@@ -44,16 +44,15 @@ export function CTA() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Link href="#beratung">
-                            <Button
+                        <Button
                                 size="lg"
                                 variant="secondary"
                                 className="h-14 px-8 text-lg font-bold shadow-xl group"
+                                onClick={() => document.getElementById('beratung')?.scrollIntoView({ behavior: 'smooth' })}
                             >
                                 Kostenloses Beratungsgespräch
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </Button>
-                        </Link>
                         <Link href="/features">
                             <Button
                                 size="lg"

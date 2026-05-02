@@ -106,15 +106,14 @@ export function Hero() {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="flex flex-col sm:flex-row items-center justify-center gap-4"
                         >
-                            <Link href="/#beratung" className="w-full sm:w-auto">
-                                <Button
+                            <Button
                                     size="lg"
                                     className="w-full sm:w-auto h-14 text-lg px-8 gradient-primary shadow-lg shadow-primary/25 group"
+                                    onClick={() => document.getElementById('beratung')?.scrollIntoView({ behavior: 'smooth' })}
                                 >
                                     Kostenlos beraten lassen
                                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                                 </Button>
-                            </Link>
                             <Link href="/live-demo" className="w-full sm:w-auto">
                                 <Button
                                     variant="outline"
