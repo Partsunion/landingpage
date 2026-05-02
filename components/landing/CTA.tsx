@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Shield, Lock, Globe, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export function CTA() {
@@ -64,25 +64,29 @@ export function CTA() {
                         </Link>
                     </div>
 
-                    {/* Trust badges */}
+                    {/* Trust badges — proper icons and labels */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                         viewport={{ once: true }}
-                        className="mt-12 flex flex-wrap justify-center gap-8 text-white/60 text-sm"
+                        className="mt-12 flex flex-wrap justify-center gap-6 md:gap-10"
                     >
-                        <div className="flex items-center gap-2">
-                            <div className="h-2 w-2 rounded-full bg-white/40" />
-                            <span>Preis auf Anfrage</span>
+                        <div className="flex items-center gap-2 text-white/70 text-sm">
+                            <Shield className="h-4 w-4 text-white/50" />
+                            <span>DSGVO-konform</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <div className="h-2 w-2 rounded-full bg-white/40" />
+                        <div className="flex items-center gap-2 text-white/70 text-sm">
+                            <Lock className="h-4 w-4 text-white/50" />
+                            <span>End-to-End verschlüsselt</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-white/70 text-sm">
+                            <Globe className="h-4 w-4 text-white/50" />
+                            <span>Made in Germany 🇩🇪</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-white/70 text-sm">
+                            <CheckCircle className="h-4 w-4 text-white/50" />
                             <span>Unverbindliche Beratung</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <div className="h-2 w-2 rounded-full bg-white/40" />
-                            <span>Made in Germany</span>
                         </div>
                     </motion.div>
                 </motion.div>
@@ -90,3 +94,4 @@ export function CTA() {
         </section>
     );
 }
+
