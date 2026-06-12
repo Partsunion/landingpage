@@ -131,7 +131,7 @@ export function OCRScannerPreview() {
             <div className="absolute bottom-4 left-4 h-24 overflow-hidden opacity-30 text-[8px] text-blue-900 pointer-events-none">
                 <div className="animate-scroll-y">
                     {HEX_ROWS.map((hex, i) => (
-                        <p key={i}>HEX_{hex}: FETCHING_METADATA_FROM_TECDOC_API...</p>
+                        <p key={i}>HEX_{hex}: FETCHING_METADATA_FROM_CATALOG_API...</p>
                     ))}
                 </div>
             </div>

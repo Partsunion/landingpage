@@ -621,25 +621,39 @@ export function LiveDemoChat() {
 
             {/* ── CTA Popup — NON-DISMISSIBLE after successful lookup ────
                  Once the demo has been used on this device, the only path forward
-                 is the "Beratung vereinbaren" button. No backdrop close, no dismiss
-                 button — this prevents unlimited free lookups per visitor. */}
+                 is the "Beratungstermin sichern" button. The link pre-fills the
+                 consultation form so Sales sees the Demo-Lead-Context. */}
             {showCTA && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-                    <div className="relative glass border border-[var(--accent)]/30 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl" style={{ animation: 'popIn .4s cubic-bezier(.16,1,.3,1) forwards' }}>
-                        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl gradient-primary flex items-center justify-center shadow-lg shadow-[var(--primary)]/30">
-                            <CheckCircle2 className="h-8 w-8 text-white" />
+                    <div
+                        className="relative rounded-2xl border border-primary/40 bg-[rgba(15,23,42,0.95)] backdrop-blur-xl p-8 max-w-md w-full text-center shadow-2xl"
+                        style={{ animation: 'popIn .4s cubic-bezier(.16,1,.3,1) forwards' }}
+                    >
+                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/15 border border-primary/30 mb-5">
+                            <CheckCircle2 className="h-7 w-7 text-primary" />
                         </div>
-                        <h2 className="text-2xl font-display font-bold mb-2">Demo abgeschlossen!</h2>
-                        <p className="text-[var(--muted-foreground)] text-sm mb-6 leading-relaxed">
-                            Sie haben gesehen, wie unsere KI in Sekunden das passende Teil findet.
-                            <br /><strong className="text-[var(--foreground)]">Möchten Sie das für Ihr Unternehmen?</strong>
+                        <h2
+                            className="text-2xl md:text-3xl font-semibold mb-3"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                        >
+                            Demo abgeschlossen.
+                        </h2>
+                        <p className="text-muted-foreground text-sm mb-2 leading-relaxed">
+                            Sie haben gesehen, wie unsere KI in unter 8&nbsp;Sekunden das richtige Teil findet.
                         </p>
-                        <a href="/contact" className="inline-flex items-center justify-center gap-2 w-full px-8 py-3.5 rounded-xl gradient-primary text-white font-semibold shadow-lg shadow-[var(--primary)]/30 hover:shadow-xl transition-all hover:-translate-y-0.5">
-                            <Phone className="h-4 w-4" /> Beratung vereinbaren <ArrowRight className="h-4 w-4" />
+                        <p className="text-foreground/90 text-sm mb-7 leading-relaxed font-medium">
+                            Lassen Sie uns 30&nbsp;Minuten darüber sprechen, wie das in Ihrem Betrieb läuft.
+                        </p>
+                        <a
+                            href={`/#beratung?source=demo${partQuery ? `&part=${encodeURIComponent(partQuery)}` : ''}`}
+                            className="inline-flex items-center justify-center gap-2 w-full h-12 px-6 rounded-lg gradient-primary text-white text-base font-medium shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow group"
+                        >
+                            Beratungstermin sichern
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                         </a>
-                        <p className="mt-4 text-[11px] text-[var(--muted-foreground)]/70">
-                            Die kostenlose Abfrage ist pro Gerät auf eine Anfrage begrenzt.
+                        <p className="mt-4 text-[11px] text-muted-foreground/70">
+                            Eine Demo-Anfrage pro Gerät · Unverbindlich
                         </p>
                     </div>
                 </div>

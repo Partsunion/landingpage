@@ -18,11 +18,11 @@ const kpis = [
 ];
 
 const criticalItems = [
-    { name: 'Bremssattel VA links', oem: '8K0615123F', stock: 4, min: 8, status: 'warning' as const, supplier: 'WM SE' },
-    { name: 'Turbolader Garrett', oem: '03L253016TX', stock: 2, min: 6, status: 'warning' as const, supplier: 'WM SE' },
-    { name: 'Lichtmaschine 150A', oem: '06F903023J', stock: 0, min: 3, status: 'danger' as const, supplier: 'Stahlgruber' },
-    { name: 'Kupplungssatz SACHS', oem: '3000950649', stock: 1, min: 4, status: 'danger' as const, supplier: 'WM SE' },
-    { name: 'Stoßdämpfer HA', oem: '2043263200', stock: 3, min: 6, status: 'warning' as const, supplier: 'PV Automotive' },
+    { name: 'Bremssattel VA links', oem: '8K0615123F', stock: 4, min: 8, status: 'warning' as const, supplier: 'Lieferant A' },
+    { name: 'Turbolader Garrett', oem: '03L253016TX', stock: 2, min: 6, status: 'warning' as const, supplier: 'Lieferant B' },
+    { name: 'Lichtmaschine 150A', oem: '06F903023J', stock: 0, min: 3, status: 'danger' as const, supplier: 'Lieferant A' },
+    { name: 'Kupplungssatz SACHS', oem: '3000950649', stock: 1, min: 4, status: 'danger' as const, supplier: 'Lieferant C' },
+    { name: 'Stoßdämpfer HA', oem: '2043263200', stock: 3, min: 6, status: 'warning' as const, supplier: 'Lieferant B' },
 ];
 
 function CornerMarks({ color = 'rgba(148,163,184,0.35)' }: { color?: string }) {

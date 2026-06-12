@@ -210,8 +210,17 @@ export default function DatenschutzPage() {
                 <p>
                     Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem
                     Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der
-                    Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht
-                    ohne Ihre Einwilligung weiter.
+                    Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+                </p>
+                <p>
+                    Technisch werden die im Formular eingegebenen Daten (Firma, Ansprechpartner, Telefon,
+                    E-Mail-Adresse sowie Ihre Nachricht) beim Absenden direkt aus Ihrem Browser an unsere
+                    Programmierschnittstelle unter <em>api.partsunion.de</em> übermittelt und dort in unserem
+                    eigenen Kundenverwaltungs-/CRM-System gespeichert. Dieses System wird von uns selbst auf
+                    Servern innerhalb der Europäischen Union betrieben; eine Weitergabe an Dritte zu
+                    Werbezwecken findet nicht statt. Die Daten dienen ausschließlich der Bearbeitung Ihrer
+                    Anfrage sowie der anschließenden Beratung und Vertragsanbahnung. Über das genannte CRM-System
+                    hinaus geben wir diese Daten nicht ohne Ihre Einwilligung an Dritte weiter.
                 </p>
                 <p>
                     Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre
@@ -241,10 +250,31 @@ export default function DatenschutzPage() {
                 <h3>Schriftarten (lokales Hosting)</h3>
                 <p>
                     Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten die Schriften
-                    <em> DM Sans</em> und <em>Outfit</em>. Die Schriftdateien werden bereits beim Erstellen
-                    der Website heruntergeladen und ausschließlich von unserem eigenen Server ausgeliefert.
-                    Beim Besuch dieser Website wird keinerlei Verbindung zu Google-Servern aufgebaut,
-                    insbesondere werden auch keine IP-Adressen an Google übermittelt.
+                    <em> Geist</em> und <em>Geist Mono</em>. Die Schriftdateien werden bereits beim
+                    Erstellen der Website heruntergeladen und ausschließlich von unserem eigenen Server
+                    ausgeliefert. Beim Besuch dieser Website wird keinerlei Verbindung zu Google-Servern
+                    aufgebaut, insbesondere werden auch keine IP-Adressen an Google übermittelt.
+                </p>
+
+                <h3>Plausible Analytics (cookielose Reichweitenmessung)</h3>
+                <p>
+                    Zur statistischen Auswertung der Besucherzugriffe nutzen wir Plausible Analytics,
+                    einen Webanalysedienst mit Hosting in der Europäischen Union. Plausible setzt
+                    <strong> keine Cookies</strong>, speichert <strong>keine IP-Adressen</strong> und
+                    erstellt <strong>keine geräteübergreifenden Profile</strong>. Es werden ausschließlich
+                    aggregierte, nicht-personenbezogene Nutzungsdaten erhoben (z. B. aufgerufene Seiten,
+                    Referrer, ungefähre Herkunftsregion auf Länderebene, Gerätetyp).
+                </p>
+                <p>
+                    Da Plausible keine Informationen im Endgerät speichert oder ausliest, ist hierfür
+                    keine Einwilligung nach § 25 Abs. 1 TDDDG erforderlich. Rechtsgrundlage für die
+                    Verarbeitung der aggregierten Daten ist unser berechtigtes Interesse an einer
+                    datenschutzfreundlichen Reichweitenmessung und der Verbesserung unseres Angebots
+                    (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen:
+                    {' '}
+                    <a href="https://plausible.io/data-policy" target="_blank" rel="noopener noreferrer">
+                        plausible.io/data-policy
+                    </a>.
                 </p>
 
                 <h2>6. Eigene Dienste</h2>

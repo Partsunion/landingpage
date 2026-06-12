@@ -5,9 +5,9 @@ import { ShoppingCart, TrendingDown, Clock, CheckCircle2, Factory } from 'lucide
 import { useState, useEffect } from 'react';
 
 const suppliers = [
-    { name: 'Stahlgruber', price: 42.50, delivery: 'Morgen', stock: 'Hoch', best: true },
-    { name: 'WM SE', price: 44.90, delivery: 'Heute (Express)', stock: 'Mittel', best: false },
-    { name: 'Trost', price: 43.10, delivery: '2-3 Tage', stock: 'Niedrig', best: false },
+    { name: 'Lieferant A', price: 42.50, delivery: 'Morgen', stock: 'Hoch', best: true },
+    { name: 'Lieferant B', price: 44.90, delivery: 'Heute (Express)', stock: 'Mittel', best: false },
+    { name: 'Lieferant C', price: 43.10, delivery: '2-3 Tage', stock: 'Niedrig', best: false },
 ];
 
 export function AutomatedOrderPreview() {

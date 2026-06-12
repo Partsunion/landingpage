@@ -2,32 +2,21 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { Button } from '@/components/ui/Button';
-import { ArrowRight, Sparkles, Clock, Bot, ShieldCheck, TrendingUp } from 'lucide-react';
-
-const DashboardPreview = dynamic(
-    () => import('@/components/landing/DashboardPreview').then(m => m.DashboardPreview),
-    {
-        ssr: false,
-        loading: () => (
-            <div className="w-full rounded-xl bg-[hsl(224_71%_4%)] min-h-[520px] animate-pulse" />
-        ),
-    }
-);
+import { MagneticButton } from '@/components/ui/MagneticButton';
+import { AnimatedHeadline } from '@/components/ui/AnimatedHeadline';
+import { Counter } from '@/components/ui/Counter';
+import { DashboardPreview } from '@/components/landing/DashboardPreview';
+import { ArrowRight, Sparkles, PlayCircle } from 'lucide-react';
 
 export function Hero() {
     return (
         <section className="relative min-h-screen pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-            {/* Premium Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20" />
+            {/* Editorial background: subtle vignette + single soft spotlight */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.10),transparent_55%)] -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/0 to-background -z-10" />
 
-            {/* Animated glow orbs */}
-            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full -z-10 animate-pulse-glow" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/15 blur-[120px] rounded-full -z-10 animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
-
-            {/* Grid pattern overlay */}
-            <div className="absolute inset-0 grid-pattern opacity-50 -z-10" />
+            {/* Hairline grid — much subtler than before */}
+            <div className="absolute inset-0 grid-pattern opacity-20 -z-10" />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="text-center max-w-5xl mx-auto">
@@ -44,84 +33,66 @@ export function Hero() {
                             </span>
                         </div>
 
-                        {/* Hero Headline */}
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1]" style={{ fontFamily: 'var(--font-display)' }}>
-                            Ihr Teilehandel.<br />
-                            <span className="text-gradient">
-                                Vollautomatisch.
-                            </span>
-                        </h1>
+                        {/* Hero Headline — word-stagger reveal */}
+                        <AnimatedHeadline
+                            className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-6 leading-[1.05]"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}
+                            delay={0.15}
+                        >
+                            Vom Fahrzeugschein-Foto zum fertigen Angebot in <span className="text-gradient">8 Sekunden.</span>
+                        </AnimatedHeadline>
 
                         {/* Subheadline */}
-                        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-                            Der KI-Mitarbeiter, der Fahrzeugscheine liest, OEM-Nummern findet und Angebote erstellt —
-                            <span className="text-foreground font-medium"> in 8 Sekunden statt 15 Minuten.</span>
+                        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+                            Partsunion liest, matcht und beantwortet WhatsApp-Anfragen automatisch — damit Ihr Team sich auf die Fälle konzentriert, die wirklich Hände brauchen.
                         </p>
 
-                        {/* Stats Row */}
+                        {/* Inline Stats — 2 with provenance, animated counters */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10"
+                            transition={{ duration: 0.6, delay: 0.6 }}
+                            className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 mb-10 text-sm"
                         >
-                            <div className="flex items-center gap-2 text-sm">
-                                <div className="h-8 w-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                                    <Bot className="h-4 w-4 text-emerald-400" />
-                                </div>
-                                <span className="text-muted-foreground">
-                                    <strong className="text-foreground">bis zu 89%</strong> Automatisierung
-                                </span>
+                            <div className="flex items-baseline gap-2">
+                                <Counter
+                                    to={97}
+                                    suffix="%"
+                                    className="font-mono text-xl md:text-2xl font-semibold text-foreground tabular-nums"
+                                />
+                                <span className="text-muted-foreground">OEM-Trefferquote · interne Systemtests (Zielwert)</span>
                             </div>
-                            <div className="flex items-center gap-2 text-sm">
-                                <div className="h-8 w-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
-                                    <ShieldCheck className="h-4 w-4 text-violet-400" />
-                                </div>
-                                <span className="text-muted-foreground">
-                                    <strong className="text-foreground">97,8%</strong> OEM-Trefferquote im Pilot
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm">
-                                <div className="h-8 w-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                                    <TrendingUp className="h-4 w-4 text-blue-400" />
-                                </div>
-                                <span className="text-muted-foreground">
-                                    <strong className="text-foreground">3× Kapazität</strong> möglich
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm">
-                                <div className="h-8 w-8 rounded-lg bg-accent/20 flex items-center justify-center">
-                                    <Clock className="h-4 w-4 text-accent" />
-                                </div>
-                                <span className="text-muted-foreground">
-                                    <strong className="text-foreground">24/7</strong> verfügbar
-                                </span>
+                            <span className="hidden md:block h-1 w-1 rounded-full bg-border" aria-hidden />
+                            <div className="flex items-baseline gap-2">
+                                <Counter
+                                    to={8}
+                                    suffix=" Sek"
+                                    className="font-mono text-xl md:text-2xl font-semibold text-foreground tabular-nums"
+                                />
+                                <span className="text-muted-foreground">statt 15&nbsp;Min pro Anfrage</span>
                             </div>
                         </motion.div>
 
-                        {/* CTA Buttons */}
+                        {/* CTA — magnetic primary + inline demo link */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                            transition={{ duration: 0.6, delay: 0.7 }}
+                            className="flex flex-col sm:flex-row items-center justify-center gap-5"
                         >
-                            <Button
-                                    size="lg"
-                                    className="w-full sm:w-auto h-14 text-lg px-8 gradient-primary shadow-lg shadow-primary/25 group"
-                                    onClick={() => document.getElementById('beratung')?.scrollIntoView({ behavior: 'smooth' })}
-                                >
-                                    Kostenlos beraten lassen
-                                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                                </Button>
-                            <Link href="/live-demo" className="w-full sm:w-auto">
-                                <Button
-                                    variant="outline"
-                                    size="lg"
-                                    className="w-full sm:w-auto h-14 text-lg px-8 glass border-border/50 hover:border-primary/50"
-                                >
-                                    Live Demo ansehen
-                                </Button>
+                            <MagneticButton
+                                onClick={() => document.getElementById('beratung')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="group inline-flex items-center justify-center h-14 px-8 rounded-lg text-base font-medium text-primary-foreground gradient-primary shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow"
+                            >
+                                Beratungstermin sichern
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                            </MagneticButton>
+                            <Link
+                                href="/live-demo"
+                                className="group inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                            >
+                                <PlayCircle className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
+                                Live-Demo ansehen
                             </Link>
                         </motion.div>
 
@@ -132,17 +103,17 @@ export function Hero() {
                             transition={{ duration: 0.6, delay: 0.5 }}
                             className="mt-8 text-sm text-muted-foreground"
                         >
-                            Unverbindlich & kostenlos • Individuelles Angebot • Made in Germany
+                            Unverbindlich · Live-Demo mit Ihren echten Daten möglich
                         </motion.p>
                     </motion.div>
                 </div>
 
-                {/* Dashboard Preview */}
+                {/* Dashboard Preview — hidden on mobile (zu detailliert für kleine Screens, wirkt sonst quetschig) */}
                 <motion.div
                     initial={{ opacity: 0, y: 40, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="mt-16 sm:mt-24 relative mx-auto max-w-6xl"
+                    className="hidden md:block mt-16 sm:mt-24 relative mx-auto max-w-6xl"
                 >
                     {/* Glow behind preview */}
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent blur-3xl -z-10" />

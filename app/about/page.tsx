@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
-import { Target, Users, History, Brain, Cpu, Sparkles, ArrowRight, Quote } from 'lucide-react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowRight, Quote, Cpu, Users, Brain, Sparkles, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Über Uns - Partsunion',
+    title: 'Über uns — Von Teilehändlern. Für Teilehändler.',
     description:
-        'Unsere Mission: Den Autoteilehandel mit KI-Technologie revolutionieren. Ein Team aus Branchenexperten und Software-Entwicklern.',
+        'Partsunion entstand aus 6.000 Teilen pro Monat operativer Erfahrung. Vier Leute, eine Mission: den Teilehandel mit KI auf 2026er-Niveau bringen.',
     alternates: { canonical: 'https://www.partsunion.de/about' },
     openGraph: {
         title: 'Über uns | Partsunion',
@@ -14,210 +14,245 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'de_DE',
         siteName: 'Partsunion',
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Partsunion Team' }],
+        images: ['/opengraph-image'],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Über uns | Partsunion',
         description: 'Von Teilehändlern. Für Teilehändler.',
-        images: ['/og-image.png'],
+        images: ['/opengraph-image'],
     },
+};
+
+const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
+        { '@type': 'ListItem', position: 2, name: 'Über uns', item: 'https://www.partsunion.de/about' },
+    ],
 };
 
 export default function AboutPage() {
     return (
-        <div className="pt-20">
-            {/* Hero Section */}
-            <section className="py-20 md:py-28 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-background" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/10 blur-[150px] rounded-full -z-10" />
+        <div className="pt-24 pb-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+            />
 
-                <div className="container mx-auto px-4 text-center relative z-10">
-                    <span className="inline-block py-1.5 px-4 rounded-full glass text-sm font-medium text-primary mb-4">
-                        Über Partsunion
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
+
+            <div className="container mx-auto px-4 md:px-6">
+                {/* Hero */}
+                <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
+                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                        <MapPin className="h-3 w-3" />
+                        Brühl · Deutschland
                     </span>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+                    <h1
+                        className="text-3xl md:text-5xl lg:text-6xl font-semibold mb-5"
+                        style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.035em', lineHeight: 1.05 }}
+                    >
                         Von Teilehändlern.<br />
                         <span className="text-gradient">Für Teilehändler.</span>
                     </h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Wir kennen die Branche aus erster Hand – und bauen die Software, die wir selbst gebraucht hätten.
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                        Wir kennen die Branche aus erster Hand — und bauen die Software,
+                        die wir selbst gebraucht hätten.
                     </p>
                 </div>
-            </section>
 
-            {/* Founder Story Section */}
-            <section className="py-16 md:py-24 relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-
-                <div className="container mx-auto px-4 md:px-6 max-w-5xl relative z-10">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
-                        {/* Story */}
-                        <div>
-                            <span className="inline-block py-1.5 px-4 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6">
-                                Die Gründungsgeschichte
-                            </span>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                                Entstanden aus der <span className="text-gradient">Praxis</span>
-                            </h2>
-                            <div className="space-y-4 text-muted-foreground leading-relaxed">
-                                <p>
-                                    Die Idee zu Partsunion entstand aus echter Frustration. <strong className="text-foreground">Mitgründer Elias</strong> führte
-                                    selbst einen erfolgreichen Teilehandel mit über <strong className="text-foreground">6.000 verkauften Teilen pro Monat</strong>.
-                                </p>
-                                <p>
-                                    Er wusste aus täglicher Erfahrung: Die OEM-Suche ist komplex und fehleranfällig.
-                                    Das richtige Teil zu identifizieren kostet Zeit – und falsch identifizierte Teile führen
-                                    zu frustrierenden Retouren, die Marge und Kundenzufriedenheit kosten.
-                                </p>
-                                <p>
-                                    Elias suchte nach einer Lösung, die er selbst nutzen würde. Als er keine fand,
-                                    beschloss er, sie selbst zu bauen.
-                                </p>
-                            </div>
+                {/* Story + Founder Quote */}
+                <div className="max-w-5xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-12 mb-20 md:mb-24">
+                    <section className="lg:col-span-7">
+                        <div className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                            Die Gründungsgeschichte
                         </div>
+                        <h2
+                            className="text-2xl md:text-3xl font-semibold mb-5"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                        >
+                            Entstanden aus der Praxis — nicht aus dem Pitch-Deck.
+                        </h2>
+                        <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
+                            <p>
+                                Die Idee zu Partsunion entstand aus echter Frustration. Mitgründer{' '}
+                                <span className="text-foreground font-medium">Elias</span> führte selbst einen
+                                erfolgreichen Teilehandel mit über{' '}
+                                <span className="text-foreground font-medium">6.000 verkauften Teilen pro Monat</span>.
+                            </p>
+                            <p>
+                                Aus täglicher Erfahrung wusste er: Die OEM-Suche ist komplex und fehleranfällig.
+                                Das richtige Teil zu identifizieren kostet Zeit — und falsch identifizierte Teile
+                                führen zu Retouren, die Marge und Kundenzufriedenheit kosten.
+                            </p>
+                            <p>
+                                Elias suchte nach einer Lösung, die er selbst nutzen würde. Als er keine fand,
+                                beschloss er, sie zu bauen — mit drei weiteren Leuten, die die Branche verstehen
+                                oder die Technologie beherrschen, die sie braucht.
+                            </p>
+                        </div>
+                    </section>
 
-                        {/* Quote Card */}
-                        <div className="relative">
-                            <div className="glass p-8 rounded-2xl border border-border/50">
-                                <Quote className="h-10 w-10 text-primary/30 mb-4" />
-                                <blockquote className="text-xl font-medium text-foreground mb-6 leading-relaxed">
-                                    „Ich habe jeden Tag gesehen, wie viel Zeit mein Team mit manueller OEM-Suche verschwendet
-                                    und wie viele Retouren auf Identifikationsfehler zurückgehen. Das musste aufhören."
-                                </blockquote>
-                                <div className="flex items-center gap-4">
-                                    <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                                        E
-                                    </div>
-                                    <div>
-                                        <div className="font-bold text-foreground">Elias</div>
-                                        <div className="text-sm text-muted-foreground">Mitgründer & Branchenexperte</div>
-                                    </div>
+                    <aside className="lg:col-span-5">
+                        <div className="sticky top-28 rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] p-6 md:p-8">
+                            <Quote className="h-6 w-6 text-primary mb-4 opacity-70" />
+                            <blockquote
+                                className="text-lg md:text-xl text-foreground/95 leading-relaxed mb-6"
+                                style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.015em' }}
+                            >
+                                „Ich habe jeden Tag gesehen, wie viel Zeit mein Team mit manueller OEM-Suche
+                                verschwendet und wie viele Retouren auf Identifikationsfehler zurückgehen.
+                                Das musste aufhören."
+                            </blockquote>
+                            <div className="flex items-center gap-3 pt-4 border-t border-border/60">
+                                <div className="h-10 w-10 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center text-primary font-semibold">
+                                    E
+                                </div>
+                                <div>
+                                    <div className="text-sm font-medium text-foreground">Elias</div>
+                                    <div className="text-xs text-muted-foreground">Mitgründer · Branchenexperte</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </aside>
                 </div>
-            </section>
 
-            {/* Team Section */}
-            <section className="py-16 md:py-24">
-                <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-                            Unser Team
+                {/* Team */}
+                <section className="max-w-5xl mx-auto mb-20 md:mb-24">
+                    <div className="text-center mb-10">
+                        <div className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                            Das Team
+                        </div>
+                        <h2
+                            className="text-2xl md:text-3xl font-semibold mb-3"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                        >
+                            Vier Leute. Eine Mission.
                         </h2>
-                        <p className="text-muted-foreground max-w-xl mx-auto">
-                            Vier Leute. Eine Mission. Den Teilehandel revolutionieren.
+                        <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+                            Den Teilehandel mit KI auf 2026er-Niveau bringen — ohne Buzzword-Bingo, mit Code.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {/* Software Entwickler */}
-                        <div className="glass p-8 rounded-2xl border border-border/50 card-hover">
-                            <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-primary">
-                                <Cpu size={32} />
+                    <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-6">
+                            <div className="h-10 w-10 rounded-lg flex items-center justify-center border border-border/60 bg-[rgba(15,23,42,0.4)] text-primary mb-4">
+                                <Cpu className="h-4 w-4" />
                             </div>
-                            <h3 className="text-xl font-bold mb-2 text-center">2 Software-Entwickler</h3>
-                            <p className="text-muted-foreground text-center">
-                                Bauen die KI-Engine, die Fahrzeugscheine liest, OEM-Nummern findet und
+                            <h3
+                                className="text-base md:text-lg font-semibold mb-2 text-foreground"
+                                style={{ fontFamily: 'var(--font-display)' }}
+                            >
+                                2 Software-Engineers
+                            </h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                Bauen die KI-Pipeline, die Fahrzeugscheine liest, OEM-Nummern matcht und
                                 Angebote in Sekunden erstellt.
                             </p>
                         </div>
-
-                        {/* Sales */}
-                        <div className="glass p-8 rounded-2xl border border-border/50 card-hover">
-                            <div className="h-16 w-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-accent">
-                                <Users size={32} />
+                        <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-6">
+                            <div className="h-10 w-10 rounded-lg flex items-center justify-center border border-border/60 bg-[rgba(15,23,42,0.4)] text-primary mb-4">
+                                <Users className="h-4 w-4" />
                             </div>
-                            <h3 className="text-xl font-bold mb-2 text-center">2 Sales-Experten</h3>
-                            <p className="text-muted-foreground text-center">
+                            <h3
+                                className="text-base md:text-lg font-semibold mb-2 text-foreground"
+                                style={{ fontFamily: 'var(--font-display)' }}
+                            >
+                                2 Sales- &amp; Branchenexperten
+                            </h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
                                 Verstehen die Branche, sprechen die Sprache der Händler und sorgen dafür,
-                                dass Partsunion echte Probleme löst.
+                                dass Partsunion echte Probleme löst — nicht erfundene.
                             </p>
                         </div>
                     </div>
 
-                    <div className="mt-8 p-6 glass rounded-xl border border-success/20 text-center">
-                        <p className="text-lg font-medium text-foreground">
-                            <span className="text-success">✓</span> Elias vertraut auf Partsunion – jeden Tag in seinem eigenen Teilehandel.
+                    <div className="mt-6 rounded-xl border border-primary/30 bg-primary/[0.04] p-5 text-center">
+                        <p className="text-sm md:text-base text-foreground/90">
+                            <span className="text-primary font-medium">Eat your own dog food.</span>{' '}
+                            Elias' eigener Teilehandel läuft seit Q4/2025 auf Partsunion. Jedes Feature,
+                            das hier öffentlich ist, durchläuft erst seinen Sales-Workspace.
                         </p>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* KI Intelligence Section */}
-            <section className="py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-
-                <div className="container mx-auto px-4 md:px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <span className="inline-block py-1.5 px-4 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-4">
-                            KI-Intelligenz
-                        </span>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-                            Technologie, die den <span className="text-gradient">Unterschied</span> macht
+                {/* Technology */}
+                <section className="max-w-5xl mx-auto mb-20 md:mb-24">
+                    <div className="text-center mb-10">
+                        <div className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                            Unter der Haube
+                        </div>
+                        <h2
+                            className="text-2xl md:text-3xl font-semibold mb-3"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                        >
+                            KI, die für den{' '}
+                            <span className="text-gradient">Automotive-Aftermarket</span> trainiert ist.
                         </h2>
-                        <p className="text-muted-foreground max-w-2xl mx-auto">
-                            Unsere KI wurde speziell für den Automotive Aftermarket entwickelt und trainiert.
-                        </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        <div className="p-8 rounded-2xl glass border border-border/50 card-hover">
-                            <div className="h-14 w-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6 text-primary">
-                                <Brain size={28} />
+                    <div className="grid md:grid-cols-3 gap-4">
+                        {[
+                            {
+                                icon: Brain,
+                                title: 'Natural-Language-Engine',
+                                body: 'Auf eine umfangreiche Sammlung von Branchen-Begriffen trainiert. Versteht „Klötze" als „Bremsbelag" und türkisch „fren balatası" als das Gleiche.',
+                            },
+                            {
+                                icon: Cpu,
+                                title: 'Computer-Vision OCR',
+                                body: 'Trainiert auf WhatsApp-komprimierte Handy-Fotos, schiefe Scans, verschmutzte Scheine. OEM in Sekunden.',
+                            },
+                            {
+                                icon: Sparkles,
+                                title: 'OEM-Pipeline',
+                                body: 'Mehrstufiges Matching gegen Ihre DB, Teilekataloge und Web-Quellen mit Konfidenz-Scoring und Eskalation an Mensch bei < 0,9.',
+                            },
+                        ].map((tile) => (
+                            <div key={tile.title} className="rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <tile.icon className="h-4 w-4 text-primary" />
+                                    <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-primary/80">
+                                        Modul
+                                    </span>
+                                </div>
+                                <h3
+                                    className="text-base font-semibold mb-2 text-foreground"
+                                    style={{ fontFamily: 'var(--font-display)' }}
+                                >
+                                    {tile.title}
+                                </h3>
+                                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                                    {tile.body}
+                                </p>
                             </div>
-                            <h3 className="text-xl font-bold mb-3 text-center">Natural Language</h3>
-                            <p className="text-muted-foreground text-center text-sm">
-                                Versteht "Mechaniker-Slang", Sprachnachrichten und informelle Anfragen wie ein echter Kollege.
-                            </p>
-                        </div>
-
-                        <div className="p-8 rounded-2xl glass border border-border/50 card-hover">
-                            <div className="h-14 w-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-6 text-accent">
-                                <Cpu size={28} />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-center">Computer Vision</h3>
-                            <p className="text-muted-foreground text-center text-sm">
-                                OCR-Technologie für Fahrzeugscheine mit präziser Extraktion von HSN, TSN und VIN.
-                            </p>
-                        </div>
-
-                        <div className="p-8 rounded-2xl glass border border-border/50 card-hover">
-                            <div className="h-14 w-14 bg-success/10 rounded-xl flex items-center justify-center mx-auto mb-6 text-success">
-                                <Sparkles size={28} />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-center">OEM-Matching</h3>
-                            <p className="text-muted-foreground text-center text-sm">
-                                Proprietärer Algorithmus für präzises Teile-Matching gegen Millionen von Datensätzen.
-                            </p>
-                        </div>
+                        ))}
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* CTA Section */}
-            <section className="py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 gradient-primary opacity-90" />
-                <div className="absolute inset-0 grid-pattern opacity-10" />
-
-                <div className="container mx-auto px-4 text-center relative z-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                        Lassen Sie uns sprechen
+                {/* Closing CTA */}
+                <section className="max-w-2xl mx-auto text-center">
+                    <h2
+                        className="text-2xl md:text-3xl font-semibold mb-4"
+                        style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                    >
+                        Lassen Sie uns 30 Minuten sprechen.
                     </h2>
-                    <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">
-                        Wir zeigen Ihnen in 15 Minuten, wie Partsunion Ihren Teilehandel transformieren kann.
+                    <p className="text-sm md:text-base text-muted-foreground mb-7">
+                        Wir zeigen Partsunion live an Ihren echten Fahrzeugen und Teilen.
                     </p>
                     <Link
                         href="/#beratung"
-                        className="inline-flex items-center gap-2 h-14 px-8 text-lg font-bold bg-white text-primary rounded-xl shadow-xl hover:bg-white/90 transition-colors"
+                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg gradient-primary text-white text-sm font-medium shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow group"
                     >
-                        Beratungstermin buchen
-                        <ArrowRight className="h-5 w-5" />
+                        Beratungstermin sichern
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </Link>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     );
 }

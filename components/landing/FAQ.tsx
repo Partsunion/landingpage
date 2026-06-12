@@ -11,7 +11,7 @@ const faqs = [
     },
     {
         question: 'Welche Ersatzteile kann der WhatsApp-Bot verarbeiten?',
-        answer: 'Unser APEX-Pipeline unterstützt alle gängigen Verschleißteile und Ersatzteile: Bremsbeläge, Filter, Kupplung, Zündkerzen, Stoßdämpfer, Querlenker und viele mehr. Durch die 4-Phasen OEM-Ermittlung (DB → Gemini Grounded → Claude Adversarial → Flywheel) erreichen wir eine Erkennungsrate von über 95%.'
+        answer: 'Alle gängigen Verschleiß- und Ersatzteile: Bremsbeläge, Filter, Kupplungen, Zündkerzen, Stoßdämpfer, Querlenker und viele mehr. Eine mehrstufige KI-Pipeline gleicht jede Anfrage parallel gegen Ihre eigene Datenbank, Lieferanten-Kataloge und mehrere Web-Quellen ab — mit dem Ziel, dass möglichst viele Anfragen direkt als fertiges Angebot bei Ihnen landen, ohne manuelle Recherche.'
     },
     {
         question: 'Wie lange dauert die Einrichtung?',
@@ -31,7 +31,7 @@ const faqs = [
     },
     {
         question: 'Was kostet Partsunion?',
-        answer: 'Wir bieten flexible Tarife auf Anfrage, angepasst an Ihr Bestellvolumen. Vereinbaren Sie ein kostenloses Beratungsgespräch — wir zeigen Ihnen live, wie viel Zeit und Geld Sie mit Partsunion sparen können, und erstellen ein individuelles Angebot.'
+        answer: 'Jeder Teilehandel hat ein anderes Anfragevolumen, andere Lieferanten und einen anderen Tech-Stack. Deshalb stimmen wir das Paket in einem 30-Minuten-Beratungstermin direkt auf Ihren Betrieb ab — inklusive einer transparenten ROI-Rechnung mit Ihren echten Zahlen. Sie bekommen ein konkretes, schriftliches Angebot mit Festpreis, bevor Sie sich entscheiden müssen.'
     },
     {
         question: 'Kann ich Partsunion erst testen, bevor ich mich entscheide?',

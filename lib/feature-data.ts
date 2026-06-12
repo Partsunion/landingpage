@@ -46,7 +46,7 @@ export const featureData: FeatureDetail[] = [
             'Sofortige Reaktion auf jede Anfrage',
             'Kein Warten bis "jemand im Büro ist"'
         ],
-        technicalDetails: 'Das System läuft auf redundanten Servern mit 99.9% Uptime-Garantie. Automatische Failover-Mechanismen und globale Lastverteilung sorgen für ununterbrochene Verfügbarkeit.',
+        technicalDetails: 'Das System läuft auf EU-Cloud-Infrastruktur mit einem vertraglichen Ziel-SLA von 99,5 % im Jahresmittel (siehe AGB §4). Monitoring und automatisierte Neustarts sorgen für hohe Verfügbarkeit; geplante Wartungen werden vorab angekündigt.',
         benefit: 'Fangen Sie Leads ab, die bei der Konkurrenz ins Leere laufen. Werkstätten, die am Wochenende Teile brauchen, bekommen von Ihnen sofort ein Angebot.',
         category: 'value'
     },
@@ -80,7 +80,7 @@ export const featureData: FeatureDetail[] = [
             'Cross-Reference Prüfung auf Kompatibilität',
             'Weniger Reklamationen, mehr Kundenzufriedenheit'
         ],
-        technicalDetails: 'Computer Vision extrahiert HSN, TSN und VIN mit hoher Genauigkeit. Ein mehrstufiges Validierungssystem prüft Kompatibilitäten gegen TecDoc und Hersteller-Datenbanken.',
+        technicalDetails: 'Computer Vision extrahiert HSN, TSN und VIN mit hoher Genauigkeit. Ein mehrstufiges Validierungssystem prüft Kompatibilitäten gegen Teilekataloge und Hersteller-Datenbanken.',
         benefit: 'Jede Retoure kostet Zeit, Geld und Kundenvertrauen. Mit präziser Fahrzeugerkennung gehören falsche Teile der Vergangenheit an.',
         category: 'value'
     },
@@ -129,7 +129,7 @@ export const featureData: FeatureDetail[] = [
         icon: Search,
         features: [
             'Scan von Fahrzeugscheinen (OCR)',
-            'Abgleich mit TecDoc und Hersteller-Datenbanken',
+            'Abgleich mit Teilekatalogen und Hersteller-Datenbanken',
             'Erkennung von Baujahr-spezifischen Änderungen',
             'Cross-Reference auf Alternativ-Hersteller',
             'Automatische Preisgruppenzuordnung',

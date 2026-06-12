@@ -6,10 +6,14 @@ import Link from "next/link";
 /**
  * Cookie consent banner — DSGVO / § 25 TDDDG compliant.
  *
- * The landing page only uses strictly necessary first-party storage (theme
- * preference, cookie-consent flag). No third-party analytics, no tracking
- * pixels, no remarketing tags. The banner is therefore informational +
- * opt-in and does not load any tracker until the user explicitly accepts.
+ * The landing page uses strictly necessary first-party storage (theme
+ * preference, cookie-consent flag) and ONE privacy-friendly, cookieless
+ * analytics tool: Plausible (EU-hosted, no cookies, no IP storage, no
+ * personal data — see components/layout/Analytics.tsx). Because Plausible
+ * sets no cookies and does not access device storage, it falls outside the
+ * § 25 TDDDG consent requirement; we still disclose it transparently here
+ * and in the Datenschutzerklärung. No tracking pixels, no remarketing tags,
+ * no Google Analytics.
  *
  * Storage:
  *   localStorage['pu-cookie-consent'] = 'accepted' | 'rejected'
@@ -83,41 +87,34 @@ export function CookieBanner() {
             role="dialog"
             aria-label="Cookie-Einwilligung"
             aria-live="polite"
-            className="fixed inset-x-0 bottom-0 z-[100] border-t border-border/60 bg-background/95 backdrop-blur-xl"
+            className="fixed inset-x-3 bottom-3 z-[100] mx-auto max-w-3xl rounded-xl border border-border/60 bg-background/95 backdrop-blur-xl shadow-2xl"
         >
-            <div className="mx-auto flex max-w-6xl flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between md:gap-6 md:p-6">
-                <div className="flex-1 text-sm text-foreground/90">
-                    <p className="mb-1 font-display text-base font-semibold text-foreground">
-                        Wir respektieren Ihre Privatsphäre
-                    </p>
-                    <p className="leading-relaxed text-muted-foreground">
-                        Wir verwenden ausschließlich technisch notwendige Speicherung im Browser
-                        (z.B. für Ihre Einwilligung). Es werden keine Tracking-Cookies, kein
-                        Analytics und keine Drittanbieter-Dienste geladen. Details finden Sie in
-                        unserer{" "}
-                        <Link
-                            href="/legal/datenschutz"
-                            className="text-primary underline underline-offset-2 hover:text-primary/80"
-                        >
-                            Datenschutzerklärung
-                        </Link>
-                        .
-                    </p>
-                </div>
-                <div className="flex flex-col gap-2 sm:flex-row md:flex-shrink-0">
+            <div className="flex flex-col gap-3 p-3.5 md:flex-row md:items-center md:justify-between md:gap-4 md:px-5 md:py-3">
+                <p className="flex-1 text-xs leading-relaxed text-muted-foreground md:text-sm">
+                    Nur technisch notwendige Speicherung, keine Tracking-Cookies. Zur anonymen
+                    Reichweitenmessung nutzen wir das cookielose, EU-gehostete Plausible (keine
+                    personenbezogenen Daten).{" "}
+                    <Link
+                        href="/legal/datenschutz"
+                        className="text-foreground underline underline-offset-2 hover:text-primary"
+                    >
+                        Datenschutz
+                    </Link>
+                </p>
+                <div className="flex flex-shrink-0 gap-2">
                     <button
                         type="button"
                         onClick={reject}
-                        className="rounded-lg border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition hover:bg-muted"
+                        className="rounded-md border border-border bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground md:text-sm"
                     >
                         Nur notwendige
                     </button>
                     <button
                         type="button"
                         onClick={accept}
-                        className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+                        className="rounded-md bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 md:text-sm"
                     >
-                        Einverstanden
+                        OK
                     </button>
                 </div>
             </div>

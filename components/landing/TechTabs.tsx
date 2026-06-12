@@ -93,14 +93,14 @@ export function TechTabs() {
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block py-1.5 px-4 rounded-full glass text-sm font-medium text-primary mb-4">
-                            Intelligenz trifft Effizienz
+                        <span className="inline-block py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                            Unter der Haube
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-                            Technologie, die <span className="text-gradient">mitdenkt</span>
+                        <h2 className="text-3xl md:text-5xl font-semibold mb-4" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}>
+                            WhatsApp-Bot &amp; <span className="text-gradient">Warenwirtschaft.</span>
                         </h2>
-                        <p className="text-muted-foreground text-lg">
-                            Wechseln Sie die Ansicht für Details.
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Zwei Module, ein Workspace.
                         </p>
                     </motion.div>
                 </div>
@@ -164,13 +164,8 @@ export function TechTabs() {
                                                     transition={{ duration: 0.4, delay: idx * 0.1 }}
                                                     className="flex gap-4 group"
                                                 >
-                                                    <div className={cn(
-                                                        "h-12 w-12 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110",
-                                                        tab.id === 'bot'
-                                                            ? 'bg-primary/10 text-primary'
-                                                            : 'bg-success/10 text-success'
-                                                    )}>
-                                                        <feature.icon size={24} />
+                                                    <div className="h-11 w-11 rounded-lg flex items-center justify-center shrink-0 border border-border/60 bg-[rgba(15,23,42,0.4)] text-primary transition-transform group-hover:scale-105">
+                                                        <feature.icon size={20} />
                                                     </div>
                                                     <div>
                                                         <h4 className="font-bold mb-1">{feature.title}</h4>
@@ -191,19 +186,6 @@ export function TechTabs() {
                                             )}
                                         </div>
 
-                                        {/* Status Badge */}
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.5, delay: 0.3 }}
-                                            className="absolute -bottom-4 -right-4 md:bottom-4 md:right-4 glass p-4 rounded-xl shadow-xl hidden md:flex items-center gap-3 z-20"
-                                        >
-                                            <div className="h-3 w-3 rounded-full bg-success animate-pulse" />
-                                            <div>
-                                                <div className="font-semibold text-sm">System Status</div>
-                                                <div className="text-xs text-muted-foreground">24/7 Operativ</div>
-                                            </div>
-                                        </motion.div>
                                     </div>
                                 </motion.div>
                             );

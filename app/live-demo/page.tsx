@@ -25,20 +25,13 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'de_DE',
         siteName: 'Partsunion',
-        images: [
-            {
-                url: '/og-image.png',
-                width: 1200,
-                height: 630,
-                alt: 'Partsunion Live Demo – KI-OEM-Ermittlung',
-            },
-        ],
+        images: ['/opengraph-image'],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Partsunion Live Demo – KI-OEM-Ermittlung',
         description: 'Ermitteln Sie OEM-Nummern in Sekunden – kostenlose KI-Demo.',
-        images: ['/og-image.png'],
+        images: ['/opengraph-image'],
     },
 };
 

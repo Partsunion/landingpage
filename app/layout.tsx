@@ -1,26 +1,7 @@
 import type { Metadata } from "next";
-import { DM_Sans, Outfit, JetBrains_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-// JetBrains Mono — für Zahlen, OEM-Nummern und Preise im Industrial-Precision-Design
-// der Dashboard- und WaWi-Previews. Tabular-nums für spalten-ausgerichtete Zahlen.
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.partsunion.de"),
@@ -29,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Partsunion",
   },
   description:
-    "Partsunion automatisiert Ihren Autoteilehandel mit KI: OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot, Warenwirtschaft und Retourenreduktion auf unter 4 %. Jetzt kostenlose Demo ansehen.",
+    "Partsunion automatisiert Ihren Autoteilehandel mit KI: OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot, Warenwirtschaft und weniger Retouren durch präzise Teile-Identifikation. Jetzt kostenlose Demo ansehen.",
   keywords: [
     "Autoteile Software",
     "Autoteilehändler Automatisierung",
@@ -75,27 +56,26 @@ export const metadata: Metadata = {
     locale: "de_DE",
     url: "https://www.partsunion.de",
     siteName: "Partsunion",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Partsunion – KI-Automatisierung für Autoteilehändler",
-      },
-    ],
+    // Kein explicit images-Array → Next nutzt opengraph-image.tsx
+    // aus dem App-Root (dynamisch gerendert beim Build).
   },
   twitter: {
     card: "summary_large_image",
     title: "Partsunion – KI-Automatisierung für Autoteilehändler",
     description:
       "OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot und Warenwirtschaft für Autoteilehändler.",
-    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "https://www.partsunion.de",
     languages: {
       "de-DE": "https://www.partsunion.de",
+      "x-default": "https://www.partsunion.de",
     },
+  },
+  verification: {
+    // Werte hier ergänzen sobald GSC + Bing Webmaster eingerichtet sind:
+    // google: "abc123…",
+    // other: { "msvalidate.01": "…" },
   },
   icons: {
     icon: [
@@ -110,6 +90,7 @@ export const metadata: Metadata = {
 import { Navbar } from "@/components/layout/Navbar";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Footer } from "@/components/landing/Footer";
+import { Analytics } from "@/components/layout/Analytics";
 
 export default function RootLayout({
   children,
@@ -176,8 +157,18 @@ export default function RootLayout({
                     "@type": "Offer",
                     priceCurrency: "EUR",
                     availability: "https://schema.org/InStock",
-                    url: "https://www.partsunion.de/pricing",
+                    url: "https://www.partsunion.de/#beratung",
                   },
+                  // NOTE: Kein aggregateRating. Es gibt (Stand Go-Live) noch keine
+                  // echten, verifizierten Kundenbewertungen. Erfundene Sterne-Ratings
+                  // verstoßen gegen UWG §5 (irreführende Werbung) und Googles
+                  // Structured-Data-Richtlinie (self-serving fake ratings → manuelle
+                  // Penalty). Erst wieder einsetzen, wenn reale, belegbare Reviews
+                  // vorliegen.
+                  // NOTE: featureList = nur tatsächlich verfügbare Funktionen.
+                  // TecAlliance/TecDoc-Integration und die Großhändler-Anbindung
+                  // sind Roadmap (noch nicht live) und gehören daher NICHT in die
+                  // strukturierten Produktdaten — sonst irreführende Werbung (UWG §5).
                   featureList: [
                     "KI-OEM-Ermittlung aus VIN, HSN/TSN oder Fahrzeugbrief",
                     "24/7 WhatsApp-Bot für Kundenanfragen",
@@ -188,13 +179,27 @@ export default function RootLayout({
                   ],
                   provider: { "@id": "https://www.partsunion.de/#organization" },
                 },
+                {
+                  "@type": "Service",
+                  "@id": "https://www.partsunion.de/#service",
+                  name: "KI-Automatisierung für Autoteilehändler",
+                  serviceType: "SaaS",
+                  provider: { "@id": "https://www.partsunion.de/#organization" },
+                  areaServed: { "@type": "Country", name: "Deutschland" },
+                  description:
+                    "End-to-End Automatisierung für den Teilehandel: Vom WhatsApp-Foto zum bezahlten Auftrag in unter 10 Minuten.",
+                  audience: {
+                    "@type": "BusinessAudience",
+                    audienceType: "Autoteilehändler, Werkstätten, Teile-Großhändler",
+                  },
+                },
               ],
             }),
           }}
         />
       </head>
       <body
-        className={`${dmSans.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased flex flex-col min-h-screen bg-background text-foreground`}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased flex flex-col min-h-screen bg-background text-foreground`}
       >
         <Navbar />
         <main className="flex-1">
@@ -202,6 +207,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieBanner />
+        <Analytics />
       </body>
     </html>
   );

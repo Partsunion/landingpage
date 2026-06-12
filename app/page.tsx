@@ -1,10 +1,9 @@
 import { Hero } from '@/components/landing/Hero';
-import { PainPoints } from '@/components/landing/PainPoints';
+import { PartnerStrip } from '@/components/landing/PartnerStrip';
 import { BeforeAfter } from '@/components/landing/BeforeAfter';
 import { ValueProposition } from '@/components/landing/ValueProposition';
+import { Wholesalers } from '@/components/landing/Wholesalers';
 import { TechTabs } from '@/components/landing/TechTabs';
-import { Features } from '@/components/landing/Features';
-import { Testimonials } from '@/components/landing/Testimonials';
 import { ConsultationForm } from '@/components/landing/ConsultationForm';
 import { FAQ } from '@/components/landing/FAQ';
 import { CTA } from '@/components/landing/CTA';
@@ -15,12 +14,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <PainPoints />
+      <PartnerStrip />
       <BeforeAfter />
       <ValueProposition />
+      <Wholesalers />
       <TechTabs />
-      <Features />
-      <Testimonials />
       <ConsultationForm />
       <FAQ />
       <CTA />

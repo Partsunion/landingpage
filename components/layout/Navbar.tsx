@@ -58,9 +58,9 @@ export function Navbar() {
                         <Image
                             src="/logo.png"
                             alt="Partsunion"
-                            width={320}
-                            height={96}
-                            className="h-16 md:h-20 w-auto"
+                            width={160}
+                            height={48}
+                            className="h-9 md:h-10 w-auto"
                             priority
                         />
                     </Link>
@@ -145,7 +145,7 @@ export function Navbar() {
                         <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                             Kontakt
                         </Link>
-                        <Link href="/live-demo" className="text-sm font-medium text-accent hover:text-accent/80 transition-colors flex items-center gap-1">
+                        <Link href="/live-demo" className="text-sm font-medium text-primary hover:text-primary-hover transition-colors flex items-center gap-1">
                             <Sparkles className="h-3.5 w-3.5" />
                             Live Demo
                         </Link>
@@ -218,7 +218,7 @@ export function Navbar() {
                         </Link>
                         <Link
                             href="/live-demo"
-                            className="text-sm font-medium text-accent hover:text-accent/80 flex items-center gap-2"
+                            className="text-sm font-medium text-primary hover:text-primary-hover flex items-center gap-2"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             <Sparkles className="h-4 w-4" />

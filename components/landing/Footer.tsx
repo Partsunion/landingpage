@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail } from 'lucide-react';
+import { Mail, Linkedin } from 'lucide-react';
 
 const footerLinks = {
     product: [
@@ -10,9 +10,12 @@ const footerLinks = {
         { label: 'WhatsApp Bot', href: '/features/whatsapp-bot' },
         { label: 'OEM-Ermittlung', href: '/features/oem-ermittlung' },
         { label: 'Warenwirtschaft', href: '/features/bestandssynchronisation' },
+        { label: 'ROI-Rechner', href: '/pricing' },
+        { label: 'Live-Demo', href: '/live-demo' },
     ],
     company: [
         { label: 'Über uns', href: '/about' },
+        { label: 'Blog', href: '/blog' },
         { label: 'Kontakt', href: '/contact' },
         { label: 'Beratungstermin', href: '/#beratung' },
     ],
@@ -21,7 +24,7 @@ const footerLinks = {
         { label: 'Datenschutz', href: '/legal/datenschutz' },
         { label: 'AGB', href: '/legal/agb' },
         { label: 'Widerrufsrecht', href: '/legal/widerruf' },
-    ]
+    ],
 };
 
 export function Footer() {
@@ -53,6 +56,15 @@ export function Footer() {
                             <a href="mailto:info@partsunion.de" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                                 <Mail className="h-4 w-4" />
                                 info@partsunion.de
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/company/partsunion"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                <Linkedin className="h-4 w-4" />
+                                Partsunion auf LinkedIn
                             </a>
                         </div>
                     </div>
@@ -116,7 +128,7 @@ export function Footer() {
                     </p>
 
                     <div className="flex items-center gap-4">
-                        <span className="text-sm text-muted-foreground">Made in Germany 🇩🇪</span>
+                        <span className="text-sm text-muted-foreground">Made in Germany</span>
                     </div>
                 </div>
             </div>

@@ -1,92 +1,189 @@
-import { Metadata } from 'next';
-import { Mail, MapPin } from 'lucide-react';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Mail, MapPin, MessageCircle, Phone, ArrowRight } from 'lucide-react';
 import { ContactForm } from './ContactForm';
 
 export const metadata: Metadata = {
-    title: 'Kontakt - Partsunion',
+    title: 'Kontakt — Sprechen wir über Ihren Teilehandel',
     description:
-        'Sprechen Sie mit uns. Wir beraten Sie gerne zur Digitalisierung Ihres Teilehandels.',
-    alternates: {
-        canonical: 'https://www.partsunion.de/contact',
-    },
+        'Frage zum Produkt, Pilot-Anfrage oder Support: hier erreichen Sie das Partsunion-Team direkt.',
+    alternates: { canonical: 'https://www.partsunion.de/contact' },
     openGraph: {
         title: 'Kontakt | Partsunion',
-        description:
-            'Sprechen Sie mit uns. Wir beraten Sie gerne zur Digitalisierung Ihres Teilehandels.',
+        description: 'Sprechen Sie mit uns zur Digitalisierung Ihres Teilehandels.',
         url: 'https://www.partsunion.de/contact',
         type: 'website',
         locale: 'de_DE',
         siteName: 'Partsunion',
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Partsunion Kontakt' }],
+        images: ['/opengraph-image'],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Kontakt | Partsunion',
         description: 'Sprechen Sie mit uns zur Digitalisierung Ihres Teilehandels.',
-        images: ['/og-image.png'],
+        images: ['/opengraph-image'],
+    },
+};
+
+const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
+        { '@type': 'ListItem', position: 2, name: 'Kontakt', item: 'https://www.partsunion.de/contact' },
+    ],
+};
+
+const contactLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Partsunion Kontakt',
+    url: 'https://www.partsunion.de/contact',
+    mainEntity: {
+        '@type': 'Organization',
+        name: 'Partsunion UG (haftungsbeschränkt)',
+        email: 'info@partsunion.de',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Zum Sommersberg 27',
+            postalCode: '50321',
+            addressLocality: 'Brühl',
+            addressCountry: 'DE',
+        },
     },
 };
 
 export default function ContactPage() {
     return (
-        <div className="pt-20">
-            <section className="py-20 bg-muted/30">
-                <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6">Kontakt aufnehmen</h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Egal ob Frage zum Produkt oder Support-Anfrage - wir sind für Sie da.
+        <div className="pt-24 pb-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(contactLd) }}
+            />
+
+            {/* Background */}
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
+
+            <div className="container mx-auto px-4 md:px-6">
+                {/* Header */}
+                <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                        <MessageCircle className="h-3 w-3" />
+                        Direkter Kontakt
+                    </span>
+                    <h1
+                        className="text-3xl md:text-5xl lg:text-6xl font-semibold mb-5"
+                        style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.035em', lineHeight: 1.05 }}
+                    >
+                        Sprechen wir über <span className="text-gradient">Ihren Teilehandel.</span>
+                    </h1>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                        Frage zum Produkt, Pilot-Anfrage, Integration-Detail oder Support — wir
+                        antworten innerhalb von 24 Stunden.
                     </p>
                 </div>
-            </section>
 
-            <section className="py-20">
-                <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-                    <div className="grid md:grid-cols-2 gap-12">
-                        <div>
-                            <h2 className="text-2xl font-bold mb-6">Schreiben Sie uns</h2>
+                {/* Two-column body */}
+                <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 max-w-6xl mx-auto">
+                    {/* Form */}
+                    <section className="lg:col-span-7">
+                        <h2
+                            className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground mb-5"
+                        >
+                            Nachricht schreiben
+                        </h2>
+                        <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-6 md:p-8">
                             <ContactForm />
                         </div>
+                    </section>
 
-                        <div className="space-y-8">
-                            <h2 className="text-2xl font-bold mb-6">Direkter Kontakt</h2>
+                    {/* Contact info */}
+                    <aside className="lg:col-span-5 space-y-4">
+                        <h2
+                            className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground mb-5"
+                        >
+                            Wege zu uns
+                        </h2>
 
-                            <div className="flex items-start gap-4">
-                                <Mail className="h-6 w-6 text-primary mt-1" />
-                                <div>
-                                    <h3 className="font-bold">E-Mail</h3>
-                                    <p className="text-muted-foreground">info@partsunion.de</p>
+                        <a
+                            href="mailto:info@partsunion.de"
+                            className="block rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5 hover:border-primary/40 transition-colors group"
+                        >
+                            <div className="flex items-center gap-3 mb-2">
+                                <div className="h-9 w-9 rounded-lg flex items-center justify-center border border-border/60 text-primary">
+                                    <Mail className="h-4 w-4" />
+                                </div>
+                                <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                                    E-Mail
                                 </div>
                             </div>
+                            <div className="font-mono text-sm text-foreground mb-1" style={{ fontFamily: 'var(--font-mono)' }}>
+                                info@partsunion.de
+                            </div>
+                            <p className="text-xs text-muted-foreground">Antwort meist innerhalb von 24 h</p>
+                        </a>
 
-                            <div className="flex items-start gap-4">
-                                <MapPin className="h-6 w-6 text-primary mt-1" />
-                                <div>
-                                    <h3 className="font-bold">Sitz</h3>
-                                    <p className="text-muted-foreground">
-                                        Partsunion UG (haftungsbeschränkt)<br />
-                                        Zum Sommersberg 27<br />
-                                        50321 Brühl
-                                    </p>
+                        <div className="rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5">
+                            <div className="flex items-center gap-3 mb-2">
+                                <div className="h-9 w-9 rounded-lg flex items-center justify-center border border-border/60 text-primary">
+                                    <MapPin className="h-4 w-4" />
+                                </div>
+                                <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                                    Sitz
                                 </div>
                             </div>
-
-                            <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
-                                <h4 className="font-bold mb-2 text-primary">Support benötigt?</h4>
-                                <p className="text-sm text-muted-foreground mb-4">
-                                    Als Kunde finden Sie schnelle Hilfe in unserem Support-Center oder
-                                    direkt im Dashboard.
-                                </p>
-                                <a
-                                    href="https://app.partsunion.de"
-                                    className="inline-flex items-center justify-center h-9 px-4 text-sm font-medium rounded-lg border border-input bg-transparent hover:bg-accent hover:text-accent-foreground transition-colors"
-                                >
-                                    Zum Support-Center
-                                </a>
+                            <div className="text-sm text-foreground/85 leading-relaxed">
+                                Partsunion UG (haftungsbeschränkt)<br />
+                                Zum Sommersberg 27<br />
+                                50321 Brühl · Deutschland
                             </div>
                         </div>
-                    </div>
+
+                        <Link
+                            href="/#beratung"
+                            className="block rounded-xl border border-primary/40 bg-primary/[0.05] p-5 hover:bg-primary/[0.08] transition-colors group"
+                        >
+                            <div className="flex items-center gap-3 mb-2">
+                                <div className="h-9 w-9 rounded-lg flex items-center justify-center bg-primary/15 border border-primary/30 text-primary">
+                                    <Phone className="h-4 w-4" />
+                                </div>
+                                <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-primary">
+                                    Beratungstermin
+                                </div>
+                            </div>
+                            <div className="text-sm text-foreground font-medium mb-1">
+                                30 Minuten · Online oder vor Ort
+                            </div>
+                            <p className="text-xs text-muted-foreground mb-3">
+                                Live-Demo an Ihren echten Fahrzeugen plus ROI-Rechnung.
+                            </p>
+                            <span className="inline-flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
+                                Slot wählen <ArrowRight className="h-3 w-3" />
+                            </span>
+                        </Link>
+
+                        <div className="rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5">
+                            <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground mb-2">
+                                Bestandskunde?
+                            </div>
+                            <p className="text-sm text-foreground/85 mb-3">
+                                Support &amp; Tickets direkt im Dashboard.
+                            </p>
+                            <a
+                                href="https://app.partsunion.de"
+                                className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground/80 hover:text-primary transition-colors"
+                            >
+                                Zum Dashboard <ArrowRight className="h-3 w-3" />
+                            </a>
+                        </div>
+                    </aside>
                 </div>
-            </section>
+            </div>
         </div>
     );
 }

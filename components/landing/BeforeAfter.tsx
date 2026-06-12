@@ -1,154 +1,148 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, AlertTriangle, Zap } from 'lucide-react';
+import { ArrowRight, X, Check } from 'lucide-react';
 
-const comparisons = [
+interface Row {
+    label: string;
+    before: string;
+    beforeNote: string;
+    after: string;
+    afterNote: string;
+}
+
+const rows: Row[] = [
     {
-        category: 'Anfragebearbeitung',
-        before: { value: '15 Min', detail: 'Manuelles Abtippen pro Anfrage' },
-        after: { value: '8 Sek', detail: 'Automatische KI-Verarbeitung' },
+        label: 'Anfrage bearbeiten',
+        before: '15 Min',
+        beforeNote: 'Manuelles Abtippen aus WhatsApp ins ERP',
+        after: '8 Sek',
+        afterNote: 'KI liest Fahrzeugschein-Foto, matcht OEM',
     },
     {
-        category: 'Retourenquote',
-        before: { value: '20%', detail: 'Falsche Teile durch Tippfehler' },
-        after: { value: '3,2%', detail: 'KI-validierte OEM-Zuordnung' },
+        label: 'Retourenquote',
+        before: 'bis ~20 %',
+        beforeNote: 'Falsche Teile durch HSN/TSN-Tippfehler',
+        after: 'unter 5 %',
+        afterNote: 'Präzise OEM-Identifikation statt manueller Eingabe (Zielwert)',
     },
     {
-        category: 'Verfügbarkeit',
-        before: { value: '8h/Tag', detail: 'Nur während Öffnungszeiten' },
-        after: { value: '24/7', detail: 'WhatsApp-Bot antwortet immer' },
+        label: 'Erreichbarkeit',
+        before: '8 h / Tag',
+        beforeNote: 'Nur während Öffnungszeiten',
+        after: '24 / 7',
+        afterNote: 'WhatsApp-Bot antwortet auch nachts',
     },
     {
-        category: 'Angebote pro Tag',
-        before: { value: '~30', detail: 'Begrenzt durch Mitarbeiterkapazität' },
-        after: { value: '500+', detail: 'Unbegrenzt skalierbar' },
+        label: 'Angebote pro Tag',
+        before: '~30',
+        beforeNote: 'Begrenzt durch Mitarbeiterkapazität',
+        after: '500+',
+        afterNote: 'Parallel-Verarbeitung, unbegrenzt skalierbar',
     },
     {
-        category: 'Bestandssync',
-        before: { value: 'Manuell', detail: 'Fehleranfällig, zeitversetzt' },
-        after: { value: 'Echtzeit', detail: 'Automatisch über alle Kanäle' },
+        label: 'Bestand-Sync',
+        before: 'Manuell',
+        beforeNote: 'Fehleranfällig, mit Stunden Versatz',
+        after: 'Echtzeit',
+        afterNote: 'eBay · Webshop · Theke synchron',
     },
 ];
 
 export function BeforeAfter() {
     return (
         <section className="py-24 md:py-32 relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-background" />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                {/* Section Header */}
-                <div className="text-center mb-16 max-w-3xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block py-1.5 px-4 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4">
+                        <span className="inline-block py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
                             Der Unterschied
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                            Vorher vs. <span className="text-gradient">mit Partsunion</span>
+                        <h2
+                            className="text-3xl md:text-5xl font-semibold mb-5"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}
+                        >
+                            Was sich konkret <span className="text-gradient">verändert.</span>
                         </h2>
-                        <p className="text-lg text-muted-foreground">
-                            So verändert sich Ihr Arbeitsalltag mit KI-Automatisierung.
+                        <p className="text-base md:text-lg text-muted-foreground">
+                            Fünf typische Kennzahlen im Sales-Geschäft eines Teilehändlers — als Modellrechnung
+                            auf Basis von Branchenwerten und internen Systemtests.
                         </p>
                     </motion.div>
                 </div>
 
-                {/* Comparison Table */}
+                {/* Two-column comparison */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto"
+                    viewport={{ once: true, margin: '-80px' }}
+                    className="max-w-5xl mx-auto"
                 >
-                    {/* Header Row — desktop only. On mobile, each row gets its own header chips. */}
-                    <div className="hidden md:grid md:grid-cols-3 gap-4 mb-4 px-4">
-                        <div />
-                        <div className="text-center">
-                            <div className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full bg-error/10 border border-error/20">
-                                <AlertTriangle className="h-3.5 w-3.5 text-error" />
-                                <span className="text-sm font-semibold text-error">Ohne Partsunion</span>
-                            </div>
+                    {/* Column headers */}
+                    <div className="grid grid-cols-2 gap-3 md:gap-5 mb-3">
+                        <div className="flex items-center gap-2 px-4 py-3 rounded-lg border border-border/60 bg-[rgba(15,23,42,0.3)]">
+                            <X className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
+                            <span className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                                Ohne Partsunion
+                            </span>
                         </div>
-                        <div className="text-center">
-                            <div className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full bg-success/10 border border-success/20">
-                                <Zap className="h-3.5 w-3.5 text-success" />
-                                <span className="text-sm font-semibold text-success">Mit Partsunion</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Mobile header chips (shown once, above the stack) */}
-                    <div className="flex md:hidden justify-center gap-2 mb-4">
-                        <div className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full bg-error/10 border border-error/20">
-                            <AlertTriangle className="h-3 w-3 text-error" />
-                            <span className="text-xs font-semibold text-error">Ohne</span>
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full bg-success/10 border border-success/20">
-                            <Zap className="h-3 w-3 text-success" />
-                            <span className="text-xs font-semibold text-success">Mit Partsunion</span>
+                        <div className="flex items-center gap-2 px-4 py-3 rounded-lg border border-primary/30 bg-primary/[0.04]">
+                            <Check className="h-3.5 w-3.5 text-primary" aria-hidden />
+                            <span className="text-xs font-medium uppercase tracking-[0.14em] text-primary">
+                                Mit Partsunion
+                            </span>
                         </div>
                     </div>
 
-                    {/* Comparison Rows */}
-                    <div className="space-y-3">
-                        {comparisons.map((comp, index) => (
+                    {/* Rows */}
+                    <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] overflow-hidden">
+                        {rows.map((row, idx) => (
                             <motion.div
-                                key={index}
-                                initial={{ opacity: 0, x: -20 }}
+                                key={row.label}
+                                initial={{ opacity: 0, x: -10 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.4, delay: index * 0.1 }}
+                                transition={{ duration: 0.4, delay: idx * 0.06 }}
                                 viewport={{ once: true }}
-                                className="p-4 md:p-5 rounded-xl glass border border-border/50 hover:border-primary/20 transition-all"
+                                className={idx > 0 ? 'border-t border-border/60' : ''}
                             >
-                                {/* Mobile layout: category on top, before/after below */}
-                                <div className="md:hidden">
-                                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                                        {comp.category}
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-3 items-center">
-                                        <div className="text-center py-2 rounded-lg bg-error/5 border border-error/10">
-                                            <div className="text-xl font-bold text-error/80" style={{ fontFamily: 'var(--font-display)' }}>
-                                                {comp.before.value}
-                                            </div>
-                                        </div>
-                                        <div className="text-center py-2 rounded-lg bg-success/5 border border-success/10">
-                                            <div className="text-xl font-bold text-success" style={{ fontFamily: 'var(--font-display)' }}>
-                                                {comp.after.value}
-                                            </div>
-                                        </div>
-                                    </div>
+                                {/* Label row */}
+                                <div className="px-4 md:px-6 pt-4 pb-1">
+                                    <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                                        {row.label}
+                                    </span>
                                 </div>
 
-                                {/* Desktop layout: 3-column grid */}
-                                <div className="hidden md:grid md:grid-cols-3 gap-4 items-center">
-                                    {/* Category */}
-                                    <div>
-                                        <span className="text-base font-semibold text-foreground">{comp.category}</span>
-                                    </div>
-
-                                    {/* Before */}
-                                    <div className="text-center">
-                                        <div className="text-2xl font-bold text-error/80 mb-0.5" style={{ fontFamily: 'var(--font-display)' }}>
-                                            {comp.before.value}
+                                {/* Before / After grid */}
+                                <div className="grid grid-cols-2 divide-x divide-border/40">
+                                    <div className="px-4 md:px-6 py-4">
+                                        <div
+                                            className="text-2xl md:text-3xl font-semibold text-foreground/60 mb-1 tabular-nums"
+                                            style={{ fontFamily: 'var(--font-mono)' }}
+                                        >
+                                            {row.before}
                                         </div>
-                                        <div className="text-xs text-muted-foreground">
-                                            {comp.before.detail}
+                                        <div className="text-xs text-muted-foreground leading-relaxed max-w-xs">
+                                            {row.beforeNote}
                                         </div>
                                     </div>
-
-                                    {/* After */}
-                                    <div className="text-center">
-                                        <div className="text-2xl font-bold text-success mb-0.5" style={{ fontFamily: 'var(--font-display)' }}>
-                                            {comp.after.value}
+                                    <div className="px-4 md:px-6 py-4 bg-primary/[0.02]">
+                                        <div
+                                            className="text-2xl md:text-3xl font-semibold text-primary mb-1 tabular-nums"
+                                            style={{ fontFamily: 'var(--font-mono)' }}
+                                        >
+                                            {row.after}
                                         </div>
-                                        <div className="text-xs text-muted-foreground">
-                                            {comp.after.detail}
+                                        <div className="text-xs text-muted-foreground leading-relaxed max-w-xs">
+                                            {row.afterNote}
                                         </div>
                                     </div>
                                 </div>
@@ -156,23 +150,28 @@ export function BeforeAfter() {
                         ))}
                     </div>
 
-                    {/* Bottom CTA */}
+                    {/* Closing CTA */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
                         viewport={{ once: true }}
                         className="text-center mt-12"
                     >
-                        <p className="text-muted-foreground text-sm mb-6">
-                            Berechnen Sie Ihr persönliches Einsparpotenzial in einem kostenlosen Beratungsgespräch.
+                        <p className="text-xs text-muted-foreground/70 mb-5 max-w-xl mx-auto leading-relaxed">
+                            Die „Mit Partsunion"-Werte sind illustrative Zielgrößen auf Basis von
+                            Branchen-Benchmarks und internen Systemtests — keine zugesicherten Ergebnisse.
+                            Partsunion befindet sich im Markteintritt; belastbare Kundenkennzahlen liegen noch nicht vor.
+                        </p>
+                        <p className="text-sm text-muted-foreground mb-5 max-w-md mx-auto">
+                            Wir rechnen Ihr persönliches Einsparpotenzial im Beratungstermin gemeinsam durch — mit Ihren echten Zahlen.
                         </p>
                         <a
                             href="#beratung"
-                            className="inline-flex items-center gap-2 py-3 px-8 rounded-full gradient-primary text-white font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all group"
+                            className="inline-flex items-center gap-2 py-3 px-6 rounded-lg gradient-primary text-white text-sm font-medium shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all group"
                         >
-                            Einsparpotenzial berechnen
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            Beratungstermin sichern
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                         </a>
                     </motion.div>
                 </motion.div>

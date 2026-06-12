@@ -2,256 +2,185 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-    TrendingUp,
-    Clock,
-    Zap,
-    ShieldCheck,
-    Globe,
-    Users,
-    ArrowRight,
-    CheckCircle2
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ScalabilityVisual } from '@/components/features/ScalabilityVisual';
-import { TwentyFourSevenVisual } from '@/components/features/TwentyFourSevenVisual';
-import { SpeedVisual } from '@/components/features/SpeedVisual';
+import { ArrowRight, ShieldCheck, Zap, Clock, FileText, TrendingUp, Users } from 'lucide-react';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { OEMVisual } from '@/components/features/OEMVisual';
-import { InvoiceVisual } from '@/components/features/InvoiceVisual';
+import { SpeedVisual } from '@/components/features/SpeedVisual';
+import { ScalabilityVisual } from '@/components/features/ScalabilityVisual';
 
-const valueProps = [
-    {
-        slug: 'skalierbarkeit',
-        icon: TrendingUp,
-        title: 'Skalierbarkeit ohne Kostenexplosion',
-        headline: 'Wachsen Sie ohne Grenzen',
-        description: 'Zuverlässig auch bei hohen Anfragen. Gleichbleibende Performance 365 Tage im Jahr.',
-        highlights: [
-            'Keine Krankheits- oder Urlaubsausfälle',
-            'Keine neuen Mitarbeiter oder Bürokosten',
-            'Konstante Qualität bei jeder Anfrage'
-        ],
-        color: 'from-emerald-500 to-teal-500',
-        bgColor: 'bg-emerald-500/10',
-        iconColor: 'text-emerald-500',
-        visual: 'scalability'
-    },
-    {
-        slug: '24-7-einsatzbereit',
-        icon: Clock,
-        title: '24/7 Einsatzbereit',
-        headline: 'Immer für Ihre Kunden da',
-        description: 'Umsatz und Einsatz auch außerhalb der Öffnungszeiten. Verpassen Sie keinen Lead mehr.',
-        highlights: [
-            'Angebote um 3 Uhr nachts',
-            'Wochenend-Anfragen automatisch bearbeitet',
-            'Internationaler Kundenservice'
-        ],
-        color: 'from-blue-500 to-cyan-500',
-        bgColor: 'bg-blue-500/10',
-        iconColor: 'text-blue-500',
-        visual: '247'
-    },
-    {
-        slug: 'geschwindigkeit',
-        icon: Zap,
-        title: 'Sekunden statt Minuten',
-        headline: 'Blitzschnelle Angebotserstellung',
-        description: 'Erstellt pro Anfrage 3 Angebote aus verschiedenen Preisgruppen. Parallele Verarbeitung beliebig vieler Anfragen.',
-        highlights: [
-            'Kürzere Antwortzeiten = Höhere Abschlussquote',
-            'Keine Nacharbeit wegen Fehlangeboten',
-            'Mehr Umsatz durch mehr Kapazität'
-        ],
-        color: 'from-amber-500 to-orange-500',
-        bgColor: 'bg-amber-500/10',
-        iconColor: 'text-amber-500',
-        visual: 'speed'
-    },
-    {
-        slug: 'sinkende-retouren',
-        icon: ShieldCheck,
-        title: 'KI-gestützte OEM-Ermittlung',
-        headline: 'Das richtige Teil beim ersten Mal',
-        description: 'Automatischer Multi-Source-Abgleich über mehrere Datenbanken. Konfidenz-Prüfung und Kreuzvalidierung für maximale Treffsicherheit.',
-        highlights: [
-            'Automatische Kreuzvalidierung über mehrere Quellen',
-            'Drastische Reduzierung der Retouren',
-            'Weniger Reklamationen, mehr Marge'
-        ],
-        color: 'from-violet-500 to-purple-500',
-        bgColor: 'bg-violet-500/10',
-        iconColor: 'text-violet-500',
-        visual: 'oem'
-    },
-    {
-        slug: 'automatische-rechnungserstellung',
-        icon: Globe,
-        title: 'Automatische Rechnungserstellung',
-        headline: 'Vollständiger Prozess',
-        description: 'Von der Bestellung über die Rechnung bis zum Versand - vollautomatisch. Kein manueller Schritt nötig.',
-        highlights: [
-            'Auto-generierte Rechnungen mit MwSt.',
-            'Zahlungslinks automatisch versendet',
-            'Lieferschein-Erstellung inklusive'
-        ],
-        color: 'from-pink-500 to-rose-500',
-        bgColor: 'bg-pink-500/10',
-        iconColor: 'text-pink-500',
-        visual: 'invoice'
-    },
-    {
-        slug: 'team-entlastung',
-        icon: Users,
-        title: 'Entlastung des Teams',
-        headline: 'Fokus auf das Wesentliche',
-        description: 'Wegfall gleichbleibender Routine. Fokus auf Beratung, Vertrieb und Kundenbindung.',
-        highlights: [
-            'Kein Stress bei hohen Anfragen',
-            'Einfache Einarbeitung neuer Mitarbeiter',
-            'Mehr Zeit für persönliche Beratung'
-        ],
-        color: 'from-cyan-500 to-blue-500',
-        bgColor: 'bg-cyan-500/10',
-        iconColor: 'text-cyan-500',
-        visual: null
-    }
-];
+// ─────────────────────────────────────────────────────────────────────────────
+// Bento tile primitive
+// ─────────────────────────────────────────────────────────────────────────────
 
-function VisualComponent({ type }: { type: string | null }) {
-    switch (type) {
-        case 'scalability': return <ScalabilityVisual />;
-        case '247': return <TwentyFourSevenVisual />;
-        case 'speed': return <SpeedVisual />;
-        case 'oem': return <OEMVisual />;
-        case 'invoice': return <InvoiceVisual />;
-        default: return null;
-    }
+interface TileProps {
+    slug: string;
+    icon: typeof ShieldCheck;
+    eyebrow: string;
+    title: string;
+    body: string;
+    children?: React.ReactNode;
+    className?: string;
+    /** When true, the visual fills the lower half (large tile). */
+    largeVisual?: boolean;
 }
+
+function Tile({ slug, icon: Icon, eyebrow, title, body, children, className, largeVisual }: TileProps) {
+    return (
+        <SpotlightCard className={className}>
+            <Link
+                href={`/features/${slug}`}
+                className="flex h-full flex-col p-6 md:p-7 lg:p-8"
+            >
+                <div className="flex items-center gap-2 mb-4">
+                    <Icon className="h-4 w-4 text-primary" />
+                    <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-primary/80">
+                        {eyebrow}
+                    </span>
+                </div>
+
+                <h3
+                    className="text-xl md:text-2xl font-semibold mb-3 text-foreground"
+                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                >
+                    {title}
+                </h3>
+
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
+                    {body}
+                </p>
+
+                {children && (
+                    <div className={largeVisual ? 'mt-auto pt-8' : 'mt-6'}>
+                        {children}
+                    </div>
+                )}
+
+                <div className="mt-6 inline-flex items-center text-xs font-medium text-foreground/70 transition-colors group-hover/spot:text-primary">
+                    Details ansehen
+                    <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover/spot:translate-x-0.5" />
+                </div>
+            </Link>
+        </SpotlightCard>
+    );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section
+// ─────────────────────────────────────────────────────────────────────────────
 
 export function ValueProposition() {
     return (
         <section className="py-24 md:py-32 relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-background" />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+            {/* Subtle background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-background" />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                {/* Section Header */}
-                <div className="text-center mb-16 max-w-3xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-14 md:mb-20 max-w-2xl mx-auto">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block py-1.5 px-4 rounded-full glass text-sm font-medium text-primary mb-4">
-                            Warum Partsunion?
+                        <span className="inline-block py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                            Warum Partsunion
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                            Die Vorteile auf <span className="text-gradient">einen Blick</span>
+                        <h2
+                            className="text-3xl md:text-5xl font-semibold mb-5"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}
+                        >
+                            Das ganze Tagesgeschäft —{' '}
+                            <span className="text-gradient">in einer Plattform.</span>
                         </h2>
-                        <p className="text-lg text-muted-foreground">
-                            Überzeugen Sie sich selbst, warum führende Autoteilehändler auf unsere KI-Lösung setzen.
+                        <p className="text-base md:text-lg text-muted-foreground">
+                            Sechs Bausteine, die zusammen Ihren Sales-Workspace ersetzen.
                         </p>
                     </motion.div>
                 </div>
 
-                {/* Feature Rows - alternating layout */}
-                <div className="space-y-20 md:space-y-32">
-                    {valueProps.map((prop, index) => (
-                        <motion.div
-                            key={prop.slug}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true, margin: '-100px' }}
-                        >
-                            {prop.visual ? (
-                                /* Full-width feature with visual */
-                                <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
-                                    {/* Content Side */}
-                                    <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                                        <div className={cn(
-                                            "h-14 w-14 rounded-xl flex items-center justify-center mb-6",
-                                            prop.bgColor
-                                        )}>
-                                            <prop.icon className={cn("h-7 w-7", prop.iconColor)} />
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-bold mb-3" style={{ fontFamily: 'var(--font-display)' }}>
-                                            {prop.title}
-                                        </h3>
-                                        <p className="text-muted-foreground mb-6 text-base md:text-lg leading-relaxed">
-                                            {prop.description}
-                                        </p>
-                                        <ul className="space-y-3 mb-8">
-                                            {prop.highlights.map((highlight, idx) => (
-                                                <li key={idx} className="flex items-start gap-3">
-                                                    <CheckCircle2 className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
-                                                    <span className="text-muted-foreground">{highlight}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                        <Link
-                                            href={`/features/${prop.slug}`}
-                                            className="inline-flex items-center text-sm font-medium text-primary hover:underline group"
-                                        >
-                                            Mehr erfahren
-                                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                        </Link>
-                                    </div>
+                {/* Bento Grid */}
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+                >
+                    {/* Tile 1 — LARGE 2x2 — OEM (hero feature) */}
+                    <Tile
+                        slug="sinkende-retouren"
+                        icon={ShieldCheck}
+                        eyebrow="OEM-Pipeline"
+                        title="Das richtige Teil beim ersten Mal."
+                        body="Mehrstufige KI-Pipeline gleicht jede Anfrage parallel gegen Ihre eigene Datenbank, Lieferanten-Kataloge und mehrere Web-Quellen ab. Konfidenz-Prüfung und Kreuzvalidierung für maximale Treffsicherheit — mit dem Ziel einer deutlich niedrigeren Retourenquote."
+                        className="md:col-span-2 md:row-span-2 min-h-[420px]"
+                        largeVisual
+                    >
+                        <div className="relative h-[200px] md:h-[260px] -mx-2 md:-mx-4 -mb-2 md:-mb-4 overflow-hidden rounded-xl border border-border/40 bg-[rgba(10,15,26,0.5)] p-4">
+                            <OEMVisual />
+                        </div>
+                    </Tile>
 
-                                    {/* Visual Side */}
-                                    <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                                        <div className="relative glass rounded-2xl border border-border/50 p-4 md:p-6 overflow-hidden">
-                                            {/* Glow */}
-                                            <div className={`absolute inset-0 bg-gradient-to-br ${prop.color} opacity-5 blur-xl`} />
-                                            <VisualComponent type={prop.visual} />
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                /* Card-only (no visual) */
-                                <div className="max-w-2xl mx-auto">
-                                    <Link
-                                        href={`/features/${prop.slug}`}
-                                        className="group block"
-                                    >
-                                        <div className="p-8 rounded-2xl glass card-hover border border-border/50 hover:border-primary/30 text-center">
-                                            <div className={cn(
-                                                "h-14 w-14 rounded-xl flex items-center justify-center mb-6 mx-auto transition-transform group-hover:scale-110",
-                                                prop.bgColor
-                                            )}>
-                                                <prop.icon className={cn("h-7 w-7", prop.iconColor)} />
-                                            </div>
-                                            <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                                                {prop.title}
-                                            </h3>
-                                            <p className="text-muted-foreground mb-6">
-                                                {prop.description}
-                                            </p>
-                                            <ul className="space-y-2 mb-6 inline-block text-left">
-                                                {prop.highlights.map((highlight, idx) => (
-                                                    <li key={idx} className="flex items-start gap-2 text-sm">
-                                                        <CheckCircle2 className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                                                        <span className="text-muted-foreground">{highlight}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                            <div className="flex items-center justify-center text-sm font-medium text-primary">
-                                                <span>Mehr erfahren</span>
-                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )}
-                        </motion.div>
-                    ))}
-                </div>
+                    {/* Tile 2 — WIDE 2x1 — Speed */}
+                    <Tile
+                        slug="geschwindigkeit"
+                        icon={Zap}
+                        eyebrow="Geschwindigkeit"
+                        title="8 Sekunden bis zum Angebot."
+                        body="Drei Angebote aus verschiedenen Preisgruppen parallel — statt 15 Minuten Tippen."
+                        className="md:col-span-2"
+                    >
+                        <div className="relative h-[120px] -mx-2 -mb-2 overflow-hidden rounded-xl border border-border/40 bg-[rgba(10,15,26,0.5)] p-3">
+                            <SpeedVisual />
+                        </div>
+                    </Tile>
+
+                    {/* Tile 3 — SMALL 1x1 — 24/7 */}
+                    <Tile
+                        slug="24-7-einsatzbereit"
+                        icon={Clock}
+                        eyebrow="Always-on"
+                        title="24/7 Einsatzbereit."
+                        body="Angebote um 3 Uhr nachts. Wochenende. Feiertag. Der Bot bleibt wach."
+                        className="md:col-span-1"
+                    />
+
+                    {/* Tile 4 — SMALL 1x1 — Auto-Rechnung */}
+                    <Tile
+                        slug="automatische-rechnungserstellung"
+                        icon={FileText}
+                        eyebrow="Faktura"
+                        title="Rechnung in einem Klick."
+                        body="Auftrag → Rechnung → Lieferschein → Zahlungslink. Ohne Tippen."
+                        className="md:col-span-1"
+                    />
+
+                    {/* Tile 5 — WIDE 2x1 — Skalierbarkeit */}
+                    <Tile
+                        slug="skalierbarkeit"
+                        icon={TrendingUp}
+                        eyebrow="Skalierbarkeit"
+                        title="3× Anfragenvolumen — ohne neuen Mitarbeiter."
+                        body="Konstante Qualität bei jeder Anfrage. Keine Krankheits- oder Urlaubsausfälle, keine Einarbeitung."
+                        className="md:col-span-2"
+                    >
+                        <div className="relative h-[100px] -mx-2 -mb-2 overflow-hidden rounded-xl border border-border/40 bg-[rgba(10,15,26,0.5)] p-3">
+                            <ScalabilityVisual />
+                        </div>
+                    </Tile>
+
+                    {/* Tile 6 — WIDE 2x1 — Team-Entlastung (no visual, copy-driven) */}
+                    <Tile
+                        slug="team-entlastung"
+                        icon={Users}
+                        eyebrow="Team"
+                        title="Ihr Team macht das, wofür Sie es eingestellt haben."
+                        body="Beratung. Vertrieb. Kundenbindung. Statt Fahrzeugscheine abzutippen und im Katalog zu suchen."
+                        className="md:col-span-2"
+                    />
+                </motion.div>
             </div>
         </section>
     );
 }
-
-export { valueProps };

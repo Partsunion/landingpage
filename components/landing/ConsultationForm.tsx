@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { submitLead } from '@/lib/leads';
+import { track } from '@/components/layout/Analytics';
+import { CalendarPicker } from '@/components/landing/CalendarPicker';
 import {
     Send,
     Phone,
@@ -24,6 +26,7 @@ export function ConsultationForm() {
         email: '',
         nachricht: ''
     });
+    const [appointmentSlot, setAppointmentSlot] = useState<string | null>(null);
     const [consent, setConsent] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -46,13 +49,19 @@ export function ConsultationForm() {
         try {
             await submitLead({
                 ...formState,
+                appointmentSlot,
                 source: 'beratung',
                 consent: true,
             });
             setIsSubmitted(true);
+            track('Lead Submitted', {
+                source: 'beratung',
+                with_appointment: appointmentSlot ? 'yes' : 'no',
+            });
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : 'Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.';
             setError(message);
+            track('Lead Submit Failed', { source: 'beratung' });
         } finally {
             setIsSubmitting(false);
         }
@@ -85,13 +94,14 @@ export function ConsultationForm() {
                                 Unverbindliche Beratung
                             </span>
 
-                            <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                                Preis auf <span className="text-gradient">Anfrage</span>
+                            <h2 className="text-3xl md:text-5xl font-semibold mb-6" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}>
+                                Lassen Sie uns <span className="text-gradient">30 Minuten</span> sprechen.
                             </h2>
 
                             <p className="text-lg text-muted-foreground mb-8">
-                                Jeder Teilehandel ist anders. Deshalb erstellen wir Ihnen ein individuelles Angebot,
-                                das genau auf Ihre Anforderungen und Ihr Volumen zugeschnitten ist.
+                                Wir zeigen Ihnen Partsunion live an Ihren echten Fahrzeugen und Teilen,
+                                rechnen Ihr Einsparpotenzial gemeinsam durch und stimmen ein Paket
+                                genau auf Ihr Anfragevolumen ab.
                             </p>
 
                             {/* Benefits List */}
@@ -253,11 +263,14 @@ export function ConsultationForm() {
                                                     name="nachricht"
                                                     value={formState.nachricht}
                                                     onChange={handleChange}
-                                                    rows={4}
+                                                    rows={3}
                                                     placeholder="Erzählen Sie uns kurz über Ihren Betrieb und Ihre Anforderungen..."
                                                     className="flex w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                                                 />
                                             </div>
+
+                                            {/* Calendar Slot Picker */}
+                                            <CalendarPicker value={appointmentSlot} onChange={setAppointmentSlot} />
 
                                             {/* DSGVO consent checkbox — explicit opt-in per Art. 6 Abs. 1 lit. a */}
                                             <label className="flex items-start gap-3 cursor-pointer select-none text-xs text-muted-foreground">
