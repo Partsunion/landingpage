@@ -1,21 +1,21 @@
 # ============================================================================
 # partsunion-landing-page — Next.js 16 with output: export → static via serve
 # ============================================================================
-FROM node:22-alpine AS deps
+FROM node:22.23.2-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32 AS deps
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-audit --no-fund --no-progress
 
 # ---- Production dependencies (locked runtime server only) ----
-FROM node:22-alpine AS production-deps
+FROM node:22.23.2-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32 AS production-deps
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev --no-audit --no-fund --no-progress
 
 # ---- Builder ----
-FROM node:22-alpine AS builder
+FROM node:22.23.2-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32 AS builder
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -23,7 +23,7 @@ COPY . .
 RUN npm run build
 
 # ---- Runtime (serve static export from /out) ----
-FROM node:22-alpine AS runner
+FROM node:22.23.2-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32 AS runner
 
 WORKDIR /app
 
