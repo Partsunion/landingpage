@@ -18,12 +18,19 @@ const PLAUSIBLE_DOMAIN = 'partsunion.de';
 /** Plausible Self-Hosted oder Cloud; Standard ist die Cloud-URL. */
 const PLAUSIBLE_SCRIPT = 'https://plausible.io/js/script.tagged-events.outbound-links.js';
 
+// Pin the reviewed vendor payload. A changed third-party script must fail closed
+// until the new bytes and hash have been reviewed and released together.
+const PLAUSIBLE_INTEGRITY =
+    'sha384-cNy8VYncrUFmX/OhlSwl5GX0i+gb9VwyOZlUuhIU4gjR6jhozJYi9Mifv7A2ZX7q';
+
 export function Analytics() {
     return (
         <Script
             defer
             data-domain={PLAUSIBLE_DOMAIN}
             src={PLAUSIBLE_SCRIPT}
+            integrity={PLAUSIBLE_INTEGRITY}
+            crossOrigin="anonymous"
             strategy="afterInteractive"
         />
     );
