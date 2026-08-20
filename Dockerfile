@@ -5,7 +5,14 @@ FROM node:22-alpine AS deps
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --no-audit --no-fund --no-progress
+RUN npm ci --no-audit --no-fund --no-progress
+
+# ---- Production dependencies (locked runtime server only) ----
+FROM node:22-alpine AS production-deps
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev --no-audit --no-fund --no-progress
 
 # ---- Builder ----
 FROM node:22-alpine AS builder
@@ -20,17 +27,34 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV PORT=8080
+ARG VCS_REF=unknown
+ARG BUILD_DATE=unknown
+ARG APP_RELEASE=landingpage@unversioned
+ARG VCS_REPOSITORY=https://github.com/nyroxsystems-boop/landingpage
+LABEL org.opencontainers.image.source="$VCS_REPOSITORY" \
+      org.opencontainers.image.revision="$VCS_REF" \
+      org.opencontainers.image.created="$BUILD_DATE" \
+      org.opencontainers.image.version="$APP_RELEASE"
 
-RUN npm install -g serve@14
+ENV NODE_ENV=production \
+    PORT=8080 \
+    APP_RELEASE="$APP_RELEASE" \
+    GIT_COMMIT_SHA="$VCS_REF" \
+    BUILD_DATE="$BUILD_DATE"
 
 # Next.js with output: export drops the static site in out/
 COPY --from=builder /app/out ./out
+# `_headers` is hosting-provider metadata, not a public asset. The canonical
+# production Caddyfile applies these headers and explicitly rejects this path.
+RUN rm -f ./out/_headers
+COPY --from=production-deps /app/node_modules ./node_modules
+COPY package.json ./
 
 EXPOSE 8080
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD wget -q --spider http://localhost:8080/ || exit 1
 
-CMD ["serve", "out", "-l", "8080", "--no-clipboard"]
+# Audit H-9: serve as the built-in non-root `node` user (port 8080 > 1024).
+USER node
+CMD ["./node_modules/.bin/serve", "out", "-l", "8080", "--no-clipboard"]

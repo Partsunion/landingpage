@@ -4,7 +4,7 @@ export function ArticleOemErmittlung() {
     return (
         <>
             <p>
-                „OEM-Nummer in unter einer Sekunde aus einem Foto" — das klingt nach Marketing-Sprache.
+                „OEM-Nummer in unter einer Sekunde aus einem Foto“ — das klingt nach Marketing-Sprache.
                 In diesem Artikel zeigen wir die echte Pipeline dahinter, Schritt für Schritt: was passiert
                 vom Hochladen des Fahrzeugscheins bis zur OEM-Empfehlung im Chat — und warum ein Großteil
                 der Anfragen mit hoher Konfidenz endet, während unsichere Fälle bewusst an den Menschen gehen.
@@ -12,14 +12,14 @@ export function ArticleOemErmittlung() {
 
             <h2>Stufe 1 — OCR auf Werkstatt-Bedingungen trainiert</h2>
             <p>
-                Standard-OCR-Bibliotheken (Tesseract, Google Vision) scheitern an WhatsApp-komprimierten
-                Handy-Fotos. Sie sind trainiert auf saubere, gescannte Dokumente — nicht auf einen
-                schiefgehaltenen Schein mit Schlierenlicht aus dem Smartphone. Unsere OCR ist auf{' '}
-                <strong>120.000 Werkstatt-typische Fotos</strong> trainiert:
+                Klassische OCR-Bibliotheken (Tesseract & Co.) scheitern an WhatsApp-komprimierten
+                Handy-Fotos. Sie sind auf saubere, gescannte Dokumente ausgelegt — nicht auf einen
+                schiefgehaltenen Schein mit Schlierenlicht aus dem Smartphone. Unsere Vision-Pipeline ist
+                gezielt darauf ausgelegt, mit <strong>Werkstatt-typischen Bedingungen</strong> umzugehen:
             </p>
             <ul>
-                <li>WhatsApp-Quality (60 % JPEG-Compression) statt scanqualität</li>
-                <li>Schräglagen bis 30°</li>
+                <li>Starke WhatsApp-/JPEG-Kompression statt Scanqualität</li>
+                <li>Schräglagen und Verdrehungen</li>
                 <li>Verschmutzte oder zerknitterte Scheine</li>
                 <li>Schlechte Beleuchtung (Werkstattlicht, Sonneneinfall, Schatten)</li>
                 <li>Hand-überlagerte Felder (Daumen am Schein-Rand)</li>
@@ -43,13 +43,12 @@ export function ArticleOemErmittlung() {
                     in Millisekunden zurück.
                 </li>
                 <li>
-                    <strong>Aftermarket-Teilekataloge</strong> — Branchen-Standardverzeichnisse (etwa
-                    TecDoc) mit Hersteller-OE-Nummern, Aftermarket-Alternativen und Cross-References. Die
-                    Anbindung an die Standard-Kataloge ist Teil unserer Roadmap.
+                    <strong>Aftermarket-Teilekataloge</strong> — der lizenzierte TecDoc-Katalog (pro
+                    Mandant) mit Hersteller-OE-Nummern, Aftermarket-Alternativen und Cross-References.
                 </li>
                 <li>
-                    <strong>Web-Grounding</strong> — bei seltenen Fahrzeugen (US-Imports, Klassiker)
-                    holen wir Daten aus Hersteller-Quellen, die Standardkataloge nicht abdecken.
+                    <strong>Eigene OEM-Datenbank &amp; Cross-References</strong> — gepflegte Mappings und
+                    Alternativ-Hersteller-Verknüpfungen, die auch seltenere Fahrzeuge abdecken.
                 </li>
             </ol>
             <p>
@@ -61,13 +60,13 @@ export function ArticleOemErmittlung() {
             <h2>Stufe 3 — Motor-Disambiguierung wenn nötig</h2>
             <p>
                 Der häufigste Grund für Konfidenz unter 0,9: <strong>mehrere Motorvarianten zum gleichen
-                Fahrzeugmodell</strong>. „BMW 320d Bj 2014" — kann B47 oder N47 sein, das Teil ist anders.
+                Fahrzeugmodell</strong>. „BMW 320d Bj 2014“ — kann B47 oder N47 sein, das Teil ist anders.
                 In diesen Fällen prüft der Bot ob er den Motorcode aus der FIN ableiten kann (Position 5–8
                 kodiert oft die Motorfamilie). Falls nicht, fragt er aktiv im Chat nach:
             </p>
             <blockquote>
                 „Ich sehe zwei mögliche Motorvarianten für Ihr Fahrzeug. Können Sie mir den Motorcode
-                geben? Er steht im Schein unter Feld 2.2 oder direkt auf dem Motorblock."
+                geben? Er steht im Schein unter Feld 2.2 oder direkt auf dem Motorblock.“
             </blockquote>
             <p>
                 Das ist <strong>kein Bug, sondern ein Feature</strong>. Eine Rückfrage in 5 Sekunden ist
@@ -79,7 +78,7 @@ export function ArticleOemErmittlung() {
                 Pro OEM-Kandidat berechnet die Pipeline einen Konfidenz-Score zwischen 0 und 1. Faktoren:
             </p>
             <ul>
-                <li>Übereinstimmung zwischen den Quellen (lokal / Katalog / Web)</li>
+                <li>Übereinstimmung zwischen den Quellen (lokale DB / TecDoc-Katalog / eigene Cross-References)</li>
                 <li>Anzahl der historischen Bestellungen dieses OEMs für dieses Fahrzeug</li>
                 <li>Retoure-Quote dieses OEMs in den letzten 90 Tagen</li>
                 <li>Klarheit der Fahrzeug-Disambiguierung (Motorvariante, Ausstattungslinie)</li>
@@ -87,7 +86,7 @@ export function ArticleOemErmittlung() {
             <p>
                 <strong>Konfidenz ≥ 0,92</strong> → Bot antwortet eigenständig.<br />
                 <strong>0,80 ≤ Konfidenz &lt; 0,92</strong> → Bot antwortet mit Hinweis „eine Alternative
-                ist auch möglich", listet beide.<br />
+                ist auch möglich“, listet beide.<br />
                 <strong>Konfidenz &lt; 0,80</strong> → Eskalation an Sales-Mitarbeiter mit vollem Kontext
                 (extrahierte Daten, Match-Vorschläge, Begründung der Unsicherheit).
             </p>
@@ -110,7 +109,7 @@ export function ArticleOemErmittlung() {
                 <li>FIN-Decoder gegen NHTSA-API (US) oder JATO (international)</li>
                 <li>Match über Hersteller-Modell-Baujahr-Variante</li>
                 <li>Foto des Original-Teils + Computer-Vision-Vergleich gegen Hersteller-Katalog</li>
-                <li>Eskalation an Sales-Mitarbeiter mit Hinweis „Klassiker, manuelle Recherche empfohlen"</li>
+                <li>Eskalation an Sales-Mitarbeiter mit Hinweis „Klassiker, manuelle Recherche empfohlen“</li>
             </ol>
             <p>
                 Bei Edge-Cases ist die Trefferquote naturgemäß niedriger, aber genau dafür ist die

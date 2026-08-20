@@ -2,19 +2,24 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Impressum - Partsunion',
-    description: 'Impressum der Partsunion UG (haftungsbeschränkt)',
+    description: 'Impressum der PartsUnion UG (haftungsbeschränkt)',
 };
 
 export default function ImpressumPage() {
     return (
         <div className="container mx-auto px-4 py-20 max-w-3xl">
-            <div className="prose dark:prose-invert max-w-none">
-                <h1>Impressum</h1>
-                <p className="text-sm text-muted-foreground">Angaben gemäß § 5 TMG</p>
+            <div className="blog-content max-w-none">
+                <h1
+                    className="text-3xl md:text-4xl font-semibold text-foreground mb-3"
+                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                >
+                    Impressum
+                </h1>
+                <p className="text-sm text-muted-foreground">Angaben gemäß § 5 DDG</p>
 
                 <h2>Anbieter</h2>
                 <p>
-                    Partsunion UG (haftungsbeschränkt)<br />
+                    PartsUnion UG (haftungsbeschränkt)<br />
                     Zum Sommersberg 27<br />
                     50321 Brühl<br />
                     Deutschland
@@ -22,39 +27,23 @@ export default function ImpressumPage() {
 
                 <h2>Vertreten durch</h2>
                 <p>
-                    Geschäftsführer: Alexander Blawat
+                    Geschäftsführer:<br />
+                    Alexander Blawat<br />
+                    Aaron Vogt<br />
+                    Bardia Bagherian<br />
+                    Elias Zafar
                 </p>
 
                 <h2>Registereintrag</h2>
                 <p>
-                    {/* TODO-HANDSCHLAG: echte HRB-Nummer einsetzen, Formulierung entfernen */}
-                    Eintragung im Handelsregister.<br />
                     Registergericht: Amtsgericht Köln<br />
-                    Registernummer: wird nach Handelsregistereintrag ergänzt (in Beantragung).
-                </p>
-
-                <h2>Umsatzsteuer-ID</h2>
-                <p>
-                    {/* TODO-HANDSCHLAG: echte USt-IdNr. einsetzen, Formulierung entfernen */}
-                    Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />
-                    in Beantragung beim Finanzamt. Bis zur Erteilung ist die Steuernummer auf Anfrage erhältlich.
+                    Handelsregisternummer: HRB 128845
                 </p>
 
                 <h2>Kontakt</h2>
                 <p>
                     E-Mail: info@partsunion.de<br />
-                    Website: www.partsunion.de
-                </p>
-
-                <h2>EU-Streitschlichtung</h2>
-                <p>
-                    Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
-                    {' '}<a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                        https://ec.europa.eu/consumers/odr/
-                    </a>
-                </p>
-                <p>
-                    Unsere E-Mail-Adresse finden Sie oben im Impressum.
+                    Website: partsunion.de
                 </p>
 
                 <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
@@ -65,10 +54,9 @@ export default function ImpressumPage() {
 
                 <h2>Haftung für Inhalte</h2>
                 <p>
-                    Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den
-                    allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht
-                    verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen
-                    zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder
+                    Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+                    verantwortlich. Eine allgemeine Verpflichtung, übermittelte oder gespeicherte fremde Informationen
+                    zu überwachen oder aktiv nach rechtswidrigen Tätigkeiten zu forschen, besteht nicht. Verpflichtungen zur Entfernung oder
                     Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
                     Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
                     Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese

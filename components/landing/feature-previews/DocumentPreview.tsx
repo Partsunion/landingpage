@@ -7,9 +7,9 @@
  * gerade generiert wird) — Header → Empfänger → Positionen → Totals.
  * Loop nach Pause.
  *
- * Visuell: Außenrand im Site-Design (Hairline + rgba), Papier innen
- * im Light-Cream-Look mit dezenter Schattierung — ist nun integriert
- * in den Site-Stil statt isoliert.
+ * Visuell: helle Panel-Optik im Site-Design (bg-card, border-border,
+ * bg-muted-Subflächen), Papier innen im Light-Cream-Look mit dezenter
+ * Schattierung — integriert in den Site-Stil statt isoliert.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -99,14 +99,14 @@ export function DocumentPreview({ data }: { data: DocumentPreviewData }) {
     return (
         <div
             ref={ref}
-            className="w-full rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] overflow-hidden"
+            className="w-full rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden"
         >
             {/* Header — Site-Design */}
-            <div className="flex items-center justify-between h-10 px-4 border-b border-border/60 bg-[rgba(15,23,42,0.3)]">
+            <div className="flex items-center justify-between h-10 px-4 border-b border-border bg-muted">
                 <div className="flex items-center gap-2.5">
                     <motion.span
                         className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
-                        animate={reduceMotion ? undefined : { boxShadow: ['0 0 0px var(--primary)', '0 0 8px var(--primary)', '0 0 0px var(--primary)'] }}
+                        animate={reduceMotion ? undefined : { opacity: [0.4, 1, 0.4] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                     />
                     <span
@@ -132,7 +132,7 @@ export function DocumentPreview({ data }: { data: DocumentPreviewData }) {
                 style={{
                     background: 'linear-gradient(180deg, #FAFAF7 0%, #F2F1EC 100%)',
                     color: '#1A1E24',
-                    boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.2)',
+                    boxShadow: 'inset 0 0 0 1px rgba(16,24,40,0.06), 0 1px 2px rgba(16,24,40,0.08)',
                     fontFamily: FONT_DISPLAY,
                 }}
             >
@@ -211,7 +211,7 @@ export function DocumentPreview({ data }: { data: DocumentPreviewData }) {
 
             {/* Footer */}
             {data.footer && (
-                <div className="px-4 py-2.5 border-t border-border/60 bg-[rgba(15,23,42,0.3)] flex items-center gap-2">
+                <div className="px-4 py-2.5 border-t border-border bg-muted flex items-center gap-2">
                     <motion.span
                         className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
                         animate={reduceMotion ? undefined : { opacity: [0.4, 1, 0.4] }}

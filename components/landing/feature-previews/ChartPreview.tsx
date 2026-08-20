@@ -6,8 +6,8 @@
  * Verhalten: Bars wachsen sequenziell von 0 % auf Zielwert mit spring physics.
  * Header-Stats animieren synchron mit (Counter-Up). Loop nach Pause.
  *
- * Visuell: gleiche Tokens wie der Rest der Site (border-border/60,
- * bg-[rgba(15,23,42,0.4)], primary/muted-foreground/foreground).
+ * Visuell: helle Panel-Optik im Site-Design (bg-card, border-border,
+ * bg-muted-Subflächen, Serien in Blau/Grün).
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -35,26 +35,26 @@ const LOOP_PAUSE_MS = 3500;
 
 function statusBg(status: ChartBar['status']): string {
     switch (status) {
-        case 'success': return 'bg-emerald-400/15';
-        case 'warn':    return 'bg-amber-400/15';
-        case 'info':    return 'bg-primary/15';
-        default:        return 'bg-muted-foreground/10';
+        case 'success': return 'bg-[#12B76A]/10';
+        case 'warn':    return 'bg-[#F79009]/10';
+        case 'info':    return 'bg-primary/10';
+        default:        return 'bg-muted';
     }
 }
 
 function statusFill(status: ChartBar['status']): string {
     switch (status) {
-        case 'success': return 'rgb(74,222,128)';
-        case 'warn':    return 'rgb(245,165,36)';
-        case 'info':    return 'rgb(29,111,232)';
-        default:        return 'rgb(148,163,184)';
+        case 'success': return '#12B76A';
+        case 'warn':    return '#F79009';
+        case 'info':    return '#1D6FE8';
+        default:        return '#CBD5E1';
     }
 }
 
 function statusText(status: ChartBar['status']): string {
     switch (status) {
-        case 'success': return 'text-emerald-400';
-        case 'warn':    return 'text-amber-400';
+        case 'success': return 'text-[#067647]';
+        case 'warn':    return 'text-[#B54708]';
         case 'info':    return 'text-primary';
         default:        return 'text-muted-foreground';
     }
@@ -106,7 +106,8 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
     const inView = useInView(ref, { once: false, amount: 0.3 });
     const reduceMotion = useReducedMotion() ?? false;
     const [animationCycle, setAnimationCycle] = useState(0);
-    const [animateNow, setAnimateNow] = useState(reduceMotion);
+    const [animateNow, setAnimateNow] = useState(false);
+    const animationActive = reduceMotion || (inView && animateNow);
 
     const max = Math.max(...data.bars.map((b) => b.value));
     const first = data.bars[0];
@@ -114,38 +115,37 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
     const delta = first && first.value > 0 ? ((last.value - first.value) / first.value) * 100 : 0;
 
     useEffect(() => {
-        if (reduceMotion) {
-            setAnimateNow(true);
-            return;
-        }
-        if (!inView) {
-            setAnimateNow(false);
-            return;
-        }
+        if (reduceMotion || !inView) return;
+
         // Trigger anim + loop
-        setAnimateNow(true);
+        const startFrame = requestAnimationFrame(() => setAnimateNow(true));
         const total = data.bars.length * STAGGER_MS + 1500; // bar growth duration
+        let restartTimer: ReturnType<typeof setTimeout> | undefined;
         const id = setInterval(() => {
             setAnimateNow(false);
-            setTimeout(() => {
+            restartTimer = setTimeout(() => {
                 setAnimateNow(true);
                 setAnimationCycle((c) => c + 1);
             }, 30);
         }, total + LOOP_PAUSE_MS);
-        return () => clearInterval(id);
+        return () => {
+            cancelAnimationFrame(startFrame);
+            clearInterval(id);
+            if (restartTimer) clearTimeout(restartTimer);
+        };
     }, [inView, reduceMotion, data.bars.length]);
 
     return (
         <div
             ref={ref}
-            className="w-full rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] overflow-hidden"
+            className="w-full rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden"
         >
             {/* Header */}
-            <div className="flex items-center justify-between h-10 px-4 border-b border-border/60 bg-[rgba(15,23,42,0.3)]">
+            <div className="flex items-center justify-between h-10 px-4 border-b border-border bg-muted">
                 <div className="flex items-center gap-2.5">
                     <motion.span
                         className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
-                        animate={reduceMotion ? undefined : { boxShadow: ['0 0 0px var(--primary)', '0 0 8px var(--primary)', '0 0 0px var(--primary)'] }}
+                        animate={reduceMotion ? undefined : { opacity: [0.4, 1, 0.4] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                     />
                     <span
@@ -166,9 +166,9 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
             </div>
 
             {/* Stat-Row */}
-            <div className="grid grid-cols-3 border-b border-border/60">
+            <div className="grid grid-cols-3 border-b border-border">
                 {first && (
-                    <div className="p-4 border-r border-border/60">
+                    <div className="p-4 border-r border-border">
                         <div
                             className="text-base tabular-nums text-foreground font-medium"
                             style={{ fontFamily: FONT_MONO }}
@@ -178,7 +178,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                                 to={first.value}
                                 decimals={first.display?.includes(',') ? 1 : 0}
                                 suffix={data.unit ?? ''}
-                                active={animateNow}
+                                active={animationActive}
                             />
                         </div>
                         <div className="text-[10px] uppercase tracking-[0.1em] mt-1 text-muted-foreground">
@@ -187,7 +187,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                     </div>
                 )}
                 {last && (
-                    <div className="p-4 border-r border-border/60">
+                    <div className="p-4 border-r border-border">
                         <div
                             className={`text-base tabular-nums font-medium ${statusText(last.status)}`}
                             style={{ fontFamily: FONT_MONO }}
@@ -197,7 +197,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                                 to={last.value}
                                 decimals={last.display?.includes(',') ? 1 : 0}
                                 suffix={data.unit ?? ''}
-                                active={animateNow}
+                                active={animationActive}
                                 duration={1.8}
                             />
                         </div>
@@ -208,7 +208,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                 )}
                 <div className="p-4">
                     <div
-                        className={`text-base tabular-nums font-medium ${delta < 0 ? 'text-emerald-400' : delta > 0 ? 'text-amber-400' : 'text-foreground'}`}
+                        className={`text-base tabular-nums font-medium ${delta < 0 ? 'text-[#067647]' : delta > 0 ? 'text-[#B54708]' : 'text-foreground'}`}
                         style={{ fontFamily: FONT_MONO }}
                     >
                         <AnimatedNumber
@@ -216,7 +216,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                             to={delta}
                             decimals={0}
                             suffix=" %"
-                            active={animateNow}
+                            active={animationActive}
                             duration={2.0}
                         />
                     </div>
@@ -246,7 +246,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                                 <motion.div
                                     key={`bar-${i}-${animationCycle}`}
                                     initial={{ width: '0%' }}
-                                    animate={{ width: animateNow ? `${pct}%` : '0%' }}
+                                    animate={{ width: animationActive ? `${pct}%` : '0%' }}
                                     transition={
                                         reduceMotion
                                             ? { duration: 0 }
@@ -254,14 +254,11 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
                                                 type: 'spring',
                                                 stiffness: 90,
                                                 damping: 18,
-                                                delay: animateNow ? i * (STAGGER_MS / 1000) : 0,
+                                                delay: animationActive ? i * (STAGGER_MS / 1000) : 0,
                                             }
                                     }
                                     className="absolute inset-y-0 left-0 rounded-sm"
-                                    style={{
-                                        background: statusFill(bar.status),
-                                        boxShadow: `0 0 8px ${statusFill(bar.status)}40`,
-                                    }}
+                                    style={{ background: statusFill(bar.status) }}
                                 />
                             </div>
                             <span
@@ -277,7 +274,7 @@ export function ChartPreview({ data }: { data: ChartPreviewData }) {
 
             {/* Footer */}
             {data.footer && (
-                <div className="px-4 py-2.5 border-t border-border/60 bg-[rgba(15,23,42,0.3)] flex items-center gap-2">
+                <div className="px-4 py-2.5 border-t border-border bg-muted flex items-center gap-2">
                     <motion.span
                         className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
                         animate={reduceMotion ? undefined : { opacity: [0.4, 1, 0.4] }}

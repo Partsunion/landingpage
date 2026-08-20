@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Scan, Search, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Scan, CheckCircle2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 // Stable deterministic hex strings so the component stays pure and server-
@@ -31,12 +31,12 @@ export function OCRScannerPreview() {
     }, []);
 
     return (
-        <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden relative font-mono text-xs">
+        <div className="w-full h-full bg-card border border-border shadow-[var(--shadow-card)] rounded-2xl overflow-hidden relative font-mono text-xs">
             {/* Camera View Overlay */}
             {/* Documentation Background */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center bg-slate-100">
+            <div className="absolute inset-0 z-0 flex items-center justify-center bg-muted">
                 {/* Mock Vehicle Registration Document */}
-                <div className="w-[80%] h-[60%] bg-[#fdfbf7] border border-slate-300 shadow-xl rotate-[-2deg] p-4 relative overflow-hidden">
+                <div className="w-[80%] h-[60%] bg-[#fdfbf7] border border-slate-300 shadow-[var(--shadow-raised)] rotate-[-2deg] p-4 relative overflow-hidden">
                     {/* Watermark/Pattern effect */}
                     <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#000_0,#000_1px,transparent_1px,transparent_10px)]" />
 
@@ -74,20 +74,20 @@ export function OCRScannerPreview() {
                 <motion.div
                     animate={{ top: ['0%', '100%', '0%'] }}
                     transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                    className="absolute left-0 right-0 h-0.5 bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] z-20"
+                    className="absolute left-0 right-0 h-0.5 bg-primary z-20"
                 />
 
                 {/* Corner Accents */}
-                <div className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-blue-600" />
-                <div className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-blue-600" />
-                <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-blue-600" />
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-blue-600" />
+                <div className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-primary" />
+                <div className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-primary" />
+                <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-primary" />
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-primary" />
             </div>
 
             {/* Data Extraction Overlay */}
             <div className="absolute top-4 left-4 right-4 z-30 flex gap-2">
-                <div className="bg-white/80 backdrop-blur-md border border-slate-200 p-3 rounded-xl flex-1 shadow-sm">
-                    <div className="text-blue-600 font-bold mb-2 flex items-center gap-2">
+                <div className="bg-white border border-border p-3 rounded-xl flex-1 shadow-[var(--shadow-card)]">
+                    <div className="text-primary font-bold mb-2 flex items-center gap-2">
                         <Scan size={14} /> OCR ENGINE ACTIVE
                     </div>
                     <div className="space-y-1 text-slate-500">
@@ -114,9 +114,9 @@ export function OCRScannerPreview() {
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9 }}
-                        className="absolute bottom-4 left-4 right-4 z-40 bg-white border border-emerald-500/50 p-4 rounded-xl shadow-xl flex items-center gap-4"
+                        className="absolute bottom-4 left-4 right-4 z-40 bg-white border border-[#12B76A]/40 p-4 rounded-xl shadow-[var(--shadow-raised)] flex items-center gap-4"
                     >
-                        <div className="h-10 w-10 bg-emerald-500 text-white rounded-full flex items-center justify-center">
+                        <div className="h-10 w-10 bg-[#12B76A] text-primary-foreground rounded-full flex items-center justify-center">
                             <CheckCircle2 size={24} />
                         </div>
                         <div>

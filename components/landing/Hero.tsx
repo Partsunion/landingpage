@@ -2,139 +2,158 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { MagneticButton } from '@/components/ui/MagneticButton';
-import { AnimatedHeadline } from '@/components/ui/AnimatedHeadline';
-import { Counter } from '@/components/ui/Counter';
-import { DashboardPreview } from '@/components/landing/DashboardPreview';
-import { ArrowRight, Sparkles, PlayCircle } from 'lucide-react';
+import { WAWIPreview } from '@/components/landing/WAWIPreview';
+import {
+    ArrowRight,
+    PanelsTopLeft,
+    Database,
+    FileCheck2,
+    Warehouse,
+    Landmark,
+} from 'lucide-react';
+
+/**
+ * Hero — Enterprise-ERP-Positionierung: links das Branchenversprechen, rechts
+ * eine echte Produktansicht. WhatsApp bleibt ein Eingangskanal, ist aber nicht
+ * mehr das Produktversprechen oder das dominante Hero-Visual.
+ */
+
+const standards = [
+    { icon: Database, label: 'Teile- & Fahrzeugdaten', sub: 'OEM · Fitment · Querverweise' },
+    { icon: Warehouse, label: 'Warenwirtschaft', sub: 'ATP · Bewegungen · Inventur' },
+    { icon: FileCheck2, label: 'Durchgängige Belege', sub: 'Angebot · Auftrag · Rechnung' },
+    { icon: Landmark, label: 'Finanzen & Compliance', sub: 'DATEV · TSE · E-Rechnung' },
+];
 
 export function Hero() {
     return (
-        <section className="relative min-h-screen pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-            {/* Editorial background: subtle vignette + single soft spotlight */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.10),transparent_55%)] -z-10" />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/0 to-background -z-10" />
+        <section className="relative overflow-hidden bg-background">
+            {/* Dezentes Blaulicht oben rechts, feines Raster */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(29,111,232,0.08),transparent_50%)] -z-10" />
+            <div className="absolute inset-x-0 top-0 h-[520px] grid-pattern opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)] -z-10" />
 
-            {/* Hairline grid — much subtler than before */}
-            <div className="absolute inset-0 grid-pattern opacity-20 -z-10" />
-
-            <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <div className="text-center max-w-5xl mx-auto">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="grid min-w-0 lg:grid-cols-12 gap-12 lg:gap-8 items-center pt-32 pb-16 md:pt-40 md:pb-20">
+                    {/* Links: Value Proposition */}
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
+                        className="min-w-0 lg:col-span-7 max-w-2xl"
                     >
-                        {/* Badge */}
-                        <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full glass mb-8 border border-primary/20">
-                            <Sparkles className="h-4 w-4 text-accent" />
-                            <span className="text-sm font-medium text-foreground/90">
-                                KI-Automatisierung für den Teilehandel
-                            </span>
-                        </div>
-
-                        {/* Hero Headline — word-stagger reveal */}
-                        <AnimatedHeadline
-                            className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-6 leading-[1.05]"
-                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}
-                            delay={0.15}
-                        >
-                            Vom Fahrzeugschein-Foto zum fertigen Angebot in <span className="text-gradient">8 Sekunden.</span>
-                        </AnimatedHeadline>
-
-                        {/* Subheadline */}
-                        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-                            Partsunion liest, matcht und beantwortet WhatsApp-Anfragen automatisch — damit Ihr Team sich auf die Fälle konzentriert, die wirklich Hände brauchen.
+                        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary mb-5">
+                            Partsunion ERP
                         </p>
 
-                        {/* Inline Stats — 2 with provenance, animated counters */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
-                            className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 mb-10 text-sm"
+                        <h1
+                            className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.07] text-foreground mb-6"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}
                         >
-                            <div className="flex items-baseline gap-2">
-                                <Counter
-                                    to={97}
-                                    suffix="%"
-                                    className="font-mono text-xl md:text-2xl font-semibold text-foreground tabular-nums"
-                                />
-                                <span className="text-muted-foreground">OEM-Trefferquote · interne Systemtests (Zielwert)</span>
-                            </div>
-                            <span className="hidden md:block h-1 w-1 rounded-full bg-border" aria-hidden />
-                            <div className="flex items-baseline gap-2">
-                                <Counter
-                                    to={8}
-                                    suffix=" Sek"
-                                    className="font-mono text-xl md:text-2xl font-semibold text-foreground tabular-nums"
-                                />
-                                <span className="text-muted-foreground">statt 15&nbsp;Min pro Anfrage</span>
-                            </div>
-                        </motion.div>
+                            Enterprise-ERP für den Autoteilehandel.
+                        </h1>
 
-                        {/* CTA — magnetic primary + inline demo link */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                            className="flex flex-col sm:flex-row items-center justify-center gap-5"
-                        >
-                            <MagneticButton
+                        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
+                            Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer
+                            gemeinsamen Plattform — mit durchgängigen Belegketten, verlässlichen
+                            Zuständen und rollenbasierten Arbeitsplätzen.
+                        </p>
+
+                        {/* CTAs */}
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
+                            <button
                                 onClick={() => document.getElementById('beratung')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="group inline-flex items-center justify-center h-14 px-8 rounded-lg text-base font-medium text-primary-foreground gradient-primary shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow"
+                                className="group inline-flex items-center justify-center h-13 px-7 rounded-xl text-base font-medium text-primary-foreground bg-primary hover:bg-primary-hover shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                             >
                                 Beratungstermin sichern
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                            </MagneticButton>
+                            </button>
                             <Link
-                                href="/live-demo"
-                                className="group inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                                href="/plattform"
+                                className="group inline-flex items-center justify-center gap-2 h-13 px-6 rounded-xl border border-border bg-card text-base font-medium text-foreground hover:border-border-hover hover:bg-muted transition-colors"
                             >
-                                <PlayCircle className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
-                                Live-Demo ansehen
+                                <PanelsTopLeft className="h-5 w-5 text-primary" />
+                                Plattform ansehen
                             </Link>
+                        </div>
+
+                        {/* Funktionsbelege statt nicht extern verifizierter Leistungskennzahlen */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="flex flex-wrap items-center gap-x-10 gap-y-4"
+                        >
+                            <div>
+                                <div className="font-mono text-sm font-semibold text-foreground">VERKAUF → FINANZEN</div>
+                                <div className="text-xs text-muted-foreground mt-0.5 max-w-[180px] leading-snug">
+                                    durchgängige Belegkette
+                                </div>
+                            </div>
+                            <div className="h-10 w-px bg-border hidden sm:block" aria-hidden />
+                            <div>
+                                <div className="font-mono text-sm font-semibold text-foreground">ATP & LAGERLEDGER</div>
+                                <div className="text-xs text-muted-foreground mt-0.5 max-w-[180px] leading-snug">
+                                    ein zentraler Bestandsstand
+                                </div>
+                            </div>
+                            <div className="h-10 w-px bg-border hidden sm:block" aria-hidden />
+                            <div>
+                                <div className="font-mono text-sm font-semibold text-foreground">ROLLEN & AUDIT</div>
+                                <div className="text-xs text-muted-foreground mt-0.5 max-w-[180px] leading-snug">
+                                    kontrollierte, nachvollziehbare Abläufe
+                                </div>
+                            </div>
                         </motion.div>
 
-                        {/* Trust Indicator */}
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.6, delay: 0.5 }}
                             className="mt-8 text-sm text-muted-foreground"
                         >
-                            Unverbindlich · Live-Demo mit Ihren echten Daten möglich
+                            Unverbindlich · Produktvorstellung mit Ihren realen Abläufen möglich
                         </motion.p>
+                    </motion.div>
+
+                    {/* Rechts: das Produkt — operative ERP-Arbeitsfläche */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 32 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.25 }}
+                        className="min-w-0 lg:col-span-5"
+                    >
+                        <div className="relative min-w-0 mx-auto max-w-[520px]">
+                            {/* Weicher Blauschein hinter der Produktansicht */}
+                            <div
+                                aria-hidden
+                                className="absolute -inset-6 rounded-[32px] bg-[radial-gradient(ellipse_at_center,rgba(29,111,232,0.10),transparent_70%)] -z-10"
+                            />
+                            <WAWIPreview />
+                            <p className="mt-3 text-center text-xs text-muted-foreground">
+                                Beispielansicht mit Demo-Daten: Lager- und Beschaffungssteuerung.
+                            </p>
+                        </div>
                     </motion.div>
                 </div>
 
-                {/* Dashboard Preview — hidden on mobile (zu detailliert für kleine Screens, wirkt sonst quetschig) */}
+                {/* Standards-Zeile — schmal, ersetzt die frühere Partner-Sektion */}
                 <motion.div
-                    initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="hidden md:block mt-16 sm:mt-24 relative mx-auto max-w-6xl"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="border-t border-border py-6 md:py-7"
                 >
-                    {/* Glow behind preview */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent blur-3xl -z-10" />
-
-                    <div className="relative glass rounded-2xl p-2 shadow-2xl">
-                        <DashboardPreview />
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
+                        {standards.map((s) => (
+                            <div key={s.label} className="flex items-center gap-3 min-w-0">
+                                <s.icon className="h-4.5 w-4.5 shrink-0 text-muted-foreground" aria-hidden />
+                                <div className="min-w-0">
+                                    <div className="text-[13px] font-medium text-foreground leading-tight truncate">{s.label}</div>
+                                    <div className="text-[11px] text-muted-foreground leading-tight truncate">{s.sub}</div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-
-                    {/* Floating status badge */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.8 }}
-                        className="absolute -bottom-4 -right-4 md:bottom-8 md:right-8 glass p-4 rounded-xl shadow-xl hidden md:flex items-center gap-3"
-                    >
-                        <div className="h-3 w-3 rounded-full bg-success animate-pulse" />
-                        <div>
-                            <div className="font-semibold text-sm">System Status</div>
-                            <div className="text-xs text-muted-foreground">365 Tage operativ</div>
-                        </div>
-                    </motion.div>
                 </motion.div>
             </div>
         </section>

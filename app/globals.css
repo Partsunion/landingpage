@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
-/* Tailwind v4 braucht eine explizite dark-Variant-Bindung, wenn sie über
-   eine Klasse am <html>-Element gesteuert wird (statt via OS-Preference).
-   Wir setzen <html class="dark"> in app/layout.tsx, damit `dark:`-Utilities
-   wie `dark:prose-invert` auf Legal-Pages zuverlässig greifen. */
+/* Tailwind v4: dark-Variant bleibt registriert (Legal-Pages nutzen dark:*-
+   Utilities defensiv), wird aber ohne .dark-Klasse am <html> nie aktiv —
+   die Seite ist bewusst durchgehend Light. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 html {
@@ -12,69 +11,62 @@ html {
 }
 
 :root {
-  /* Premium Automotive Color Palette */
-  --background: #0a0f1a;
-  --foreground: #f8fafc;
+  /* ── Partsunion Light Palette ─────────────────────────────────────────
+     Weiße Basis, Ink-Typografie, Signal-Blau (#1d6fe8) als einziger Akzent.
+     Blau matcht das Produkt-Dashboard — Wiedererkennung Landing → App. */
+  --background: #ffffff;
+  --foreground: #0f172a;
 
-  /* Primary: Deep Electric Blue */
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
+  /* Primary: Partsunion Signal Blue */
+  --primary: #1d6fe8;
+  --primary-hover: #1659c2;      /* auf hellem Grund wird der Hover DUNKLER */
   --primary-foreground: #ffffff;
 
-  /* Secondary: Slate tones */
-  --secondary: #1e293b;
-  --secondary-foreground: #f1f5f9;
+  /* Sekundäre Flächen: kühles Hellgrau */
+  --secondary: #eef2f7;
+  --secondary-foreground: #0f172a;
 
-  /* Muted: Deep blue-gray */
-  --muted: #0f172a;
-  --muted-foreground: #94a3b8;
+  /* Muted: blaugetönte Sektionsfläche + gedämpfter Text */
+  --muted: #f6f8fb;
+  --muted-foreground: #5b6b81;
 
-  /* Accent: Cyan/Teal for highlights */
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
+  /* Accent: heller Blauton für dezente Highlights */
+  --accent: #eaf1fd;
+  --accent-foreground: #1d6fe8;
 
-  /* Success: Green for positive metrics */
-  --success: #10b981;
+  /* Status */
+  --success: #067647;
   --success-foreground: #ffffff;
-
-  /* Warning: Amber */
-  --warning: #f59e0b;
+  --warning: #b54708;
   --warning-foreground: #ffffff;
-
-  /* Error: Rose Red */
-  --error: #f43f5e;
+  --error: #d92d20;
   --error-foreground: #ffffff;
 
   /* Border */
-  --border: rgba(148, 163, 184, 0.1);
-  --border-hover: rgba(148, 163, 184, 0.2);
+  --border: #e5eaf1;
+  --border-hover: #cbd5e1;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(15, 23, 42, 0.6);
-  --glass-border: rgba(148, 163, 184, 0.1);
+  /* Karten (ersetzt das frühere Dark-Glass) */
+  --card: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: #e5eaf1;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-  --gradient-dark: linear-gradient(180deg, #0a0f1a 0%, #1e293b 100%);
-  --gradient-glow: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-}
+  /* Gradients — tonal Signal-Blue */
+  --gradient-primary: linear-gradient(135deg, #1d6fe8 0%, #4f93ff 100%);
+  --gradient-deep: linear-gradient(135deg, #123f8f 0%, #1d6fe8 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(29, 111, 232, 0.07) 0%, transparent 70%);
 
-/* Light mode override */
-[data-theme="light"] {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --secondary: #e2e8f0;
-  --secondary-foreground: #1e293b;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --border: rgba(30, 41, 59, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.8);
+  /* Schatten-Skala — weich, neutral, nie „glowig" */
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-card-hover: 0 4px 8px -2px rgba(16, 24, 40, 0.08), 0 2px 4px -2px rgba(16, 24, 40, 0.05);
+  --shadow-raised: 0 12px 24px -6px rgba(16, 24, 40, 0.10), 0 4px 8px -4px rgba(16, 24, 40, 0.05);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -83,6 +75,18 @@ html {
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-card: var(--card);
+  /* Semantic status + form tokens — registered so bg-/text-/border-/ring-
+     utilities (success, warning, destructive, input, ring) actually generate. */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-destructive: var(--error);
+  --color-destructive-foreground: var(--error-foreground);
+  --color-input: var(--border-hover);
+  --color-ring: var(--primary);
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -95,24 +99,30 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Premium Glassmorphism utility classes */
+/* ── Karten-Utilities ────────────────────────────────────────────────────
+   .glass bleibt als Name erhalten (viele Verwendungen), rendert jetzt aber
+   eine helle Karte mit Hairline-Border und weichem Schatten. */
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
 }
 
 .glass-strong {
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-raised);
 }
 
 /* Premium gradient backgrounds */
 .gradient-primary {
   background: var(--gradient-primary);
+}
+
+.gradient-deep {
+  background: var(--gradient-deep);
 }
 
 .gradient-glow {
@@ -165,23 +175,20 @@ body {
 .animate-shimmer {
   background: linear-gradient(90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.1) 50%,
+      rgba(15, 23, 42, 0.05) 50%,
       transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
 
-/* Premium card hover effect */
+/* Card hover — Anheben mit neutralem Schatten, kein Blau-Glow */
 .card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04),
-    0 0 40px rgba(59, 130, 246, 0.1);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-raised);
 }
 
 /* Gradient text */
@@ -192,25 +199,33 @@ body {
   background-clip: text;
 }
 
-/* Grid pattern overlay */
+/* Grid pattern overlay — hell, kaum sichtbar */
 .grid-pattern {
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 /* Input styling */
 input,
 textarea,
 select {
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  box-shadow: 0 0 0 2px var(--primary);
+  box-shadow: 0 0 0 3px rgba(29, 111, 232, 0.18);
+}
+
+/* Keyboard focus for links (incl. raw gradient CTAs + nav/footer links).
+   Buttons handle focus-visible via the Button/MagneticButton primitives. */
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 
 /* Scrollbar styling */
@@ -224,7 +239,7 @@ select:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--border-hover);
   border-radius: 4px;
 }
 
@@ -285,7 +300,7 @@ select:focus {
 .blog-content code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--muted);
   padding: 0.1em 0.4em;
   border-radius: 4px;
   color: var(--foreground);
@@ -298,4 +313,21 @@ select:focus {
 .blog-content a:hover { color: var(--primary-hover); }
 .blog-content > section {
   margin-bottom: 2rem;
+}
+
+/* Accessibility: honor prefers-reduced-motion globally — neutralizes CSS
+   keyframe loops (float/pulse-glow/shimmer/ping) and smooth scrolling for
+   users who opt out. Framer components handle this via useReducedMotion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

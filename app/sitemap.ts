@@ -6,7 +6,7 @@ import { blogPosts } from '@/lib/blog-posts';
 // Sitemap zur Build-Zeit fixiert wird statt bei jedem Request.
 export const dynamic = 'force-static';
 
-const BASE_URL = 'https://www.partsunion.de';
+const BASE_URL = 'https://partsunion.de';
 
 /**
  * Dynamische Sitemap — wird bei `next build` als /sitemap.xml exportiert
@@ -26,6 +26,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
 
     const topFeatures = new Set([
+        'erp-autoteilehandel',
+        'warenwirtschaft-autoteilhandel',
+        'gobd-tse-zugferd-datev',
+        'b2b-kundenportal-white-label',
         'oem-ermittlung',
         'whatsapp-bot',
         'bestandssynchronisation',
@@ -38,7 +42,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         // ─── Konversions-kritisch ─────────────────────────────────────
         { url: `${BASE_URL}/`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
         { url: `${BASE_URL}/live-demo`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/plattform`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/features`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/vergleich`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
         { url: `${BASE_URL}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
         { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
         { url: `${BASE_URL}/pricing`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },

@@ -1,51 +1,42 @@
 /**
  * WhatsAppPreview — wrapper that reuses the single ChatPreview source of truth.
  *
- * Vorher: separate Phone-Mockup-Komponente mit eigenem Design + eigenen Nachrichten.
- * Jetzt: nutzt dieselbe `ChatPreview` wie die Feature-Pages → **ein** Design,
- * **eine** Nachrichten-Architektur, **ein** Vorkasse-Flow.
+ * Jetzt: nutzt dieselbe `ChatPreview` wie die Feature-Pages → ein Design,
+ * eine Nachrichten-Architektur.
  *
- * Spezifisch für TechTabs auf der Landingpage: zeigt den vollen Vorkasse-Pfad
- * vom Foto-Upload bis zur ausgelösten Bestellung.
+ * HONESTY: zeigt nur den LIVE-Pfad (Foto → Fahrzeug-/Teil-Erkennung →
+ * 3 Angebote → Kunde wählt → Auftrag entsteht). Der Vorkasse-/Chat-Zahlungs-
+ * Schritt (Klarna/PayPal/…) ist Roadmap und wird hier NICHT als live gezeigt.
  */
 
 import { ChatPreview, type ChatPreviewData } from './feature-previews/ChatPreview';
 
 const data: ChatPreviewData = {
-    title: '24/7 BOT',
-    sub: 'antwortet meist sofort',
+    title: 'DIGITALE ANFRAGE · DEMO',
+    sub: 'mit Fachprüfung bei Unsicherheit',
     customerName: 'KFZ Meier GmbH',
     customerInitials: 'KM',
-    footer: 'Antwortzeit Median 8 s · Vorkasse aktiv',
+    footer: 'Kundenkontext · Teilezuordnung · Übergabe in den Verkauf',
     messages: [
         { from: 'user', text: 'Hi, brauche Bremsen vorne für meinen Golf 7 1.6 TDI. Hier ist der Schein.', time: '14:32' },
         { from: 'user', kind: 'image', imageLabel: 'fahrzeugschein', time: '14:32' },
         {
             from: 'bot',
-            text: 'Erkannt: VW Golf VII 2.0 TDI Variant. FIN endet auf ...1923. Hier sind 3 Angebote für die Bremsen vorne:\n\n• Bosch BP1411 — 89,40 €\n• ATE 13.0470-7280.2 — 76,20 €\n• Generic — 49,90 €',
+            text: 'Erkannt: VW Golf VII 1.6 TDI. FIN endet auf ...1923. Hier sind 3 Angebote für die Bremsen vorne:\n\n• Bosch BP1411 — 89,40 €\n• ATE 13.0470-7280.2 — 76,20 €\n• Generic — 49,90 €',
             time: '14:32',
-            tag: 'auto · 8s',
+            tag: 'vorstrukturiert',
         },
         { from: 'user', text: 'Ich nehme die ATE.', time: '14:33' },
         {
             from: 'bot',
             kind: 'offer',
-            text: '1× ATE Bremsbeläge VA\nFür VW Golf VII 2.0 TDI · OEM 5Q0698451',
+            text: '1× ATE Bremsbeläge VA\nFür VW Golf VII 1.6 TDI · OEM 5Q0698451',
             price: '76,20 €',
-            deliveryNote: 'Lieferung morgen Mi 29.05. vor 12 Uhr (Express)',
+            deliveryNote: 'Lieferung morgen Mi 29.05. vor 12 Uhr',
             time: '14:33',
-            tag: 'auto',
+            tag: 'geprüft',
         },
-        {
-            from: 'bot',
-            kind: 'payment',
-            amount: '76,20 €',
-            methods: ['Klarna', 'PayPal', 'Karte', 'SOFORT'],
-            time: '14:33',
-            tag: 'vorkasse',
-        },
-        // Optional confirm-message simulates the "after payment" state.
-        // Kept here so visitors see the full closed loop on the landing page.
+        // Live: aus der Auswahl entsteht ein Auftrag/Vorgang im Dashboard.
         {
             from: 'bot',
             kind: 'confirm',

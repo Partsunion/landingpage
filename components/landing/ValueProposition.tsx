@@ -83,7 +83,7 @@ export function ValueProposition() {
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                        <span className="inline-block py-1 px-3 rounded-full border border-border bg-card text-xs font-medium text-muted-foreground mb-5">
                             Warum Partsunion
                         </span>
                         <h2
@@ -113,11 +113,11 @@ export function ValueProposition() {
                         icon={ShieldCheck}
                         eyebrow="OEM-Pipeline"
                         title="Das richtige Teil beim ersten Mal."
-                        body="Mehrstufige KI-Pipeline gleicht jede Anfrage parallel gegen Ihre eigene Datenbank, Lieferanten-Kataloge und mehrere Web-Quellen ab. Konfidenz-Prüfung und Kreuzvalidierung für maximale Treffsicherheit — mit dem Ziel einer deutlich niedrigeren Retourenquote."
+                        body="Mehrstufige KI-Pipeline gleicht jede Anfrage gegen den lizenzierten TecDoc-Katalog und Ihre eigene Datenbank ab. Konfidenz-Prüfung und Kreuzvalidierung für maximale Treffsicherheit — mit dem Ziel einer deutlich niedrigeren Retourenquote."
                         className="md:col-span-2 md:row-span-2 min-h-[420px]"
                         largeVisual
                     >
-                        <div className="relative h-[200px] md:h-[260px] -mx-2 md:-mx-4 -mb-2 md:-mb-4 overflow-hidden rounded-xl border border-border/40 bg-[rgba(10,15,26,0.5)] p-4">
+                        <div className="relative h-[200px] md:h-[260px] -mx-2 md:-mx-4 -mb-2 md:-mb-4 overflow-hidden rounded-xl border border-border bg-muted p-4">
                             <OEMVisual />
                         </div>
                     </Tile>
@@ -127,11 +127,11 @@ export function ValueProposition() {
                         slug="geschwindigkeit"
                         icon={Zap}
                         eyebrow="Geschwindigkeit"
-                        title="8 Sekunden bis zum Angebot."
+                        title="Vom Foto schneller zum Angebot."
                         body="Drei Angebote aus verschiedenen Preisgruppen parallel — statt 15 Minuten Tippen."
                         className="md:col-span-2"
                     >
-                        <div className="relative h-[120px] -mx-2 -mb-2 overflow-hidden rounded-xl border border-border/40 bg-[rgba(10,15,26,0.5)] p-3">
+                        <div className="relative h-[120px] -mx-2 -mb-2 overflow-hidden rounded-xl border border-border bg-muted p-3">
                             <SpeedVisual />
                         </div>
                     </Tile>
@@ -152,7 +152,7 @@ export function ValueProposition() {
                         icon={FileText}
                         eyebrow="Faktura"
                         title="Rechnung in einem Klick."
-                        body="Auftrag → Rechnung → Lieferschein → Zahlungslink. Ohne Tippen."
+                        body="Auftrag → Lieferschein → Rechnung. Ohne Tippen."
                         className="md:col-span-1"
                     />
 
@@ -165,7 +165,7 @@ export function ValueProposition() {
                         body="Konstante Qualität bei jeder Anfrage. Keine Krankheits- oder Urlaubsausfälle, keine Einarbeitung."
                         className="md:col-span-2"
                     >
-                        <div className="relative h-[100px] -mx-2 -mb-2 overflow-hidden rounded-xl border border-border/40 bg-[rgba(10,15,26,0.5)] p-3">
+                        <div className="relative h-[100px] -mx-2 -mb-2 overflow-hidden rounded-xl border border-border bg-muted p-3">
                             <ScalabilityVisual />
                         </div>
                     </Tile>

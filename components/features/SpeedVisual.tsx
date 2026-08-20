@@ -41,9 +41,9 @@ export function SpeedVisual() {
                     onViewportEnter={() => setIsRunning(true)}
                     transition={{ duration: 0.4 }}
                 >
-                    <div className="inline-flex items-center gap-3 glass border border-amber-500/30 rounded-2xl px-5 py-3 md:px-6 md:py-4">
-                        <Zap className="h-5 w-5 md:h-6 md:w-6 text-amber-400" />
-                        <div className="font-mono text-2xl md:text-3xl font-bold text-white">
+                    <div className="inline-flex items-center gap-3 glass border border-border rounded-2xl px-5 py-3 md:px-6 md:py-4">
+                        <Zap className="h-5 w-5 md:h-6 md:w-6 text-[#F79009]" />
+                        <div className="font-mono text-2xl md:text-3xl font-bold text-foreground">
                             {timer}<span className="text-base md:text-lg text-muted-foreground ml-1">Sek</span>
                         </div>
                     </div>
@@ -51,9 +51,9 @@ export function SpeedVisual() {
 
                 {/* Progress Pipeline */}
                 <div className="relative">
-                    <div className="absolute top-5 left-6 right-6 h-0.5 bg-slate-700/50 z-0" />
+                    <div className="absolute top-5 left-6 right-6 h-0.5 bg-[#E5EAF1] z-0" />
                     <motion.div
-                        className="absolute top-5 left-6 h-0.5 bg-gradient-to-r from-amber-500 to-emerald-500 z-10"
+                        className="absolute top-5 left-6 h-0.5 bg-gradient-to-r from-[#1D6FE8] to-[#12B76A] z-10"
                         style={{ width: `${Math.min((timer / 120) * 100, 100)}%`, maxWidth: 'calc(100% - 48px)' }}
                     />
 
@@ -69,15 +69,15 @@ export function SpeedVisual() {
                             >
                                 <motion.div
                                     className={`h-10 w-10 rounded-xl flex items-center justify-center text-base transition-all duration-300 ${stage.done
-                                            ? 'bg-gradient-to-br from-amber-500/30 to-emerald-500/30 border border-emerald-500/50 shadow-lg shadow-emerald-500/20'
-                                            : 'glass border border-border/50'
+                                            ? 'bg-[#ECFDF3] border border-[#12B76A]/40'
+                                            : 'glass border border-border'
                                         }`}
                                     animate={stage.done ? { scale: [1, 1.15, 1] } : {}}
                                     transition={{ duration: 0.3 }}
                                 >
                                     {stage.icon}
                                 </motion.div>
-                                <span className={`text-[9px] md:text-[10px] mt-2 font-medium transition-colors duration-300 ${stage.done ? 'text-emerald-400' : 'text-muted-foreground'
+                                <span className={`text-[9px] md:text-[10px] mt-2 font-medium transition-colors duration-300 ${stage.done ? 'text-[#067647]' : 'text-muted-foreground'
                                     }`}>
                                     {stage.label}
                                 </span>
@@ -88,7 +88,7 @@ export function SpeedVisual() {
 
                 {/* Comparison Bar */}
                 <motion.div
-                    className="glass border border-border/50 rounded-xl p-3 md:p-4 mt-4"
+                    className="glass border border-border rounded-xl p-3 md:p-4 mt-4"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -98,16 +98,16 @@ export function SpeedVisual() {
                         <span className="text-muted-foreground">Manuelle OEM-Ermittlung</span>
                         <span className="text-muted-foreground">~45 Min</span>
                     </div>
-                    <div className="h-2 bg-slate-700/50 rounded-full mb-3 overflow-hidden">
-                        <div className="h-full w-full bg-rose-500/40 rounded-full" />
+                    <div className="h-2 bg-[#E5EAF1] rounded-full mb-3 overflow-hidden">
+                        <div className="h-full w-full bg-[#F04438]/50 rounded-full" />
                     </div>
                     <div className="flex items-center justify-between text-[10px] md:text-xs mb-2">
-                        <span className="text-amber-400 font-medium">Partsunion KI-Bot</span>
-                        <span className="text-amber-400 font-medium">~120 Sek</span>
+                        <span className="text-primary font-medium">Partsunion KI-Bot</span>
+                        <span className="text-primary font-medium">~120 Sek</span>
                     </div>
-                    <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                    <div className="h-2 bg-[#E5EAF1] rounded-full overflow-hidden">
                         <motion.div
-                            className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
+                            className="h-full bg-gradient-to-r from-[#1D6FE8] to-[#12B76A] rounded-full"
                             initial={{ width: 0 }}
                             whileInView={{ width: '4.4%' }}
                             viewport={{ once: true }}

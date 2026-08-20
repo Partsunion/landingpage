@@ -68,7 +68,7 @@ export function CalendarPicker({ value, onChange }: Props) {
     const selectedTime = selectedISODate ? selectedISODate.split('T')[1]?.slice(0, 5) : null;
 
     return (
-        <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-4 md:p-5">
+        <div className="rounded-2xl border border-border bg-card p-4 md:p-5">
             {/* Header with week nav */}
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
@@ -119,7 +119,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                             className={`flex flex-col items-center py-2.5 rounded-lg border transition-all ${
                                 active
                                     ? 'border-primary/50 bg-primary/10 text-foreground'
-                                    : 'border-border/60 hover:border-border bg-transparent text-muted-foreground hover:text-foreground'
+                                    : 'border-border hover:border-border-hover bg-transparent text-muted-foreground hover:text-foreground'
                             }`}
                         >
                             <span className="text-[10px] font-medium uppercase tracking-[0.1em]">
@@ -158,7 +158,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                                     className={`py-2 rounded-md text-sm font-medium tabular-nums transition-all ${
                                         active
                                             ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
-                                            : 'border border-border/60 hover:border-primary/50 text-foreground/80 hover:text-foreground'
+                                            : 'border border-border hover:border-primary/50 text-foreground/80 hover:text-foreground'
                                     }`}
                                     style={{ fontFamily: 'var(--font-mono)' }}
                                 >
@@ -178,7 +178,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                     )}
                 </div>
             ) : (
-                <div className="text-center py-6 text-xs text-muted-foreground border-t border-border/40 pt-4">
+                <div className="text-center py-6 text-xs text-muted-foreground border-t border-border pt-4">
                     Wählen Sie zunächst einen Tag.
                 </div>
             )}

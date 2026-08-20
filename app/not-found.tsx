@@ -24,7 +24,7 @@ export default function NotFound() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-2 h-12 px-6 text-base font-medium gradient-primary text-white rounded-xl shadow-lg shadow-primary/25 hover:opacity-90 transition-opacity"
+                        className="inline-flex items-center gap-2 h-12 px-6 text-base font-medium gradient-primary text-primary-foreground rounded-xl shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:opacity-90 transition-opacity"
                     >
                         <ArrowLeft className="h-4 w-4" />
                         Zur Startseite

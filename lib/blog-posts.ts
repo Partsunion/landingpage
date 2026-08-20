@@ -25,7 +25,7 @@ export interface BlogPost {
     excerpt: string;
 }
 
-export const blogPosts: BlogPost[] = [
+const corePosts: BlogPost[] = [
     {
         slug: 'retourenquote-autoteilhandel-senken',
         title: 'Retourenquote im Autoteilehandel senken — ein 90-Tage-Plan',
@@ -84,6 +84,12 @@ export const blogPosts: BlogPost[] = [
             'Vom Foto zum OEM in Sekunden. Was in der Pipeline passiert — von der OCR über die Katalog-Cross-Reference bis zum Konfidenz-Scoring.',
     },
 ];
+
+// Generated SEO Ratgeber articles (block-authored) extend the core posts.
+// Import is value-level; blog-articles-data only type-imports BlogPost (no cycle).
+import { generatedArticles } from './blog-articles-data';
+
+export const blogPosts: BlogPost[] = [...corePosts, ...generatedArticles.map((a) => a.meta)];
 
 export const getPostBySlug = (slug: string): BlogPost | undefined =>
     blogPosts.find((p) => p.slug === slug);

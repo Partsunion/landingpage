@@ -1,23 +1,30 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'AGB - Partsunion',
-    description: 'Allgemeine Geschäftsbedingungen der Partsunion UG (haftungsbeschränkt)',
+    description: 'Allgemeine Geschäftsbedingungen für Partsunion',
 };
 
 export default function AGBPage() {
     return (
         <div className="container mx-auto px-4 py-20 max-w-3xl">
-            <div className="prose dark:prose-invert max-w-none">
-                <h1>Allgemeine Geschäftsbedingungen</h1>
-                <p className="text-sm text-muted-foreground">Stand: April 2026</p>
+            <div className="blog-content max-w-none">
+                <h1
+                    className="text-3xl md:text-4xl font-semibold text-foreground mb-3"
+                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                >
+                    Allgemeine Geschäftsbedingungen
+                </h1>
+                <p className="text-sm text-muted-foreground">Stand: Juli 2026</p>
 
                 <h2>§ 1 Geltungsbereich</h2>
                 <p>
-                    (1) Die nachfolgenden Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen der
-                    Partsunion UG (haftungsbeschränkt), Zum Sommersberg 27, 50321 Brühl (nachfolgend „Anbieter") und dem
-                    Kunden (nachfolgend „Kunde") über die Nutzung der Software-as-a-Service-Lösung „Partsunion"
-                    (nachfolgend „Software" oder „Dienst") in der zum Zeitpunkt des Vertragsschlusses gültigen Fassung.
+                    (1) Die nachfolgenden Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen dem
+                    in unserem <Link href="/legal/impressum">Impressum</Link> genannten Anbieter (nachfolgend
+                    „Anbieter“) und dem Kunden (nachfolgend „Kunde“) über die Nutzung der
+                    Software-as-a-Service-Lösung „Partsunion“ (nachfolgend „Software“ oder „Dienst“) in der zum
+                    Zeitpunkt des Vertragsschlusses gültigen Fassung.
                 </p>
                 <p>
                     (2) Abweichende Bedingungen des Kunden werden nicht Vertragsbestandteil, es sei denn, der Anbieter
@@ -35,7 +42,7 @@ export default function AGBPage() {
 
                 <h2>§ 2 Vertragsgegenstand</h2>
                 <p>
-                    (1) Der Anbieter stellt dem Kunden die Softwarelösung „Partsunion" als cloudbasierte
+                    (1) Der Anbieter stellt dem Kunden die Softwarelösung „Partsunion“ als cloudbasierte
                     Software-as-a-Service (SaaS) zur Verfügung. Die Software umfasst insbesondere:
                 </p>
                 <ul>
@@ -76,10 +83,10 @@ export default function AGBPage() {
 
                 <h2>§ 4 Leistungen und Verfügbarkeit</h2>
                 <p>
-                    (1) Der Anbieter gewährleistet eine Verfügbarkeit der Software von 99,5% im Jahresmittel.
-                    Hiervon ausgenommen sind Zeiten geplanter Wartungsarbeiten, die dem Kunden mindestens 48
-                    Stunden im Voraus angekündigt werden, sowie Ausfälle, die durch höhere Gewalt oder
-                    Umstände, die nicht im Einflussbereich des Anbieters liegen, verursacht werden.
+                    (1) Verfügbarkeit, Messmethode, Wartungsfenster und etwaige Service-Gutschriften ergeben
+                    sich aus der individuell vereinbarten Leistungsbeschreibung. Soweit dort kein SLA
+                    vereinbart ist, wird keine bestimmte prozentuale Verfügbarkeit zugesichert. Geplante
+                    Wartungsarbeiten werden nach Möglichkeit mindestens 48 Stunden im Voraus angekündigt.
                 </p>
                 <p>
                     (2) Der Anbieter erbringt Support per E-Mail während der Geschäftszeiten

@@ -1,16 +1,22 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'Widerrufsbelehrung - Partsunion',
-    description: 'Widerrufsbelehrung der Partsunion UG (haftungsbeschränkt)',
+    description: 'Widerrufsbelehrung für Partsunion-Verträge',
 };
 
 export default function WiderrufPage() {
     return (
         <div className="container mx-auto px-4 py-20 max-w-3xl">
-            <div className="prose dark:prose-invert max-w-none">
-                <h1>Widerrufsbelehrung</h1>
-                <p className="text-sm text-muted-foreground">Stand: April 2026</p>
+            <div className="blog-content max-w-none">
+                <h1
+                    className="text-3xl md:text-4xl font-semibold text-foreground mb-3"
+                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                >
+                    Widerrufsbelehrung
+                </h1>
+                <p className="text-sm text-muted-foreground">Stand: Juli 2026</p>
 
                 <h2>Widerrufsrecht</h2>
                 <p>
@@ -22,10 +28,9 @@ export default function WiderrufPage() {
                     Um Ihr Widerrufsrecht auszuüben, müssen Sie uns:
                 </p>
                 <p>
-                    <strong>Partsunion UG (haftungsbeschränkt)</strong><br />
-                    Zum Sommersberg 27<br />
-                    50321 Brühl<br />
-                    Deutschland<br />
+                    <strong>Anbieter gemäß Impressum</strong><br />
+                    Ladungsfähige Anschrift und Vertretungsberechtigte:{' '}
+                    <Link href="/legal/impressum">siehe Impressum</Link><br />
                     E-Mail: widerruf@partsunion.de
                 </p>
                 <p>
@@ -87,12 +92,11 @@ export default function WiderrufPage() {
                     (Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus
                     und senden Sie es zurück.)
                 </p>
-                <div className="p-6 rounded-xl bg-muted/50 border border-border/50 not-prose">
+                <div className="p-6 rounded-xl bg-muted border border-border">
                     <p className="text-sm text-muted-foreground mb-4">
                         An:<br />
-                        Partsunion UG (haftungsbeschränkt)<br />
-                        Zum Sommersberg 27<br />
-                        50321 Brühl<br />
+                        Anbieter gemäß <Link href="/legal/impressum">Impressum</Link><br />
+                        Ladungsfähige Anschrift: siehe Impressum<br />
                         E-Mail: widerruf@partsunion.de
                     </p>
                     <p className="text-sm text-muted-foreground mb-4">

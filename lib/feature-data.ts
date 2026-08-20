@@ -1,4 +1,4 @@
-import { LucideIcon, FileText, Search, Smartphone, ShoppingCart, RefreshCw, Truck, TrendingUp, Clock, Zap, ShieldCheck, Globe, Users } from 'lucide-react';
+import { LucideIcon, FileText, Search, Smartphone, ShoppingCart, RefreshCw, Truck, TrendingUp, Clock, Zap, ShieldCheck, Globe, Users, Landmark, Layers, Boxes } from 'lucide-react';
 
 export interface FeatureDetail {
     slug: string;
@@ -18,104 +18,104 @@ export const featureData: FeatureDetail[] = [
     // ============================================
     {
         slug: 'skalierbarkeit',
-        title: 'Skalierbarkeit ohne Kostenexplosion',
-        description: 'Wachsen Sie mit Ihrem Geschäft ohne steigende Personalkosten. Unser KI-System skaliert automatisch.',
+        title: 'Skalierbare Organisation',
+        description: 'Standorte, Rollen und Arbeitsvolumen auf einer gemeinsamen Plattform organisieren.',
         icon: TrendingUp,
         features: [
-            'Zuverlässige Performance auch bei hohen Anfragevolumen',
-            'Gleichbleibende Qualität 365 Tage im Jahr',
-            'Keine krankheits- oder urlaubsbedingten Ausfälle',
-            'Keine Kosten für neue Mitarbeiter oder Büroflächen',
-            'Automatische Lastverteilung bei Spitzenzeiten',
-            'Konstante Bearbeitungszeit unabhängig vom Volumen'
+            'Mandanten- und rollenbasierte Arbeitsplätze',
+            'Zentrale Stamm- und Bewegungsdaten',
+            'Arbeitsvorräte mit Status und Verantwortlichkeit',
+            'Einheitliche Prozesse für mehrere Teams und Standorte',
+            'Nachvollziehbare Freigaben und Änderungen',
+            'Cloud-Betrieb mit überwachter Kapazität'
         ],
-        technicalDetails: 'Unsere Cloud-Infrastruktur nutzt Auto-Scaling und Load-Balancing, um bei steigender Nachfrage automatisch Kapazitäten bereitzustellen. Die KI-Modelle sind horizontal skalierbar und verarbeiten tausende Anfragen parallel.',
-        benefit: 'Steigern Sie Ihren Umsatz ohne lineare Kostensteigerung. Während Ihre Konkurrenz bei Spitzenzeiten an Kapazitätsgrenzen stößt, liefern Sie weiterhin blitzschnelle Angebote.',
+        technicalDetails: 'Die Plattform trennt Mandanten und Berechtigungen, verarbeitet Hintergrundaufgaben über Warteschlangen und kann Infrastrukturkapazität bedarfsgerecht erweitern. Verbindliche Leistungswerte werden für das jeweilige Betriebsmodell vereinbart.',
+        benefit: 'Neue Mitarbeiter, Teams und Standorte arbeiten mit denselben Stammdaten, Rollen und kontrollierten Abläufen.',
         category: 'value'
     },
     {
         slug: '24-7-einsatzbereit',
-        title: '24/7 Einsatzbereit',
-        description: 'Ihr digitaler Mitarbeiter kennt keine Öffnungszeiten. Bearbeiten Sie Anfragen rund um die Uhr.',
+        title: 'Betrieb & Self-Service',
+        description: 'Digitale Eingangskanäle und das Kundenportal ergänzen die persönliche Betreuung.',
         icon: Clock,
         features: [
-            'Umsatz auch außerhalb der Geschäftszeiten',
-            'Automatische Angebotserstellung um 3 Uhr nachts',
-            'Wochenend-Anfragen werden sofort bearbeitet',
-            'Internationale Zeitzonen kein Problem',
-            'Sofortige Reaktion auf jede Anfrage',
-            'Kein Warten bis "jemand im Büro ist"'
+            'B2B-Portal für Belege und Bestellanfragen',
+            'Digitale Anfragen werden zentral erfasst',
+            'Arbeitsvorrat für die Bearbeitung zu Geschäftszeiten',
+            'Status und Kontext bleiben vollständig erhalten',
+            'Überwachung zentraler Dienste und Schnittstellen',
+            'Betriebsmodell und Servicezeiten vertraglich definierbar'
         ],
-        technicalDetails: 'Das System läuft auf EU-Cloud-Infrastruktur mit einem vertraglichen Ziel-SLA von 99,5 % im Jahresmittel (siehe AGB §4). Monitoring und automatisierte Neustarts sorgen für hohe Verfügbarkeit; geplante Wartungen werden vorab angekündigt.',
-        benefit: 'Fangen Sie Leads ab, die bei der Konkurrenz ins Leere laufen. Werkstätten, die am Wochenende Teile brauchen, bekommen von Ihnen sofort ein Angebot.',
+        technicalDetails: 'Das System ist für EU-Cloud-Infrastruktur, Monitoring und automatisierte Neustarts vorbereitet. Ein verbindliches SLA wird erst im individuellen Vertrag auf Basis des freigegebenen Betriebsmodells vereinbart.',
+        benefit: 'Kunden können Vorgänge digital anstoßen und Belege abrufen, ohne dass der ERP-Kern von einem einzelnen Kanal abhängt.',
         category: 'value'
     },
     {
         slug: 'geschwindigkeit',
-        title: 'Sekunden statt Minuten',
-        description: 'Blitzschnelle Angebotserstellung mit paralleler Verarbeitung beliebig vieler Anfragen.',
+        title: 'Effiziente Arbeitsabläufe',
+        description: 'Weniger Mehrfacherfassung durch verbundene Stammdaten, Belege und Folgeprozesse.',
         icon: Zap,
         features: [
-            '3 Angebote pro Anfrage aus verschiedenen Preisgruppen',
-            'Parallele Verarbeitung beliebig vieler Anfragen gleichzeitig',
-            'Kürzere Antwortzeiten = Höhere Abschlussquote',
-            'Keine Nacharbeit wegen Fehlangeboten',
-            'Automatische Priorisierung nach Anfragewert',
-            'Echtzeit-Bestandsprüfung inklusive'
+            'Fahrzeug- und Kundendaten im Verkaufsvorgang',
+            'Artikelvergleich mit Preisen und Bestand',
+            'Folgebelege übernehmen geprüfte Positionen',
+            'Priorisierte Arbeitsvorräte statt verteilter Listen',
+            'ATP-Prüfung und Reservierung im Verkaufsprozess',
+            'Schnellzugriff auf relevante Geschäftsobjekte'
         ],
-        technicalDetails: 'Die KI nutzt optimierte Inference-Pipelines und Caching-Strategien. OEM-Matching erfolgt in Millisekunden durch Vektor-Datenbanken und vorberechnete Indizes.',
-        benefit: 'Wer zuerst antwortet, gewinnt den Kunden. Mit Partsunion sind Sie immer schneller als die Konkurrenz und steigern so Ihre Abschlussquote drastisch.',
+        technicalDetails: 'Suchindizes, Hintergrundverarbeitung und ein gemeinsames Objektmodell reduzieren Systemwechsel. Konkrete Antwortzeiten hängen von Katalog-, Lieferanten- und Infrastruktur-Anbindungen ab.',
+        benefit: 'Mitarbeiter bearbeiten mehr Schritte im selben Kontext und müssen Daten seltener erneut erfassen oder abgleichen.',
         category: 'value'
     },
     {
         slug: 'sinkende-retouren',
-        title: 'Sinkende Retourenquote',
-        description: 'Automatische Fahrzeugerkennung und OEM-Matching eliminieren menschliche Fehler.',
+        title: 'Fitment & Prüfpfade',
+        description: 'Fahrzeugbezug, OE-Referenzen und Alternativen werden nachvollziehbar geprüft.',
         icon: ShieldCheck,
         features: [
-            'KI-gestützte OEM-Ermittlung ohne Tippfehler',
-            'Automatische Fahrzeugerkennung aus Schein-Fotos',
-            'Drastische Reduzierung der Retourenquote',
-            'Keine Verwechslungen mehr bei ähnlichen Teilen',
-            'Cross-Reference Prüfung auf Kompatibilität',
-            'Weniger Reklamationen, mehr Kundenzufriedenheit'
+            'Erfassung von VIN, HSN und TSN',
+            'OE- und Herstellerreferenzen am Artikel',
+            'Cross-Reference auf freigegebene Alternativen',
+            'Unsichere Zuordnungen als sichtbarer Prüfbedarf',
+            'Fahrzeugbezug bleibt am Verkaufsvorgang erhalten',
+            'Retourengründe für spätere Auswertungen'
         ],
-        technicalDetails: 'Computer Vision extrahiert HSN, TSN und VIN mit hoher Genauigkeit. Ein mehrstufiges Validierungssystem prüft Kompatibilitäten gegen Teilekataloge und Hersteller-Datenbanken.',
-        benefit: 'Jede Retoure kostet Zeit, Geld und Kundenvertrauen. Mit präziser Fahrzeugerkennung gehören falsche Teile der Vergangenheit an.',
+        technicalDetails: 'Dokumenterfassung kann Fahrzeugmerkmale vorbefüllen; Katalog- und Cross-Reference-Daten werden anschließend über definierte Prüfregeln bewertet. Unsicherheit wird nicht als sichere Zuordnung dargestellt.',
+        benefit: 'Teileentscheidungen werden dokumentierbar und typische Zuordnungsfehler können früher erkannt werden.',
         category: 'value'
     },
     {
         slug: 'sprachuebergreifend',
-        title: 'Sprachübergreifend nutzbar',
-        description: 'Automatische Spracherkennung und Verständnis von Sprachnachrichten und Mechaniker-Slang.',
+        title: 'Mehrsprachige Anfragen',
+        description: 'Text- und Sprachanfragen können kanalübergreifend für die Bearbeitung vorbereitet werden.',
         icon: Globe,
         features: [
-            'Automatische Erkennung der Kundensprache',
-            'Versteht Sprachnachrichten und Audio-Dateien',
-            'Erkennt Mechaniker-Slang und Umgangssprache',
-            '"Bremsklötze" wird als "Bremsbelagsatz" verstanden',
-            'Mehrsprachige Antworten möglich',
-            'Keine Kommunikationsbarrieren mehr'
+            'Text- und Audioeingänge in einem Arbeitsvorrat',
+            'Originalinhalt bleibt für die Fachprüfung erhalten',
+            'Erkannte Fahrzeug- und Teilebegriffe als Vorschlag',
+            'Sprachhinweis und Übersetzung sichtbar prüfbar',
+            'Mehrsprachige Antworten nach Freigabe möglich',
+            'Übergabe an Mitarbeiter mit vollständigem Originalkontext'
         ],
-        technicalDetails: 'Whisper-basierte Sprach-zu-Text Konvertierung kombiniert mit speziell trainiertem NLU-Modell für Automotive-Terminologie. Unterstützt Deutsch, Englisch, Türkisch, Polnisch, Russisch und weitere.',
-        benefit: 'Erreichen Sie auch internationale Kunden und Mechaniker, die lieber Sprachnachrichten senden. Keine Sprachbarrieren, keine verlorenen Anfragen.',
+        technicalDetails: 'Audio kann in Text überführt und zusammen mit dem Original in den Vorgang übernommen werden. Welche Sprachen und Fachbegriffe produktiv freigegeben sind, wird im Onboarding dokumentiert; unsichere Inhalte bleiben als Prüfbedarf sichtbar.',
+        benefit: 'Internationale Anfragen landen strukturiert im selben Arbeitsvorrat, während der Originalinhalt für die Fachprüfung erhalten bleibt.',
         category: 'value'
     },
     {
         slug: 'team-entlastung',
-        title: 'Entlastung des Teams',
-        description: 'Wegfall gleichbleibender Routine. Fokus auf Beratung, Vertrieb und Kundenbindung.',
+        title: 'Geführte Teamarbeit',
+        description: 'Klare Arbeitsvorräte, Verantwortlichkeiten und Freigaben unterstützen den Tagesbetrieb.',
         icon: Users,
         features: [
-            'Wegfall repetitiver Anfrage-Bearbeitung',
-            'Kein Stress mehr bei hohen Anfragevolumen',
-            'Mitarbeiter fokussieren auf komplexe Beratung',
-            'Einfache Einarbeitung neuer Mitarbeiter',
-            'Höhere Mitarbeiterzufriedenheit',
-            'Mehr Zeit für echte Kundenbeziehungen'
+            'Priorisierte Vorgänge statt verteilter Aufgabenlisten',
+            'Zuständigkeit und Bearbeitungsstatus sichtbar',
+            'Standardisierte Abläufe für wiederkehrende Fälle',
+            'Fachprüfung bei unklaren Zuordnungen',
+            'Rollenbasierte Aktionen und Freigaben',
+            'Historie als gemeinsame Informationsbasis'
         ],
-        technicalDetails: 'Das System übernimmt 80% der Standardanfragen vollautomatisch. Komplexe Fälle werden intelligent an Menschen eskaliert mit vollständigem Kontext.',
-        benefit: 'Ihre Mitarbeiter verbringen ihre Zeit mit wertschöpfenden Tätigkeiten statt stupider Dateneingabe. Zufriedenere Teams, besserer Service.',
+        technicalDetails: 'Statusmodelle, Rollen und Arbeitsvorräte steuern die Übergabe zwischen automatischer Vorverarbeitung und menschlicher Fachentscheidung. Jede Eskalation behält ihren fachlichen Kontext.',
+        benefit: 'Wissen bleibt im Vorgang und Arbeit kann kontrolliert zwischen Mitarbeitern und Teams übergeben werden.',
         category: 'value'
     },
 
@@ -124,96 +124,165 @@ export const featureData: FeatureDetail[] = [
     // ============================================
     {
         slug: 'oem-ermittlung',
-        title: 'KI-gestützte OEM Ermittlung',
-        description: 'Nie wieder das falsche Teil bestellen. Unsere AI matcht Fahrzeugschein mit Herstellerdaten.',
+        title: 'Teileidentifikation & OE-Referenzen',
+        description: 'Fahrzeugmerkmale, OE-Nummern, Cross-References und Alternativen in einem Prüfpfad.',
         icon: Search,
         features: [
             'Scan von Fahrzeugscheinen (OCR)',
             'Abgleich mit Teilekatalogen und Hersteller-Datenbanken',
             'Erkennung von Baujahr-spezifischen Änderungen',
             'Cross-Reference auf Alternativ-Hersteller',
-            'Automatische Preisgruppenzuordnung',
-            'Kompatibilitätsprüfung in Echtzeit'
+            'Preisgruppenauflösung im Verkaufsvorgang',
+            'Sichtbarer Prüfstatus bei unsicheren Zuordnungen'
         ],
-        technicalDetails: 'Wir nutzen Computer Vision, um HSN/TSN und FIN zu extrahieren. Ein proprietärer Algorithmus prüft dann Kompatibilitäten über Millionen von Datensätzen in Millisekunden.',
-        benefit: 'Reduzieren Sie Ihre Retourenquote drastisch. Vertrauen Sie auf Daten statt Bauchgefühl.',
+        technicalDetails: 'Dokumenterfassung unterstützt die Extraktion von HSN, TSN und VIN. Katalog-, Hersteller- und Cross-Reference-Daten werden über nachvollziehbare Prüfregeln zusammengeführt.',
+        benefit: 'Teileentscheidungen basieren auf verbundenen Fahrzeug- und Artikeldaten statt auf verteilten Notizen.',
         category: 'core'
     },
     {
         slug: 'whatsapp-bot',
-        title: '24/7 WhatsApp Autoteile-Bot',
-        description: 'Ihr neuer Mitarbeiter, der nie schläft. Nimmt Anfragen entgegen und erstellt automatisch Angebote.',
+        title: 'Digitale Anfragebearbeitung',
+        description: 'WhatsApp als optionaler Eingangskanal für strukturierte, fachlich prüfbare Teileanfragen.',
         icon: Smartphone,
         features: [
-            'Versteht Sprachnachrichten und Fotos',
-            'Identifiziert Fahrzeug und gesuchtes Teil',
-            'Sendet vollautomatisch Angebote',
-            'Übergibt komplexe Fälle an Menschen',
+            'Erfasst Sprachnachrichten, Text und Fotos',
+            'Strukturiert Fahrzeug und gesuchtes Teil vor',
+            'Bereitet Angebotsvorgänge zur Prüfung vor',
+            'Übergibt unklare Fälle an Mitarbeiter',
             'Mehrsprachig einsetzbar',
             'WhatsApp Business API Integration'
         ],
-        technicalDetails: 'Basierend auf LLMs (Large Language Models), die speziell auf KFZ-Teile trainiert wurden. Der Bot versteht Slang wie "Bremse vorne" genau so gut wie "Bremsbelagsatz Vorderachse".',
-        benefit: 'Seien Sie für Ihre Kunden erreichbar, wenn die Konkurrenz schon geschlossen hat. Fangen Sie jeden Lead ab.',
+        technicalDetails: 'Sprach-, Text- und Bildverarbeitung strukturiert Kundenangaben. Fachliche Unsicherheit löst eine Übergabe mit Originalinhalt und bisherigem Kontext aus.',
+        benefit: 'Ein zusätzlicher Eingangskanal speist denselben Verkaufsprozess, ohne ein separates Datensilo zu erzeugen.',
         category: 'core'
     },
     {
         slug: 'automatische-rechnungserstellung',
-        title: 'Automatische Rechnungserstellung',
-        description: 'Vom Auftrag zur Rechnung in Sekunden. Fehlerfrei und Finanzamt-konform.',
+        title: 'Belegfluss & Faktura',
+        description: 'Vom Angebot über Auftrag und Lieferung bis zur festgeschriebenen Rechnung.',
         icon: FileText,
         features: [
             'Automatische Generierung als PDF',
             'Direkter Email-Versand an Kunden',
             'DATEV-Schnittstelle für den Steuerberater',
-            'Autonome Stornorechnungen bei Retouren'
+            'Gutschrift- und Stornopfad mit Ursprungsbezug'
         ],
         technicalDetails: 'Unser System nutzt Templates, die Sie einmalig anpassen. Bei jeder Bestellung triggert der Status "Versendet" die PDF-Generierung. Die Dokumente werden revisionssicher archiviert.',
-        benefit: 'Sparen Sie sich die Buchhaltung am Wochenende. Partsunion erledigt den Papierkram, während Sie verkaufen.',
+        benefit: 'Folgebelege übernehmen geprüfte Positionen und bleiben über ihre Referenzen nachvollziehbar.',
         category: 'core'
     },
     {
         slug: 'bestellprozess',
-        title: 'Automatisierter Bestellprozess',
-        description: 'Von der Lagerlücke zur Nachbestellung ohne einen Mausklick.',
+        title: 'Disposition & Einkauf',
+        description: 'Von Fehlmenge und Bedarf über Bestellvorschlag bis zu Bestellung und Wareneingang.',
         icon: ShoppingCart,
         features: [
             'Automatische Bestellvorschläge bei Mindestbestand',
             'Preisvergleich bei angebundenen Lieferanten',
-            'Direkte API-Bestellung bei Großhändlern',
-            'Tracking-Updates für Ihre Kunden'
+            'Direkte API-Bestellung bei Großhändlern (Konnektoren in Entwicklung — WM SE priorisiert)',
+            'Bestellvorschläge mit Dringlichkeit, Reichweite und Lieferanten-Empfehlung'
         ],
-        technicalDetails: 'Unser Algorithmus analysiert Ihre Abverkaufsgeschwindigkeit und Lieferzeiten, um den optimalen Bestellzeitpunkt zu berechnen (Predictive Ordering).',
-        benefit: 'Optimieren Sie Ihren Cashflow und vermeiden Sie "Out-of-Stock"-Situationen bei Schnelldrehern.',
+        technicalDetails: 'Bestellvorschläge werden aus Fehlmenge, Mindestbestand, Reservierungen, offenen Zugängen, Reichweite und Lieferzeit abgeleitet. Ein Mitarbeiter prüft Menge und Bezugsquelle, bevor die Bestellung freigegeben wird.',
+        benefit: 'Disposition wird aus Bestands-, Reservierungs- und Beschaffungsdaten nachvollziehbar vorbereitet.',
         category: 'core'
     },
     {
         slug: 'bestandssynchronisation',
         title: 'Multi-Channel Warenbestand',
-        description: 'Ein Lager, viele Verkaufskanäle. Synchronisation in Echtzeit.',
+        description: 'Ein zentrales Lager für alle Verkaufswege — sauber gebucht, kein Doppelverkauf.',
         icon: RefreshCw,
         features: [
-            'Sync mit eBay, autoteile-markt.de, Daparto',
-            'Vermeidung von Überverkäufen',
-            'Zentrales Dashboard für alle Kanäle',
-            'Priorisierung von Verkaufskanälen'
+            'Ein zentrales Lager für Theke (POS), Aufträge und Angebote',
+            'Reservierungen (ATP) verhindern Überverkäufe',
+            'Bewegungsjournal: jede Zu- und Abbuchung als Ledger',
+            'Marktplatz-/Shop-Konnektoren (eBay & Co.) in Entwicklung'
         ],
-        technicalDetails: 'Wir nutzen Webhooks und APIs für Real-Time-Updates. Sobald ein Teil auf eBay verkauft wird, wird es im Shop gesperrt - und umgekehrt.',
-        benefit: 'Verkaufen Sie überall, ohne den Überblick zu verlieren. Skalieren Sie Ihren Umsatz ohne Chaos.',
+        technicalDetails: 'Bestand, Reservierungen und Bewegungen laufen über ein zentrales Ledger; der Theken-POS bucht live ab und das ATP-Verfahren sperrt reservierte Mengen. Konnektoren für Marktplätze und Webshops (eBay, Webshop) mit Echtzeit-Sync befinden sich in Entwicklung.',
+        benefit: 'Behalten Sie über alle Verkaufswege den Überblick — ohne Doppelverkäufe und ohne Excel-Chaos.',
         category: 'core'
     },
     {
         slug: 'retourenmanagement',
-        title: 'Smartes Retourenmanagement',
+        title: 'Retouren & Garantie',
         description: 'Machen Sie aus Rücksendungen einen geordneten Prozess.',
         icon: Truck,
         features: [
-            'QR-Code Retourenschein für Kunden',
-            'Automatische Wiedereinlagerung im System',
-            'Gutschrift-Erstellung auf Knopfdruck',
-            'Analyse von Retourengründen'
+            'RMA mit Artikel, Menge, Grund und Ursprungsbeleg',
+            'Zustands- und Verantwortlichkeitsprüfung',
+            'Wiedereinlagerung erst nach fachlicher Entscheidung',
+            'Verknüpfte Gutschrift oder Lieferantenreklamation',
+            'Auswertung dokumentierter Retourengründe'
         ],
-        technicalDetails: 'Der Retourenprozess ist voll in die Warenwirtschaft integriert. Eingehende Retouren werden gescannt und sofort wieder dem verfügbaren Bestand zugebucht.',
-        benefit: 'Verwandeln Sie den Frustfaktor Retoure in ein professionelles Kundenerlebnis.',
+        technicalDetails: 'Die Retoure bleibt mit dem Ursprungsbeleg, dem Prüfentscheid und den daraus folgenden Bestands- und Finanzbuchungen verknüpft. Ware wird nicht vor der fachlichen Entscheidung wieder als verfügbar geführt.',
+        benefit: 'Retouren, Bestand, Erstattung und Lieferantenreklamation bleiben als kontrollierter Vorgang nachvollziehbar.',
+        category: 'core'
+    },
+    {
+        slug: 'gobd-tse-zugferd-datev',
+        title: 'Nachvollziehbare Faktura & Kassenbuch',
+        description: 'GoBD-orientierte Belegführung sowie vorbereitete TSE-, DSFinV-K-, ZUGFeRD- und DATEV-Pfade.',
+        icon: Landmark,
+        features: [
+            'GoBD-orientierte Festschreibung mit verknüpftem Korrekturpfad',
+            'Technisch vorbereiteter TSE- und DSFinV-K-Pfad',
+            'Vorbereitete ZUGFeRD- und XRechnung-Ausgabe',
+            'DATEV-Export: Kontenrahmen SKR03/04 + EXTF-Buchungsstapel',
+            'USt-Voranmeldung, USt-Journal und belegweise USt-Verprobung',
+            'GoBD-orientiertes Kassenbuch & Z-Bericht mit laufendem Saldo'
+        ],
+        technicalDetails: 'Beträge werden in Cent verarbeitet und die USt je Steuersatz aus den Rechnungspositionen aufgeteilt. Prüfpfade unterstützen Nummernkreis- und Chronologie-Kontrollen; Steuerprofil, TSE, Exporte und konkrete Einsatzweise werden vor Produktivstart fachlich und technisch abgenommen.',
+        benefit: 'Belege, Kasse und Meldungen bleiben nachvollziehbar; DATEV-Exporte und Steuerpfade können vor dem Einsatz mit Ihrer Steuerberatung abgenommen werden.',
+        category: 'core'
+    },
+    {
+        slug: 'b2b-kundenportal-white-label',
+        title: 'White-Label B2B-Kundenportal',
+        description: 'Pilot für ein Kundenportal unter Ihrer Marke: Geschäftskunden sehen Belege und senden Bestellanfragen mit ihren Preisen.',
+        icon: Globe,
+        features: [
+            'White-Label unter Ihrer eigenen Domain',
+            'Kunden sehen ihre Rechnungen inkl. PDF-Download',
+            'Bestellanfragen mit kundenspezifischen, serverseitig aufgelösten Preisen',
+            'Sicherer Token-/Magic-Link-Login, strikt mandanten-isoliert',
+            'Kein Preis-Leck: Preise werden nie clientseitig berechnet',
+            'Bestellungen sind unverbindliche Anfragen (buchen keinen Bestand)'
+        ],
+        technicalDetails: 'Die Plattform stellt einen token-authentifizierten Self-Service-Bereich bereit: eigene Stammdaten, Rechnungen inklusive PDF, mandantenbezogene Produkte mit serverseitiger Preisauflösung und Bestellanfragen. White-Label-Domains werden über CNAME und TLS angebunden.',
+        benefit: 'Entlasten Sie Ihr Team von Standard-Nachfragen und binden Sie Geschäftskunden mit einem professionellen Self-Service-Portal unter Ihrer eigenen Marke.',
+        category: 'core'
+    },
+    {
+        slug: 'erp-autoteilehandel',
+        title: 'ERP-System für den Autoteilehandel',
+        description: 'Branchenspezifisches ERP: Verkauf, Betrieb und Finanzen in einer Datenbasis — mit Einkauf, Lager und Warenwirtschaft im Betriebs-Workspace.',
+        icon: Layers,
+        features: [
+            'Drei Workspaces auf einer Datenbasis: Verkauf, Betrieb, Finanzen',
+            'Durchgängige Belegkette: Angebot → Lieferschein → Rechnung',
+            'Integrierte Warenwirtschaft mit ATP-Reservierungen',
+            'Vorbereitete DACH-Pfade: GoBD, TSE, ZUGFeRD, DATEV',
+            'CRM, Bonität/Kreditlimit und über 40 Auswertungen',
+            '5-Rollen-Rechtesystem, 2FA, Mandanten-Isolation, Audit-Log'
+        ],
+        technicalDetails: 'Partsunion ist auf den Autoteilehandel zugeschnitten: OE-/Kataloglogik, KFZ-Fitment, Altteilpfand und digitale Eingangskanäle sind in die Geschäftsobjekte eingebunden. Alle Module teilen eine Datenbasis.',
+        benefit: 'Ein einziges System statt Excel, Insellösungen und Steuerberater-Chaos — branchenspezifisch für den Teilehandel.',
+        category: 'core'
+    },
+    {
+        slug: 'warenwirtschaft-autoteilhandel',
+        title: 'Warenwirtschaftssystem für den Autoteilehandel',
+        description: 'Eine vollständige Warenwirtschaft für Kfz-Teile — mit Wareneingang, ATP-Reservierungen, Disposition und Inventur.',
+        icon: Boxes,
+        features: [
+            'Artikel, Bestand & Bewegungsjournal (Ledger)',
+            'Foto-Erfassung unterstützt den Abgleich mit der Bestellung',
+            'Reservierungen (ATP) verhindern Überverkäufe',
+            'Disposition mit Dringlichkeit, Reichweite und Bezugsquelle',
+            'KFZ-Fitment, Chargen/Serien, Lagerorte & Umbuchungen',
+            'Inventur, Etiketten/Barcode und Retoure per Foto'
+        ],
+        technicalDetails: 'Bestand, Reservierungen und Bewegungen laufen über ein zentrales Ledger; jede Zu-/Abbuchung ist nachvollziehbar und der Buchbestand wird gegen das Bewegungs-Hauptbuch verprobt. Cockpits für Stammdaten-Qualität, Artikel-Dubletten und Single-Source-Beschaffungsrisiko sind eingebaut.',
+        benefit: 'Schluss mit Excel und Phantombeständen — eine WaWi, die den Autoteilehandel versteht (OEM, Fitment, Altteilpfand).',
         category: 'core'
     }
 ];

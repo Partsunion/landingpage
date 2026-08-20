@@ -7,27 +7,35 @@ import { ChevronDown, HelpCircle } from 'lucide-react';
 const faqs = [
     {
         question: 'Was genau ist Partsunion und wie funktioniert es?',
-        answer: 'Partsunion ist ein KI-gesteuertes Betriebssystem für Autoteilehändler. Ihre Kunden bestellen per WhatsApp, unser Bot erkennt das Fahrzeug und Ersatzteil, ermittelt automatisch die OEM-Nummer und findet die günstigsten Angebote — alles in Sekunden statt Minuten.'
+        answer: 'Partsunion ist ein branchenspezifisches ERP für den Autoteilehandel. Es verbindet Teileidentifikation, Verkauf, Beschaffung, Lager und Finanzen auf einer Datenbasis. Angebot, Auftrag, Lieferung, Rechnung und Bestandsbewegungen bleiben als zusammenhängender Vorgang nachvollziehbar.'
     },
     {
-        question: 'Welche Ersatzteile kann der WhatsApp-Bot verarbeiten?',
-        answer: 'Alle gängigen Verschleiß- und Ersatzteile: Bremsbeläge, Filter, Kupplungen, Zündkerzen, Stoßdämpfer, Querlenker und viele mehr. Eine mehrstufige KI-Pipeline gleicht jede Anfrage parallel gegen Ihre eigene Datenbank, Lieferanten-Kataloge und mehrere Web-Quellen ab — mit dem Ziel, dass möglichst viele Anfragen direkt als fertiges Angebot bei Ihnen landen, ohne manuelle Recherche.'
+        question: 'Ist WhatsApp für den Betrieb des ERP erforderlich?',
+        answer: 'Nein. Verkauf, Einkauf, Lager und Finanzen funktionieren eigenständig. WhatsApp ist ein optionaler Eingangskanal neben Theke, E-Mail und B2B-Portal. Digitale Anfragen landen im selben Arbeitsvorrat und erzeugen kein separates Datensilo.'
+    },
+    {
+        question: 'Ist Partsunion ein Warenwirtschaftssystem oder ein ERP für den Autoteilehandel?',
+        answer: 'Beides — branchenspezifisch. Die Warenwirtschaft deckt Artikel, Einkauf, Wareneingang, Bestände, Reservierungen, Lagerbewegungen und Inventur ab. Hinzu kommen Verkauf, CRM, Faktura und Finanzprozesse. OE-/Kataloglogik, Fahrzeugbezug und Altteilpfand sind in die gemeinsamen Geschäftsobjekte eingebunden.'
+    },
+    {
+        question: 'Wie unterstützt Partsunion die Teileidentifikation?',
+        answer: 'Fahrzeugmerkmale wie VIN, HSN und TSN, OE-Referenzen, Herstellerdaten und Cross-References werden in einem Prüfpfad zusammengeführt. Bestand, Preise und freigegebene Bezugsquellen ergänzen die Entscheidung. Unsichere Zuordnungen bleiben als Prüfbedarf sichtbar und werden nicht als sicher dargestellt.'
     },
     {
         question: 'Wie lange dauert die Einrichtung?',
-        answer: 'Die Grundeinrichtung dauert weniger als einen Tag. Wir verbinden Ihre WhatsApp Business-Nummer, konfigurieren Ihren Tenant mit Ihren Lieferanten-Konditionen, und Sie können sofort Bestellungen entgegennehmen. Ein persönliches Onboarding ist im Preis enthalten.'
+        answer: 'Der Aufwand hängt von Stammdaten, Rollen, Nummernkreisen, Steuerprofil, Lagerstruktur und benötigten Schnittstellen ab. Vor dem Produktivstart werden Pflichtkonfiguration, Datenmigration, Berechtigungen und Kernprozesse gemeinsam abgenommen. Den konkreten Zeitplan erhalten Sie nach dem Prozess- und Datencheck.'
     },
     {
         question: 'Funktioniert Partsunion mit meinen bestehenden Lieferanten?',
-        answer: 'Ja! Unser System ist lieferantenagnostisch. Wir durchsuchen automatisch die größten Teile-Plattformen und Ihr eigenes Lager, um den besten Preis zu finden. Ihre bestehenden Lieferantenbeziehungen bleiben erhalten — Partsunion optimiert nur den Beschaffungsprozess.'
+        answer: 'Lieferanten werden als Stammdaten mit Konditionen und Bezugsinformationen geführt. Direkte Katalog-, Preis- oder Bestellschnittstellen hängen vom jeweiligen Anbieter ab und werden im Onboarding einzeln als live, eingeschränkt oder Roadmap ausgewiesen. Bestehende Lieferantenbeziehungen bleiben erhalten.'
     },
     {
         question: 'Welche Sprachen werden unterstützt?',
-        answer: 'Der WhatsApp-Bot spricht fünf Sprachen: Deutsch, Englisch, Türkisch, Kurdisch und Polnisch. Die Spracherkennung erfolgt automatisch — Ihr Kunde schreibt einfach in seiner Muttersprache, und der Bot antwortet passend.'
+        answer: 'Digitale Text- und Sprachanfragen können in den unterstützten Sprachen vorstrukturiert werden. Der Originalinhalt bleibt erhalten, damit Mitarbeiter Übersetzung und fachliche Zuordnung prüfen können. Welche Sprachen produktiv freigegeben sind, wird im Onboarding dokumentiert.'
     },
     {
         question: 'Wie sicher sind meine Kundendaten?',
-        answer: 'Maximale Sicherheit: Alle Daten werden DSGVO-konform auf europäischen Servern gespeichert. Die Kommunikation ist End-to-End verschlüsselt, und jeder Händler hat einen isolierten Multi-Tenant-Bereich. Wir verwenden bcrypt-Hashing, Rate Limiting und JWT-Authentifizierung.'
+        answer: 'Die Übertragung ist TLS-verschlüsselt, sensible Zugangsdaten werden verschlüsselt gespeichert, und Händlerdaten werden tenant-gescopt verarbeitet. Dazu kommen abgestufte Rechte, 2-Faktor-Authentifizierung, bcrypt-Hashing, Rate Limiting und Audit-Protokolle. Die technische und datenschutzrechtliche Abnahme wird vor dem produktiven Onboarding dokumentiert.'
     },
     {
         question: 'Was kostet Partsunion?',
@@ -35,9 +43,20 @@ const faqs = [
     },
     {
         question: 'Kann ich Partsunion erst testen, bevor ich mich entscheide?',
-        answer: 'Selbstverständlich! Nutzen Sie unsere interaktive Live-Demo direkt auf der Website, um den Bot in Aktion zu erleben. Im Beratungsgespräch richten wir gerne auch eine personalisierte Testumgebung mit Ihren echten Teilen und Fahrzeugen ein.'
+        answer: 'Ja. Die Website enthält eine begrenzte Demo der digitalen Teileermittlung. Für eine belastbare Bewertung zeigen wir das ERP anhand Ihrer Rollen, Belegketten, Lagerstruktur und typischen Teilefälle in einer abgestimmten Testumgebung.'
     },
 ];
+
+// FAQPage structured data → eligible for Google rich-result FAQ snippets.
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+};
 
 export function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -47,39 +66,47 @@ export function FAQ() {
     };
 
     return (
-        <section id="faq" className="py-24 md:py-32 relative">
-            {/* Subtle background gradient */}
-            <div className="absolute inset-0 gradient-glow opacity-30" />
+        <section id="faq" className="py-20 md:py-28 relative bg-muted/60 border-y border-border">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                {/* Section Header */}
+                <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+                {/* Header — links, auf Desktop sticky */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="lg:col-span-4"
                 >
-                    <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full glass mb-6">
-                        <HelpCircle className="h-4 w-4 text-primary" />
-                        <span className="text-sm font-medium text-muted-foreground">
+                    <div className="lg:sticky lg:top-28">
+                        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary mb-3 flex items-center gap-1.5">
+                            <HelpCircle className="h-3.5 w-3.5" />
                             Häufige Fragen
-                        </span>
+                        </p>
+                        <h2
+                            className="text-3xl md:text-4xl font-semibold text-foreground mb-4"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                        >
+                            Alles, was Sie vor dem Start wissen müssen.
+                        </h2>
+                        <p className="text-base text-muted-foreground mb-6">
+                            Von der Einrichtung bis zur Abrechnung. Ihre Frage ist nicht dabei?
+                        </p>
+                        <a
+                            href="#beratung"
+                            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+                        >
+                            Wir beraten Sie persönlich →
+                        </a>
                     </div>
-                    <h2
-                        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-                        style={{ fontFamily: 'var(--font-display)' }}
-                    >
-                        Alles, was Sie
-                        <span className="text-gradient"> wissen müssen</span>
-                    </h2>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        Von der Einrichtung bis zur Abrechnung — hier finden Sie Antworten auf die häufigsten Fragen zu Partsunion.
-                    </p>
                 </motion.div>
 
-                {/* FAQ Items */}
-                <div className="max-w-3xl mx-auto space-y-3">
+                {/* FAQ Items — rechts */}
+                <div className="lg:col-span-8 space-y-3">
                     {faqs.map((faq, index) => (
                         <motion.div
                             key={index}
@@ -91,8 +118,9 @@ export function FAQ() {
                         >
                             <button
                                 onClick={() => toggleItem(index)}
-                                className="w-full flex items-center justify-between p-5 md:p-6 text-left group"
+                                className="w-full flex items-center justify-between p-5 md:p-6 text-left group rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                                 aria-expanded={openIndex === index}
+                                aria-controls={`faq-answer-${index}`}
                                 id={`faq-question-${index}`}
                             >
                                 <span className="text-sm md:text-base font-medium text-foreground pr-4 group-hover:text-primary transition-colors">
@@ -109,6 +137,9 @@ export function FAQ() {
                             <AnimatePresence>
                                 {openIndex === index && (
                                     <motion.div
+                                        id={`faq-answer-${index}`}
+                                        role="region"
+                                        aria-labelledby={`faq-question-${index}`}
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
@@ -116,7 +147,7 @@ export function FAQ() {
                                         className="overflow-hidden"
                                     >
                                         <div className="px-5 md:px-6 pb-5 md:pb-6 pt-0">
-                                            <div className="border-t border-border/50 pt-4">
+                                            <div className="border-t border-border pt-4">
                                                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                                                     {faq.answer}
                                                 </p>
@@ -128,25 +159,7 @@ export function FAQ() {
                         </motion.div>
                     ))}
                 </div>
-
-                {/* CTA below FAQ */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-12"
-                >
-                    <p className="text-muted-foreground mb-4">
-                        Noch Fragen? Unser Team berät Sie gerne persönlich.
-                    </p>
-                    <a
-                        href="#beratung"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg gradient-primary text-white font-medium text-sm hover:opacity-90 transition-opacity"
-                    >
-                        Beratungsgespräch vereinbaren
-                    </a>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

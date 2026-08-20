@@ -10,7 +10,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-static';
-export const alt = 'Partsunion — KI-Automatisierung für Autoteilehändler';
+export const alt = 'Partsunion — Enterprise-ERP für den Autoteilehandel';
 export const size = { width: 1200, height: 630 } as const;
 export const contentType = 'image/png';
 
@@ -26,8 +26,8 @@ export default async function OgImage() {
                     justifyContent: 'space-between',
                     padding: 72,
                     background:
-                        'radial-gradient(ellipse at top, #1D6FE855 0%, transparent 60%), linear-gradient(180deg, #0A0B0D 0%, #111418 100%)',
-                    color: '#E8ECF1',
+                        'radial-gradient(ellipse at top, #1D6FE81f 0%, transparent 60%), linear-gradient(180deg, #FFFFFF 0%, #F6F8FB 100%)',
+                    color: '#0F172A',
                     fontFamily: 'system-ui, sans-serif',
                 }}
             >
@@ -39,7 +39,7 @@ export default async function OgImage() {
                             width: 48,
                             height: 48,
                             borderRadius: 12,
-                            background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
+                            background: 'linear-gradient(135deg, #1D6FE8 0%, #4F93FF 100%)',
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: 28,
@@ -64,8 +64,8 @@ export default async function OgImage() {
                             display: 'flex',
                             marginLeft: 'auto',
                             fontSize: 16,
-                            color: '#9AA3AD',
-                            border: '1px solid #252A31',
+                            color: '#5B6B81',
+                            border: '1px solid #E5EAF1',
                             padding: '8px 16px',
                             borderRadius: 999,
                             textTransform: 'uppercase',
@@ -89,28 +89,28 @@ export default async function OgImage() {
                             maxWidth: 1000,
                         }}
                     >
-                        Vom Fahrzeugschein-Foto zum fertigen Angebot in&nbsp;
+                        Enterprise-ERP für den&nbsp;
                         <span
                             style={{
                                 display: 'flex',
-                                background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
+                                background: 'linear-gradient(135deg, #1D6FE8 0%, #4F93FF 100%)',
                                 backgroundClip: 'text',
                                 color: 'transparent',
                             }}
                         >
-                            8&nbsp;Sekunden.
+                            Autoteilehandel.
                         </span>
                     </div>
                     <div
                         style={{
                             display: 'flex',
                             fontSize: 26,
-                            color: '#9AA3AD',
+                            color: '#5B6B81',
                             maxWidth: 900,
                             lineHeight: 1.4,
                         }}
                     >
-                        Die KI-Plattform für den modernen Teilehandel — WhatsApp-Bot, OEM-Ermittlung, Warenwirtschaft &amp; Vorkasse-Flow.
+                        Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen Plattform.
                     </div>
                 </div>
 
@@ -120,15 +120,15 @@ export default async function OgImage() {
                         display: 'flex',
                         alignItems: 'flex-end',
                         justifyContent: 'space-between',
-                        borderTop: '1px solid #252A31',
+                        borderTop: '1px solid #E5EAF1',
                         paddingTop: 24,
                         width: '100%',
                     }}
                 >
-                    <div style={{ display: 'flex', gap: 48 }}>
-                        <Stat value="~97 %" label="OEM-Treffer (Ziel)" />
-                        <Stat value="8 s" label="Antwortzeit" />
-                        <Stat value="24/7" label="Verfügbar" />
+                    <div style={{ display: 'flex', gap: 40 }}>
+                        <Stat value="IDENT" label="Teile & Fahrzeuge" />
+                        <Stat value="WAWI" label="Einkauf & Lager" />
+                        <Stat value="FIN" label="Faktura & Finanzen" />
                     </div>
                     <div
                         style={{
@@ -156,7 +156,7 @@ function Stat({ value, label }: { value: string; label: string }) {
                     fontSize: 40,
                     fontWeight: 600,
                     letterSpacing: '-0.02em',
-                    color: '#E8ECF1',
+                    color: '#0F172A',
                 }}
             >
                 {value}
@@ -165,7 +165,7 @@ function Stat({ value, label }: { value: string; label: string }) {
                 style={{
                     display: 'flex',
                     fontSize: 14,
-                    color: '#5E6670',
+                    color: '#98A2B3',
                     textTransform: 'uppercase',
                     letterSpacing: '0.1em',
                     marginTop: 4,

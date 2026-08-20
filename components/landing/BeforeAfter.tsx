@@ -13,68 +13,66 @@ interface Row {
 
 const rows: Row[] = [
     {
-        label: 'Anfrage bearbeiten',
-        before: '15 Min',
-        beforeNote: 'Manuelles Abtippen aus WhatsApp ins ERP',
-        after: '8 Sek',
-        afterNote: 'KI liest Fahrzeugschein-Foto, matcht OEM',
+        label: 'Teileidentifikation',
+        before: 'Verteilte Suche',
+        beforeNote: 'Fahrzeugdaten, Katalog und Notizen liegen in getrennten Werkzeugen',
+        after: 'Ein Vorgang',
+        afterNote: 'Fahrzeug, OE-Referenzen, Alternativen und Kundenbedarf bleiben verbunden',
     },
     {
-        label: 'Retourenquote',
-        before: 'bis ~20 %',
-        beforeNote: 'Falsche Teile durch HSN/TSN-Tippfehler',
-        after: 'unter 5 %',
-        afterNote: 'Präzise OEM-Identifikation statt manueller Eingabe (Zielwert)',
+        label: 'Verfügbarkeit & Bezug',
+        before: 'Einzelprüfungen',
+        beforeNote: 'Bestände, Reservierungen und Lieferquellen werden separat abgefragt',
+        after: 'ATP & Beschaffung',
+        afterNote: 'Verfügbarer Bestand, Reservierung und Bezugsquelle in derselben Entscheidung',
     },
     {
-        label: 'Erreichbarkeit',
-        before: '8 h / Tag',
-        beforeNote: 'Nur während Öffnungszeiten',
-        after: '24 / 7',
-        afterNote: 'WhatsApp-Bot antwortet auch nachts',
+        label: 'Belegfluss',
+        before: 'Mehrfach erfassen',
+        beforeNote: 'Angebot, Auftrag, Lieferung und Rechnung werden erneut eingegeben',
+        after: 'Durchgängige Kette',
+        afterNote: 'Folgebelege übernehmen Positionen, Referenzen und dokumentierte Zustände',
     },
     {
-        label: 'Angebote pro Tag',
-        before: '~30',
-        beforeNote: 'Begrenzt durch Mitarbeiterkapazität',
-        after: '500+',
-        afterNote: 'Parallel-Verarbeitung, unbegrenzt skalierbar',
+        label: 'Bestandsführung',
+        before: 'Momentaufnahme',
+        beforeNote: 'Tabellen und Insellösungen zeigen unterschiedliche Bestandsstände',
+        after: 'Bewegungsjournal',
+        afterNote: 'Zugang, Abgang, Reservierung, Transfer und Inventur sind nachvollziehbar',
     },
     {
-        label: 'Bestand-Sync',
-        before: 'Manuell',
-        beforeNote: 'Fehleranfällig, mit Stunden Versatz',
-        after: 'Echtzeit',
-        afterNote: 'eBay · Webshop · Theke synchron',
+        label: 'Steuerung & Kontrolle',
+        before: 'Zuruf & Wissen',
+        beforeNote: 'Prioritäten, Freigaben und Ausnahmen hängen an einzelnen Mitarbeitern',
+        after: 'Arbeitsvorräte & Rollen',
+        afterNote: 'Status, Verantwortlichkeit, Freigabe und Historie sind im Vorgang sichtbar',
     },
 ];
 
 export function BeforeAfter() {
     return (
-        <section className="py-24 md:py-32 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-background" />
-
+        <section aria-label="Prozessvergleich" className="py-20 md:py-28 relative overflow-hidden bg-background">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                {/* Header */}
-                <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
+                {/* Header — linksbündig */}
+                <div className="max-w-2xl mb-12 md:mb-14">
                     <motion.div
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
-                            Der Unterschied
-                        </span>
+                        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-primary mb-3">
+                            Der operative Unterschied
+                        </p>
                         <h2
-                            className="text-3xl md:text-5xl font-semibold mb-5"
-                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}
+                            className="text-3xl md:text-4xl font-semibold text-foreground mb-4"
+                            style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
                         >
-                            Was sich konkret <span className="text-gradient">verändert.</span>
+                            Von Insellösungen zu kontrollierten Abläufen.
                         </h2>
                         <p className="text-base md:text-lg text-muted-foreground">
-                            Fünf typische Kennzahlen im Sales-Geschäft eines Teilehändlers — als Modellrechnung
-                            auf Basis von Branchenwerten und internen Systemtests.
+                            Der Mehrwert entsteht nicht durch eine einzelne Automatik, sondern durch
+                            gemeinsame Daten, klare Zustände und durchgängige Belege.
                         </p>
                     </motion.div>
                 </div>
@@ -85,14 +83,14 @@ export function BeforeAfter() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true, margin: '-80px' }}
-                    className="max-w-5xl mx-auto"
+                    className="max-w-5xl"
                 >
                     {/* Column headers */}
                     <div className="grid grid-cols-2 gap-3 md:gap-5 mb-3">
-                        <div className="flex items-center gap-2 px-4 py-3 rounded-lg border border-border/60 bg-[rgba(15,23,42,0.3)]">
+                        <div className="flex items-center gap-2 px-4 py-3 rounded-lg border border-border bg-card">
                             <X className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
                             <span className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                                Ohne Partsunion
+                                Fragmentierte Systemlandschaft
                             </span>
                         </div>
                         <div className="flex items-center gap-2 px-4 py-3 rounded-lg border border-primary/30 bg-primary/[0.04]">
@@ -104,7 +102,7 @@ export function BeforeAfter() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] overflow-hidden">
+                    <div className="rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden">
                         {rows.map((row, idx) => (
                             <motion.div
                                 key={row.label}
@@ -112,7 +110,7 @@ export function BeforeAfter() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.4, delay: idx * 0.06 }}
                                 viewport={{ once: true }}
-                                className={idx > 0 ? 'border-t border-border/60' : ''}
+                                className={idx > 0 ? 'border-t border-border' : ''}
                             >
                                 {/* Label row */}
                                 <div className="px-4 md:px-6 pt-4 pb-1">
@@ -122,11 +120,11 @@ export function BeforeAfter() {
                                 </div>
 
                                 {/* Before / After grid */}
-                                <div className="grid grid-cols-2 divide-x divide-border/40">
+                                <div className="grid grid-cols-2 divide-x divide-border">
                                     <div className="px-4 md:px-6 py-4">
                                         <div
-                                            className="text-2xl md:text-3xl font-semibold text-foreground/60 mb-1 tabular-nums"
-                                            style={{ fontFamily: 'var(--font-mono)' }}
+                                            className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground/60 mb-1 tabular-nums break-words leading-tight"
+                                            style={{ fontFamily: 'var(--font-display)' }}
                                         >
                                             {row.before}
                                         </div>
@@ -136,8 +134,8 @@ export function BeforeAfter() {
                                     </div>
                                     <div className="px-4 md:px-6 py-4 bg-primary/[0.02]">
                                         <div
-                                            className="text-2xl md:text-3xl font-semibold text-primary mb-1 tabular-nums"
-                                            style={{ fontFamily: 'var(--font-mono)' }}
+                                            className="text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-1 tabular-nums break-words leading-tight"
+                                            style={{ fontFamily: 'var(--font-display)' }}
                                         >
                                             {row.after}
                                         </div>
@@ -150,27 +148,19 @@ export function BeforeAfter() {
                         ))}
                     </div>
 
-                    {/* Closing CTA */}
+                    {/* Weiterführender Link */}
                     <motion.div
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
                         viewport={{ once: true }}
-                        className="text-center mt-12"
+                        className="mt-8"
                     >
-                        <p className="text-xs text-muted-foreground/70 mb-5 max-w-xl mx-auto leading-relaxed">
-                            Die „Mit Partsunion"-Werte sind illustrative Zielgrößen auf Basis von
-                            Branchen-Benchmarks und internen Systemtests — keine zugesicherten Ergebnisse.
-                            Partsunion befindet sich im Markteintritt; belastbare Kundenkennzahlen liegen noch nicht vor.
-                        </p>
-                        <p className="text-sm text-muted-foreground mb-5 max-w-md mx-auto">
-                            Wir rechnen Ihr persönliches Einsparpotenzial im Beratungstermin gemeinsam durch — mit Ihren echten Zahlen.
-                        </p>
                         <a
                             href="#beratung"
-                            className="inline-flex items-center gap-2 py-3 px-6 rounded-lg gradient-primary text-white text-sm font-medium shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all group"
+                            className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
                         >
-                            Beratungstermin sichern
+                            Ihre heutigen Abläufe bilden wir im Beratungstermin konkret auf Partsunion ab
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                         </a>
                     </motion.div>

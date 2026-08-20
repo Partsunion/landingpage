@@ -15,11 +15,11 @@ export const metadata: Metadata = {
         'WhatsApp Bot Aftermarket',
         'Teilekatalog Cross-Reference',
     ],
-    alternates: { canonical: 'https://www.partsunion.de/blog' },
+    alternates: { canonical: 'https://partsunion.de/blog' },
     openGraph: {
         title: 'Blog | Partsunion',
         description: 'Best Practices, Tech-Deep-Dives und Branchen-Analysen für den modernen Teilehandel.',
-        url: 'https://www.partsunion.de/blog',
+        url: 'https://partsunion.de/blog',
         type: 'website',
         locale: 'de_DE',
         siteName: 'Partsunion',
@@ -37,8 +37,8 @@ const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.partsunion.de/blog' },
+        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://partsunion.de/blog' },
     ],
 };
 
@@ -47,12 +47,12 @@ const blogLd = {
     '@type': 'Blog',
     name: 'Partsunion Blog',
     description: 'Best Practices für den modernen Autoteilehandel.',
-    url: 'https://www.partsunion.de/blog',
-    publisher: { '@id': 'https://www.partsunion.de/#organization' },
+    url: 'https://partsunion.de/blog',
+    publisher: { '@id': 'https://partsunion.de/#organization' },
     blogPost: blogPosts.map((p) => ({
         '@type': 'BlogPosting',
         headline: p.title,
-        url: `https://www.partsunion.de/blog/${p.slug}`,
+        url: `https://partsunion.de/blog/${p.slug}`,
         datePublished: p.publishedAt,
         dateModified: p.updatedAt,
     })),
@@ -70,13 +70,13 @@ export default function BlogIndex() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }}
             />
 
-            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(29,111,232,0.08),transparent_55%)] -z-10" />
             <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
 
             <div className="container mx-auto px-4 md:px-6">
                 {/* Hero */}
                 <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border text-xs font-medium text-muted-foreground mb-5">
                         Blog
                     </span>
                     <h1
@@ -122,7 +122,7 @@ export default function BlogIndex() {
                                     {post.excerpt}
                                 </p>
 
-                                <div className="flex items-center justify-between pt-4 border-t border-border/40">
+                                <div className="flex items-center justify-between pt-4 border-t border-border">
                                     <time
                                         className="text-[10px] tabular-nums text-muted-foreground"
                                         style={{ fontFamily: 'var(--font-mono)' }}

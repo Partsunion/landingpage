@@ -14,12 +14,16 @@
  *   }
  *
  * Static-export build = no server-side API route, so the call goes directly
- * from the browser. CORS + rate-limit + honeypot live on the CRM side.
+ * from the browser. CORS + rate-limit live on the CRM side; the form honeypot
+ * is checked here before any request is sent.
  */
 
+// Der CRM-Router ist im Backend unter /api/crm gemountet → der echte Lead-Endpoint
+// ist /api/crm/leads. (Früher zeigte der Default auf /api/leads → 404 „Not found"
+// beim Absenden der Beratungs-/Kontaktanfrage.)
 const CRM_LEADS_URL =
     process.env.NEXT_PUBLIC_CRM_LEADS_URL ||
-    'https://api.partsunion.de/api/leads';
+    'https://api.partsunion.de/api/crm/leads';
 
 /** Mailto-fallback when CRM is unreachable. */
 const FALLBACK_EMAIL = 'info@partsunion.de';

@@ -5,13 +5,21 @@ import Image from 'next/image';
 import { Mail, Linkedin } from 'lucide-react';
 
 const footerLinks = {
-    product: [
-        { label: 'Features', href: '/features' },
-        { label: 'WhatsApp Bot', href: '/features/whatsapp-bot' },
+    platform: [
+        { label: 'Die Plattform im Überblick', href: '/plattform' },
+        { label: 'ERP für den Teilehandel', href: '/features/erp-autoteilehandel' },
+        { label: 'Warenwirtschaft (WaWi)', href: '/features/warenwirtschaft-autoteilhandel' },
+        { label: 'Digitale Anfragen', href: '/features/whatsapp-bot' },
         { label: 'OEM-Ermittlung', href: '/features/oem-ermittlung' },
-        { label: 'Warenwirtschaft', href: '/features/bestandssynchronisation' },
-        { label: 'ROI-Rechner', href: '/pricing' },
-        { label: 'Live-Demo', href: '/live-demo' },
+        { label: 'Finanzen & Faktura', href: '/features/gobd-tse-zugferd-datev' },
+        { label: 'B2B-Kundenportal', href: '/features/b2b-kundenportal-white-label' },
+    ],
+    product: [
+        { label: 'Alle Module', href: '/features' },
+        { label: 'Vergleich', href: '/vergleich' },
+        { label: 'Business-Case-Rechner', href: '/pricing' },
+        { label: 'Teileermittlung testen', href: '/live-demo' },
+        { label: 'Sicherheit', href: '/#sicherheit' },
     ],
     company: [
         { label: 'Über uns', href: '/about' },
@@ -29,26 +37,26 @@ const footerLinks = {
 
 export function Footer() {
     return (
-        <footer className="relative border-t border-border/50 bg-muted/30">
+        <footer className="relative border-t border-border bg-muted/30">
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
             <div className="container mx-auto px-4 md:px-6 py-16 relative z-10">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12">
                     {/* Brand Column */}
                     <div className="col-span-2 lg:col-span-2">
                         <Link href="/" className="inline-block mb-6">
                             <Image
-                                src="/logo.png"
+                                src="/logo-wordmark.png"
                                 alt="Partsunion"
-                                width={200}
-                                height={60}
-                                className="h-12 md:h-14 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                                width={426}
+                                height={126}
+                                className="h-9 md:h-11 w-auto opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </Link>
                         <p className="text-muted-foreground text-sm mb-6 max-w-xs">
-                            Das intelligente Betriebssystem für den modernen Autoteilehandel.
-                            KI-Automatisierung, die Ihren Umsatz steigert.
+                            Das spezialisierte Enterprise-ERP für den Autoteilehandel — von der
+                            Teileidentifikation bis zu Lager, Belegfluss und Finanzen.
                         </p>
 
                         {/* Contact Info */}
@@ -67,6 +75,23 @@ export function Footer() {
                                 Partsunion auf LinkedIn
                             </a>
                         </div>
+                    </div>
+
+                    {/* Platform Links */}
+                    <div>
+                        <h4 className="font-semibold mb-4 text-foreground">Plattform</h4>
+                        <ul className="space-y-3">
+                            {footerLinks.platform.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     {/* Product Links */}
@@ -122,7 +147,7 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-muted-foreground">
                         © {new Date().getFullYear()} Partsunion. Alle Rechte vorbehalten.
                     </p>
@@ -132,6 +157,8 @@ export function Footer() {
                     </div>
                 </div>
             </div>
+            {/* Mobile clearance so the fixed Sticky-CTA never covers footer content. */}
+            <div aria-hidden className="h-20 md:hidden" />
         </footer>
     );
 }

@@ -3,30 +3,52 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
+// Google Search Console / Bing Webmaster verification.
+// Sobald der GSC-Verifizierungs-Code vorliegt: hier eintragen + neu deployen.
+// (Meta-Tag-Methode — Next gibt <meta name="google-site-verification"> aus.)
+const GSC_VERIFICATION = "";   // z. B. "abcDEF123…" aus Search Console
+const BING_VERIFICATION = "";  // z. B. "0123ABC…" aus Bing Webmaster Tools
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.partsunion.de"),
+  metadataBase: new URL("https://partsunion.de"),
   title: {
-    default: "Partsunion – KI-Automatisierung für Autoteilehändler | OEM, WaWi & WhatsApp-Bot",
+    default: "Partsunion – Enterprise-ERP für den Autoteilehandel",
     template: "%s | Partsunion",
   },
   description:
-    "Partsunion automatisiert Ihren Autoteilehandel mit KI: OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot, Warenwirtschaft und weniger Retouren durch präzise Teile-Identifikation. Jetzt kostenlose Demo ansehen.",
+    "Partsunion ist das Enterprise-ERP für den Autoteilehandel: Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen Plattform. WhatsApp ist als Eingangskanal integrierbar.",
   keywords: [
     "Autoteile Software",
+    "Enterprise ERP Autoteilehandel",
     "Autoteilehändler Automatisierung",
-    "KI Autoteile",
+    "Betriebssystem Autoteilehandel",
+    "ERP Autoteile",
+    "Warenwirtschaft Autoteile",
+    "WaWi Kfz-Teile",
+    "Teilehandel Software",
     "OEM Ermittlung",
     "OEM Nummer finden",
-    "WhatsApp Bot Autoteile",
-    "Warenwirtschaft Autoteile",
-    "Teilehandel Software",
-    "Ersatzteile KI",
+    "TecDoc Anbindung",
+    "Kassenbuch GoBD",
+    "TSE Kasse Autoteile",
+    "DATEV Export Autoteile",
+    "ZUGFeRD XRechnung",
+    "B2B Kundenportal Autoteile",
+    "Foto-Wareneingang",
     "Autoteile-Dashboard",
+    "Werkstatt Software",
+    "Software für Teilehandel",
+    "Software Autoteilehandel",
+    "Warenwirtschaftssystem Autoteile",
+    "Warenwirtschaft Autoteilehandel",
+    "ERP System Autoteilehandel",
+    "ERP Autoteilehandel",
+    "ERP für Teilehandel",
     "Partsunion",
     "Retourenquote senken",
     "Autoteile Händler Tools",
   ],
-  authors: [{ name: "Partsunion", url: "https://www.partsunion.de" }],
+  authors: [{ name: "Partsunion", url: "https://partsunion.de" }],
   creator: "Partsunion",
   publisher: "Partsunion",
   applicationName: "Partsunion",
@@ -49,33 +71,32 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Partsunion – KI-Automatisierung für Autoteilehändler",
+    title: "Partsunion – Enterprise-ERP für den Autoteilehandel",
     description:
-      "OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot, Warenwirtschaft und Retourenreduktion – das Betriebssystem für den modernen Teilehandel.",
+      "Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen ERP-Plattform für den Autoteilehandel.",
     type: "website",
     locale: "de_DE",
-    url: "https://www.partsunion.de",
+    url: "https://partsunion.de",
     siteName: "Partsunion",
     // Kein explicit images-Array → Next nutzt opengraph-image.tsx
     // aus dem App-Root (dynamisch gerendert beim Build).
   },
   twitter: {
     card: "summary_large_image",
-    title: "Partsunion – KI-Automatisierung für Autoteilehändler",
+    title: "Partsunion – Enterprise-ERP für den Autoteilehandel",
     description:
-      "OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot und Warenwirtschaft für Autoteilehändler.",
+      "Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen ERP-Plattform.",
   },
   alternates: {
-    canonical: "https://www.partsunion.de",
+    canonical: "https://partsunion.de",
     languages: {
-      "de-DE": "https://www.partsunion.de",
-      "x-default": "https://www.partsunion.de",
+      "de-DE": "https://partsunion.de",
+      "x-default": "https://partsunion.de",
     },
   },
   verification: {
-    // Werte hier ergänzen sobald GSC + Bing Webmaster eingerichtet sind:
-    // google: "abc123…",
-    // other: { "msvalidate.01": "…" },
+    ...(GSC_VERIFICATION ? { google: GSC_VERIFICATION } : {}),
+    ...(BING_VERIFICATION ? { other: { "msvalidate.01": BING_VERIFICATION } } : {}),
   },
   icons: {
     icon: [
@@ -98,7 +119,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className="dark">
+    <html lang="de">
       <head>
         {/*
           Favicons + apple-touch-icon are emitted automatically from the
@@ -119,45 +140,51 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "Organization",
-                  "@id": "https://www.partsunion.de/#organization",
+                  "@id": "https://partsunion.de/#organization",
                   name: "Partsunion",
-                  url: "https://www.partsunion.de",
+                  url: "https://partsunion.de",
                   logo: {
                     "@type": "ImageObject",
-                    url: "https://www.partsunion.de/logo.png",
+                    url: "https://partsunion.de/logo.png",
                     width: 512,
                     height: 512,
                   },
                   description:
-                    "Partsunion ist das Betriebssystem für den Teilehandel: KI-Automatisierung, OEM-Ermittlung, Warenwirtschaft und 24/7 WhatsApp-Bot für Autoteilehändler.",
+                    "Partsunion entwickelt ein branchenspezifisches Enterprise-ERP für den Autoteilehandel: von der Teileidentifikation über Beschaffung und Lager bis zu Verkauf und Finanzen.",
                   areaServed: "DE",
                   knowsLanguage: ["de", "en"],
                   sameAs: [],
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.partsunion.de/#website",
-                  url: "https://www.partsunion.de",
+                  "@id": "https://partsunion.de/#website",
+                  url: "https://partsunion.de",
                   name: "Partsunion",
                   description:
-                    "KI-Automatisierung für Autoteilehändler: OEM-Ermittlung, WhatsApp-Bot, Warenwirtschaft.",
-                  publisher: { "@id": "https://www.partsunion.de/#organization" },
+                    "Enterprise-ERP für den Autoteilehandel: Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen.",
+                  publisher: { "@id": "https://partsunion.de/#organization" },
                   inLanguage: "de-DE",
                 },
                 {
                   "@type": "SoftwareApplication",
-                  "@id": "https://www.partsunion.de/#software",
+                  "@id": "https://partsunion.de/#software",
                   name: "Partsunion",
+                  alternateName: [
+                    "Partsunion ERP",
+                    "Partsunion Warenwirtschaft",
+                    "Autoteile-Software Partsunion",
+                  ],
                   applicationCategory: "BusinessApplication",
+                  applicationSubCategory: "ERP & Warenwirtschaft (Autoteilehandel)",
                   operatingSystem: "Web",
                   description:
-                    "All-in-One SaaS für Autoteilehändler: OEM-Ermittlung in Sekunden, 24/7 WhatsApp-Bot, Warenwirtschaft, Retourenreduktion und automatische Angebotserstellung.",
-                  url: "https://www.partsunion.de",
+                    "Branchenspezifisches ERP für den Autoteilehandel mit Teileidentifikation, Einkauf, Warenwirtschaft, Verkauf, Faktura, Finanzfunktionen und White-Label-B2B-Kundenportal. WhatsApp kann als Eingangskanal genutzt werden.",
+                  url: "https://partsunion.de",
                   offers: {
                     "@type": "Offer",
                     priceCurrency: "EUR",
                     availability: "https://schema.org/InStock",
-                    url: "https://www.partsunion.de/#beratung",
+                    url: "https://partsunion.de/#beratung",
                   },
                   // NOTE: Kein aggregateRating. Es gibt (Stand Go-Live) noch keine
                   // echten, verifizierten Kundenbewertungen. Erfundene Sterne-Ratings
@@ -165,29 +192,33 @@ export default function RootLayout({
                   // Structured-Data-Richtlinie (self-serving fake ratings → manuelle
                   // Penalty). Erst wieder einsetzen, wenn reale, belegbare Reviews
                   // vorliegen.
-                  // NOTE: featureList = nur tatsächlich verfügbare Funktionen.
-                  // TecAlliance/TecDoc-Integration und die Großhändler-Anbindung
+                  // NOTE: featureList = nur tatsächlich verfügbare (live) Funktionen.
+                  // Live-Marktplatz-/Shop-Sync und die direkte Großhändler-Bestellung
                   // sind Roadmap (noch nicht live) und gehören daher NICHT in die
                   // strukturierten Produktdaten — sonst irreführende Werbung (UWG §5).
+                  // TecDoc wird als genutzte Katalog-Lizenz geführt, nicht als Partnerschaft.
                   featureList: [
-                    "KI-OEM-Ermittlung aus VIN, HSN/TSN oder Fahrzeugbrief",
-                    "24/7 WhatsApp-Bot für Kundenanfragen",
-                    "Integrierte Warenwirtschaft (WaWi)",
-                    "Automatische Angebotserstellung",
-                    "Echtzeit-Bestandssynchronisation",
-                    "Retourenmanagement",
+                    "Teileidentifikation über VIN, HSN/TSN, OE-Nummern und Fahrzeugdaten",
+                    "Einkauf mit Lieferanten, Bestellvorschlägen und Bestellabwicklung",
+                    "Integrierte Warenwirtschaft mit Foto-Wareneingang und Retoure",
+                    "Verkauf mit durchgängiger Belegkette von Angebot bis Rechnung",
+                    "Faktura und Finanzen mit ZUGFeRD/XRechnung, TSE, DATEV-Export und GoBD-Funktionen",
+                    "Über 40 datengetriebene Auswertungen aus echten Belegen",
+                    "White-Label B2B-Kundenportal mit kundenspezifischen Preisen",
+                    "Mandanten-Isolation, 2FA, Audit-Log, DSGVO Auskunft & Löschung",
+                    "WhatsApp als optionaler Eingangskanal für Kundenanfragen",
                   ],
-                  provider: { "@id": "https://www.partsunion.de/#organization" },
+                  provider: { "@id": "https://partsunion.de/#organization" },
                 },
                 {
                   "@type": "Service",
-                  "@id": "https://www.partsunion.de/#service",
-                  name: "KI-Automatisierung für Autoteilehändler",
+                  "@id": "https://partsunion.de/#service",
+                  name: "Enterprise-ERP für Autoteilehändler",
                   serviceType: "SaaS",
-                  provider: { "@id": "https://www.partsunion.de/#organization" },
+                  provider: { "@id": "https://partsunion.de/#organization" },
                   areaServed: { "@type": "Country", name: "Deutschland" },
                   description:
-                    "End-to-End Automatisierung für den Teilehandel: Vom WhatsApp-Foto zum bezahlten Auftrag in unter 10 Minuten.",
+                    "Branchenspezifische ERP-Plattform für Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen im Autoteilehandel.",
                   audience: {
                     "@type": "BusinessAudience",
                     audienceType: "Autoteilehändler, Werkstätten, Teile-Großhändler",

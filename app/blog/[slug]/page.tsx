@@ -3,9 +3,11 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Clock, CalendarDays } from 'lucide-react';
 import { blogPosts, getPostBySlug } from '@/lib/blog-posts';
+import { getGeneratedArticle } from '@/lib/blog-articles-data';
 import { ArticleRetouren } from './articles/retouren';
 import { ArticleWhatsAppBot } from './articles/whatsapp-bot';
 import { ArticleOemErmittlung } from './articles/oem-ermittlung';
+import { ArticleRenderer } from './articles/Renderer';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -20,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const post = getPostBySlug(slug);
     if (!post) return { title: 'Beitrag nicht gefunden' };
 
-    const url = `https://www.partsunion.de/blog/${post.slug}`;
+    const url = `https://partsunion.de/blog/${post.slug}`;
     return {
         title: post.title,
         description: post.description,
@@ -59,16 +61,17 @@ export default async function BlogPostPage({ params }: Props) {
     const post = getPostBySlug(slug);
     if (!post) notFound();
 
-    const body = ARTICLES[slug];
+    const generated = getGeneratedArticle(slug);
+    const body = ARTICLES[slug] ?? (generated ? <ArticleRenderer blocks={generated.blocks} faqs={generated.faqs} /> : null);
     if (!body) notFound();
 
     const breadcrumbLd = {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
-            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.partsunion.de/blog' },
-            { '@type': 'ListItem', position: 3, name: post.title, item: `https://www.partsunion.de/blog/${post.slug}` },
+            { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://partsunion.de/blog' },
+            { '@type': 'ListItem', position: 3, name: post.title, item: `https://partsunion.de/blog/${post.slug}` },
         ],
     };
 
@@ -77,16 +80,16 @@ export default async function BlogPostPage({ params }: Props) {
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.description,
-        url: `https://www.partsunion.de/blog/${post.slug}`,
+        url: `https://partsunion.de/blog/${post.slug}`,
         datePublished: post.publishedAt,
         dateModified: post.updatedAt,
         wordCount: post.readingMinutes * 200,
         timeRequired: `PT${post.readingMinutes}M`,
         keywords: post.keywords.join(', '),
         inLanguage: 'de-DE',
-        author: { '@type': 'Organization', name: 'Partsunion', url: 'https://www.partsunion.de' },
-        publisher: { '@id': 'https://www.partsunion.de/#organization' },
-        mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.partsunion.de/blog/${post.slug}` },
+        author: { '@type': 'Organization', name: 'Partsunion', url: 'https://partsunion.de' },
+        publisher: { '@id': 'https://partsunion.de/#organization' },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `https://partsunion.de/blog/${post.slug}` },
     };
 
     // Related posts — exclude current
@@ -103,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
             />
 
-            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(29,111,232,0.08),transparent_55%)] -z-10" />
             <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
 
             <article className="container mx-auto px-4 md:px-6">
@@ -168,7 +171,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </p>
                     <Link
                         href="/#beratung"
-                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg gradient-primary text-white text-sm font-medium shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow group"
+                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg gradient-primary text-primary-foreground text-sm font-medium shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:opacity-95 transition-opacity group"
                     >
                         Beratungstermin sichern
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -186,7 +189,7 @@ export default async function BlogPostPage({ params }: Props) {
                                 <Link
                                     key={r.slug}
                                     href={`/blog/${r.slug}`}
-                                    className="group block rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5 hover:border-border transition-colors"
+                                    className="group block rounded-xl border border-border bg-card shadow-[var(--shadow-card)] p-5 hover:border-border-hover transition-colors"
                                 >
                                     <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-primary/80 mb-2 block">
                                         {r.category}

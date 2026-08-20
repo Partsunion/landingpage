@@ -1,16 +1,22 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'Datenschutzerklärung - Partsunion',
-    description: 'Datenschutzerklärung der Partsunion UG (haftungsbeschränkt)',
+    description: 'Datenschutzerklärung für die Partsunion-Website',
 };
 
 export default function DatenschutzPage() {
     return (
         <div className="container mx-auto px-4 py-20 max-w-3xl">
-            <div className="prose dark:prose-invert max-w-none">
-                <h1>Datenschutzerklärung</h1>
-                <p className="text-sm text-muted-foreground">Stand: April 2026</p>
+            <div className="blog-content max-w-none">
+                <h1
+                    className="text-3xl md:text-4xl font-semibold text-foreground mb-3"
+                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                >
+                    Datenschutzerklärung
+                </h1>
+                <p className="text-sm text-muted-foreground">Stand: Juli 2026</p>
 
                 <h2>1. Datenschutz auf einen Blick</h2>
 
@@ -26,7 +32,7 @@ export default function DatenschutzPage() {
                 <p>
                     <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br />
                     Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten
-                    können Sie dem Abschnitt „Hinweis zur verantwortlichen Stelle" in dieser Datenschutzerklärung
+                    können Sie dem Abschnitt „Hinweis zur verantwortlichen Stelle“ in dieser Datenschutzerklärung
                     entnehmen.
                 </p>
                 <p>
@@ -88,12 +94,10 @@ export default function DatenschutzPage() {
                 </p>
 
                 <h3>Hinweis zur verantwortlichen Stelle</h3>
-                <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
                 <p>
-                    Partsunion UG (haftungsbeschränkt)<br />
-                    Zum Sommersberg 27<br />
-                    50321 Brühl<br />
-                    Deutschland
+                    Verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist der in unserem{' '}
+                    <Link href="/legal/impressum">Impressum</Link> genannte Anbieter. Die ladungsfähige Anschrift und
+                    die vertretungsberechtigten Personen sind dort aktuell aufgeführt.
                 </p>
                 <p>
                     E-Mail: datenschutz@partsunion.de
@@ -184,7 +188,7 @@ export default function DatenschutzPage() {
 
                 <h3>Cookies</h3>
                 <p>
-                    Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Datenpakete und richten
+                    Unsere Internetseiten verwenden so genannte „Cookies“. Cookies sind kleine Datenpakete und richten
                     auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung
                     (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert.
                     Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben

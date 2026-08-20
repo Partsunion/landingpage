@@ -7,8 +7,8 @@
  * "aktuell laufende" Row hat einen Pulse-Dot. Loop startet nach allen Rows
  * + Pause neu — so wirkt es wie ein echtes laufendes System.
  *
- * Visuell: integriert in das Hairline-Border / rgba(15,23,42,0.4)-Design
- * der ganzen Site — keine isolierte Bloomberg-Insel mehr.
+ * Visuell: helle Panel-Optik im Site-Design (bg-card, border-border,
+ * bg-muted-Subflächen) — keine isolierte Bloomberg-Insel mehr.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -34,19 +34,20 @@ const FONT_MONO = "'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', monospace";
 
 function statusClass(status: PipelineRow['status']): string {
     switch (status) {
-        case 'success': return 'text-emerald-400';
-        case 'warn':    return 'text-amber-400';
+        case 'success': return 'text-[#067647]';
+        case 'warn':    return 'text-[#B54708]';
         case 'info':    return 'text-primary';
         default:        return 'text-muted-foreground';
     }
 }
 
-function statusGlow(status: PipelineRow['status']): string {
+/** LED-Dot-Farbe pro Status (helle Fläche → kräftige Statusfarben). */
+function statusDot(status: PipelineRow['status']): string {
     switch (status) {
-        case 'success': return 'rgba(74,222,128,0.45)';
-        case 'warn':    return 'rgba(245,165,36,0.45)';
-        case 'info':    return 'rgba(29,111,232,0.5)';
-        default:        return 'rgba(148,163,184,0.3)';
+        case 'success': return '#12B76A';
+        case 'warn':    return '#F79009';
+        case 'info':    return '#1D6FE8';
+        default:        return '#CBD5E1';
     }
 }
 
@@ -54,20 +55,13 @@ export function PipelinePreview({ data }: { data: PipelinePreviewData }) {
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: false, amount: 0.3 });
     const reduceMotion = useReducedMotion() ?? false;
-    const [visibleCount, setVisibleCount] = useState(reduceMotion ? data.rows.length : 0);
+    const [visibleCount, setVisibleCount] = useState(0);
     const [activeIndex, setActiveIndex] = useState(-1);
+    const renderedVisibleCount = reduceMotion ? data.rows.length : (inView ? visibleCount : 0);
+    const renderedActiveIndex = reduceMotion ? data.rows.length - 1 : (inView ? activeIndex : -1);
 
     useEffect(() => {
-        if (reduceMotion) {
-            setVisibleCount(data.rows.length);
-            setActiveIndex(data.rows.length - 1);
-            return;
-        }
-        if (!inView) {
-            setVisibleCount(0);
-            setActiveIndex(-1);
-            return;
-        }
+        if (reduceMotion || !inView) return;
 
         let cancelled = false;
         const timers: ReturnType<typeof setTimeout>[] = [];
@@ -100,9 +94,10 @@ export function PipelinePreview({ data }: { data: PipelinePreviewData }) {
             );
         };
 
-        runOnce();
+        const startFrame = requestAnimationFrame(runOnce);
         return () => {
             cancelled = true;
+            cancelAnimationFrame(startFrame);
             timers.forEach(clearTimeout);
         };
     }, [data.rows, inView, reduceMotion]);
@@ -110,17 +105,17 @@ export function PipelinePreview({ data }: { data: PipelinePreviewData }) {
     return (
         <div
             ref={ref}
-            className="w-full rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] overflow-hidden"
+            className="w-full rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden"
         >
             {/* Header — same style as other feature cards */}
-            <div className="flex items-center justify-between h-10 px-4 border-b border-border/60 bg-[rgba(15,23,42,0.3)]">
+            <div className="flex items-center justify-between h-10 px-4 border-b border-border bg-muted">
                 <div className="flex items-center gap-2.5 min-w-0">
                     <motion.span
                         className="inline-block h-1.5 w-1.5 rounded-full shrink-0 bg-primary"
                         animate={
                             reduceMotion
                                 ? undefined
-                                : { boxShadow: ['0 0 0px var(--primary)', '0 0 8px var(--primary)', '0 0 0px var(--primary)'] }
+                                : { opacity: [0.4, 1, 0.4] }
                         }
                         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
                     />
@@ -144,9 +139,9 @@ export function PipelinePreview({ data }: { data: PipelinePreviewData }) {
             {/* Rows */}
             <div className="px-4 py-4 space-y-2 min-h-[200px]">
                 {data.rows.map((row, i) => {
-                    const isVisible = i < visibleCount;
-                    const isActive = i === activeIndex;
-                    const glow = statusGlow(row.status);
+                    const isVisible = i < renderedVisibleCount;
+                    const isActive = i === renderedActiveIndex;
+                    const dot = statusDot(row.status);
 
                     return (
                         <motion.div
@@ -163,17 +158,17 @@ export function PipelinePreview({ data }: { data: PipelinePreviewData }) {
                             className="grid items-center gap-3 py-1 rounded-md transition-colors px-1.5"
                             style={{
                                 gridTemplateColumns: '72px 1fr',
-                                background: isActive ? 'rgba(29,111,232,0.06)' : 'transparent',
+                                background: isActive ? 'var(--accent)' : 'transparent',
                             }}
                         >
                             <div className="flex items-center gap-2 min-w-0">
                                 <motion.span
                                     className="inline-block h-1.5 w-1.5 rounded-full shrink-0"
-                                    style={{ background: glow }}
+                                    style={{ background: dot }}
                                     animate={
                                         isActive && !reduceMotion
-                                            ? { boxShadow: [`0 0 0px ${glow}`, `0 0 8px ${glow}`, `0 0 0px ${glow}`] }
-                                            : { boxShadow: `0 0 2px ${glow}` }
+                                            ? { opacity: [0.35, 1, 0.35] }
+                                            : { opacity: 1 }
                                     }
                                     transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
                                 />
@@ -197,7 +192,7 @@ export function PipelinePreview({ data }: { data: PipelinePreviewData }) {
 
             {/* Footer */}
             {data.footer && (
-                <div className="px-4 py-2.5 border-t border-border/60 bg-[rgba(15,23,42,0.3)] flex items-center gap-2">
+                <div className="px-4 py-2.5 border-t border-border bg-muted flex items-center gap-2">
                     <motion.span
                         className="inline-block h-1.5 w-1.5 rounded-full bg-primary shrink-0"
                         animate={

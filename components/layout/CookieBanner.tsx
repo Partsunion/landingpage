@@ -87,7 +87,7 @@ export function CookieBanner() {
             role="dialog"
             aria-label="Cookie-Einwilligung"
             aria-live="polite"
-            className="fixed inset-x-3 bottom-3 z-[100] mx-auto max-w-3xl rounded-xl border border-border/60 bg-background/95 backdrop-blur-xl shadow-2xl"
+            className="fixed inset-x-3 bottom-3 z-[100] mx-auto max-w-3xl rounded-xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl"
         >
             <div className="flex flex-col gap-3 p-3.5 md:flex-row md:items-center md:justify-between md:gap-4 md:px-5 md:py-3">
                 <p className="flex-1 text-xs leading-relaxed text-muted-foreground md:text-sm">

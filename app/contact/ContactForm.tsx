@@ -31,9 +31,12 @@ export function ContactForm() {
         setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
+
+        const honeypot = new FormData(e.currentTarget).get('website');
+        const website = typeof honeypot === 'string' ? honeypot.trim() : '';
 
         if (!consent) {
             setError('Bitte bestätigen Sie die Verarbeitung Ihrer Daten.');
@@ -50,6 +53,7 @@ export function ContactForm() {
                 nachricht: formState.nachricht,
                 source: 'contact-page',
                 consent: true,
+                website,
             });
             setIsSubmitted(true);
         } catch (err: unknown) {
@@ -196,7 +200,7 @@ export function ContactForm() {
             >
                 {isSubmitting ? (
                     <>
-                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground" />
                         Wird gesendet...
                     </>
                 ) : (

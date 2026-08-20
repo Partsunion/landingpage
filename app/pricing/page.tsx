@@ -1,26 +1,26 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Calculator, Sparkles } from 'lucide-react';
+import { ArrowRight, Calculator, ClipboardCheck } from 'lucide-react';
 import { RoiCalculator } from './RoiCalculator';
 
 export const metadata: Metadata = {
-    title: 'ROI-Rechner — Wie viel sparen Sie mit Partsunion?',
+    title: 'Business-Case-Rechner — Prozesskosten transparent vergleichen',
     description:
-        'Berechnen Sie Ihr Einsparpotenzial mit Partsunion. Schieber für Anfragen pro Tag und Retourenquote — live errechnete Marge-Verbesserung und Zeit-Gewinn.',
+        'Vergleichen Sie heutigen Prozessaufwand und ein eigenes Zielszenario — ausschließlich mit Ihren Volumen-, Zeit-, Kosten- und Budgetannahmen.',
     keywords: [
         'Partsunion Preise',
         'Partsunion Kosten',
         'ROI Autoteile Software',
-        'KI Autoteile Preis',
-        'WhatsApp Bot Autoteile Kosten',
+        'ERP Autoteile Preis',
+        'Warenwirtschaft Autoteile Kosten',
         'Einsparpotenzial Teilehändler',
     ],
-    alternates: { canonical: 'https://www.partsunion.de/pricing' },
+    alternates: { canonical: 'https://partsunion.de/pricing' },
     openGraph: {
-        title: 'ROI-Rechner — Wie viel sparen Sie mit Partsunion?',
+        title: 'Business-Case-Rechner für Autoteilehändler',
         description:
-            'Schieben Sie die Slider, sehen Sie live Ihr Einsparpotenzial — bevor Sie überhaupt mit uns sprechen.',
-        url: 'https://www.partsunion.de/pricing',
+            'Prozesskosten mit eigenen Volumen-, Zeit- und Budgetannahmen transparent vergleichen.',
+        url: 'https://partsunion.de/pricing',
         type: 'website',
         locale: 'de_DE',
         siteName: 'Partsunion',
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'ROI-Rechner — Wie viel sparen Sie mit Partsunion?',
-        description: 'Live-Berechnung von Marge-Plus und Zeit-Gewinn pro Jahr.',
+        title: 'Business-Case-Rechner für Autoteilehändler',
+        description: 'Heutigen Prozessaufwand und eigenes Zielszenario transparent vergleichen.',
         images: ['/opengraph-image'],
     },
 };
@@ -38,8 +38,8 @@ const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
-        { '@type': 'ListItem', position: 2, name: 'ROI-Rechner', item: 'https://www.partsunion.de/pricing' },
+        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+        { '@type': 'ListItem', position: 2, name: 'ROI-Rechner', item: 'https://partsunion.de/pricing' },
     ],
 };
 
@@ -52,26 +52,26 @@ export default function PricingPage() {
             />
 
             {/* Background */}
-            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(29,111,232,0.08),transparent_55%)] -z-10" />
             <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
 
             <div className="container mx-auto px-4 md:px-6">
                 {/* Header */}
                 <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border text-xs font-medium text-muted-foreground mb-5">
                         <Calculator className="h-3 w-3" />
-                        ROI-Rechner
+                        Business-Case-Rechner
                     </span>
                     <h1
                         className="text-3xl md:text-5xl lg:text-6xl font-semibold mb-5"
                         style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.035em', lineHeight: 1.05 }}
                     >
-                        Was kostet Partsunion?<br />
-                        <span className="text-gradient">Weniger als Sie heute verlieren.</span>
+                        Ihre Prozesse. Ihre Annahmen.<br />
+                        <span className="text-gradient">Ein transparenter Business Case.</span>
                     </h1>
                     <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                        Bewegen Sie die Schieber für Ihre Eckdaten — die Berechnung läuft live.
-                        Konkretes Angebot bekommen Sie im Beratungstermin, abgestimmt auf Ihr Setup.
+                        Vergleichen Sie heutigen Aufwand und ein eigenes Zielszenario. Der Rechner
+                        verwendet keine pauschalen Automatisierungs-, Retouren- oder Umsatzversprechen.
                     </p>
                 </div>
 
@@ -83,23 +83,22 @@ export default function PricingPage() {
                 {/* Below-Calculator CTA */}
                 <div className="max-w-2xl mx-auto mt-12 md:mt-16 text-center">
                     <div className="inline-flex items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground mb-5">
-                        <Sparkles className="h-3 w-3 text-primary" />
-                        So geht&apos;s weiter
+                        <ClipboardCheck className="h-3 w-3 text-primary" />
+                        Nächster Schritt
                     </div>
                     <h2
                         className="text-2xl md:text-3xl font-semibold mb-4"
                         style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
                     >
-                        Konkretes Angebot in 30 Minuten.
+                        Annahmen im Pilotprozess validieren.
                     </h2>
                     <p className="text-muted-foreground mb-7 text-sm md:text-base">
-                        Wir zeigen Ihnen Partsunion live an Ihren echten Fahrzeugen, rechnen
-                        Ihr Einsparpotenzial mit Ihren Originaldaten durch und Sie bekommen
-                        ein schriftliches Angebot mit Festpreis — bevor Sie sich entscheiden.
+                        Wir grenzen einen repräsentativen Prozess ab, messen Ist- und Zielwerte
+                        und erstellen daraus ein schriftliches Angebot für Einführung und Betrieb.
                     </p>
                     <Link
                         href="/#beratung"
-                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg gradient-primary text-white text-sm font-medium shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow group"
+                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg gradient-primary text-primary-foreground text-sm font-medium shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:opacity-95 transition-opacity group"
                     >
                         Beratungstermin sichern
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

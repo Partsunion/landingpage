@@ -48,17 +48,20 @@ export interface ChatPreviewData {
 
 // ── Tokens ──────────────────────────────────────────────────────────────────
 
+// Light-Mode-Tokens — orientiert am echten WhatsApp Light Theme.
 const T = {
-    bgCanvas: '#0A0B0D',
-    bgSurface: '#111418',
-    border: '#252A31',
-    textPrimary: '#E8ECF1',
-    textMuted: '#5E6670',
+    bgCanvas: '#FFFFFF',
+    bgSurface: '#F6F8FB',
+    border: '#E5EAF1',
+    wallpaper: '#EFEAE2',
+    textPrimary: '#111B21',
+    textMuted: '#667085',
     accent500: '#1D6FE8',
-    success: '#4ADE80',
-    whatsappHeader: '#075E54',
-    whatsappBubble: '#262D31',
-    whatsappOutBubble: '#005C4B',
+    success: '#067647',
+    whatsappHeader: '#008069',
+    whatsappBubble: '#FFFFFF',
+    whatsappOutBubble: '#D9FDD3',
+    whatsappCta: '#008069',
     paperBg: '#F5F4F1',
     paperBorder: '#E8E6E0',
     paperText: '#1A1E24',
@@ -125,6 +128,7 @@ function TextBubble({ msg }: { msg: Extract<ChatMessage, { kind?: 'text' }> }) {
                         borderRadius: 8,
                         borderTopRightRadius: isBot ? 2 : 8,
                         borderTopLeftRadius: isBot ? 8 : 2,
+                        boxShadow: '0 1px 1px rgba(11,20,26,0.10)',
                     }}
                 >
                     {msg.text}
@@ -190,20 +194,20 @@ function OfferBubble({ msg }: { msg: Extract<ChatMessage, { kind: 'offer' }> }) 
                     }}
                 >
                     <div className="whitespace-pre-line">{msg.text}</div>
-                    <div className="mt-2 pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
+                    <div className="mt-2 pt-2 border-t" style={{ borderColor: 'rgba(17,27,33,0.12)' }}>
                         <div className="flex items-baseline justify-between mb-1.5">
-                            <span className="text-[9px] uppercase tracking-[0.1em]" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                            <span className="text-[9px] uppercase tracking-[0.1em]" style={{ color: 'rgba(17,27,33,0.55)' }}>
                                 Gesamt inkl. MwSt.
                             </span>
                             <span className="font-mono tabular-nums text-base font-semibold">{msg.price}</span>
                         </div>
-                        <div className="text-[10px] mb-2" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                        <div className="text-[10px] mb-2" style={{ color: 'rgba(17,27,33,0.65)' }}>
                             {msg.deliveryNote}
                         </div>
                         <button
                             type="button"
                             className="w-full py-1.5 rounded text-[10px] font-semibold uppercase tracking-[0.08em]"
-                            style={{ background: '#FFFFFF', color: T.whatsappOutBubble }}
+                            style={{ background: T.whatsappCta, color: '#FFFFFF' }}
                         >
                             Jetzt bezahlen &amp; bestellen
                         </button>
@@ -222,7 +226,7 @@ function PaymentBubble({ msg }: { msg: Extract<ChatMessage, { kind: 'payment' }>
             <div className="max-w-[86%] flex flex-col gap-0.5 w-full">
                 <motion.div
                     initial={{ boxShadow: `0 0 0 0 ${T.accent500}00` }}
-                    animate={{ boxShadow: `0 0 18px 2px ${T.accent500}40` }}
+                    animate={{ boxShadow: `0 0 14px 2px ${T.accent500}26` }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="rounded-lg overflow-hidden"
                     style={{
@@ -321,14 +325,14 @@ function ConfirmBubble({ msg }: { msg: Extract<ChatMessage, { kind: 'confirm' }>
                             </motion.span>
                             <span className="text-[11px] font-semibold">Zahlung bestätigt — Bestellung läuft.</span>
                         </div>
-                        <div className="text-[10px] leading-relaxed pl-5" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                        <div className="text-[10px] leading-relaxed pl-5" style={{ color: 'rgba(17,27,33,0.75)' }}>
                             Auftrag <span style={{ fontFamily: FONT_MONO }}>#{msg.orderId}</span>
                             <br />
                             Großhändler-Order ausgelöst · Lieferung {msg.eta}
                         </div>
                         <div
                             className="mt-2 pt-2 flex items-center gap-1.5 text-[9px] border-t"
-                            style={{ borderColor: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)' }}
+                            style={{ borderColor: 'rgba(17,27,33,0.12)', color: 'rgba(17,27,33,0.6)' }}
                         >
                             <Truck className="h-3 w-3" />
                             Tracking-Link folgt automatisch.
@@ -357,7 +361,7 @@ function TypingDots() {
                     <motion.span
                         key={delay}
                         className="inline-block h-1.5 w-1.5 rounded-full"
-                        style={{ background: 'rgba(255,255,255,0.7)' }}
+                        style={{ background: 'rgba(17,27,33,0.45)' }}
                         animate={{ y: [0, -3, 0], opacity: [0.4, 1, 0.4] }}
                         transition={{ duration: 0.9, repeat: Infinity, delay, ease: 'easeInOut' }}
                     />
@@ -497,7 +501,7 @@ export function ChatPreview({ data }: { data: ChatPreviewData }) {
     return (
         <div
             ref={containerRef}
-            className="w-full max-w-[360px] mx-auto rounded-2xl overflow-hidden border border-border/60 bg-[rgba(15,23,42,0.4)]"
+            className="w-full max-w-[360px] mx-auto rounded-2xl overflow-hidden border border-border bg-card shadow-[var(--shadow-raised)]"
             style={{
                 fontFamily: FONT_DISPLAY,
                 color: T.textPrimary,
@@ -510,18 +514,18 @@ export function ChatPreview({ data }: { data: ChatPreviewData }) {
             >
                 <div
                     className="h-8 w-8 rounded-full flex items-center justify-center text-[11px] font-semibold shrink-0"
-                    style={{ background: 'rgba(255,255,255,0.2)', color: T.textPrimary }}
+                    style={{ background: 'rgba(255,255,255,0.22)', color: '#FFFFFF' }}
                 >
                     {data.customerInitials}
                 </div>
                 <div className="min-w-0 flex-1">
-                    <div className="text-[12px] font-semibold truncate" style={{ color: T.textPrimary }}>
+                    <div className="text-[12px] font-semibold truncate" style={{ color: '#FFFFFF' }}>
                         {data.customerName}
                     </div>
                     <div className="flex items-center gap-1.5">
                         <span
                             className="inline-block h-1 w-1 rounded-full"
-                            style={{ background: T.success, boxShadow: `0 0 4px ${T.success}` }}
+                            style={{ background: '#4ADE80', boxShadow: '0 0 4px #4ADE80' }}
                         />
                         <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.7)' }}>
                             {data.sub ?? 'online'}
@@ -540,7 +544,7 @@ export function ChatPreview({ data }: { data: ChatPreviewData }) {
             <div
                 ref={scrollRef}
                 className="px-3 py-3 space-y-2 overflow-hidden"
-                style={{ height: 440 }}
+                style={{ height: 440, background: T.wallpaper }}
             >
                 <AnimatePresence initial={false}>
                     {items.map((item) => {

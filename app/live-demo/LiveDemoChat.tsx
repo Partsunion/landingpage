@@ -1,10 +1,13 @@
 'use client';
 
+/* eslint-disable @next/next/no-img-element -- local previews are ephemeral data URLs and cannot be optimized by next/image. */
+
 import { useState, useRef, useEffect, useCallback, type FormEvent, type ChangeEvent } from 'react';
 import {
-    Send, Upload, X, Bot, User, Sparkles, Loader2, Phone, ArrowRight,
+    Send, Upload, X, Bot, User, Sparkles, Loader2, ArrowRight,
     CheckCircle2, Zap, ChevronDown, Car, MessageSquare, ListFilter
 } from 'lucide-react';
+import { SafeMarkdown } from '@/components/ui/SafeMarkdown';
 
 // ─── Config ─────────────────────────────────────────────────────────
 // Same backend the Admin Dashboard (admin.partsunion.de) queries — the
@@ -104,7 +107,8 @@ interface Particle {
 }
 
 const OEM_CHARS = '0123456789ABCDEFGHJKLMNPRSTUVWXYZ';
-const P_COLORS = ['rgba(6,182,212,.8)', 'rgba(59,130,246,.8)', 'rgba(16,185,129,.7)', 'rgba(139,92,246,.6)', 'rgba(245,158,11,.5)'];
+// Ruhige Blau-/Ink-Töne auf hellem Grund — kein Neon.
+const P_COLORS = ['rgba(29,111,232,.85)', 'rgba(22,89,194,.75)', 'rgba(79,147,255,.7)', 'rgba(91,107,129,.55)', 'rgba(16,24,40,.4)'];
 
 function makeParticles(n: number): Particle[] {
     return Array.from({ length: n }, (_, i) => ({
@@ -120,14 +124,6 @@ function makeParticles(n: number): Particle[] {
 
 // ─── Helpers ────────────────────────────────────────────────────────
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
-function md(t: string): string {
-    return t
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/_(.+?)_/g, '<em>$1</em>')
-        .replace(/`(.+?)`/g, '<code class="bg-white/10 px-1 py-0.5 rounded text-[var(--accent)] text-xs font-mono">$1</code>')
-        .replace(/^> (.+)$/gm, '<blockquote class="border-l-2 border-[var(--accent)]/40 pl-3 text-[var(--muted-foreground)] text-sm">$1</blockquote>')
-        .replace(/\n\n/g, '<br/><br/>').replace(/\n/g, '<br/>');
-}
 
 // ═══════════════════════════════════════════════════════════════════
 // Component
@@ -490,7 +486,7 @@ export function LiveDemoChat() {
                 case 'vehicle_method': {
                     if (image) {
                         const vin = 'WBAPH5C55BA' + Math.floor(100000 + Math.random() * 900000);
-                        await addBot(`📸 **Fahrzeugbrief erkannt!**\nVIN: \`${vin}\``);
+                        await addBot(`🧪 **Simulierter Beispielablauf**\nDas hochgeladene Foto wird in dieser Vorschau nicht ausgelesen. Für den beispielhaften Ablauf verwenden wir ein BMW-320d-Testprofil mit Demo-VIN: \`${vin}\``);
                         await runProcessing(partQuery, { vin, make: 'BMW', model: '320d' });
                         return;
                     }
@@ -571,7 +567,7 @@ export function LiveDemoChat() {
                 value={value}
                 onChange={e => onChange(e.target.value)}
                 disabled={disabled || options.length === 0}
-                className="w-full appearance-none px-4 py-3 pr-10 rounded-xl bg-white/5 border border-[var(--border)]/40 text-sm focus:border-[var(--accent)]/60 focus:outline-none transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer hover:border-[var(--accent)]/30"
+                className="w-full appearance-none px-4 py-3 pr-10 rounded-xl bg-muted border border-border text-sm focus:border-primary focus:outline-none transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer hover:border-border-hover"
             >
                 <option value="" disabled className="bg-[var(--background)]">{placeholder}</option>
                 {options.map(o => <option key={o} value={o} className="bg-[var(--background)]">{o}</option>)}
@@ -592,16 +588,15 @@ export function LiveDemoChat() {
             {showParticles && (
                 <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full animate-pulse" style={{
-                        background: 'radial-gradient(circle, rgba(6,182,212,.4) 0%, rgba(59,130,246,.2) 40%, transparent 70%)',
-                        boxShadow: '0 0 100px 50px rgba(6,182,212,.12)',
+                        background: 'radial-gradient(circle, rgba(29,111,232,.16) 0%, rgba(29,111,232,.06) 40%, transparent 70%)',
                     }} />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full border border-[var(--accent)]/20" style={{ animation: 'demoSpin 4s linear infinite' }} />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-[var(--primary)]/10" style={{ animation: 'demoSpin 7s linear infinite reverse' }} />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-[var(--accent)]/5" style={{ animation: 'demoSpin 12s linear infinite' }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full border border-primary/20" style={{ animation: 'demoSpin 4s linear infinite' }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-primary/10" style={{ animation: 'demoSpin 7s linear infinite reverse' }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-primary/5" style={{ animation: 'demoSpin 12s linear infinite' }} />
                     {particles.map(p => (
                         <div key={p.id} className="absolute font-mono font-bold select-none" style={{
                             left: `${p.x}%`, top: `${p.y}%`, fontSize: p.size,
-                            color: p.color, textShadow: `0 0 14px ${p.color}`,
+                            color: p.color,
                             animation: `particleFly ${p.duration}s ${p.delay}s ease-in-out forwards`,
                             '--tx': `${p.targetX - p.x}vw`, '--ty': `${p.targetY - p.y}vh`, opacity: 0,
                         } as React.CSSProperties}>
@@ -609,7 +604,7 @@ export function LiveDemoChat() {
                         </div>
                     ))}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-28 text-center">
-                        <div className="flex items-center gap-2 text-[var(--accent)] font-semibold animate-pulse text-sm">
+                        <div className="flex items-center gap-2 text-primary font-semibold animate-pulse text-sm">
                             <Zap className="h-4 w-4" /> Gemini analysiert Fahrzeugdaten...
                         </div>
                         <div className="text-[11px] text-[var(--muted-foreground)] mt-1 animate-pulse" style={{ animationDelay: '.5s' }}>
@@ -625,12 +620,12 @@ export function LiveDemoChat() {
                  consultation form so Sales sees the Demo-Lead-Context. */}
             {showCTA && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+                    <div className="absolute inset-0 bg-[rgba(16,24,40,0.45)] backdrop-blur-sm" />
                     <div
-                        className="relative rounded-2xl border border-primary/40 bg-[rgba(15,23,42,0.95)] backdrop-blur-xl p-8 max-w-md w-full text-center shadow-2xl"
+                        className="relative rounded-2xl border border-border bg-card p-8 max-w-md w-full text-center shadow-[var(--shadow-raised)]"
                         style={{ animation: 'popIn .4s cubic-bezier(.16,1,.3,1) forwards' }}
                     >
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/15 border border-primary/30 mb-5">
+                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent border border-primary/15 mb-5">
                             <CheckCircle2 className="h-7 w-7 text-primary" />
                         </div>
                         <h2
@@ -647,12 +642,12 @@ export function LiveDemoChat() {
                         </p>
                         <a
                             href={`/#beratung?source=demo${partQuery ? `&part=${encodeURIComponent(partQuery)}` : ''}`}
-                            className="inline-flex items-center justify-center gap-2 w-full h-12 px-6 rounded-lg gradient-primary text-white text-base font-medium shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-shadow group"
+                            className="inline-flex items-center justify-center gap-2 w-full h-12 px-6 rounded-lg gradient-primary text-primary-foreground text-base font-medium shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:brightness-95 transition-all group"
                         >
                             Beratungstermin sichern
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                         </a>
-                        <p className="mt-4 text-[11px] text-muted-foreground/70">
+                        <p className="mt-4 text-[11px] text-muted-foreground">
                             Eine Demo-Anfrage pro Gerät · Unverbindlich
                         </p>
                     </div>
@@ -663,9 +658,9 @@ export function LiveDemoChat() {
             <div className="relative z-10 max-w-2xl mx-auto flex flex-col h-[calc(100vh-120px)]">
                 {/* Header */}
                 <div className="text-center mb-4">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-[var(--accent)]/20 mb-3">
-                        <Sparkles className="h-3.5 w-3.5 text-[var(--accent)]" />
-                        <span className="text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider">Live Demo</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-accent mb-3">
+                        <Sparkles className="h-3.5 w-3.5 text-primary" />
+                        <span className="text-[11px] font-bold text-primary uppercase tracking-wider">Live Demo</span>
                     </div>
                     <h1 className="text-3xl md:text-4xl font-display font-bold mb-1">
                         KI-<span className="text-gradient">Teileermittlung</span>
@@ -674,24 +669,24 @@ export function LiveDemoChat() {
                 </div>
 
                 {/* Tab Switcher */}
-                <div className="flex gap-1 mb-3 mx-auto glass rounded-xl p-1 border border-[var(--border)]/30">
+                <div className="flex gap-1 mb-3 mx-auto bg-card rounded-xl p-1 border border-border shadow-[var(--shadow-card)]">
                     <button onClick={() => setTabMode('dropdown')}
-                        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${tabMode === 'dropdown' ? 'gradient-primary text-white shadow-md' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`}>
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${tabMode === 'dropdown' ? 'gradient-primary text-primary-foreground shadow-md' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`}>
                         <ListFilter className="h-3.5 w-3.5" /> Fahrzeug-Auswahl
                     </button>
                     <button onClick={() => setTabMode('chat')}
-                        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${tabMode === 'chat' ? 'gradient-primary text-white shadow-md' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`}>
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${tabMode === 'chat' ? 'gradient-primary text-primary-foreground shadow-md' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`}>
                         <MessageSquare className="h-3.5 w-3.5" /> KI-Chat
                     </button>
                 </div>
 
                 {/* ── TAB: Dropdown Selector ────────────────────────── */}
                 {tabMode === 'dropdown' && (
-                    <div className="flex-1 overflow-auto rounded-2xl glass border border-[var(--border)]/50 flex flex-col shadow-2xl shadow-[var(--primary)]/5">
+                    <div className="flex-1 overflow-auto rounded-2xl bg-card border border-border flex flex-col shadow-[var(--shadow-card)]">
                         <div className="flex-1 p-5 md:p-6 space-y-5 overflow-auto">
                             {/* Step indicators */}
                             <div className="flex items-center gap-2 text-xs text-[var(--muted-foreground)] mb-1">
-                                <Car className="h-4 w-4 text-[var(--accent)]" />
+                                <Car className="h-4 w-4 text-primary" />
                                 <span className="font-semibold text-[var(--foreground)]">Fahrzeug identifizieren</span>
                             </div>
 
@@ -708,9 +703,9 @@ export function LiveDemoChat() {
 
                             {/* Vehicle Badge */}
                             {ddMake && ddModel && (
-                                <div className="flex items-center gap-3 p-3 rounded-xl bg-[var(--accent)]/5 border border-[var(--accent)]/15">
-                                    <div className="w-8 h-8 rounded-lg bg-[var(--accent)]/15 flex items-center justify-center">
-                                        <Car className="h-4 w-4 text-[var(--accent)]" />
+                                <div className="flex items-center gap-3 p-3 rounded-xl bg-muted border border-border">
+                                    <div className="w-8 h-8 rounded-lg bg-accent border border-primary/15 flex items-center justify-center">
+                                        <Car className="h-4 w-4 text-primary" />
                                     </div>
                                     <div>
                                         <div className="text-sm font-semibold">{ddMake} {ddModel}</div>
@@ -723,9 +718,9 @@ export function LiveDemoChat() {
 
                             {/* Divider */}
                             <div className="flex items-center gap-3">
-                                <div className="flex-1 border-t border-[var(--border)]/30" />
+                                <div className="flex-1 border-t border-border" />
                                 <span className="text-xs text-[var(--muted-foreground)] font-semibold">TEIL ANGEBEN</span>
-                                <div className="flex-1 border-t border-[var(--border)]/30" />
+                                <div className="flex-1 border-t border-border" />
                             </div>
 
                             {/* Part Input */}
@@ -735,7 +730,7 @@ export function LiveDemoChat() {
                                 onChange={e => setDdPart(e.target.value)}
                                 placeholder="z.B. Bremsscheibe, Ölfilter, Stoßdämpfer..."
                                 disabled={demoUsed}
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-[var(--border)]/40 text-sm focus:border-[var(--accent)]/60 focus:outline-none transition-all disabled:opacity-30 placeholder:text-[var(--muted-foreground)]/40"
+                                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-sm focus:border-primary focus:outline-none transition-all disabled:opacity-40 placeholder:text-[var(--muted-foreground)]/50"
                             />
 
                             {/* Quick Part Buttons */}
@@ -744,8 +739,8 @@ export function LiveDemoChat() {
                                     {['Bremsscheibe', 'Ölfilter', 'Luftfilter', 'Stoßdämpfer', 'Zündkerze', 'Keilriemen'].map(p => (
                                         <button key={p} onClick={() => setDdPart(p)}
                                             className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${ddPart === p
-                                                ? 'bg-[var(--accent)]/15 border-[var(--accent)]/30 text-[var(--accent)]'
-                                                : 'bg-white/5 border-[var(--border)]/30 text-[var(--muted-foreground)] hover:border-[var(--accent)]/30 hover:text-[var(--accent)]'
+                                                ? 'bg-accent border-primary/30 text-primary'
+                                                : 'bg-muted border-border text-[var(--muted-foreground)] hover:border-primary/30 hover:text-primary'
                                             }`}>
                                             {p}
                                         </button>
@@ -757,7 +752,7 @@ export function LiveDemoChat() {
                             <button
                                 onClick={handleDropdownSubmit}
                                 disabled={!ddMake || !ddModel || !ddYear || !ddEngine || !ddPart.trim() || isLoading || demoUsed}
-                                className="w-full py-3.5 rounded-xl gradient-primary text-white font-semibold shadow-lg shadow-[var(--primary)]/20 hover:shadow-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:-translate-y-0.5 disabled:hover:translate-y-0"
+                                className="w-full py-3.5 rounded-xl gradient-primary text-primary-foreground font-semibold shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:-translate-y-0.5 disabled:hover:translate-y-0"
                             >
                                 {isLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> KI analysiert...</> : <><Sparkles className="h-4 w-4" /> Teil ermitteln</>}
                             </button>
@@ -772,21 +767,21 @@ export function LiveDemoChat() {
                             {/* Results (dropdown mode) */}
                             {phase === 'locked' && oemResults.length > 0 && (
                                 <div className="space-y-2 pt-2">
-                                    <div className="flex items-center gap-2 text-sm font-semibold text-[var(--accent)]">
+                                    <div className="flex items-center gap-2 text-sm font-semibold text-success">
                                         <CheckCircle2 className="h-4 w-4" /> {oemResults.length} Treffer gefunden
                                     </div>
                                     {oemResults.map((r, i) => (
-                                        <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-[var(--border)]/30 hover:border-[var(--accent)]/30 transition-all">
-                                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-[var(--accent)]/20 text-[var(--accent)]' : 'bg-white/10 text-[var(--muted-foreground)]'}`}>
+                                        <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-muted border border-border hover:border-border-hover transition-all">
+                                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-accent text-primary' : 'bg-card border border-border text-[var(--muted-foreground)]'}`}>
                                                 #{i + 1}
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-2 flex-wrap">
                                                     <span className="font-semibold text-sm">{r.brand}</span>
-                                                    <code className="text-xs bg-white/10 px-1.5 py-0.5 rounded font-mono text-[var(--accent)]">{r.oem}</code>
+                                                    <code className="text-xs bg-card border border-border px-1.5 py-0.5 rounded font-mono text-primary">{r.oem}</code>
                                                 </div>
                                             </div>
-                                            {r.confidence && <div className={`text-xs font-bold ${r.confidence >= 95 ? 'text-[var(--accent)]' : 'text-[var(--muted-foreground)]'}`}>{r.confidence}%</div>}
+                                            {r.confidence && <div className={`text-xs font-bold ${r.confidence >= 95 ? 'text-success' : 'text-[var(--muted-foreground)]'}`}>{r.confidence}%</div>}
                                         </div>
                                     ))}
                                 </div>
@@ -802,35 +797,48 @@ export function LiveDemoChat() {
 
                 {/* ── TAB: Chat ─────────────────────────────────────── */}
                 {tabMode === 'chat' && (
-                    <div className="flex-1 overflow-hidden rounded-2xl glass border border-[var(--border)]/50 flex flex-col shadow-2xl shadow-[var(--primary)]/5">
-                        <div className="flex-1 overflow-y-auto p-4 md:p-5 space-y-3">
+                    <div className="flex-1 overflow-hidden rounded-2xl bg-card border border-border flex flex-col shadow-[var(--shadow-raised)]">
+                        {/* WhatsApp-Header */}
+                        <div className="flex items-center gap-3 h-12 px-3 shrink-0 bg-[#008069]">
+                            <div className="h-8 w-8 rounded-full flex items-center justify-center shrink-0 bg-[rgba(255,255,255,0.22)]">
+                                <Bot className="h-4 w-4 text-white" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                                <div className="text-[13px] font-semibold text-white truncate">Partsunion KI-Bot</div>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="inline-block h-1 w-1 rounded-full bg-[#12B76A]" />
+                                    <span className="text-[10px] text-[rgba(255,255,255,0.7)]">online · antwortet sofort</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex-1 overflow-y-auto p-4 md:p-5 space-y-3 bg-[#EFEAE2]">
                             {messages.map(msg => (
                                 <div key={msg.id} className={`flex gap-2.5 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                                    <div className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center ${msg.role === 'bot' ? 'bg-gradient-to-br from-[var(--accent)]/20 to-[var(--primary)]/20 text-[var(--accent)]' : 'bg-[var(--primary)]/20 text-[var(--primary)]'}`}>
+                                    <div className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center shadow-[0_1px_1px_rgba(11,20,26,0.10)] ${msg.role === 'bot' ? 'bg-white text-primary' : 'bg-primary text-white'}`}>
                                         {msg.role === 'bot' ? <Bot className="h-3.5 w-3.5" /> : <User className="h-3.5 w-3.5" />}
                                     </div>
                                     <div className={`max-w-[85%] ${msg.role === 'user' ? 'ml-auto' : ''}`}>
-                                        <div className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${msg.role === 'user' ? 'bg-[var(--primary)]/15 border border-[var(--primary)]/20 rounded-tr-md' : 'bg-white/5 border border-[var(--border)]/30 rounded-tl-md'}`}>
+                                        <div className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed text-[#111B21] shadow-[0_1px_1px_rgba(11,20,26,0.10)] ${msg.role === 'user' ? 'bg-[#D9FDD3] rounded-tr-md' : 'bg-white rounded-tl-md'}`}>
                                             {msg.isTyping ? (
                                                 <div className="flex items-center gap-1.5 py-1">
-                                                    <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                                    <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                                    <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                                    <span className="w-1.5 h-1.5 bg-[rgba(17,27,33,0.45)] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                                    <span className="w-1.5 h-1.5 bg-[rgba(17,27,33,0.45)] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                                    <span className="w-1.5 h-1.5 bg-[rgba(17,27,33,0.45)] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                                                 </div>
                                             ) : (
                                                 <>
-                                                    {msg.image && <div className="mb-2 rounded-lg overflow-hidden border border-[var(--border)]/30"><img src={msg.image} alt="" className="max-h-40 w-auto" /></div>}
-                                                    <div dangerouslySetInnerHTML={{ __html: md(msg.text) }} />
+                                                    {msg.image && <div className="mb-2 rounded-lg overflow-hidden border border-border"><img src={msg.image} alt="" className="max-h-40 w-auto" /></div>}
+                                                    <SafeMarkdown text={msg.text} />
                                                     {msg.results && (
                                                         <div className="mt-3 space-y-1.5">
                                                             {msg.results.map((r, i) => (
-                                                                <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 border border-[var(--border)]/30">
-                                                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-[var(--accent)]/20 text-[var(--accent)]' : 'bg-white/10 text-[var(--muted-foreground)]'}`}>#{i + 1}</div>
+                                                                <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl bg-muted border border-border">
+                                                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-accent text-primary' : 'bg-card border border-border text-[var(--muted-foreground)]'}`}>#{i + 1}</div>
                                                                     <div className="flex-1 min-w-0">
                                                                         <span className="font-semibold text-xs">{r.brand}</span>{' '}
-                                                                        <code className="text-[11px] bg-white/10 px-1 py-0.5 rounded font-mono text-[var(--accent)]">{r.oem}</code>
+                                                                        <code className="text-[11px] bg-card border border-border px-1 py-0.5 rounded font-mono text-primary">{r.oem}</code>
                                                                     </div>
-                                                                    {r.confidence && <div className={`text-xs font-bold ${r.confidence >= 95 ? 'text-[var(--accent)]' : 'text-[var(--muted-foreground)]'}`}>{r.confidence}%</div>}
+                                                                    {r.confidence && <div className={`text-xs font-bold ${r.confidence >= 95 ? 'text-success' : 'text-[var(--muted-foreground)]'}`}>{r.confidence}%</div>}
                                                                 </div>
                                                             ))}
                                                         </div>
@@ -844,40 +852,40 @@ export function LiveDemoChat() {
                             <div ref={chatEnd} />
                         </div>
                         {imagePreview && (
-                            <div className="px-4 py-2 border-t border-[var(--border)]/30">
+                            <div className="px-4 py-2 border-t border-border bg-muted">
                                 <div className="relative inline-block">
-                                    <img src={imagePreview} alt="" className="h-14 rounded-lg border border-[var(--border)]/30" />
-                                    <button onClick={() => { setImagePreview(null); if (fileRef.current) fileRef.current.value = ''; }} className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--error)] rounded-full flex items-center justify-center text-white"><X className="h-2.5 w-2.5" /></button>
+                                    <img src={imagePreview} alt="" className="h-14 rounded-lg border border-border" />
+                                    <button onClick={() => { setImagePreview(null); if (fileRef.current) fileRef.current.value = ''; }} className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--error)] rounded-full flex items-center justify-center text-primary-foreground"><X className="h-2.5 w-2.5" /></button>
                                 </div>
                             </div>
                         )}
                         {phase === 'part_input' && tabMode === 'chat' && (
-                            <div className="px-3 py-2 border-t border-[var(--border)]/30 flex gap-1.5 flex-wrap">
+                            <div className="px-3 py-2 border-t border-border bg-muted flex gap-1.5 flex-wrap">
                                 {['Bremsscheibe', 'Ölfilter', 'Stoßdämpfer', 'Zündkerze'].map(p => (
                                     <button key={p} onClick={() => { setInput(p); inputRef.current?.focus(); }}
-                                        className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-[var(--border)]/30 hover:border-[var(--accent)]/40 text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-all">{p}</button>
+                                        className="px-3 py-1 rounded-full text-xs font-medium bg-card border border-border hover:border-primary/40 text-[var(--muted-foreground)] hover:text-primary transition-all">{p}</button>
                                 ))}
                             </div>
                         )}
-                        <form onSubmit={handleSubmit} className="p-3 border-t border-[var(--border)]/30 flex items-end gap-2">
+                        <form onSubmit={handleSubmit} className="p-3 border-t border-border bg-muted flex items-end gap-2">
                             <input type="file" ref={fileRef} onChange={handleImage} accept="image/*" className="hidden" />
                             <button type="button" onClick={() => fileRef.current?.click()} disabled={phase === 'locked' || isLoading}
-                                className="flex-shrink-0 w-9 h-9 rounded-xl bg-white/5 border border-[var(--border)]/30 flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-all disabled:opacity-30">
+                                className="flex-shrink-0 w-9 h-9 rounded-xl bg-card border border-border flex items-center justify-center text-[var(--muted-foreground)] hover:text-primary transition-all disabled:opacity-30">
                                 <Upload className="h-3.5 w-3.5" />
                             </button>
                             <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)}
                                 placeholder={phase === 'locked' ? 'Demo abgeschlossen' : phase === 'part_input' ? 'Welches Teil?' : phase === 'vin_input' ? 'VIN…' : phase === 'hsn_input' ? 'HSN TSN…' : 'Nachricht…'}
                                 disabled={isLoading || phase === 'locked'} autoFocus
-                                className="flex-1 px-3.5 py-2 rounded-xl bg-white/5 border border-[var(--border)]/30 focus:border-[var(--accent)]/50 focus:outline-none text-sm placeholder:text-[var(--muted-foreground)]/40 transition-all disabled:opacity-40" />
+                                className="flex-1 px-3.5 py-2 rounded-xl bg-card border border-border focus:border-primary focus:outline-none text-sm placeholder:text-[var(--muted-foreground)]/50 transition-all disabled:opacity-40" />
                             <button type="submit" disabled={isLoading || (!input.trim() && !imagePreview) || phase === 'locked'}
-                                className="flex-shrink-0 w-9 h-9 rounded-xl gradient-primary flex items-center justify-center text-white disabled:opacity-20 transition-all">
+                                className="flex-shrink-0 w-9 h-9 rounded-xl gradient-primary flex items-center justify-center text-primary-foreground disabled:opacity-20 transition-all">
                                 {isLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
                             </button>
                         </form>
                     </div>
                 )}
 
-                <p className="text-center text-[10px] text-[var(--muted-foreground)]/40 mt-2">Powered by Gemini AI · Eine kostenlose Abfrage pro Gerät</p>
+                <p className="text-center text-[10px] text-[var(--muted-foreground)]/70 mt-2">Powered by Gemini AI · Eine kostenlose Abfrage pro Gerät</p>
             </div>
 
             <style jsx global>{`

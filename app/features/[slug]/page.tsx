@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles, TrendingUp, FileCode2, HelpCircle, Quote } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, BriefcaseBusiness, FileCode2, HelpCircle, Quote } from 'lucide-react';
 import { featureData } from '@/lib/feature-data';
 import { featureContent } from '@/lib/feature-content';
 import { Button } from '@/components/ui/Button';
@@ -21,26 +21,30 @@ export async function generateStaticParams() {
  * the feature title if no specific override is defined.
  */
 const seoTitles: Record<string, string> = {
-    'oem-ermittlung': 'OEM-Nummern in Sekunden finden — KI für Autoteilehändler',
-    'whatsapp-bot': '24/7 WhatsApp-Bot für Autoteilehändler',
-    'automatische-rechnungserstellung': 'Rechnung & Lieferschein automatisch erstellen',
-    'bestellprozess': 'Automatischer Bestellprozess für Autoteile',
-    'bestandssynchronisation': 'Echtzeit-Bestandssynchronisation: eBay, Webshop, Theke',
-    'retourenmanagement': 'Retouren-Management: Retourenquote deutlich senken',
-    'skalierbarkeit': '3× Anfragenvolumen ohne neuen Mitarbeiter',
-    '24-7-einsatzbereit': '24/7 verfügbarer Sales-Workspace',
-    'geschwindigkeit': 'Angebot in 8 Sekunden statt 15 Minuten',
-    'sinkende-retouren': 'Retourenquote drastisch senken — KI-OEM-Matching',
-    'sprachuebergreifend': 'Mehrsprachiger WhatsApp-Bot für Autoteilehändler',
-    'team-entlastung': 'Routine-Anfragen automatisieren — Team entlasten',
+    'oem-ermittlung': 'Teileidentifikation & OE-Referenzen für Autoteilehändler',
+    'whatsapp-bot': 'Digitale Anfragebearbeitung für den Autoteilehandel',
+    'automatische-rechnungserstellung': 'Durchgängiger Belegfluss & Faktura',
+    'bestellprozess': 'Disposition & Einkauf für Autoteile',
+    'bestandssynchronisation': 'Multi-Channel Warenbestand: ein zentrales Lager für alle Verkaufswege',
+    'retourenmanagement': 'Retouren & Garantie im Autoteilehandel',
+    'skalierbarkeit': 'Skalierbare ERP-Organisation für den Teilehandel',
+    '24-7-einsatzbereit': 'Digitaler Self-Service & Betriebsmodell',
+    'geschwindigkeit': 'Effiziente Arbeitsabläufe im Autoteilehandel',
+    'sinkende-retouren': 'Fitment & dokumentierte Teileprüfung',
+    'sprachuebergreifend': 'Mehrsprachige digitale Anfragen',
+    'team-entlastung': 'Arbeitsvorräte, Rollen & geführte Teamarbeit',
+    'gobd-tse-zugferd-datev': 'GoBD-orientierte Faktura, TSE, ZUGFeRD & DATEV',
+    'b2b-kundenportal-white-label': 'White-Label B2B-Kundenportal mit kundenspezifischen Preisen',
+    'erp-autoteilehandel': 'ERP-System für den Autoteilehandel — Software für den Teilehandel',
+    'warenwirtschaft-autoteilhandel': 'Warenwirtschaftssystem (WaWi) für den Autoteilehandel',
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const finalParams = await params;
     const feature = featureData.find((f) => f.slug === finalParams.slug);
-    if (!feature) return { title: 'Feature nicht gefunden' };
+    if (!feature) return { title: 'Modul nicht gefunden' };
 
-    const url = `https://www.partsunion.de/features/${feature.slug}`;
+    const url = `https://partsunion.de/features/${feature.slug}`;
     const seoTitle = seoTitles[feature.slug] ?? feature.title;
     const fullTitle = `${seoTitle} | Partsunion`;
 
@@ -51,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             feature.title,
             'Autoteilehändler',
             'Autoteile Software',
-            'KI Autoteile',
+            'Enterprise ERP Autoteile',
             'Partsunion',
         ],
         alternates: { canonical: url },
@@ -80,16 +84,15 @@ export default async function FeatureDetailPage({ params }: Props) {
 
     const Icon = feature.icon;
     const isValueProp = feature.category === 'value';
-    const seoTitle = seoTitles[feature.slug] ?? feature.title;
     const content = featureContent[feature.slug] ?? {};
 
     const breadcrumbLd = {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
-            { '@type': 'ListItem', position: 2, name: 'Features', item: 'https://www.partsunion.de/features' },
-            { '@type': 'ListItem', position: 3, name: feature.title, item: `https://www.partsunion.de/features/${feature.slug}` },
+            { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+            { '@type': 'ListItem', position: 2, name: 'Module', item: 'https://partsunion.de/features' },
+            { '@type': 'ListItem', position: 3, name: feature.title, item: `https://partsunion.de/features/${feature.slug}` },
         ],
     };
 
@@ -100,7 +103,7 @@ export default async function FeatureDetailPage({ params }: Props) {
         name: feature.title,
         description: feature.description,
         serviceType: feature.title,
-        provider: { '@id': 'https://www.partsunion.de/#organization' },
+        provider: { '@id': 'https://partsunion.de/#organization' },
         areaServed: 'DE',
         hasOfferCatalog: {
             '@type': 'OfferCatalog',
@@ -149,7 +152,7 @@ export default async function FeatureDetailPage({ params }: Props) {
             )}
 
             {/* Background */}
-            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(29,111,232,0.08),transparent_55%)] -z-10" />
             <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
 
             <article>
@@ -161,7 +164,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
                         >
                             <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-                            Alle Features
+                            Alle Module
                         </Link>
                     </nav>
 
@@ -170,7 +173,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                         {/* Left — copy */}
                         <header className="lg:col-span-7">
                             <div className="flex items-center gap-3 mb-5">
-                                <div className="h-10 w-10 rounded-lg flex items-center justify-center border border-border/60 bg-[rgba(15,23,42,0.4)] text-primary">
+                                <div className="h-10 w-10 rounded-lg flex items-center justify-center border border-primary/15 bg-accent text-primary">
                                     <Icon className="h-5 w-5" />
                                 </div>
                                 <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-primary/80">
@@ -197,7 +200,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                     <Button
                                         variant="primary"
                                         size="lg"
-                                        className="h-12 px-6 text-sm gradient-primary shadow-lg shadow-primary/30 group w-full sm:w-auto"
+                                        className="h-12 px-6 text-sm gradient-primary shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] group w-full sm:w-auto"
                                     >
                                         Beratungstermin sichern
                                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -205,9 +208,9 @@ export default async function FeatureDetailPage({ params }: Props) {
                                 </Link>
                                 <Link
                                     href="/features"
-                                    className="inline-flex items-center justify-center h-12 px-5 rounded-lg border border-border/60 hover:border-border text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                                    className="inline-flex items-center justify-center h-12 px-5 rounded-lg border border-border hover:border-border-hover text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
                                 >
-                                    Alle Features
+                                    Alle Module
                                 </Link>
                             </div>
                         </header>
@@ -217,15 +220,28 @@ export default async function FeatureDetailPage({ params }: Props) {
                             {content.preview ? (
                                 <FeaturePreview data={content.preview} />
                             ) : (
-                                <div className="rounded-xl border border-border/60 bg-[rgba(10,15,26,0.6)] p-10 flex flex-col items-center justify-center text-muted-foreground/30 min-h-[280px]">
-                                    <Icon size={64} className="mb-3" />
-                                    <p className="text-[11px] uppercase tracking-[0.14em] font-mono">
-                                        {feature.slug}
-                                    </p>
+                                <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] p-6 min-h-[280px]">
+                                    <div className="flex items-center gap-3 border-b border-border pb-4 mb-4">
+                                        <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/15 bg-accent text-primary">
+                                            <Icon className="h-4 w-4" />
+                                        </span>
+                                        <div>
+                                            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">Modulübersicht</p>
+                                            <p className="text-sm font-semibold text-foreground">{feature.title}</p>
+                                        </div>
+                                    </div>
+                                    <ul className="space-y-3">
+                                        {feature.features.slice(0, 4).map((item) => (
+                                            <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                                                <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-primary" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             )}
                             <p className="text-center text-[11px] text-muted-foreground/60">
-                                Repräsentative Daten · Echte Logs im Beratungstermin
+                                Repräsentativer Ablauf · Konkrete Ausprägung im Beratungstermin
                             </p>
                         </aside>
                     </div>
@@ -248,7 +264,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                 {feature.features.map((item, i) => (
                                     <li
                                         key={i}
-                                        className="flex items-start gap-3 p-4 rounded-lg border border-border/60 bg-[rgba(15,23,42,0.3)]"
+                                        className="flex items-start gap-3 p-4 rounded-lg border border-border bg-card shadow-[var(--shadow-card)]"
                                     >
                                         <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden />
                                         <span className="text-sm text-foreground/85 leading-relaxed">{item}</span>
@@ -264,9 +280,9 @@ export default async function FeatureDetailPage({ params }: Props) {
                                 className="text-xl md:text-2xl font-semibold mb-4"
                                 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
                             >
-                                So funktioniert&apos;s
+                                Prozess und technische Einordnung
                             </h2>
-                            <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-6">
+                            <div className="rounded-2xl border border-border bg-muted p-6">
                                 <p className="text-base text-muted-foreground leading-relaxed">
                                     {feature.technicalDetails}
                                 </p>
@@ -279,7 +295,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                 id="benefit-h2"
                                 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-primary mb-3"
                             >
-                                <Sparkles className="h-3.5 w-3.5" />
+                                <BriefcaseBusiness className="h-3.5 w-3.5" />
                                 Was das für Ihr Geschäft heißt
                             </h2>
                             <p className="text-base md:text-lg text-foreground/90 leading-relaxed font-medium">
@@ -292,7 +308,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                             published customer references; presenting these as real
                             would be irreführende Werbung (UWG §5). */}
                         {content.useCase && (
-                            <section aria-labelledby="usecase-h2" className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-6 md:p-8">
+                            <section aria-labelledby="usecase-h2" className="rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] p-6 md:p-8">
                                 <div className="flex items-center gap-2 mb-4">
                                     <Quote className="h-4 w-4 text-primary" aria-hidden />
                                     <h2
@@ -312,7 +328,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                     {content.useCase.body}
                                 </p>
                                 {content.useCase.metrics && content.useCase.metrics.length > 0 && (
-                                    <div className="grid grid-cols-3 gap-3 pt-5 border-t border-border/60">
+                                    <div className="grid grid-cols-3 gap-3 pt-5 border-t border-border">
                                         {content.useCase.metrics.map((m) => (
                                             <div key={m.label}>
                                                 <div
@@ -328,7 +344,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                         ))}
                                     </div>
                                 )}
-                                <p className="text-[11px] text-muted-foreground/60 leading-relaxed mt-5 pt-4 border-t border-border/40 italic">
+                                <p className="text-[11px] text-muted-foreground/60 leading-relaxed mt-5 pt-4 border-t border-border italic">
                                     {content.useCase.disclaimer ??
                                         'Illustratives Modell-Szenario auf Basis von Branchen-Benchmarks und internen Systemtests — keine reale Kundenreferenz. Partsunion befindet sich im Markteintritt; veröffentlichte Kundenkennzahlen liegen noch nicht vor. Die genannten Werte sind Zielgrößen, keine zugesicherten Ergebnisse.'}
                                 </p>
@@ -345,7 +361,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                     <FileCode2 className="h-3.5 w-3.5" />
                                     Technische Specs
                                 </h2>
-                                <dl className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] divide-y divide-border/60">
+                                <dl className="rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] divide-y divide-border">
                                     {content.specs.map((spec) => (
                                         <div
                                             key={spec.label}
@@ -381,7 +397,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                     {content.faqs.map((faq, i) => (
                                         <details
                                             key={i}
-                                            className="group rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] open:border-primary/40 transition-colors"
+                                            className="group rounded-xl border border-border bg-card shadow-[var(--shadow-card)] open:border-primary/40 transition-colors"
                                         >
                                             <summary className="flex items-start gap-3 px-5 py-4 cursor-pointer list-none">
                                                 <span className="flex-1 text-sm md:text-base font-medium text-foreground group-open:text-primary transition-colors">
@@ -396,7 +412,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                                 </span>
                                             </summary>
                                             <div className="px-5 pb-5 -mt-1">
-                                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed border-t border-border/40 pt-4">
+                                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed border-t border-border pt-4">
                                                     {faq.a}
                                                 </p>
                                             </div>
@@ -407,12 +423,12 @@ export default async function FeatureDetailPage({ params }: Props) {
                         )}
 
                         {/* Closing CTA-Section, balanced */}
-                        <section className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] p-8 md:p-10 text-center">
+                        <section className="rounded-2xl border border-border bg-muted p-8 md:p-10 text-center">
                             <h2
                                 className="text-2xl md:text-3xl font-semibold mb-3"
                                 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
                             >
-                                Sehen Sie {feature.title} live an Ihren echten Daten.
+                                Prüfen Sie {feature.title} an Ihren realen Prozessbeispielen.
                             </h2>
                             <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-md mx-auto">
                                 30 Minuten genügen, um zu beurteilen ob es für Ihren Betrieb passt.
@@ -421,7 +437,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                 <Button
                                     variant="primary"
                                     size="lg"
-                                    className="h-12 px-7 text-sm gradient-primary shadow-lg shadow-primary/30 group"
+                                    className="h-12 px-7 text-sm gradient-primary shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] group"
                                 >
                                     Beratungstermin sichern
                                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -445,7 +461,7 @@ export default async function FeatureDetailPage({ params }: Props) {
                                             <Link
                                                 key={r.slug}
                                                 href={`/features/${r.slug}`}
-                                                className="group flex flex-col gap-2 p-4 rounded-lg border border-border/60 hover:border-border transition-colors bg-[rgba(15,23,42,0.3)]"
+                                                className="group flex flex-col gap-2 p-4 rounded-lg border border-border hover:border-border-hover transition-colors bg-card shadow-[var(--shadow-card)]"
                                             >
                                                 <RIcon className="h-4 w-4 text-primary" />
                                                 <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">

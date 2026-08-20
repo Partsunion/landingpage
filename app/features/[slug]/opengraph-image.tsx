@@ -36,8 +36,8 @@ export default async function FeatureOgImage({ params }: { params: Promise<{ slu
                     justifyContent: 'space-between',
                     padding: 72,
                     background:
-                        'radial-gradient(ellipse at top left, #1D6FE855 0%, transparent 55%), linear-gradient(180deg, #0A0B0D 0%, #111418 100%)',
-                    color: '#E8ECF1',
+                        'radial-gradient(ellipse at top left, #1D6FE81f 0%, transparent 55%), linear-gradient(180deg, #FFFFFF 0%, #F6F8FB 100%)',
+                    color: '#0F172A',
                     fontFamily: 'system-ui, sans-serif',
                 }}
             >
@@ -49,7 +49,7 @@ export default async function FeatureOgImage({ params }: { params: Promise<{ slu
                             width: 44,
                             height: 44,
                             borderRadius: 10,
-                            background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
+                            background: 'linear-gradient(135deg, #1D6FE8 0%, #4F93FF 100%)',
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: 24,
@@ -88,7 +88,7 @@ export default async function FeatureOgImage({ params }: { params: Promise<{ slu
                             fontWeight: 600,
                             lineHeight: 1.05,
                             letterSpacing: '-0.035em',
-                            color: '#E8ECF1',
+                            color: '#0F172A',
                         }}
                     >
                         {title}
@@ -98,7 +98,7 @@ export default async function FeatureOgImage({ params }: { params: Promise<{ slu
                             style={{
                                 display: 'flex',
                                 fontSize: 24,
-                                color: '#9AA3AD',
+                                color: '#5B6B81',
                                 lineHeight: 1.45,
                                 maxWidth: 950,
                             }}
@@ -114,12 +114,12 @@ export default async function FeatureOgImage({ params }: { params: Promise<{ slu
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        borderTop: '1px solid #252A31',
+                        borderTop: '1px solid #E5EAF1',
                         paddingTop: 22,
                         width: '100%',
                     }}
                 >
-                    <div style={{ display: 'flex', fontSize: 18, color: '#5E6670', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
+                    <div style={{ display: 'flex', fontSize: 18, color: '#98A2B3', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
                         Feature-Dokumentation
                     </div>
                     <div style={{ display: 'flex', fontSize: 22, color: '#1D6FE8', fontWeight: 500 }}>

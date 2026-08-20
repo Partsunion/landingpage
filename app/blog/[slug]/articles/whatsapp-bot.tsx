@@ -4,10 +4,10 @@ export function ArticleWhatsAppBot() {
     return (
         <>
             <p>
-                WhatsApp ist im Aftermarket nicht mehr „nice to have", sondern der dominante Kanal für
+                WhatsApp ist im Aftermarket nicht mehr „nice to have“, sondern der dominante Kanal für
                 Werkstätten und Kleinkunden. Wer in den nächsten 12 Monaten keinen WhatsApp-Bot live hat,
                 verliert messbar Lead-Volumen — vor allem nachts, am Wochenende und an Kunden, die
-                türkisch, polnisch oder russisch schreiben. Dieser Leitfaden zeigt den kompletten Setup-Pfad,
+                türkisch, kurdisch oder polnisch schreiben. Dieser Leitfaden zeigt den kompletten Setup-Pfad,
                 den ein typischer Mittelständler in 14 Tagen durchläuft.
             </p>
 
@@ -32,7 +32,7 @@ export function ArticleWhatsAppBot() {
                 </li>
             </ul>
 
-            <h2>Phase 1 — Nummer migrieren und Bot „silent" mitlaufen lassen (Tag 1–5)</h2>
+            <h2>Phase 1 — Nummer migrieren und Bot „silent“ mitlaufen lassen (Tag 1–5)</h2>
             <p>
                 Ihre bestehende WhatsApp-Geschäftsnummer wird auf die Business Cloud API umgezogen.
                 Der Migration-Prozess dauert je nach Provider <strong>24 bis 72 Stunden</strong>. In
@@ -40,16 +40,16 @@ export function ArticleWhatsAppBot() {
                 erhalten, nur das Backend wechselt.
             </p>
             <p>
-                Sobald die Migration durch ist, läuft der Bot „silent" mit: er sieht jede Anfrage,
+                Sobald die Migration durch ist, läuft der Bot „silent“ mit: er sieht jede Anfrage,
                 generiert intern eine Antwort, aber Ihre Mitarbeiter sehen die Vorschläge im Sales-Inbox
                 und antworten weiterhin selbst. So bauen wir <strong>~500 Trainings-Beispiele</strong>{' '}
                 auf, an denen der Bot lernt, wie Ihr Team antwortet — Tonfall, Standard-Floskeln,
                 übliche Folgefragen.
             </p>
 
-            <h2>Phase 2 — Auto-Antworten für „sichere" Anfragetypen (Tag 6–10)</h2>
+            <h2>Phase 2 — Auto-Antworten für „sichere“ Anfragetypen (Tag 6–10)</h2>
             <p>
-                Jetzt aktivieren wir die ersten Auto-Antworten. Definition „sichere" Anfrage:
+                Jetzt aktivieren wir die ersten Auto-Antworten. Definition „sichere“ Anfrage:
             </p>
             <ul>
                 <li>
@@ -67,35 +67,37 @@ export function ArticleWhatsAppBot() {
             </ul>
             <p>
                 Alles was außerhalb dieser Kriterien liegt, eskaliert weiterhin an einen Menschen. Aber
-                schon allein die „sicheren" Anfragen machen erfahrungsgemäß einen <strong>Großteil aller
+                schon allein die „sicheren“ Anfragen machen erfahrungsgemäß einen <strong>Großteil aller
                 eingehenden Tickets</strong> aus. Der Bot übernimmt sie komplett autonom in Sekunden
                 Antwortzeit.
             </p>
 
-            <h2>Phase 3 — Vorkasse-Flow aktivieren (Tag 11–14)</h2>
+            <h2>Auf der Roadmap — Vorkasse-Flow im Chat (in Vorbereitung)</h2>
             <p>
-                Das eigentliche Game-Changer-Feature: Der Bot schickt nach Bestätigung der Bestellung
-                eine sichere Payment-Karte direkt in den Chat — mit Klarna, PayPal, Karte und SOFORT
-                als Optionen. <strong>Erst wenn das Geld eingegangen ist</strong>, löst das System die
-                Bestellung beim Großhändler aus.
+                Ein geplantes Game-Changer-Feature (in Entwicklung): Der Bot soll künftig nach Bestätigung
+                der Bestellung eine sichere Payment-Karte direkt in den Chat schicken — mit Klarna, PayPal,
+                Karte und SOFORT als Optionen. <strong>Erst wenn das Geld eingegangen ist</strong>, soll das
+                System die Bestellung auslösen. Die Live-Anbindung der Zahlungsanbieter aktivieren wir im
+                Onboarding; Direkt-Konnektoren zu Großhändlern sind in Entwicklung (WM SE priorisiert).
             </p>
             <p>
-                Was das ändert: Sie gehen nie in Vorleistung. Klassisches Risiko im Aftermarket — Kunde
+                Was das ändert: Sie gehen nicht in Vorleistung. Klassisches Risiko im Aftermarket — Kunde
                 bestätigt eine Bestellung, Sie ordern beim Großhändler (oft mit Speditionskosten), Kunde
-                springt am nächsten Tag ab. Mit Vorkasse-Flow wird das technisch unmöglich. Modellhafter
-                Effekt auf die Brutto-Marge: je nach Storno-Quote <strong>mehrere Prozentpunkte</strong>.
+                springt am nächsten Tag ab. Ein Vorkasse-Flow reduziert dieses Storno-Risiko deutlich.
+                Heute steuern Sie es über Bonität, Kreditlimit und Zahlungskonditionen pro Kunde.
+                Modellhafter Effekt auf die Brutto-Marge: je nach Storno-Quote <strong>mehrere Prozentpunkte</strong>.
             </p>
             <p>
                 Stammkunden mit Rahmenvertrag werden im Dashboard getaggt — für die läuft weiter „auf
-                Rechnung". Die Regeln pflegen Sie selbst, kein Tech-Ticket nötig.
+                Rechnung“. Die Regeln pflegen Sie selbst, kein Tech-Ticket nötig.
             </p>
 
             <h2>Mehrsprachigkeit — der unterschätzte Wachstumshebel</h2>
             <p>
-                Wenn Sie türkische, polnische oder russische Werkstätten in der Nähe haben, ist das ein
+                Wenn Sie türkische, kurdische oder polnische Werkstätten in der Nähe haben, ist das ein
                 erheblicher Hebel: Der Bot erkennt die Sprache automatisch (Konfidenz typisch{' '}
                 <code>≥ 0,98</code>), parst die Anfrage semantisch und antwortet in der Kundensprache.
-                Werkstatt-Slang ist trainiert — „fren balatası" wird als „Bremsbelag" erkannt, „Klötze"
+                Werkstatt-Slang ist trainiert — „fren balatası“ wird als „Bremsbelag“ erkannt, „Klötze“
                 ebenso. Mitarbeiter müssen die Sprache selbst nicht beherrschen, sie sehen die
                 übersetzte Version im Sales-Inbox.
             </p>
@@ -107,8 +109,10 @@ export function ArticleWhatsAppBot() {
                 können Sie selbst rechnen: Unser{' '}
                 <Link href="/pricing">ROI-Rechner</Link> nimmt Anfragen pro Tag,
                 Ø-Auftragswert und Retourenquote als Input und zeigt live Marge-Recovery + Zusatz-Umsatz.
-                Für einen Mittelständler mit 40 Anfragen pro Tag und 15 % Retourenquote liegt das
-                typische Einsparpotenzial bei <strong>~80.000 € pro Jahr</strong>.
+                Für einen Mittelständler mit 40 Anfragen pro Tag und 15 % Retourenquote zeigt der
+                Rechner modellhaft ein Einsparpotenzial in der Größenordnung von <strong>~80.000 € pro
+                Jahr</strong> — eine illustrative Zielgröße, keine zugesicherten Ergebnisse; belastbare
+                Kundenkennzahlen liegen im Markteintritt noch nicht vor.
             </p>
 
             <h2>Häufige Anfänger-Fehler — und wie Sie sie vermeiden</h2>
@@ -129,7 +133,7 @@ export function ArticleWhatsAppBot() {
             <h3>3. Mitarbeiter umgehen den Bot</h3>
             <p>
                 Wenn die OEM-Erfahrung nach zwei Monaten gut ist, fangen Mitarbeiter an, „aus dem
-                Gedächtnis" zu antworten. Damit verlieren Sie sowohl die Konsistenz als auch die
+                Gedächtnis“ zu antworten. Damit verlieren Sie sowohl die Konsistenz als auch die
                 Lerndaten. Workflow muss erzwingen: Alle Anfragen laufen durch die Pipeline.
             </p>
         </>

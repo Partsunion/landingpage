@@ -19,11 +19,13 @@ export function MobileStickyCTA() {
         <motion.div
             initial={{ y: 100 }}
             animate={{ y: visible ? 0 : 100 }}
-            className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-lg border-t border-border z-50 md:hidden"
+            aria-hidden={!visible}
+            className={`fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-lg border-t border-border z-50 md:hidden ${visible ? '' : 'pointer-events-none'}`}
         >
             <Button
-                className="w-full shadow-lg h-12 text-lg font-bold"
+                className="w-full shadow-lg h-12 text-base font-semibold"
                 size="lg"
+                tabIndex={visible ? 0 : -1}
                 onClick={() => document.getElementById('beratung')?.scrollIntoView({ behavior: 'smooth' })}
             >
                 <MessageCircle className="mr-2 h-5 w-5" />

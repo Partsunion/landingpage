@@ -20,16 +20,16 @@ export function TeamReliefVisual() {
             <div className="w-full max-w-sm space-y-3 md:space-y-4">
                 {/* AI Automated Section */}
                 <motion.div
-                    className="glass border border-border/50 rounded-xl p-3 md:p-4"
+                    className="glass border border-border rounded-xl p-3 md:p-4"
                     initial={{ opacity: 0, y: -10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
                     <div className="flex items-center gap-2 mb-3">
-                        <div className="h-6 w-6 rounded-md bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                            <Bot className="h-3.5 w-3.5 text-white" />
+                        <div className="h-6 w-6 rounded-md gradient-primary flex items-center justify-center">
+                            <Bot className="h-3.5 w-3.5 text-primary-foreground" />
                         </div>
-                        <span className="text-xs font-bold text-white">KI übernimmt</span>
+                        <span className="text-xs font-bold text-foreground">KI übernimmt</span>
                     </div>
                     <div className="space-y-2.5">
                         {automatedTasks.map((task, i) => (
@@ -42,14 +42,14 @@ export function TeamReliefVisual() {
                             >
                                 <div className="flex items-center justify-between text-[10px] md:text-xs mb-1">
                                     <div className="flex items-center gap-2">
-                                        <task.icon className="h-3 w-3 text-blue-400" />
+                                        <task.icon className="h-3 w-3 text-primary" />
                                         <span className="text-muted-foreground">{task.label}</span>
                                     </div>
-                                    <span className="text-blue-400 font-mono font-medium">{task.pct}%</span>
+                                    <span className="text-primary font-mono font-medium">{task.pct}%</span>
                                 </div>
-                                <div className="h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
+                                <div className="h-1.5 bg-[#E5EAF1] rounded-full overflow-hidden">
                                     <motion.div
-                                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
+                                        className="h-full bg-gradient-to-r from-[#1D6FE8] to-[#4F93FF] rounded-full"
                                         initial={{ width: 0 }}
                                         whileInView={{ width: `${task.pct}%` }}
                                         viewport={{ once: true }}
@@ -63,30 +63,30 @@ export function TeamReliefVisual() {
 
                 {/* Human Focus Section */}
                 <motion.div
-                    className="glass border border-emerald-500/30 rounded-xl p-3 md:p-4 bg-gradient-to-r from-emerald-500/5 to-transparent"
+                    className="glass border border-[#12B76A]/30 rounded-xl p-3 md:p-4 bg-gradient-to-r from-[#ECFDF3] to-transparent"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 1.2 }}
                 >
                     <div className="flex items-center gap-2 mb-3">
-                        <div className="h-6 w-6 rounded-md bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center">
-                            <Users className="h-3.5 w-3.5 text-white" />
+                        <div className="h-6 w-6 rounded-md bg-[#12B76A] flex items-center justify-center">
+                            <Users className="h-3.5 w-3.5 text-primary-foreground" />
                         </div>
-                        <span className="text-xs font-bold text-white">Ihr Team fokussiert auf</span>
+                        <span className="text-xs font-bold text-foreground">Ihr Team fokussiert auf</span>
                     </div>
                     <div className="flex gap-2">
                         {humanFocus.map((item, i) => (
                             <motion.div
                                 key={i}
-                                className="flex-1 flex items-center gap-2 bg-emerald-500/10 rounded-lg p-2.5"
+                                className="flex-1 flex items-center gap-2 bg-[#ECFDF3] border border-[#12B76A]/20 rounded-lg p-2.5"
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15 + 1.5, type: 'spring' }}
                             >
-                                <item.icon className="h-4 w-4 text-emerald-400 shrink-0" />
-                                <span className="text-[9px] md:text-[10px] text-emerald-300 font-medium">{item.label}</span>
+                                <item.icon className="h-4 w-4 text-[#067647] shrink-0" />
+                                <span className="text-[9px] md:text-[10px] text-[#067647] font-medium">{item.label}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -100,8 +100,8 @@ export function TeamReliefVisual() {
                     viewport={{ once: true }}
                     transition={{ delay: 2 }}
                 >
-                    <TrendingDown className="h-3.5 w-3.5 text-emerald-400" />
-                    <span className="text-xs text-emerald-400 font-medium">80% weniger Routinearbeit</span>
+                    <TrendingDown className="h-3.5 w-3.5 text-[#067647]" />
+                    <span className="text-xs text-[#067647] font-medium">80% weniger Routinearbeit</span>
                 </motion.div>
             </div>
         </div>

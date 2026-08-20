@@ -7,11 +7,11 @@ export const metadata: Metadata = {
     title: 'Kontakt — Sprechen wir über Ihren Teilehandel',
     description:
         'Frage zum Produkt, Pilot-Anfrage oder Support: hier erreichen Sie das Partsunion-Team direkt.',
-    alternates: { canonical: 'https://www.partsunion.de/contact' },
+    alternates: { canonical: 'https://partsunion.de/contact' },
     openGraph: {
         title: 'Kontakt | Partsunion',
         description: 'Sprechen Sie mit uns zur Digitalisierung Ihres Teilehandels.',
-        url: 'https://www.partsunion.de/contact',
+        url: 'https://partsunion.de/contact',
         type: 'website',
         locale: 'de_DE',
         siteName: 'Partsunion',
@@ -29,8 +29,8 @@ const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://www.partsunion.de/' },
-        { '@type': 'ListItem', position: 2, name: 'Kontakt', item: 'https://www.partsunion.de/contact' },
+        { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+        { '@type': 'ListItem', position: 2, name: 'Kontakt', item: 'https://partsunion.de/contact' },
     ],
 };
 
@@ -38,10 +38,10 @@ const contactLd = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
     name: 'Partsunion Kontakt',
-    url: 'https://www.partsunion.de/contact',
+    url: 'https://partsunion.de/contact',
     mainEntity: {
         '@type': 'Organization',
-        name: 'Partsunion UG (haftungsbeschränkt)',
+        name: 'Partsunion',
         email: 'info@partsunion.de',
         address: {
             '@type': 'PostalAddress',
@@ -66,13 +66,13 @@ export default function ContactPage() {
             />
 
             {/* Background */}
-            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(59,130,246,0.08),transparent_55%)] -z-10" />
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(29,111,232,0.08),transparent_55%)] -z-10" />
             <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
 
             <div className="container mx-auto px-4 md:px-6">
                 {/* Header */}
                 <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border/60 text-xs font-medium text-muted-foreground mb-5">
+                    <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full border border-border text-xs font-medium text-muted-foreground mb-5">
                         <MessageCircle className="h-3 w-3" />
                         Direkter Kontakt
                     </span>
@@ -97,7 +97,7 @@ export default function ContactPage() {
                         >
                             Nachricht schreiben
                         </h2>
-                        <div className="rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-6 md:p-8">
+                        <div className="rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] p-6 md:p-8">
                             <ContactForm />
                         </div>
                     </section>
@@ -112,10 +112,10 @@ export default function ContactPage() {
 
                         <a
                             href="mailto:info@partsunion.de"
-                            className="block rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5 hover:border-primary/40 transition-colors group"
+                            className="block rounded-xl border border-border bg-card shadow-[var(--shadow-card)] p-5 hover:border-primary/40 transition-colors group"
                         >
                             <div className="flex items-center gap-3 mb-2">
-                                <div className="h-9 w-9 rounded-lg flex items-center justify-center border border-border/60 text-primary">
+                                <div className="h-9 w-9 rounded-lg flex items-center justify-center border border-primary/15 bg-accent text-primary">
                                     <Mail className="h-4 w-4" />
                                 </div>
                                 <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
@@ -128,9 +128,9 @@ export default function ContactPage() {
                             <p className="text-xs text-muted-foreground">Antwort meist innerhalb von 24 h</p>
                         </a>
 
-                        <div className="rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5">
+                        <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] p-5">
                             <div className="flex items-center gap-3 mb-2">
-                                <div className="h-9 w-9 rounded-lg flex items-center justify-center border border-border/60 text-primary">
+                                <div className="h-9 w-9 rounded-lg flex items-center justify-center border border-primary/15 bg-accent text-primary">
                                     <MapPin className="h-4 w-4" />
                                 </div>
                                 <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
@@ -138,7 +138,7 @@ export default function ContactPage() {
                                 </div>
                             </div>
                             <div className="text-sm text-foreground/85 leading-relaxed">
-                                Partsunion UG (haftungsbeschränkt)<br />
+                                Partsunion<br />
                                 Zum Sommersberg 27<br />
                                 50321 Brühl · Deutschland
                             </div>
@@ -167,7 +167,7 @@ export default function ContactPage() {
                             </span>
                         </Link>
 
-                        <div className="rounded-xl border border-border/60 bg-[rgba(15,23,42,0.3)] p-5">
+                        <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] p-5">
                             <div className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground mb-2">
                                 Bestandskunde?
                             </div>

@@ -23,7 +23,7 @@ export function SpotlightCard({
     children,
     className,
     style,
-    glow = 'rgba(59, 130, 246, 0.35)',
+    glow = 'rgba(29, 111, 232, 0.20)',
     radius = 320,
 }: SpotlightCardProps) {
     const ref = useRef<HTMLDivElement>(null);
@@ -41,7 +41,7 @@ export function SpotlightCard({
             ref={ref}
             onMouseMove={handleMouseMove}
             className={cn(
-                'group/spot relative isolate overflow-hidden rounded-2xl border border-border/60 bg-[rgba(15,23,42,0.4)] transition-colors duration-300 hover:border-border',
+                'group/spot relative isolate overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-[border-color,box-shadow] duration-300 hover:border-border-hover hover:shadow-[var(--shadow-card-hover)]',
                 className,
             )}
             style={
@@ -72,10 +72,10 @@ export function SpotlightCard({
             {/* Inner glow that lights up the surface around the cursor */}
             <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spot:opacity-100"
                 style={{
                     background:
-                        'radial-gradient(var(--spot-radius) circle at var(--mx, 50%) var(--my, 50%), rgba(59,130,246,0.08), transparent 50%)',
+                        'radial-gradient(var(--spot-radius) circle at var(--mx, 50%) var(--my, 50%), rgba(29,111,232,0.05), transparent 50%)',
                 }}
             />
             <div className="relative z-10 h-full">{children}</div>

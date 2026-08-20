@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Bot, Package, Cloud, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { getCoreFeatures } from '@/lib/feature-data';
 
@@ -30,7 +30,7 @@ export function Features() {
                             Alles was Sie <span className="text-gradient">brauchen</span>
                         </h2>
                         <p className="text-lg text-muted-foreground">
-                            Partsunion vereint modernste KI-Technologie mit jahrelanger Branchenerfahrung im Autoteilehandel.
+                            Durchgängige Prozesse, belastbare Stammdaten und klare Arbeitsvorräte für den täglichen Autoteilehandel.
                         </p>
                     </motion.div>
                 </div>
@@ -51,9 +51,9 @@ export function Features() {
                                     href={`/features/${feature.slug}`}
                                     className="group block h-full"
                                 >
-                                    <div className="h-full p-6 lg:p-8 rounded-2xl glass border border-border/50 hover:border-primary/30 transition-all card-hover">
+                                    <div className="h-full p-6 lg:p-8 rounded-2xl glass border border-border hover:border-primary/30 transition-all card-hover">
                                         {/* Icon */}
-                                        <div className="h-14 w-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                                        <div className="h-14 w-14 border border-primary/15 bg-accent rounded-xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                                             <Icon size={28} />
                                         </div>
 
@@ -87,9 +87,9 @@ export function Features() {
                 >
                     <Link
                         href="/features"
-                        className="inline-flex items-center gap-2 py-3 px-6 rounded-full glass border border-border/50 hover:border-primary/50 transition-all text-sm font-medium"
+                        className="inline-flex items-center gap-2 py-3 px-6 rounded-full glass border border-border hover:border-border-hover transition-all text-sm font-medium"
                     >
-                        Alle Features ansehen
+                        Alle Module ansehen
                         <ArrowRight className="h-4 w-4" />
                     </Link>
                 </motion.div>

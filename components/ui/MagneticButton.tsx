@@ -39,7 +39,7 @@ export function MagneticButton({
             onMouseLeave={handleMouseLeave}
             animate={pos}
             transition={{ type: 'spring', stiffness: 180, damping: 14, mass: 0.4 }}
-            className={className}
+            className={`cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${className}`}
         >
             {children}
         </motion.button>

@@ -26,7 +26,7 @@ export function ArticleRetouren() {
             <ol>
                 <li>
                     <strong>Falsche HSN/TSN-Eingabe</strong> durch Mitarbeiter beim Abtippen ins ERP — Anteil:{' '}
-                    <strong>42 %</strong>. Klassischer Tippfehler im Stress, „0603 CJZ" wird „0603 CJ2" und das
+                    <strong>42 %</strong>. Klassischer Tippfehler im Stress, „0603 CJZ“ wird „0603 CJ2“ und das
                     Teil passt nicht. Komplett vermeidbar mit OCR-Erkennung aus dem Foto.
                 </li>
                 <li>
@@ -35,16 +35,16 @@ export function ArticleRetouren() {
                     Lösung: Kreuzvalidierung gegen Teilekataloge + automatische Position-Kennzeichnung.
                 </li>
                 <li>
-                    <strong>Falsche Motorvariante</strong> — die häufigste Falle ist „2.0 TDI" ohne Motorcode.
+                    <strong>Falsche Motorvariante</strong> — die häufigste Falle ist „2.0 TDI“ ohne Motorcode.
                     BMW 320d B47 vs. N47 → komplett unterschiedliche OEM-Nummern. Anteil: <strong>18 %</strong>.
                     Lösung: Bot fragt aktiv nach Motorcode wenn er nicht aus Schein oder FIN ableitbar ist.
                 </li>
                 <li>
                     <strong>Lieferschäden</strong> — Verpackung beschädigt, Teil verkratzt. Anteil: <strong>12 %</strong>.
-                    Nicht KI-lösbar, aber durch sauberen Workflow mit „beschädigt"-Status sauber abrechenbar.
+                    Nicht KI-lösbar, aber durch sauberen Workflow mit „beschädigt“-Status sauber abrechenbar.
                 </li>
                 <li>
-                    <strong>Kunden-Bestellfehler</strong> („falsches Auto bestellt") — Anteil: <strong>5 %</strong>.
+                    <strong>Kunden-Bestellfehler</strong> („falsches Auto bestellt“) — Anteil: <strong>5 %</strong>.
                     Wird durch Vorkasse-Flow drastisch reduziert: Wer vorab zahlt, prüft seine Bestellung
                     erfahrungsgemäß deutlich genauer.
                 </li>
@@ -89,10 +89,10 @@ export function ArticleRetouren() {
             <h2>Was die Quote nach Tag 90 davon abhält, höher zu rutschen</h2>
             <p>
                 Der häufigste Fehler nach erfolgreicher Einführung: Mitarbeiter umgehen den Bot bei
-                vermeintlich „einfachen" Anfragen und tippen wieder selbst. Innerhalb von zwei Wochen ist
+                vermeintlich „einfachen“ Anfragen und tippen wieder selbst. Innerhalb von zwei Wochen ist
                 die Quote zurück bei 8–10 %. Lösung: Workflow-Disziplin im Dashboard erzwingen — alle
                 Anfragen laufen durch die Pipeline, auch wenn der Mitarbeiter die OEM-Nummer „auswendig
-                weiß". Die KI prüft dann nur noch gegen, statt zu suchen.
+                weiß“. Die KI prüft dann nur noch gegen, statt zu suchen.
             </p>
 
             <h2>Was Sie konkret tun können, um schnell zu starten</h2>

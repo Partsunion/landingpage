@@ -1,15 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle2, FileText, Download, Printer, Share2 } from 'lucide-react';
+import { FileText, Download } from 'lucide-react';
 
 export function InvoicePreview() {
     return (
-        <div className="w-full h-full bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden flex flex-col shadow-2xl">
+        <div className="w-full h-full bg-card rounded-2xl border border-border overflow-hidden flex flex-col shadow-[var(--shadow-raised)]">
             {/* Header / Toolbar */}
-            <div className="bg-white border-b border-slate-200 p-4 flex items-center justify-between">
+            <div className="bg-white border-b border-border p-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                    <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground">
                         <FileText size={18} />
                     </div>
                     <span className="font-bold text-sm text-slate-900">Rechnungs-Designer</span>
@@ -25,11 +25,11 @@ export function InvoicePreview() {
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Sidebar */}
-                <div className="w-1/3 border-r border-slate-200 p-4 space-y-6 hidden md:block bg-white">
+                <div className="w-1/3 border-r border-border p-4 space-y-6 hidden md:block bg-white">
                     <div>
                         <label className="text-[10px] font-bold uppercase text-slate-500 mb-2 block">Logo Position</label>
                         <div className="grid grid-cols-3 gap-1">
-                            <div className="h-8 border border-blue-600 bg-blue-50 text-blue-600 rounded flex items-center justify-center text-[10px] font-medium">Links</div>
+                            <div className="h-8 border border-primary bg-accent text-primary rounded flex items-center justify-center text-[10px] font-medium">Links</div>
                             <div className="h-8 border border-slate-200 text-slate-500 rounded flex items-center justify-center text-[10px] font-medium hover:bg-slate-50">Mitte</div>
                             <div className="h-8 border border-slate-200 text-slate-500 rounded flex items-center justify-center text-[10px] font-medium hover:bg-slate-50">Rechts</div>
                         </div>
@@ -38,8 +38,8 @@ export function InvoicePreview() {
                     <div>
                         <label className="text-[10px] font-bold uppercase text-slate-500 mb-2 block">Primärfarbe</label>
                         <div className="flex items-center gap-2">
-                            <div className="h-6 w-6 rounded bg-blue-600 shadow-sm" />
-                            <div className="h-8 flex-1 border border-slate-200 rounded px-2 flex items-center text-[10px] font-mono text-slate-600">#2563EB</div>
+                            <div className="h-6 w-6 rounded bg-primary shadow-sm" />
+                            <div className="h-8 flex-1 border border-slate-200 rounded px-2 flex items-center text-[10px] font-mono text-slate-600">#1D6FE8</div>
                         </div>
                     </div>
 
@@ -50,15 +50,15 @@ export function InvoicePreview() {
                 </div>
 
                 {/* Preview Area */}
-                <div className="flex-1 p-6 overflow-y-auto bg-slate-100">
+                <div className="flex-1 p-6 overflow-y-auto bg-muted">
                     <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        className="bg-white aspect-[1/1.4] w-full max-w-md mx-auto shadow-lg rounded-sm p-8 text-[10px] text-slate-800 relative overflow-hidden ring-1 ring-slate-900/5"
+                        className="bg-white aspect-[1/1.4] w-full max-w-md mx-auto shadow-[var(--shadow-raised)] rounded-sm p-8 text-[10px] text-slate-800 relative overflow-hidden ring-1 ring-slate-900/5"
                     >
                         {/* A4 Paper feel */}
                         <div className="flex justify-between mb-12">
-                            <div className="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-lg shadow-sm">PU</div>
+                            <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center font-bold text-lg shadow-sm">PU</div>
                             <div className="text-right">
                                 <h2 className="text-lg font-bold text-slate-900 mb-1 uppercase tracking-tighter">Rechnung</h2>
                                 <p className="text-slate-500">RE-2026-001</p>
@@ -76,7 +76,7 @@ export function InvoicePreview() {
                         {/* Table */}
                         <table className="w-full mb-8">
                             <thead>
-                                <tr className="border-b-2 border-blue-100 text-blue-600 font-bold">
+                                <tr className="border-b-2 border-accent text-primary font-bold">
                                     <th className="text-left py-2">Position</th>
                                     <th className="text-center py-2">Menge</th>
                                     <th className="text-right py-2">Preis</th>
@@ -109,7 +109,7 @@ export function InvoicePreview() {
                                     <span>MwSt. (19%):</span>
                                     <span>42,71 €</span>
                                 </div>
-                                <div className="flex justify-between font-bold text-sm text-blue-600 pt-2 border-t border-slate-100 mt-2">
+                                <div className="flex justify-between font-bold text-sm text-primary pt-2 border-t border-slate-100 mt-2">
                                     <span>Gesamt:</span>
                                     <span>267,51 €</span>
                                 </div>
@@ -117,14 +117,14 @@ export function InvoicePreview() {
                         </div>
 
                         {/* Bottom Decoration */}
-                        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-blue-600" />
+                        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-primary" />
                     </motion.div>
                 </div>
             </div>
 
             {/* Footer / Actions */}
-            <div className="bg-white border-t border-slate-200 p-3 flex justify-end gap-2">
-                <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+            <div className="bg-white border-t border-border p-3 flex justify-end gap-2">
+                <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-primary text-primary-foreground rounded-lg hover:bg-primary-hover transition-colors shadow-sm">
                     <Download size={14} /> Als PDF exportieren
                 </button>
             </div>
