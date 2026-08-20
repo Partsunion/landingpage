@@ -13,7 +13,7 @@ import { SafeMarkdown } from '@/components/ui/SafeMarkdown';
 // Same backend the Admin Dashboard (admin.partsunion.de) queries — the
 // WhatsApp-Bot service on Railway hosts the shared production database
 // plus the Hydra v2 OEM engine. Override via NEXT_PUBLIC_API_URL at build time.
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://autoteile-bot-service-production.up.railway.app';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://api.partsunion.de';
 
 // localStorage key: landing-page demo is limited to ONE successful query per device (not per session).
 // If this key is present (any value), the demo is permanently locked on this device.
