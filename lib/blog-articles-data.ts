@@ -62,7 +62,7 @@ export const generatedArticles: GeneratedArticle[] = [
             {
                 "type": "ul",
                 "items": [
-                    "Greift die Lösung auf einen lizenzierten Teilekatalog zu (z. B. TecDoc) statt auf nicht lizenzierte Drittquellen?",
+                    "Greift die Lösung auf lizenzierte Herstellerkataloge statt auf nicht lizenzierte Drittquellen zu?",
                     "Lassen sich OE-Nummern, Vergleichsnummern und Hersteller-Referenzen einem Artikel zuordnen und durchsuchen?",
                     "Ist ein KFZ-Fitment hinterlegt, also die Zuordnung Teil zu Fahrzeug (Marke, Modell, Motorisierung), idealerweise per HSN/TSN oder VIN?",
                     "Kann eine Anfrage vom Fahrzeug ausgehen und automatisch die passenden Artikel im eigenen Bestand finden?"
@@ -70,7 +70,7 @@ export const generatedArticles: GeneratedArticle[] = [
             },
             {
                 "type": "p",
-                "text": "Partsunion arbeitet hier mit einem lizenzierten TecDoc-Katalog plus eigener Datenbank – ohne Web-Scraping. Genau diese OEM-Tiefe unterscheidet eine echte WaWi für Kfz-Teile von einer allgemeinen Handelssoftware."
+                "text": "Partsunion arbeitet mit lizenzierten Herstellerkatalogen plus eigener Datenbank – ohne Web-Scraping. Partsunion verfügt über die erforderlichen Nutzungsrechte. Genau diese OE-Tiefe unterscheidet eine echte WaWi für Kfz-Teile von einer allgemeinen Handelssoftware."
             },
             {
                 "type": "h2",
@@ -182,7 +182,7 @@ export const generatedArticles: GeneratedArticle[] = [
                         "href": "/features/warenwirtschaft-autoteilhandel"
                     },
                     {
-                        "label": "OEM-Ermittlung und Fitment über lizenzierten TecDoc-Katalog",
+                        "label": "OE-Ermittlung und Fitment über lizenzierte Herstellerkataloge",
                         "href": "/features/oem-ermittlung"
                     },
                     {
@@ -337,7 +337,7 @@ export const generatedArticles: GeneratedArticle[] = [
                 "items": [
                     "Drei Arbeitsbereiche für Verkauf, Lager und Finanzen auf einer gemeinsamen Datenbasis, ohne Systembrüche.",
                     "WhatsApp-Bot mit Foto- und Fahrzeugschein-Erkennung in fünf Sprachen (DE/EN/TR/KU/PL) inklusive Sprachnachrichten.",
-                    "OEM-Ermittlung über einen lizenzierten TecDoc-Katalog plus eigene Datenbank, ausdrücklich ohne Web-Scraping.",
+                    "OE-Ermittlung über lizenzierte Herstellerkataloge plus eigene Datenbank, ausdrücklich ohne Web-Scraping.",
                     "Warenwirtschaft mit zentralem Bestands-Ledger, ATP-Reservierungen, Foto-Wareneingang per KI, Reorder-Intelligenz, Kfz-Fitment, Chargen/Serien, Inventur und Retoure per Foto.",
                     "Steuer und Finanzen mit GoBD, TSE (Paragraf 146a AO), DSFinV-K, ZUGFeRD/XRechnung (EN 16931), DATEV (SKR 03/04, EXTF), USt-VA, OSS, Intrastat, SEPA und MT940 sowie umsatzsteuerlich korrektem Altteilpfand.",
                     "White-Label-B2B-Kundenportal mit serverseitig berechneten, kundenspezifischen Preisen.",
@@ -514,7 +514,7 @@ export const generatedArticles: GeneratedArticle[] = [
             },
             {
                 "type": "p",
-                "text": "Partsunion erstellt Rechnungen sowohl als ZUGFeRD als auch als XRechnung im EN-16931-Profil – inklusive korrekter Behandlung von Branchen-Spezialfällen wie der Differenzbesteuerung nach §25a UStG und dem umsatzsteuerlich sauberen Ausweis von Altteilpfand. Auch grenzüberschreitende Konstellationen (innergemeinschaftliche Lieferung, Ausfuhr, Reverse Charge) werden in der Umsatzsteuerlogik berücksichtigt, was im Ersatzteilexport schnell relevant wird. Wie diese Sonderfälle entstehen, beginnt schon bei der Teile-Identifikation über die OEM-Ermittlung per lizenziertem TecDoc-Katalog."
+                "text": "Partsunion erstellt Rechnungen sowohl als ZUGFeRD als auch als XRechnung im EN-16931-Profil – inklusive korrekter Behandlung von Branchen-Spezialfällen wie der Differenzbesteuerung nach §25a UStG und dem umsatzsteuerlich sauberen Ausweis von Altteilpfand. Auch grenzüberschreitende Konstellationen (innergemeinschaftliche Lieferung, Ausfuhr, Reverse Charge) werden in der Umsatzsteuerlogik berücksichtigt, was im Ersatzteilexport schnell relevant wird. Wie diese Sonderfälle entstehen, beginnt schon bei der Teile-Identifikation über lizenzierte Herstellerkataloge."
             },
             {
                 "type": "h2",
@@ -541,7 +541,7 @@ export const generatedArticles: GeneratedArticle[] = [
                         "href": "/features/warenwirtschaft-autoteilhandel"
                     },
                     {
-                        "label": "OEM-Ermittlung per lizenziertem TecDoc-Katalog – exakte Teile-Identifikation",
+                        "label": "OE-Ermittlung per lizenziertem Herstellerkatalog – exakte Teile-Identifikation",
                         "href": "/features/oem-ermittlung"
                     },
                     {
@@ -908,7 +908,7 @@ export const generatedArticles: GeneratedArticle[] = [
             },
             {
                 "type": "p",
-                "text": "Generische ERP- und Shop-Systeme wie weclapp, Xentral oder JTL bieten Portal- oder Shopbausteine, sind aber nicht kfz-spezifisch. Im Autoteilehandel zählen Details: OEM-Ermittlung über einen lizenzierten TecDoc-Katalog statt Web-Scraping, KFZ-Fitment, Differenzbesteuerung nach Paragraf 25a, Altteilpfand umsatzsteuerlich korrekt und kundenindividuelle Preise mit Margenschutz. Ein Portal, das auf einer branchenspezifischen Datenbasis aus Verkauf, Lager und Finanzen aufsetzt, spart Ihnen den Eigenbau dieser Logik."
+                "text": "Generische ERP- und Shop-Systeme wie weclapp, Xentral oder JTL bieten Portal- oder Shopbausteine, sind aber nicht kfz-spezifisch. Im Autoteilehandel zählen Details: OE-Ermittlung über lizenzierte Herstellerkataloge statt Web-Scraping, KFZ-Fitment, Differenzbesteuerung nach Paragraf 25a, Altteilpfand umsatzsteuerlich korrekt und kundenindividuelle Preise mit Margenschutz. Ein Portal, das auf einer branchenspezifischen Datenbasis aus Verkauf, Lager und Finanzen aufsetzt, spart Ihnen den Eigenbau dieser Logik."
             },
             {
                 "type": "p",

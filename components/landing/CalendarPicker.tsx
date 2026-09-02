@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight, Clock, CalendarDays } from 'lucide-react';
 
 /**
- * Calendar-Picker — Cal.com-Style Slot-Selector für Beratungstermine.
+ * Calendar-Picker für einen unverbindlichen Terminwunsch.
  *
  * Verhalten:
  *   - Zeigt die nächsten 14 Werktage (Mo-Fr)
@@ -68,12 +68,12 @@ export function CalendarPicker({ value, onChange }: Props) {
     const selectedTime = selectedISODate ? selectedISODate.split('T')[1]?.slice(0, 5) : null;
 
     return (
-        <div className="rounded-2xl border border-border bg-card p-4 md:p-5">
+        <div className="border border-[#cfd5dc] bg-[#f6f8fb] p-3 md:p-5">
             {/* Header with week nav */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="mb-3 flex items-center justify-between md:mb-4">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
                     <CalendarDays className="h-3.5 w-3.5" />
-                    Termin wählen
+                    Wunschzeit wählen
                 </div>
                 <div className="flex items-center gap-1">
                     <button
@@ -81,7 +81,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                         onClick={() => setWeekOffset((w) => Math.max(0, w - 1))}
                         disabled={weekOffset === 0}
                         aria-label="Vorherige Woche"
-                        className="p-1.5 rounded-md hover:bg-muted/60 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        className="p-1.5 hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                     >
                         <ChevronLeft className="h-3.5 w-3.5 text-muted-foreground" />
                     </button>
@@ -90,7 +90,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                         onClick={() => setWeekOffset((w) => Math.min(3, w + 1))}
                         disabled={weekOffset >= 3}
                         aria-label="Nächste Woche"
-                        className="p-1.5 rounded-md hover:bg-muted/60 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        className="p-1.5 hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                     >
                         <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
                     </button>
@@ -98,7 +98,7 @@ export function CalendarPicker({ value, onChange }: Props) {
             </div>
 
             {/* Day strip */}
-            <div className="grid grid-cols-5 gap-1.5 mb-4">
+            <div className="mb-3 grid grid-cols-5 gap-1 md:mb-4 md:gap-1.5">
                 {days.map((d) => {
                     const isSelected = selectedDay && d.toDateString() === selectedDay.toDateString();
                     const isSelectedFromValue =
@@ -116,7 +116,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                                     onChange(null);
                                 }
                             }}
-                            className={`flex flex-col items-center py-2.5 rounded-lg border transition-all ${
+                            className={`flex flex-col items-center border py-1.5 transition-all md:py-2.5 ${
                                 active
                                     ? 'border-primary/50 bg-primary/10 text-foreground'
                                     : 'border-border hover:border-border-hover bg-transparent text-muted-foreground hover:text-foreground'
@@ -126,7 +126,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                                 {formatDayShort(d)}
                             </span>
                             <span
-                                className="mt-0.5 text-base font-semibold tabular-nums"
+                                className="mt-0.5 text-sm font-semibold tabular-nums md:text-base"
                                 style={{ fontFamily: 'var(--font-mono)' }}
                             >
                                 {d.getDate()}
@@ -141,7 +141,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                 <div>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
                         <Clock className="h-3.5 w-3.5" />
-                        Verfügbare Slots am{' '}
+                        Mögliche Wunschzeiten am{' '}
                         <span className="text-foreground font-medium">
                             {formatDateLong(selectedDay)}
                         </span>
@@ -155,7 +155,7 @@ export function CalendarPicker({ value, onChange }: Props) {
                                     key={time}
                                     type="button"
                                     onClick={() => onChange(active ? null : isoForThis)}
-                                    className={`py-2 rounded-md text-sm font-medium tabular-nums transition-all ${
+                                    className={`py-2 text-sm font-medium tabular-nums transition-all ${
                                         active
                                             ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
                                             : 'border border-border hover:border-primary/50 text-foreground/80 hover:text-foreground'
@@ -169,17 +169,17 @@ export function CalendarPicker({ value, onChange }: Props) {
                     </div>
                     {selectedTime && (
                         <p className="mt-4 text-xs text-muted-foreground">
-                            ✓ Sie wählen{' '}
+                            ✓ Dein Terminwunsch:{' '}
                             <span className="text-foreground font-medium">
                                 {formatDateLong(selectedDay)} um {selectedTime} Uhr
                             </span>{' '}
-                            (30 Min, online via Zoom oder vor Ort).
+                            (30 Minuten). Wir bestätigen den Termin anschließend.
                         </p>
                     )}
                 </div>
             ) : (
-                <div className="text-center py-6 text-xs text-muted-foreground border-t border-border pt-4">
-                    Wählen Sie zunächst einen Tag.
+                <div className="border-t border-border py-2 pt-3 text-center text-[10px] text-muted-foreground md:py-6 md:pt-4 md:text-xs">
+                    Wähle zunächst einen passenden Tag.
                 </div>
             )}
         </div>

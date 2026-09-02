@@ -163,6 +163,9 @@ export function Navbar() {
                         <Link href="/plattform" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                             Plattform
                         </Link>
+                        <Link href="/download" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                            Download
+                        </Link>
                         <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                             Über uns
                         </Link>
@@ -234,6 +237,13 @@ export function Navbar() {
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Über uns
+                        </Link>
+                        <Link
+                            href="/download"
+                            className="text-sm font-medium text-foreground hover:text-primary"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Download
                         </Link>
                         <Link
                             href="/contact"

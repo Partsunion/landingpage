@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { featureData } from '@/lib/feature-data';
 import { blogPosts } from '@/lib/blog-posts';
+import { solutionPages } from '@/lib/solutions-data';
 
 // Statischer Export (next.config.ts: output: "export") verlangt, dass die
 // Sitemap zur Build-Zeit fixiert wird statt bei jedem Request.
@@ -43,11 +44,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${BASE_URL}/`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
         { url: `${BASE_URL}/live-demo`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/plattform`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/loesungen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+        { url: `${BASE_URL}/beratung`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/download`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/features`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/vergleich`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
         { url: `${BASE_URL}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
         { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
         { url: `${BASE_URL}/pricing`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+
+        ...solutionPages.map((page) => ({
+            url: `${BASE_URL}/loesungen/${page.slug}`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.85,
+        })),
 
         // ─── Feature-Detail-Pages ─────────────────────────────────────
         ...featureData.map((f) => ({

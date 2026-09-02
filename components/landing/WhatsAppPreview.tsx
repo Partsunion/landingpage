@@ -11,7 +11,7 @@
 
 import { ChatPreview, type ChatPreviewData } from './feature-previews/ChatPreview';
 
-const data: ChatPreviewData = {
+export const whatsappPreviewData: ChatPreviewData = {
     title: 'DIGITALE ANFRAGE · DEMO',
     sub: 'mit Fachprüfung bei Unsicherheit',
     customerName: 'KFZ Meier GmbH',
@@ -50,7 +50,7 @@ const data: ChatPreviewData = {
 export function WhatsAppPreview() {
     return (
         <div className="max-w-[400px] mx-auto">
-            <ChatPreview data={data} />
+            <ChatPreview data={whatsappPreviewData} />
         </div>
     );
 }

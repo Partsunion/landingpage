@@ -194,7 +194,7 @@ export interface BotCapability {
 export const botCapabilities: BotCapability[] = [
     { label: 'Foto- und Dokumenterfassung', detail: 'Fahrzeugschein oder Typenschild liefern HSN, TSN und VIN für die weitere Prüfung.', icon: ScanLine },
     { label: 'Sprach- und Textanfragen', detail: 'Unstrukturierte Kundenangaben werden für die fachliche Bearbeitung zusammengeführt.', icon: Mic },
-    { label: 'Lizenzierter TecDoc-Katalog', detail: 'OEM-Ermittlung über offiziellen Katalog plus Cross-Reference auf Alternativen.', icon: Database },
+    { label: 'Lizenzierte Herstellerkataloge', detail: 'OE-Ermittlung über freigeschaltete Katalogdaten plus Cross-References auf Alternativen.', icon: Database },
     { label: 'Angebote aus echtem Bestand', detail: 'Preise aus Ihrem Lager und freigegebenen Großhändler-Anbindungen — fehlende Live-Daten werden nicht erfunden.', icon: ShoppingCart },
     { label: 'Prüfregeln & Fachfreigabe', detail: 'Unsichere Fälle gehen mit vollständigem Kontext in den Arbeitsvorrat eines Mitarbeiters.', icon: UserCog },
 ];

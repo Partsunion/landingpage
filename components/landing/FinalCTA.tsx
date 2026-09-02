@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { submitLead } from '@/lib/leads';
 import { track } from '@/components/layout/Analytics';
 import { CalendarPicker } from '@/components/landing/CalendarPicker';
+import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
 import {
     Send,
     CheckCircle2,
@@ -21,19 +22,21 @@ import {
  */
 
 const benefits = [
-    'Kostenlose Erstberatung ohne Verpflichtung',
-    'Live-Demo mit Ihren echten Fahrzeugen und Teilen',
-    'ROI-Rechnung mit Ihren eigenen Zahlen',
-    'Konkretes, schriftliches Angebot mit Festpreis',
+    '30 Minuten an deinem echten Teilevorgang',
+    'Anfrage, OE-Prüfung, Auftrag und Retoure durchgehen',
+    'Terminwunsch direkt im Formular auswählen',
+    'Konkrete nächste Schritte statt Standardpräsentation',
 ];
 
 export function FinalCTA() {
+    const reducedMotion = useHydrationSafeReducedMotion();
     const [formState, setFormState] = useState({
         firma: '',
         ansprechpartner: '',
         telefon: '',
         email: '',
         nachricht: '',
+        website: '',
     });
     const [appointmentSlot, setAppointmentSlot] = useState<string | null>(null);
     const [consent, setConsent] = useState(false);
@@ -48,7 +51,7 @@ export function FinalCTA() {
 
         // DSGVO: explizite Einwilligung, bevor Daten das Formular verlassen.
         if (!consent) {
-            setError('Bitte bestätigen Sie die Verarbeitung Ihrer Daten laut Datenschutzerklärung.');
+            setError('Bitte bestätige die Verarbeitung deiner Daten laut Datenschutzerklärung.');
             setIsSubmitting(false);
             return;
         }
@@ -66,7 +69,7 @@ export function FinalCTA() {
                 with_appointment: appointmentSlot ? 'yes' : 'no',
             });
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.';
+            const message = err instanceof Error ? err.message : 'Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut.';
             setError(message);
             track('Lead Submit Failed', { source: 'beratung' });
         } finally {
@@ -79,56 +82,51 @@ export function FinalCTA() {
     };
 
     const inputClass =
-        'flex h-11 w-full rounded-lg border border-border bg-background px-3.5 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all';
+        'flex h-10 w-full min-w-0 border border-[#cfd5dc] bg-white px-2.5 py-2 text-sm placeholder:text-[#8a929b] focus:outline-none focus:ring-2 focus:ring-[#1d6fe8] focus:border-transparent transition-all md:h-11 md:px-3.5';
 
     return (
-        <section id="beratung" className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4 md:px-6">
+        <section id="beratung" className="scroll-mt-36 bg-white py-12 md:py-16">
+            <div className="mx-auto max-w-[1450px] px-5 md:px-8 xl:px-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: reducedMotion ? 0 : 0.6 }}
                     viewport={{ once: true, margin: '-80px' }}
-                    className="relative overflow-hidden rounded-3xl gradient-deep shadow-[0_24px_48px_-16px_rgba(18,63,143,0.45)]"
+                    className="relative overflow-hidden rounded-xl border border-[#155bc3] bg-[#1d6fe8] shadow-[0_22px_60px_rgba(29,111,232,.16)]"
                 >
-                    {/* Dezente Lichtakzente im Panel */}
-                    <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.13),transparent_55%)]" />
-
-                    <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center px-6 py-12 md:px-12 md:py-16">
+                    <div className="relative z-10 grid items-stretch lg:grid-cols-[.82fr_1.18fr]">
                         {/* Links: Pitch */}
-                        <div className="text-white">
-                            <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-blue-200 mb-4">
+                        <div className="p-6 text-white md:p-8 lg:p-9">
+                            <p className="mb-3 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-white/60 md:mb-5 md:text-[10px]">
                                 Unverbindliche Beratung
                             </p>
                             <h2
-                                className="text-3xl md:text-4xl lg:text-[2.75rem] font-semibold leading-tight mb-5"
-                                style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}
+                                className="mb-4 text-[32px] font-semibold leading-[1.04] tracking-[-0.045em] md:mb-6 md:text-4xl"
                             >
-                                Lassen Sie uns 30 Minuten sprechen.
+                                Zeig uns einen echten Teilevorgang.
                             </h2>
-                            <p className="text-blue-100/90 text-base md:text-lg leading-relaxed mb-8 max-w-md">
-                                Wir zeigen Partsunion live an Ihren echten Fahrzeugen und Teilen, rechnen Ihr
-                                Einsparpotenzial durch und stimmen ein Paket auf Ihr Anfragevolumen ab.
+                            <p className="mb-4 max-w-md text-sm leading-6 text-white/72 md:mb-6 md:text-lg md:leading-8">
+                                Wir schauen gemeinsam, wie Anfrage, Teileprüfung, Bestand, Beschaffung und Beleg heute in deinem Betrieb zusammenlaufen.
                             </p>
 
-                            <ul className="space-y-3.5 mb-10">
-                                {benefits.map((b) => (
-                                    <li key={b} className="flex items-start gap-3">
-                                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-200" aria-hidden />
-                                        <span className="text-[15px] text-white/95">{b}</span>
+                            <ul className="mb-2 space-y-2.5 md:mb-7 md:space-y-3">
+                                {benefits.map((b, index) => (
+                                    <li key={b} className={`items-start gap-3 ${index > 1 ? 'hidden sm:flex' : 'flex'}`}>
+                                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white md:h-5 md:w-5" aria-hidden />
+                                        <span className="text-[13px] text-white/95 md:text-[15px]">{b}</span>
                                     </li>
                                 ))}
                             </ul>
 
                             {/* Ablauf */}
-                            <div className="border-t border-white/15 pt-6">
+                            <div className="hidden border-t border-white/15 pt-6 sm:block">
                                 <ol className="flex flex-col sm:flex-row gap-4 sm:gap-8">
-                                    {['Formular ausfüllen', 'Rückmeldung in 24 h', 'Live-Demo-Termin'].map((step, i) => (
+                                    {['Betrieb beschreiben', 'Terminwunsch wählen', 'Ablauf gemeinsam prüfen'].map((step, i) => (
                                         <li key={step} className="flex items-center gap-2.5">
-                                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/15 text-xs font-semibold text-white">
+                                            <span className="flex h-6 w-6 items-center justify-center border border-white/25 text-xs font-semibold text-white">
                                                 {i + 1}
                                             </span>
-                                            <span className="text-sm text-blue-100/90">{step}</span>
+                                            <span className="text-sm text-white/68">{step}</span>
                                         </li>
                                     ))}
                                 </ol>
@@ -136,7 +134,7 @@ export function FinalCTA() {
                         </div>
 
                         {/* Rechts: Formular-Karte */}
-                        <div className="rounded-2xl bg-card border border-border shadow-[var(--shadow-raised)] p-6 md:p-8">
+                        <div className="border-t border-white/20 bg-white p-4 md:p-7 lg:border-l lg:border-t-0 lg:p-8">
                             {isSubmitted ? (
                                 <div className="text-center py-12">
                                     <div className="h-14 w-14 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-5">
@@ -146,14 +144,16 @@ export function FinalCTA() {
                                         Vielen Dank!
                                     </h3>
                                     <p className="text-sm text-muted-foreground mb-6">
-                                        Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.
+                                            Wir haben deine Anfrage und den gewählten Terminwunsch erhalten und melden uns bei dir.
                                     </p>
                                     <Button
                                         variant="outline"
                                         onClick={() => {
                                             setIsSubmitted(false);
                                             setError(null);
-                                            setFormState({ firma: '', ansprechpartner: '', telefon: '', email: '', nachricht: '' });
+                                            setFormState({ firma: '', ansprechpartner: '', telefon: '', email: '', nachricht: '', website: '' });
+                                            setAppointmentSlot(null);
+                                            setConsent(false);
                                         }}
                                     >
                                         Neue Anfrage
@@ -161,13 +161,17 @@ export function FinalCTA() {
                                 </div>
                             ) : (
                                 <>
-                                    <h3 className="text-lg font-semibold mb-5 text-foreground" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+                                    <h3 className="mb-4 text-lg font-semibold tracking-[-0.025em] text-[#101318] md:mb-5 md:text-xl">
                                         Beratungstermin vereinbaren
                                     </h3>
-                                    <form onSubmit={handleSubmit} className="space-y-4">
-                                        <div className="grid sm:grid-cols-2 gap-4">
+                                    <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+                                        <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                                            <label htmlFor="cta-website">Website</label>
+                                            <input id="cta-website" type="text" name="website" value={formState.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                                        </div>
+                                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
                                             <div className="space-y-1.5">
-                                                <label htmlFor="cta-firma" className="text-sm font-medium text-foreground">Firma *</label>
+                                                <label htmlFor="cta-firma" className="text-xs font-medium text-foreground md:text-sm">Firma *</label>
                                                 <input
                                                     id="cta-firma"
                                                     type="text"
@@ -180,7 +184,7 @@ export function FinalCTA() {
                                                 />
                                             </div>
                                             <div className="space-y-1.5">
-                                                <label htmlFor="cta-ansprechpartner" className="text-sm font-medium text-foreground">Ansprechpartner *</label>
+                                                <label htmlFor="cta-ansprechpartner" className="text-xs font-medium text-foreground md:text-sm">Ansprechpartner *</label>
                                                 <input
                                                     id="cta-ansprechpartner"
                                                     type="text"
@@ -193,9 +197,9 @@ export function FinalCTA() {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="grid sm:grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
                                             <div className="space-y-1.5">
-                                                <label htmlFor="cta-telefon" className="text-sm font-medium text-foreground">Telefon *</label>
+                                                <label htmlFor="cta-telefon" className="text-xs font-medium text-foreground md:text-sm">Telefon *</label>
                                                 <input
                                                     id="cta-telefon"
                                                     type="tel"
@@ -208,7 +212,7 @@ export function FinalCTA() {
                                                 />
                                             </div>
                                             <div className="space-y-1.5">
-                                                <label htmlFor="cta-email" className="text-sm font-medium text-foreground">E-Mail *</label>
+                                                <label htmlFor="cta-email" className="text-xs font-medium text-foreground md:text-sm">E-Mail *</label>
                                                 <input
                                                     id="cta-email"
                                                     type="email"
@@ -222,22 +226,22 @@ export function FinalCTA() {
                                             </div>
                                         </div>
                                         <div className="space-y-1.5">
-                                            <label htmlFor="cta-nachricht" className="text-sm font-medium text-foreground">Nachricht (optional)</label>
+                                            <label htmlFor="cta-nachricht" className="text-xs font-medium text-foreground md:text-sm">Nachricht (optional)</label>
                                             <textarea
                                                 id="cta-nachricht"
                                                 name="nachricht"
                                                 value={formState.nachricht}
                                                 onChange={handleChange}
                                                 rows={2}
-                                                placeholder="Kurz zu Ihrem Betrieb und Ihren Anforderungen…"
-                                                className="flex w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                                                placeholder="Kurz zu deinem Betrieb und deinen Anforderungen…"
+                                                className="flex w-full resize-none border border-[#cfd5dc] bg-white px-2.5 py-2 text-sm placeholder:text-[#8a929b] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1d6fe8] transition-all md:px-3.5 md:py-2.5"
                                             />
                                         </div>
 
                                         <CalendarPicker value={appointmentSlot} onChange={setAppointmentSlot} />
 
                                         {/* DSGVO-Consent — explizites Opt-in (Art. 6 Abs. 1 lit. a) */}
-                                        <label className="flex items-start gap-2.5 cursor-pointer select-none text-xs text-muted-foreground">
+                                        <label className="flex cursor-pointer select-none items-start gap-2 text-[10px] leading-4 text-muted-foreground md:gap-2.5 md:text-xs md:leading-5">
                                             <input
                                                 type="checkbox"
                                                 required
@@ -246,18 +250,16 @@ export function FinalCTA() {
                                                 className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-2 focus:ring-primary cursor-pointer"
                                             />
                                             <span>
-                                                Ich willige ein, dass meine Angaben zur Kontaktaufnahme und für Rückfragen
-                                                dauerhaft gespeichert werden. Die Daten werden nicht an Dritte weitergegeben.
-                                                Details in der{' '}
+                                                Ich bin damit einverstanden, dass Partsunion meine Angaben zur Bearbeitung dieser Anfrage und für Rückfragen verwendet. Details findest du in der{' '}
                                                 <a href="/legal/datenschutz" className="text-primary hover:underline">
                                                     Datenschutzerklärung
                                                 </a>
-                                                . Widerruf jederzeit per E-Mail möglich.
+                                                .
                                             </span>
                                         </label>
 
                                         {error && (
-                                            <div className="p-3.5 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                                            <div className="border border-destructive/20 bg-destructive/10 p-3.5 text-sm text-destructive">
                                                 {error}
                                             </div>
                                         )}
@@ -265,7 +267,7 @@ export function FinalCTA() {
                                         <Button
                                             type="submit"
                                             size="lg"
-                                            className="w-full h-12 text-base shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] group disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="group h-11 w-full rounded-none text-sm shadow-none disabled:cursor-not-allowed disabled:opacity-50 md:h-12 md:text-base"
                                             disabled={isSubmitting || !consent}
                                         >
                                             {isSubmitting ? (
@@ -282,7 +284,7 @@ export function FinalCTA() {
                                             )}
                                         </Button>
                                         <p className="text-center text-[11px] text-muted-foreground">
-                                            Kostenlos &amp; unverbindlich · Antwort innerhalb von 24 Stunden
+                                            Unverbindlich · Dein Terminwunsch wird mit der Anfrage an Partsunion übermittelt
                                         </p>
                                     </form>
                                 </>

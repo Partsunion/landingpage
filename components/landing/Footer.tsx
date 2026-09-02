@@ -15,6 +15,7 @@ const footerLinks = {
         { label: 'B2B-Kundenportal', href: '/features/b2b-kundenportal-white-label' },
     ],
     product: [
+        { label: 'Desktop-App herunterladen', href: '/download' },
         { label: 'Alle Module', href: '/features' },
         { label: 'Vergleich', href: '/vergleich' },
         { label: 'Business-Case-Rechner', href: '/pricing' },

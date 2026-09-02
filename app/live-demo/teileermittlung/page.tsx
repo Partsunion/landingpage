@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: 'Live Demo – VIN-genaue OE-Teileermittlung | Partsunion',
-        description: 'Fahrzeugschein oder VIN + Teil – Partsunion prüft den YQ-Herstellerkatalog und rät bei Varianten nicht.',
+        description: 'Fahrzeugschein oder VIN + Teil – Partsunion prüft lizenzierte Herstellerkataloge und rät bei Varianten nicht.',
         url: 'https://partsunion.de/live-demo/teileermittlung',
         type: 'website',
         locale: 'de_DE',
@@ -36,7 +36,7 @@ export default function TeileermittlungDemoPage() {
                     <h1 className="text-3xl md:text-4xl font-display font-bold mb-3">VIN-OE-Finder <span className="text-gradient">live</span></h1>
                     <p className="text-[var(--muted-foreground)] text-base">
                         Fahrzeugschein fotografieren oder VIN aus Feld E eingeben — wir ermitteln die passende
-                        <strong className="text-[var(--foreground)]"> OE-Nummer direkt im YQ-Herstellerkatalog</strong>.
+                        <strong className="text-[var(--foreground)]"> OE-Nummer direkt in lizenzierten Herstellerkatalogen</strong>.
                         Varianten bleiben sichtbar, statt automatisch geraten zu werden. Kostenlos, 10 Abfragen.
                     </p>
                 </div>

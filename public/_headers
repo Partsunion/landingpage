@@ -37,6 +37,14 @@
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Versionierte Desktop-Installer ändern ihren Inhalt nicht. Expliziter MIME-Typ
+# und nosniff verhindern, dass Browser den Binärdownload als Inhalt interpretieren.
+/downloads/*.dmg
+  Content-Type: application/x-apple-diskimage
+  Content-Disposition: attachment
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+
 # Short-cache HTML pages so content updates propagate quickly.
 /*.html
   Cache-Control: public, max-age=0, must-revalidate

@@ -43,7 +43,7 @@ export function ArticleOemErmittlung() {
                     in Millisekunden zurück.
                 </li>
                 <li>
-                    <strong>Aftermarket-Teilekataloge</strong> — der lizenzierte TecDoc-Katalog (pro
+                    <strong>Aftermarket-Teilekataloge</strong> — lizenzierte Herstellerkataloge (pro
                     Mandant) mit Hersteller-OE-Nummern, Aftermarket-Alternativen und Cross-References.
                 </li>
                 <li>
@@ -78,7 +78,7 @@ export function ArticleOemErmittlung() {
                 Pro OEM-Kandidat berechnet die Pipeline einen Konfidenz-Score zwischen 0 und 1. Faktoren:
             </p>
             <ul>
-                <li>Übereinstimmung zwischen den Quellen (lokale DB / TecDoc-Katalog / eigene Cross-References)</li>
+                <li>Übereinstimmung zwischen den Quellen (lokale DB / Herstellerkatalog / eigene Cross-References)</li>
                 <li>Anzahl der historischen Bestellungen dieses OEMs für dieses Fahrzeug</li>
                 <li>Retoure-Quote dieses OEMs in den letzten 90 Tagen</li>
                 <li>Klarheit der Fahrzeug-Disambiguierung (Motorvariante, Ausstattungslinie)</li>

@@ -12,11 +12,11 @@ const BING_VERIFICATION = "";  // z. B. "0123ABC…" aus Bing Webmaster Tools
 export const metadata: Metadata = {
   metadataBase: new URL("https://partsunion.de"),
   title: {
-    default: "Partsunion – Enterprise-ERP für den Autoteilehandel",
+    default: "Partsunion – Warenwirtschaft für den Autoteilehandel",
     template: "%s | Partsunion",
   },
   description:
-    "Partsunion ist das Enterprise-ERP für den Autoteilehandel: Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen Plattform. WhatsApp ist als Eingangskanal integrierbar.",
+    "Partsunion verbindet Teileanfragen, Fahrzeugbezug, Verkauf, Einkauf, Lager und Rechnung in einem durchgängigen Ablauf für den Autoteilehandel.",
   keywords: [
     "Autoteile Software",
     "Enterprise ERP Autoteilehandel",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "Teilehandel Software",
     "OEM Ermittlung",
     "OEM Nummer finden",
-    "TecDoc Anbindung",
+    "lizenzierte Herstellerkataloge",
     "Kassenbuch GoBD",
     "TSE Kasse Autoteile",
     "DATEV Export Autoteile",
@@ -71,9 +71,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Partsunion – Enterprise-ERP für den Autoteilehandel",
+    title: "Partsunion – Warenwirtschaft für den Autoteilehandel",
     description:
-      "Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen ERP-Plattform für den Autoteilehandel.",
+      "Vom ersten Teilebedarf bis zur Rechnung: Verkauf, Einkauf, Lager und Büro in einem durchgängigen Ablauf.",
     type: "website",
     locale: "de_DE",
     url: "https://partsunion.de",
@@ -83,9 +83,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Partsunion – Enterprise-ERP für den Autoteilehandel",
+    title: "Partsunion – Warenwirtschaft für den Autoteilehandel",
     description:
-      "Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen auf einer gemeinsamen ERP-Plattform.",
+      "Teileanfragen, Fahrzeugbezug, Verkauf, Einkauf, Lager und Rechnung in einem System.",
   },
   alternates: {
     canonical: "https://partsunion.de",
@@ -108,10 +108,9 @@ export const metadata: Metadata = {
   },
 };
 
-import { Navbar } from "@/components/layout/Navbar";
 import { CookieBanner } from "@/components/layout/CookieBanner";
-import { Footer } from "@/components/landing/Footer";
 import { Analytics } from "@/components/layout/Analytics";
+import { SiteShell } from "@/components/layout/SiteShell";
 
 export default function RootLayout({
   children,
@@ -196,7 +195,7 @@ export default function RootLayout({
                   // Live-Marktplatz-/Shop-Sync und die direkte Großhändler-Bestellung
                   // sind Roadmap (noch nicht live) und gehören daher NICHT in die
                   // strukturierten Produktdaten — sonst irreführende Werbung (UWG §5).
-                  // TecDoc wird als genutzte Katalog-Lizenz geführt, nicht als Partnerschaft.
+                  // Katalogzugriffe werden ausschließlich als lizenzierte Nutzung geführt, nicht als Partnerschaft.
                   featureList: [
                     "Teileidentifikation über VIN, HSN/TSN, OE-Nummern und Fahrzeugdaten",
                     "Einkauf mit Lieferanten, Bestellvorschlägen und Bestellabwicklung",
@@ -232,11 +231,7 @@ export default function RootLayout({
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialiased flex flex-col min-h-screen bg-background text-foreground`}
       >
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <SiteShell>{children}</SiteShell>
         <CookieBanner />
         <Analytics />
       </body>

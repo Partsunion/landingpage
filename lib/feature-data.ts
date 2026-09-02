@@ -207,7 +207,7 @@ export const featureData: FeatureDetail[] = [
         description: 'Machen Sie aus Rücksendungen einen geordneten Prozess.',
         icon: Truck,
         features: [
-            'RMA mit Artikel, Menge, Grund und Ursprungsbeleg',
+            'Retoure mit Artikel, Menge, Grund und Ursprungsbeleg',
             'Zustands- und Verantwortlichkeitsprüfung',
             'Wiedereinlagerung erst nach fachlicher Entscheidung',
             'Verknüpfte Gutschrift oder Lieferantenreklamation',

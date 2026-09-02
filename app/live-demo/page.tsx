@@ -57,7 +57,7 @@ export default function LiveDemoPage() {
                         <h2 className="text-2xl font-display font-semibold mb-2">VIN-OE-Finder</h2>
                         <p className="text-sm text-[var(--muted-foreground)] leading-relaxed flex-1">
                             Fahrzeugschein fotografieren oder VIN aus Feld E eingeben. Wir ermitteln die
-                            <strong className="text-[var(--foreground)]"> passende OE-Nummer im YQ-Herstellerkatalog</strong> und zeigen offene Varianten ehrlich an. 10 Abfragen kostenlos.
+                            <strong className="text-[var(--foreground)]"> passende OE-Nummer in lizenzierten Herstellerkatalogen</strong> und zeigen offene Varianten ehrlich an. 10 Abfragen kostenlos.
                         </p>
                         <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
                             OEM-Nummer finden <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -156,7 +156,7 @@ export const featureContent: Record<string, FeatureContent> = {
     },
 
     'retourenmanagement': {
-        subtitle: 'Kundenretoure, RMA, Lieferantenreklamation und Gutschrift als kontrollierte Prozesse.',
+        subtitle: 'Kundenretoure, Lieferantenreklamation und Gutschrift als kontrollierte Prozesse.',
         specs: [
             { label: 'Eingang', value: 'Retoure mit Grund, Artikel, Menge und Ursprungsbeleg' },
             { label: 'Prüfung', value: 'Zustand, Verantwortlichkeit und nächste Aktion' },
@@ -170,7 +170,7 @@ export const featureContent: Record<string, FeatureContent> = {
             sub: 'Eingang → Prüfung → Abschluss',
             footer: 'Bestand und Gutschrift folgen der Entscheidung',
             rows: [
-                { tag: 'RMA', value: 'Retoure mit Ursprungsbeleg', status: 'muted' },
+                { tag: 'RET', value: 'Retoure mit Ursprungsbeleg', status: 'muted' },
                 { tag: 'PRÜF', value: 'Zustand und Grund dokumentiert', status: 'info' },
                 { tag: 'ENTSC', value: 'Wiedereinlagern · Reklamieren · Ablehnen', status: 'info' },
                 { tag: 'ABSCH', value: 'Bestand und Beleg aktualisiert', status: 'success' },

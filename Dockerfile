@@ -49,12 +49,13 @@ COPY --from=builder /app/out ./out
 RUN rm -f ./out/_headers
 COPY --from=production-deps /app/node_modules ./node_modules
 COPY package.json ./
+COPY server.mjs ./
 
 EXPOSE 8080
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD wget -q --spider http://localhost:8080/ || exit 1
+    CMD wget -q --spider http://127.0.0.1:8080/ || exit 1
 
 # Audit H-9: serve as the built-in non-root `node` user (port 8080 > 1024).
 USER node
-CMD ["./node_modules/.bin/serve", "out", "-l", "8080", "--no-clipboard"]
+CMD ["node", "server.mjs"]

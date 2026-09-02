@@ -4,7 +4,7 @@
 
 /**
  * OemSearchPublic — öffentliche Fahrzeug→Teil→OE-Suche auf der Landingpage.
- * Gleiche VIN-genaue YQ-WS.OEM-Logik wie das Admin-Tool, aber max. 10 Abfragen
+ * Gleiche VIN-genaue Herstellerkatalog-Logik wie das Admin-Tool, aber max. 10 Abfragen
  * (server-seitig per IP gezählt, in der DB — überlebt Reload & Bot-Neustart).
  */
 import { useEffect, useRef, useState, type FormEvent } from 'react';
@@ -41,7 +41,7 @@ interface FindResult {
     image?: string | null;
     oemCandidates?: Array<{ oem: string; brand: string }>;
     vehicleCandidates?: Array<{ id: string; label: string }>;
-    source?: 'yq-ws-oem-v2';
+    source?: string;
     provider?: string;
     remaining?: number;
     error?: string;
@@ -296,7 +296,7 @@ export function OemSearchPublic() {
                                     </div>
                                 )}
                                 <div className="text-xs text-[var(--muted-foreground)]">
-                                    {result.vehicle}<span className="text-primary"> · YQ-Herstellerkatalog per VIN</span>
+                                    {result.vehicle}<span className="text-primary"> · Lizenzierter Herstellerkatalog per VIN</span>
                                 </div>
                                 {result.grouping?.verified && (
                                     <div className="mt-1 text-xs text-success">
@@ -336,7 +336,7 @@ export function OemSearchPublic() {
                                     : result.alternatives
                                     ? `${result.fitmentVariants.length} vom Hersteller ausgewiesene Alternativen`
                                     : result.oem
-                                    ? 'YQ-Kandidat · noch nicht freigabefähig'
+                                    ? 'Katalog-Kandidat · noch nicht freigabefähig'
                                     : `${result.fitmentVariants.length} VIN-passende Ausführungen — Auswahl offen`}
                             </div>
                             {result.reason && (
@@ -356,7 +356,7 @@ export function OemSearchPublic() {
                                 </div>
                             )}
                             <div className="text-sm text-[var(--foreground)]">{result.partType}</div>
-                            <div className="text-xs text-[var(--muted-foreground)] mb-3">{result.vehicle}<span className="text-primary"> · YQ-Herstellerkatalog per VIN</span></div>
+                            <div className="text-xs text-[var(--muted-foreground)] mb-3">{result.vehicle}<span className="text-primary"> · Lizenzierter Herstellerkatalog per VIN</span></div>
                             <div className="grid gap-1.5 sm:grid-cols-2">
                                 {result.fitmentVariants.slice(0, 6).map((v, i) => (
                                     <div key={i} className="rounded-lg border border-border bg-muted px-3 py-2">
@@ -377,7 +377,7 @@ export function OemSearchPublic() {
                             </div>
                             <p className="text-[11px] text-[var(--muted-foreground)]/70 mt-2">
                                 {result.grouping?.matched === 'bundle'
-                                    ? 'YQ führt die Paketbestandteile einzeln. Ausstattungsabhängige Varianten bleiben deshalb sichtbar.'
+                                    ? 'Der lizenzierte Katalog führt die Paketbestandteile einzeln. Ausstattungsabhängige Varianten bleiben deshalb sichtbar.'
                                     : 'Wir wählen bei offenen Ausstattungsmerkmalen absichtlich keine Nummer auf Verdacht.'}
                             </p>
                         </div>

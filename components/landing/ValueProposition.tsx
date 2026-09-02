@@ -113,7 +113,7 @@ export function ValueProposition() {
                         icon={ShieldCheck}
                         eyebrow="OEM-Pipeline"
                         title="Das richtige Teil beim ersten Mal."
-                        body="Mehrstufige KI-Pipeline gleicht jede Anfrage gegen den lizenzierten TecDoc-Katalog und Ihre eigene Datenbank ab. Konfidenz-Prüfung und Kreuzvalidierung für maximale Treffsicherheit — mit dem Ziel einer deutlich niedrigeren Retourenquote."
+                        body="Die Ermittlung gleicht jede Anfrage mit lizenzierten Herstellerkatalogen und Ihrer eigenen Datenbank ab. Offene Varianten bleiben sichtbar und gehen in die Fachprüfung — mit dem Ziel, Fehlbestellungen und Rückfragen deutlich zu reduzieren."
                         className="md:col-span-2 md:row-span-2 min-h-[420px]"
                         largeVisual
                     >
