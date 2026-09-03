@@ -18,13 +18,13 @@ export const solutionStories = {
         situationTitle: 'Die Anfrage darf ruhig unordentlich ankommen.',
         situationIntro: 'Der Kunde schreibt so, wie Kunden eben schreiben. Partsunion sorgt dafür, dass daraus intern ein klarer, weiterführbarer Vorgang wird.',
         situations: [
-            { moment: 'Eingang', title: '„Brauche Bremse vorne für den Golf.“', text: 'Nachricht, Foto oder Telefonnotiz landet mit Kanal, Kunde und Zeitstempel in der Anfrage-Inbox.' },
+            { moment: 'Eingang', title: '„Brauche Bremse vorne für den Golf.“', text: 'Nachricht, Foto oder Telefonnotiz landet mit Kanal, Kunde und Zeitstempel unter Anfragen.' },
             { moment: 'Prüfung', title: 'Fahrzeug und Bedarf werden ergänzt.', text: 'Fahrzeugschein, VIN und offene Angaben stehen direkt am Gespräch – nicht in einem zweiten Fenster.' },
             { moment: 'Übergabe', title: 'Der geprüfte Fall wird zum Angebot.', text: 'Positionen, Hinweise und Kundenkontext gehen weiter, ohne dass jemand den Chat erneut abschreiben muss.' },
         ],
         comparisonTitle: 'Vom losen Kontakt zum bearbeitbaren Vorgang.',
         workflowTitle: 'So wird aus einer Nachricht ein Verkauf.',
-        capabilityTitle: 'Was eine echte Anfrage-Inbox zusammenhalten muss.',
+        capabilityTitle: 'Was eine gute Anfragebearbeitung zusammenhalten muss.',
         outcomeTitle: 'Am Ende ist nicht nur die Nachricht beantwortet.',
         outcomes: [
             { title: 'Klare Zuständigkeit', text: 'Jeder sieht, wer übernimmt, was noch fehlt und welcher Schritt als Nächstes ansteht.' },
@@ -168,7 +168,7 @@ export const solutionStories = {
     mobile: {
         situationEyebrow: 'Die Warenwirtschaft dort, wo das Teil liegt',
         situationTitle: 'Nicht alles beginnt am Schreibtisch.',
-        situationIntro: 'Am Fahrzeug, Regal, Paket oder Retourentisch zählt eine schnelle Erfassung. Die Händler-App bringt genau diesen Stand direkt in den passenden Partsunion-Vorgang.',
+        situationIntro: 'Am Fahrzeug, Regal, Paket oder Retourentisch zählt eine schnelle Erfassung. Die Händler-App bringt genau diesen Stand direkt in den passenden Partsunion-Prozess.',
         situations: [
             { moment: 'Kamera', title: 'Nummer, Fahrzeugschein oder Zustand aufnehmen.', text: 'Die Erfassung startet am physischen Teil, ohne Notizzettel und spätere Galerie-Suche.' },
             { moment: 'Zuordnung', title: 'Kunde, Artikel oder Beleg verbinden.', text: 'Der mobile Entwurf erhält sofort den fachlichen und kaufmännischen Kontext.' },

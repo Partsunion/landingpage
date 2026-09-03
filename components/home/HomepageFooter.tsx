@@ -7,7 +7,7 @@ const groups = [
         title: 'Produkt',
         links: [
             { label: 'Alle Lösungen', href: '/loesungen' },
-            { label: 'Anfragen & WhatsApp', href: '/loesungen/anfragen-whatsapp' },
+            { label: 'Anfrage & WhatsApp', href: '/loesungen/anfragen-whatsapp' },
             { label: 'OE-Ermittlung', href: '/loesungen/oe-ermittlung' },
             { label: 'Betriebsassistent', href: '/loesungen/betriebsassistent' },
             { label: 'Desktop-App', href: '/download' },

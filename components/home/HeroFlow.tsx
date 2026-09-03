@@ -236,7 +236,7 @@ export function HeroFlow() {
 
                         <div className="bg-[#e9eef4] p-2 sm:p-3">
                             <div className="mb-2 grid grid-cols-[90px_18px_minmax(0,1fr)] items-center gap-1 px-0.5 text-[5px] font-bold uppercase tracking-[.1em] text-[#637489] sm:grid-cols-[165px_30px_minmax(0,1fr)] sm:gap-2 sm:text-[7px] sm:tracking-[.12em] lg:grid-cols-[180px_34px_minmax(0,1fr)]">
-                                <span>Kundenkontakt</span><span /><span>Partsunion Vorgang</span>
+                                <span>Kundenkontakt</span><span /><span>Bearbeitung mit Partsunion</span>
                             </div>
                             <div className="relative grid grid-cols-[90px_18px_minmax(0,1fr)] items-center gap-1 sm:grid-cols-[165px_30px_minmax(0,1fr)] sm:items-end sm:gap-2 lg:grid-cols-[180px_34px_minmax(0,1fr)]">
                                 <PhoneConversation active={active} reducedMotion={reducedMotion} />

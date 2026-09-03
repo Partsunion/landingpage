@@ -17,7 +17,7 @@ import { solutionPages, type SolutionIcon } from '@/lib/solutions-data';
 
 export const metadata: Metadata = {
     title: 'Lösungen für den Autoteilehandel',
-    description: 'Von Anfrage und OE-Ermittlung über Warenwirtschaft, Einkauf und Retoure bis Finanzen und Betriebsassistent: Partsunion verbindet den kompletten Teilevorgang.',
+    description: 'Von Anfrage und OE-Ermittlung über Warenwirtschaft, Einkauf und Retoure bis Finanzen und Betriebsassistent: Partsunion verbindet den kompletten Prozess.',
     alternates: { canonical: '/loesungen' },
 };
 
@@ -42,7 +42,7 @@ export default function SolutionsOverview() {
                 <div className="mx-auto max-w-[1320px] px-5 md:px-8 xl:px-10">
                     <span className="text-[9px] font-bold uppercase tracking-[.16em] text-[#8dbaf8]">Partsunion Lösungen</span>
                     <div className="mt-4 grid gap-6 lg:grid-cols-[.78fr_1.22fr] lg:items-end">
-                        <h1 className="max-w-[650px] text-[clamp(2.25rem,3.7vw,3.45rem)] font-semibold leading-[1.04] tracking-[-.044em]">Ein Teilevorgang. Neun starke Arbeitsbereiche.</h1>
+                        <h1 className="max-w-[650px] text-[clamp(2.25rem,3.7vw,3.45rem)] font-semibold leading-[1.04] tracking-[-.044em]">Ein Prozess. Neun starke Arbeitsbereiche.</h1>
                         <p className="max-w-[650px] text-[16px] leading-7 text-white/62 lg:justify-self-end">Jede Lösung ist eigenständig nutzbar und arbeitet trotzdem auf demselben Kunden-, Artikel- und Belegkontext. Wähle den Bereich, den du genauer sehen möchtest.</p>
                     </div>
                 </div>

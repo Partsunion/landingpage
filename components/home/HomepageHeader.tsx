@@ -29,7 +29,7 @@ const moduleGroups: Array<{ title: string; links: ModuleLink[] }> = [
     {
         title: 'Verkaufen',
         links: [
-            { label: 'Anfrage-Inbox', text: 'WhatsApp, Telefon und Theke', href: '/loesungen/anfragen-whatsapp', icon: Inbox },
+            { label: 'Anfrage', text: 'WhatsApp, Telefon und Theke', href: '/loesungen/anfragen-whatsapp', icon: Inbox },
             { label: 'OE-Ermittlung', text: 'Fahrzeug und Teileprüfung', href: '/loesungen/oe-ermittlung', icon: ScanLine },
             { label: 'Angebot & Auftrag', text: 'Vom Bedarf zum Beleg', href: '/loesungen/angebot-auftrag', icon: ShoppingCart },
         ],
@@ -111,7 +111,7 @@ export function HomepageHeader() {
                                     >
                                         <div className="p-6">
                                             <div className="mb-4 flex items-center justify-between border-b border-[#d7dee7] pb-4">
-                                                <span><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#2376e5]">Lösungen</span><strong className="ml-3 text-sm font-semibold">Für den kompletten Teilevorgang</strong></span>
+                                                <span><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#2376e5]">Lösungen</span><strong className="ml-3 text-sm font-semibold">Für den kompletten Prozess</strong></span>
                                                 <Link href="/loesungen" onClick={closeAll} className="inline-flex items-center gap-2 text-xs font-semibold text-[#155fc8]">Alle Lösungen <ArrowRight className="h-3.5 w-3.5" /></Link>
                                             </div>
                                             <div className="grid grid-cols-3 gap-7">

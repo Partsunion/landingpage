@@ -20,7 +20,7 @@ const faqs = [
     },
     {
         question: 'Wie beginnt die Einführung in unserem Betrieb?',
-        answer: 'Wir starten mit einem echten Teilevorgang aus deinem Alltag. Daraus leiten wir ab, welche Arbeitsbereiche, Rollen und Daten zuerst vorbereitet werden sollten. Theke, Lager und Büro bekommen genau die Schritte, die sie für ihre Arbeit brauchen.',
+        answer: 'Wir starten mit einem echten Arbeitsprozess aus deinem Alltag. Daraus leiten wir ab, welche Arbeitsbereiche, Rollen und Daten zuerst vorbereitet werden sollten. Theke, Lager und Büro bekommen genau die Schritte, die sie für ihre Arbeit brauchen.',
     },
     {
         question: 'Entscheidet der Betriebsassistent selbst, welches Teil passt oder was bestellt wird?',
@@ -59,7 +59,7 @@ export function PartsunionHomepage() {
                 <div className="mx-auto max-w-[1420px] px-5 md:px-8 xl:px-10">
                     <div className="grid gap-6 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
                         <div><div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#1c6dd8]">Echte Produktansichten</div><h2 className="mt-3 text-[clamp(2rem,3.1vw,3.05rem)] font-semibold leading-[1.07] tracking-[-.045em]">Das ist Partsunion im Tagesgeschäft.</h2></div>
-                        <p className="max-w-2xl text-[15px] leading-7 text-[#5f6b7b] lg:justify-self-end">Verkaufsarbeitsplatz, Anfrage-Inbox, Auftrag, Warenwirtschaft und Finanzen – direkt aus dem aktuellen Partsunion-Demosystem.</p>
+                        <p className="max-w-2xl text-[15px] leading-7 text-[#5f6b7b] lg:justify-self-end">Verkaufsarbeitsplatz, Anfragen, Auftrag, Warenwirtschaft und Finanzen – direkt aus dem aktuellen Partsunion-Demosystem.</p>
                     </div>
                     <ProductShowcase />
                 </div>

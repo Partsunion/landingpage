@@ -22,7 +22,7 @@ import {
  */
 
 const benefits = [
-    '30 Minuten an deinem echten Teilevorgang',
+    '30 Minuten an deinem echten Arbeitsprozess',
     'Anfrage, OE-Prüfung, Auftrag und Retoure durchgehen',
     'Terminwunsch direkt im Formular auswählen',
     'Konkrete nächste Schritte statt Standardpräsentation',
@@ -103,7 +103,7 @@ export function FinalCTA() {
                             <h2
                                 className="mb-4 text-[32px] font-semibold leading-[1.04] tracking-[-0.045em] md:mb-6 md:text-4xl"
                             >
-                                Zeig uns einen echten Teilevorgang.
+                                Zeig uns deinen echten Arbeitsprozess.
                             </h2>
                             <p className="mb-4 max-w-md text-sm leading-6 text-white/72 md:mb-6 md:text-lg md:leading-8">
                                 Wir schauen gemeinsam, wie Anfrage, Teileprüfung, Bestand, Beschaffung und Beleg heute in deinem Betrieb zusammenlaufen.

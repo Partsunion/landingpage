@@ -55,7 +55,7 @@ export function ProcessComparison() {
                         <div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#1c6dd8]">Der Unterschied im Alltag</div>
                         <h2 className="mt-3 text-[clamp(2rem,3vw,3rem)] font-semibold leading-[1.07] tracking-[-.043em] text-[#111c2e]">Weniger Rückfragen. Weniger suchen. Mehr erledigen.</h2>
                     </div>
-                    <p className="max-w-2xl text-[15px] leading-7 text-[#627084] lg:justify-self-end">Aus WhatsApp, Fahrzeugdaten, Katalog, Lager und Belegen wird ein durchgängiger Teilevorgang. Jeder Schritt arbeitet mit dem bereits geprüften Stand weiter.</p>
+                    <p className="max-w-2xl text-[15px] leading-7 text-[#627084] lg:justify-self-end">Aus WhatsApp, Fahrzeugdaten, Katalog, Lager und Belegen wird ein durchgängiger Prozess. Jeder Schritt arbeitet mit dem bereits geprüften Stand weiter.</p>
                 </div>
 
                 <div className="mt-7 overflow-hidden border border-[#b9c7d7] bg-white shadow-[0_18px_48px_rgba(20,40,68,.08)] md:mt-9 lg:grid lg:grid-cols-[.72fr_1.28fr]">

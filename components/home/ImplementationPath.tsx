@@ -6,7 +6,7 @@ import { ArrowRight, Headphones, ListChecks, Settings2, UsersRound } from 'lucid
 import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
 
 const steps = [
-    { number: '01', title: 'Ablauf verstehen', text: 'Wir gehen einen echten Teilevorgang aus deinem Betrieb gemeinsam durch.', icon: ListChecks },
+    { number: '01', title: 'Ablauf verstehen', text: 'Wir gehen einen echten Arbeitsprozess aus deinem Betrieb gemeinsam durch.', icon: ListChecks },
     { number: '02', title: 'System einrichten', text: 'Arbeitsbereiche, Rollen und vorhandene Daten werden passend vorbereitet.', icon: Settings2 },
     { number: '03', title: 'Mitarbeiter mitnehmen', text: 'Theke, Lager und Büro lernen die Schritte, die sie wirklich brauchen.', icon: UsersRound },
     { number: '04', title: 'Gemeinsam starten', text: 'Beim Start und im Tagesgeschäft gibt es einen festen Ansprechpartner.', icon: Headphones },

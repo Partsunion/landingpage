@@ -25,22 +25,23 @@ export type SolutionPageData = {
 
 export const solutionPages: SolutionPageData[] = [
     {
-        slug: 'anfragen-whatsapp', navLabel: 'Anfrage-Inbox', group: 'Verkaufen', icon: 'inbox', visual: 'inquiry',
+        slug: 'anfragen-whatsapp', navLabel: 'Anfrage', group: 'Verkaufen', icon: 'inbox', visual: 'inquiry',
         eyebrow: 'Theke und WhatsApp in einem System',
         title: 'Aus der Anfrage wird direkt ein Angebot.',
-        intro: 'Ob der Kunde mit seinem Fahrzeugschein an der Theke steht oder per WhatsApp schreibt: Partsunion übernimmt Fahrzeug, Teilebedarf und Bearbeitungsstand in denselben Verkaufsprozess.',
+        intro: 'Egal ob WhatsApp, Telefon, Theke oder E-Mail: Partsunion erfasst und strukturiert Anfragen automatisch, führt Kunde, Fahrzeug und Teilebedarf zusammen und macht sie direkt für die weitere Bearbeitung bereit.',
         promise: 'Weniger Rückfragen. Weniger suchen. Mehr Anfragen sauber bearbeiten.',
         screenshot: '/product/whatsapp-vorgang.png', screenshotAlt: 'Aktuelle Partsunion Konversationsansicht einer WhatsApp-Anfrage',
         without: ['Thekenfall und WhatsApp getrennt bearbeiten', 'Fahrzeugdaten in Notizen oder im Kopf', 'Rückfragen ohne sichtbaren Bearbeitungsstand', 'Angebot später erneut aus dem Chat abtippen'],
-        withPartsunion: ['Theke und WhatsApp in einer Anfrage-Inbox', 'Fahrzeugschein und Originalnachricht bleiben erhalten', 'Kunde, Fahrzeug und Teil werden verbunden', 'Angebot entsteht direkt aus dem geprüften Fall'],
+        withPartsunion: ['Theke und WhatsApp gemeinsam unter Anfragen', 'Fahrzeugschein und Originalnachricht bleiben erhalten', 'Kunde, Fahrzeug und Teil werden verbunden', 'Angebot entsteht automatisch aus der geprüften Auswahl'],
         workflow: [
-            { number: '01', title: 'Eingang übernehmen', text: 'Thekenfall oder WhatsApp-Anfrage landet im gemeinsamen Arbeitsvorrat.' },
-            { number: '02', title: 'Fahrzeug und Bedarf erfassen', text: 'Fahrzeugschein, Fahrzeugdaten und Teilewunsch bleiben am selben Vorgang.' },
-            { number: '03', title: 'Passende Teile zeigen', text: 'Marken, Preiskategorien und Verfügbarkeit werden gemeinsam dargestellt.' },
-            { number: '04', title: 'Direkt anbieten', text: 'Die ausgewählte Variante wird ohne Neuerfassung ins Angebot übernommen.' },
+            { number: '01', title: 'Anfrage', text: 'Thekenfall oder WhatsApp-Anfrage landet im gemeinsamen Arbeitsvorrat.' },
+            { number: '02', title: 'Kundendaten', text: 'Kunde, Kontakt und Fahrzeug werden automatisch zusammengeführt.' },
+            { number: '03', title: 'Teilebedarf', text: 'Text, Foto oder Sprachnachricht wird als konkreter Bedarf erfasst.' },
+            { number: '04', title: 'Bearbeitung', text: 'Rückfragen, Teileidentifikation, Preis und Verfügbarkeit werden automatisiert bearbeitet.' },
+            { number: '05', title: 'Angebot', text: 'Aus der geprüften Auswahl wird automatisch das passende Angebot erstellt.' },
         ],
         capabilities: [
-            { title: 'Ein System für Theke und WhatsApp', text: 'Kanalfilter, Zuständigkeit und Status schaffen einen gemeinsamen Arbeitsvorrat.' },
+            { title: 'Ein System für Theke und WhatsApp', text: 'Kanalfilter, Zuständigkeit und Status schaffen einen gemeinsamen Arbeitsvorrat unter Anfragen.' },
             { title: 'WhatsApp in fünf Sprachen', text: 'Deutsch, Englisch, Türkisch, Kurdisch und Polnisch führen durch denselben Teileablauf.' },
             { title: 'Fahrzeug am Vorgang', text: 'VIN, HSN/TSN, Modell und Dokumente stehen dort, wo die Teileentscheidung getroffen wird.' },
             { title: 'Übergabe ohne Medienbruch', text: 'Die geprüfte Anfrage kann in Angebot, Auftrag oder Retoure weitergeführt werden.' },

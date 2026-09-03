@@ -41,7 +41,7 @@ function WindowBar({ icon: Icon, title, detail, badge = 'BEISPIELVORGANG' }: { i
 function InquiryEvidence() {
     return (
         <div className="overflow-hidden border border-[#aebdce] bg-white shadow-[0_24px_55px_rgba(26,47,75,.14)]">
-            <WindowBar icon={Inbox} title="ANFRAGE-INBOX" detail="Eingang, Fachprüfung und Verkauf in einem Vorgang" />
+            <WindowBar icon={Inbox} title="ANFRAGEN" detail="Eingang, Fachprüfung und Verkauf in einem Prozess" />
             <div className="grid min-h-[410px] sm:grid-cols-[.78fr_1.22fr]">
                 <section className="border-b border-[#d2dce6] bg-[#eef3f7] p-4 sm:border-b-0 sm:border-r">
                     <div className="flex items-center gap-2 text-[7px] font-bold uppercase tracking-[.12em] text-[#6f7e90]"><MessageCircle className="h-3 w-3 text-[#22a06b]" /> Originaldialog</div>

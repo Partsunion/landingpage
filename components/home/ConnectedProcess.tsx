@@ -35,7 +35,7 @@ export function ConnectedProcess() {
                 <div className="grid gap-6 lg:grid-cols-[.82fr_1.18fr] lg:items-end">
                     <div>
                         <div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#8dbafd]">Der Partsunion Arbeitsablauf</div>
-                        <h2 className="mt-3 max-w-[620px] text-[clamp(2rem,3.1vw,3rem)] font-semibold leading-[1.08] tracking-[-.043em]">Ein Teilevorgang. Vom ersten Kontakt bis zum Abschluss.</h2>
+                        <h2 className="mt-3 max-w-[620px] text-[clamp(2rem,3.1vw,3rem)] font-semibold leading-[1.08] tracking-[-.043em]">Ein Prozess. Vom ersten Kontakt bis zum Abschluss.</h2>
                     </div>
                     <p className="max-w-2xl text-[15px] leading-7 text-white/62 lg:justify-self-end">Nicht jede Aufgabe muss vollautomatisch laufen. Entscheidend ist, dass Kunde, Fahrzeug, Teil, Bestand und Belege denselben geprüften Stand verwenden.</p>
                 </div>
