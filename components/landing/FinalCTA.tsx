@@ -23,7 +23,7 @@ import {
 
 const benefits = [
     '30 Minuten an deinem echten Arbeitsprozess',
-    'Anfrage, OE-Prüfung, Auftrag und Retoure durchgehen',
+    'Anfrage, OE-Prüfung, Auftrag, Retoure und Reklamation durchgehen',
     'Terminwunsch direkt im Formular auswählen',
     'Konkrete nächste Schritte statt Standardpräsentation',
 ];

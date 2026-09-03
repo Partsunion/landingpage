@@ -199,7 +199,7 @@ export default function RootLayout({
                   featureList: [
                     "Teileidentifikation über VIN, HSN/TSN, OE-Nummern und Fahrzeugdaten",
                     "Einkauf mit Lieferanten, Bestellvorschlägen und Bestellabwicklung",
-                    "Integrierte Warenwirtschaft mit Foto-Wareneingang und Retoure",
+                    "Integrierte Warenwirtschaft mit Foto-Wareneingang, Retouren und Reklamationen",
                     "Verkauf mit durchgängiger Belegkette von Angebot bis Rechnung",
                     "Faktura und Finanzen mit ZUGFeRD/XRechnung, TSE, DATEV-Export und GoBD-Funktionen",
                     "Über 40 datengetriebene Auswertungen aus echten Belegen",

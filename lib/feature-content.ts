@@ -156,9 +156,9 @@ export const featureContent: Record<string, FeatureContent> = {
     },
 
     'retourenmanagement': {
-        subtitle: 'Kundenretoure, Lieferantenreklamation und Gutschrift als kontrollierte Prozesse.',
+        subtitle: 'Kundenretoure, Kundenreklamation und Lieferantenreklamation als getrennte, kontrollierte Prozesse.',
         specs: [
-            { label: 'Eingang', value: 'Retoure mit Grund, Artikel, Menge und Ursprungsbeleg' },
+            { label: 'Eingang', value: 'Retoure oder Reklamation mit Grund, Artikel, Menge und Ursprungsbeleg' },
             { label: 'Prüfung', value: 'Zustand, Verantwortlichkeit und nächste Aktion' },
             { label: 'Bestand', value: 'Wiedereinlagerung erst nach fachlicher Entscheidung' },
             { label: 'Finanzen', value: 'Gutschrift oder Erstattung mit dokumentiertem Bezug' },
@@ -166,11 +166,11 @@ export const featureContent: Record<string, FeatureContent> = {
         ],
         preview: {
             kind: 'pipeline',
-            title: 'Retourenprozess',
-            sub: 'Eingang → Prüfung → Abschluss',
+            title: 'Retouren & Reklamationen',
+            sub: 'Eingang → Fallart → Prüfung → Abschluss',
             footer: 'Bestand und Gutschrift folgen der Entscheidung',
             rows: [
-                { tag: 'RET', value: 'Retoure mit Ursprungsbeleg', status: 'muted' },
+                { tag: 'FALL', value: 'Retoure oder Reklamation mit Ursprungsbeleg', status: 'muted' },
                 { tag: 'PRÜF', value: 'Zustand und Grund dokumentiert', status: 'info' },
                 { tag: 'ENTSC', value: 'Wiedereinlagern · Reklamieren · Ablehnen', status: 'info' },
                 { tag: 'ABSCH', value: 'Bestand und Beleg aktualisiert', status: 'success' },

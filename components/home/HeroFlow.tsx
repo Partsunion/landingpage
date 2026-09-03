@@ -201,7 +201,7 @@ export function HeroFlow() {
                         Zukunft beginnt, wo Prozesse automatisiert werden.
                     </motion.h1>
                     <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.5, delay: reducedMotion ? 0 : 0.12 }} className="mt-4 max-w-[520px] sm:mt-5">
-                        <strong className="block text-[17px] font-semibold leading-6 text-[#27364b]">Vom ersten Foto bis zu Bestellung, Beleg und Retoure.</strong>
+                        <strong className="block text-[17px] font-semibold leading-6 text-[#27364b]">Vom ersten Foto bis zu Bestellung, Beleg, Retoure und Reklamation.</strong>
                         <p className="mt-2 text-[15px] leading-[1.65] text-[#647084]">Partsunion verbindet Warenwirtschaft, Theke und Kasse für den Autoteilehandel.<span className="hidden sm:inline"> Kundenanfrage, Fahrzeug, Teil und alle nächsten Schritte bleiben in einem Vorgang.</span></p>
                     </motion.div>
 

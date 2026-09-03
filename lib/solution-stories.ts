@@ -106,26 +106,26 @@ export const solutionStories = {
         outcomes: [
             { title: 'Was ist frei?', text: 'Verfügbarer und bereits reservierter Bestand werden sauber getrennt.' },
             { title: 'Was kommt noch?', text: 'Offene Zugänge und Transfers ergänzen den aktuellen Lagerstand.' },
-            { title: 'Warum stimmt die Menge?', text: 'Zugänge, Verkäufe, Retouren und Korrekturen bleiben als Bewegungen nachvollziehbar.' },
+            { title: 'Warum stimmt die Menge?', text: 'Zugänge, Verkäufe, Retouren, Reklamationsfolgen und Korrekturen bleiben nachvollziehbar.' },
         ],
     },
     returns: {
-        situationEyebrow: 'Retoure ohne nachträgliche Detektivarbeit',
-        situationTitle: 'Am Teil erfassen. Mit Beleg und Entscheidung weiterarbeiten.',
-        situationIntro: 'Eine gute Retoure beginnt mit dem richtigen Artikel und Ursprungsbeleg. Danach werden Grund, Zustand und gewünschte Behandlung gezielt ergänzt.',
+        situationEyebrow: 'Retoure oder Reklamation ohne Detektivarbeit',
+        situationTitle: 'Am Teil erfassen. Fallart, Beleg und Verantwortung zusammenhalten.',
+        situationIntro: 'Eine Rückgabe und eine Reklamation können am selben Teil beginnen, brauchen aber unterschiedliche Entscheidungen. Partsunion verbindet Artikel und Ursprung und trennt danach Rückgabe, Mangel und Lieferantenfall sauber.',
         situations: [
-            { moment: 'Erfassung', title: 'Artikelnummer direkt am Teil aufnehmen.', text: 'Kamera oder Eingabe starten die Suche nach Artikel und zugehörigem Verkaufsbeleg.' },
-            { moment: 'Prüfung', title: 'Grund, Zustand und Frist gemeinsam bewerten.', text: 'Optionale Fotos dokumentieren nur das, was für den konkreten Fall wirklich gebraucht wird.' },
-            { moment: 'Bearbeitung', title: 'Bestand und Finanzen getrennt entscheiden.', text: 'Einlagern, Gutschrift oder Lieferantenretoure folgen erst nach der fachlichen Freigabe.' },
+            { moment: 'Erfassung', title: 'Artikelnummer direkt am Teil aufnehmen.', text: 'Kamera oder Eingabe finden Artikel, Verkaufsbeleg, Auftrag oder zugehörigen Wareneingang.' },
+            { moment: 'Einordnung', title: 'Rückgabe oder Reklamation unterscheiden.', text: 'Grund, Zustand, Mangel, Verantwortlichkeit und optionale Fotos ergeben einen klaren Fall.' },
+            { moment: 'Bearbeitung', title: 'Kunden- und Lieferantenweg getrennt führen.', text: 'Einlagern, Gutschrift, Erstattung oder Lieferantenreklamation folgen erst nach der fachlichen Entscheidung.' },
         ],
-        comparisonTitle: 'Ein Retourenfall statt Foto, Zettel und Erinnerung.',
-        workflowTitle: 'So läuft eine Retoure kontrolliert durch den Betrieb.',
-        capabilityTitle: 'Was eine vollständige Retourenakte enthalten muss.',
+        comparisonTitle: 'Ein vollständiger Fall statt Foto, Zettel und Erinnerung.',
+        workflowTitle: 'So laufen Retoure und Reklamation kontrolliert durch den Betrieb.',
+        capabilityTitle: 'Was eine vollständige Retouren- oder Reklamationsakte enthalten muss.',
         outcomeTitle: 'Erst prüfen, dann die richtigen Folgen auslösen.',
         outcomes: [
             { title: 'Artikel geklärt', text: 'Das zurückgegebene Teil ist eindeutig mit Menge und Ursprungsbeleg erfasst.' },
-            { title: 'Fall dokumentiert', text: 'Grund, Zustand, Frist, Zuständigkeit und optionale Fotos liegen am selben Vorgang.' },
-            { title: 'Folgen getrennt', text: 'Bestandsänderung, Kundengutschrift und Lieferantenbearbeitung werden gezielt freigegeben.' },
+            { title: 'Fall dokumentiert', text: 'Fallart, Grund, Zustand, Frist, Zuständigkeit und optionale Fotos liegen am selben Vorgang.' },
+            { title: 'Folgen getrennt', text: 'Bestandsänderung, Kundengutschrift, Erstattung und Lieferantenreklamation werden gezielt bearbeitet.' },
         ],
     },
     finance: {
@@ -152,7 +152,7 @@ export const solutionStories = {
         situationTitle: 'Nicht nur Antworten bekommen – den nächsten Schritt vorbereiten lassen.',
         situationIntro: 'Der Betriebsassistent arbeitet mit dem freigegebenen Wissen deines Betriebs. Er verbindet Fragen mit echten Vorgängen, zeigt seine Grundlage und kann passende Bearbeitungsschritte vorbereiten.',
         situations: [
-            { moment: 'Fragen', title: '„Was ist heute offen?“', text: 'Aufträge, Retouren, Bestand, Forderungen und Aufgaben werden als verständliches Lagebild zusammengefasst.' },
+            { moment: 'Fragen', title: '„Was ist heute offen?“', text: 'Aufträge, Retouren, Reklamationen, Bestand, Forderungen und Aufgaben werden als verständliches Lagebild zusammengefasst.' },
             { moment: 'Verstehen', title: '„Warum hängt dieser Auftrag?“', text: 'Der Assistent betrachtet Positionen, Fehlmengen, Lieferstatus und vorhandene Notizen im Zusammenhang.' },
             { moment: 'Erledigen', title: '„Bereite den nächsten Schritt vor.“', text: 'Eine Aufgabe, ein Angebot oder ein Bestellentwurf wird im passenden Vorgang vorbereitet und vor der Ausführung bestätigt.' },
         ],
@@ -161,7 +161,7 @@ export const solutionStories = {
         capabilityTitle: 'Was der Betriebsassistent über deinen Alltag zusammenführt.',
         outcomeTitle: 'Fragen. Entscheiden. Erledigen lassen.',
         outcomes: [
-            { title: 'Wissen abrufen', text: 'Produkte, Kunden, Bestände, Aufträge, Retouren und Zahlen werden im Betriebskontext beantwortet.' },
+            { title: 'Wissen abrufen', text: 'Produkte, Kunden, Bestände, Aufträge, Retouren, Reklamationen und Zahlen werden im Betriebskontext beantwortet.' },
             { title: 'Lage verstehen', text: 'Antworten zeigen relevante Vorgänge, Quellen und offene Punkte statt nur eine Behauptung.' },
             { title: 'Arbeit vorbereiten', text: 'Der Assistent kann nächste Schritte anlegen oder vorbereiten; du prüfst und bestätigst.' },
         ],
@@ -169,7 +169,7 @@ export const solutionStories = {
     mobile: {
         situationEyebrow: 'Die Warenwirtschaft dort, wo das Teil liegt',
         situationTitle: 'Nicht alles beginnt am Schreibtisch.',
-        situationIntro: 'Am Fahrzeug, Regal, Paket oder Retourentisch zählt eine schnelle Erfassung. Die Händler-App bringt genau diesen Stand direkt in den passenden Partsunion-Prozess.',
+        situationIntro: 'Am Fahrzeug, Regal, Paket oder Rückgabetisch zählt eine schnelle Erfassung. Die Händler-App bringt Retouren und Reklamationen direkt in den passenden Partsunion-Prozess.',
         situations: [
             { moment: 'Kamera', title: 'Nummer, Fahrzeugschein oder Zustand aufnehmen.', text: 'Die Erfassung startet am physischen Teil, ohne Notizzettel und spätere Galerie-Suche.' },
             { moment: 'Zuordnung', title: 'Kunde, Artikel oder Beleg verbinden.', text: 'Der mobile Entwurf erhält sofort den fachlichen und kaufmännischen Kontext.' },
@@ -181,7 +181,7 @@ export const solutionStories = {
         outcomeTitle: 'Ein Datenstand vom Handy bis zur Warenwirtschaft.',
         outcomes: [
             { title: 'Schneller erfasst', text: 'Nummern, Dokumente und optionale Fotos werden dort aufgenommen, wo sie entstehen.' },
-            { title: 'Richtig zugeordnet', text: 'Kunde, Auftrag, Artikel oder Retoure geben der mobilen Erfassung ihren Kontext.' },
+            { title: 'Richtig zugeordnet', text: 'Kunde, Auftrag, Artikel, Retoure oder Reklamation geben der mobilen Erfassung ihren Kontext.' },
             { title: 'Kontrolliert übernommen', text: 'Der Desktop arbeitet am selben Entwurf weiter; kritische Buchungen bleiben freigabepflichtig.' },
         ],
     },

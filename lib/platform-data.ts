@@ -80,7 +80,7 @@ export const workspaces: Workspace[] = [
         capabilities: [
             { label: 'Teilesuche & Thekenverkauf', detail: 'Fahrzeugbezug, Artikelvergleich, Preis und Bestand in einem Arbeitsablauf.', icon: ScanLine },
             { label: 'Anfragen-Arbeitsvorrat', detail: 'Digitale Anfragen landen als bearbeitbare Vorgänge mit Kundenkontext.', icon: Inbox },
-            { label: '360°-Kundenakte', detail: 'Offene Posten, Bonität, Umsatztrend, Top-Artikel und Retouren je Kunde.', icon: Users },
+            { label: '360°-Kundenakte', detail: 'Offene Posten, Bonität, Umsatztrend, Top-Artikel, Retouren und Reklamationen je Kunde.', icon: Users },
             { label: 'Belegkette', detail: 'Angebot → Lieferschein → Rechnung, durchgängig verknüpft.', icon: FileCheck2 },
             { label: 'CRM & Pipeline', detail: 'Leads, RFM-Segmente und ein Reaktivierungs-Radar nach Bestellrhythmus.', icon: LineChart },
             { label: 'Bonität & Kreditlimit', detail: 'Bonitätsampel und Kreditsperre greifen über den gesamten Verkaufsweg.', icon: BadgeEuro },
@@ -96,7 +96,7 @@ export const workspaces: Workspace[] = [
         capabilities: [
             { label: 'Bestand & Bewegungsjournal', detail: 'Jede Zu- und Abbuchung als nachvollziehbares Ledger.', icon: Database },
             { label: 'Foto-Erfassung im Wareneingang', detail: 'Bild und erkannte Artikelmerkmale unterstützen den Abgleich mit der Bestellung.', icon: Camera },
-            { label: 'Retoure per Foto', detail: 'Tablet-Flow: fotografieren, prüfen, Rücksende-Label drucken.', icon: RotateCcw },
+            { label: 'Retouren & Reklamationen', detail: 'Rückgabe oder Mangel mobil erfassen, Ursprung prüfen und Folgen getrennt bearbeiten.', icon: RotateCcw },
             { label: 'Disposition & Bestellvorschläge', detail: 'Vorschläge nach Fehlmenge, Reichweite, Dringlichkeit und Bezugsquelle.', icon: Truck },
             { label: 'Reservierungen (ATP)', detail: 'Available-to-Promise verhindert das Überverkaufen reservierter Mengen.', icon: PackageCheck },
             { label: 'KFZ-Fitment & Chargen/Serien', detail: 'Fahrzeugzuordnung, Seriennummern und Ablauf-Alerts.', icon: Boxes },

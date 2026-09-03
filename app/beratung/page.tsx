@@ -3,7 +3,7 @@ import { FinalCTA } from '@/components/landing/FinalCTA';
 
 export const metadata: Metadata = {
     title: 'Beratungstermin für Partsunion vereinbaren',
-    description: 'Zeig uns deinen echten Arbeitsprozess. Wir prüfen gemeinsam, wie Partsunion Anfrage, OE-Ermittlung, Warenwirtschaft, Bestellung, Retoure und Finanzen in deinem Betrieb verbindet.',
+    description: 'Zeig uns deinen echten Arbeitsprozess. Wir prüfen gemeinsam, wie Partsunion Anfrage, OE-Ermittlung, Warenwirtschaft, Bestellung, Retoure, Reklamation und Finanzen in deinem Betrieb verbindet.',
     alternates: { canonical: '/beratung' },
 };
 

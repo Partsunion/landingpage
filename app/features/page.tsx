@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Module — Enterprise-ERP für Autoteilehändler | Partsunion',
         description:
-            'Teileidentifikation, Verkauf, Einkauf, Warenwirtschaft, Retouren und Finanzen — alle Partsunion-Module im Überblick.',
+            'Teileidentifikation, Verkauf, Einkauf, Warenwirtschaft, Retouren, Reklamationen und Finanzen — alle Partsunion-Module im Überblick.',
         url: 'https://partsunion.de/features',
         type: 'website',
         locale: 'de_DE',

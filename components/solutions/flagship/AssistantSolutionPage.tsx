@@ -48,10 +48,10 @@ const scenarios = [
         icon: PackageSearch,
     },
     {
-        label: 'Retouren',
-        question: 'Welche Retouren brauchen heute eine Entscheidung?',
+        label: 'Retouren & Reklamationen',
+        question: 'Welche Rückgaben oder Reklamationen brauchen heute eine Entscheidung?',
         answer: 'Zwei Fälle sind vollständig dokumentiert. Bei einem ist die Bestandsbehandlung offen, beim anderen wartet die kaufmännische Bearbeitung.',
-        sources: ['Retouren', 'Ursprungsbelege', 'Bestand', 'Finanzen'],
+        sources: ['Retouren', 'Reklamationen', 'Ursprungsbelege', 'Bestand'],
         action: 'Entscheidungsliste mit getrennten Folgeschritten vorbereiten',
         icon: RotateCcw,
     },
@@ -95,7 +95,7 @@ export function AssistantSolutionPage({ page }: { page: SolutionPageData }) {
                 icon={Bot}
                 eyebrow="Betriebsassistent"
                 title="Frag deinen Betrieb. Lass Arbeit vorbereiten."
-                description="Produkte, Bestand, Kunden, Aufträge, Retouren, Umsätze und offene Aufgaben: Der Assistent verbindet deine Frage mit dem aktuellen Betriebsstand."
+                description="Produkte, Bestand, Kunden, Aufträge, Retouren, Reklamationen, Umsätze und offene Aufgaben: Der Assistent verbindet deine Frage mit dem aktuellen Betriebsstand."
                 highlight="Du entscheidest. Partsunion bereitet vor und führt erst nach deiner Bestätigung aus."
                 primaryLabel="Betriebsassistent kennenlernen"
                 secondaryLabel="Was er kennt"
@@ -109,7 +109,7 @@ export function AssistantSolutionPage({ page }: { page: SolutionPageData }) {
 
             <section id="wissen" className="scroll-mt-28 overflow-hidden bg-white py-14 md:py-20">
                 <div className="mx-auto max-w-[1320px] px-5 md:px-8 xl:px-10">
-                    <div className="grid gap-8 lg:grid-cols-[.66fr_1.34fr] lg:items-center lg:gap-14"><div><span className="text-[9px] font-bold uppercase tracking-[.15em] text-[#1d6fe8]">Dein freigegebenes Betriebswissen</span><h2 className="mt-3 text-[clamp(2rem,3.2vw,3.25rem)] font-semibold leading-[1.04] tracking-[-.045em]">Er kennt nicht nur die letzte Frage. Er kennt den Zusammenhang.</h2><p className="mt-4 max-w-[500px] text-sm leading-6 text-[#637186]">Eine Antwort kann Produkt, Kunde, Auftrag, Bestand und Zahlung gemeinsam betrachten. Genau dadurch wird aus einem allgemeinen Chat ein Assistent für den eigenen Betrieb.</p></div><div className="relative grid gap-px border border-[#b8c6d5] bg-[#b8c6d5] sm:grid-cols-3"><div className="col-span-full flex min-h-[112px] items-center justify-center bg-[#0d3158] p-5 text-white sm:col-span-1 sm:row-span-2"><div className="text-center"><span className="mx-auto flex h-12 w-12 items-center justify-center bg-[#1d6fe8]"><Bot className="h-5 w-5" /></span><strong className="mt-3 block text-sm">Betriebsassistent</strong><span className="mt-1 block text-[9px] text-white/48">verbindet den Kontext</span></div></div>{[[Boxes, 'Produkte & Bestand'], [UserRound, 'Kunden'], [ShoppingCart, 'Angebote & Aufträge'], [RotateCcw, 'Retouren'], [CircleDollarSign, 'Umsatz & Forderungen'], [ClipboardList, 'Aufgaben']].map(([ItemIcon, label]) => { const Icon = ItemIcon as typeof Bot; return <div key={label as string} className="flex min-h-[112px] items-center gap-3 bg-[#f5f8fb] p-4"><span className="flex h-9 w-9 items-center justify-center border border-[#a9bdd4] bg-white text-[#1d6fe8]"><Icon className="h-4 w-4" /></span><strong className="text-[11px] text-[#34455b]">{label as string}</strong></div>; })}</div></div>
+                    <div className="grid gap-8 lg:grid-cols-[.66fr_1.34fr] lg:items-center lg:gap-14"><div><span className="text-[9px] font-bold uppercase tracking-[.15em] text-[#1d6fe8]">Dein freigegebenes Betriebswissen</span><h2 className="mt-3 text-[clamp(2rem,3.2vw,3.25rem)] font-semibold leading-[1.04] tracking-[-.045em]">Er kennt nicht nur die letzte Frage. Er kennt den Zusammenhang.</h2><p className="mt-4 max-w-[500px] text-sm leading-6 text-[#637186]">Eine Antwort kann Produkt, Kunde, Auftrag, Bestand und Zahlung gemeinsam betrachten. Genau dadurch wird aus einem allgemeinen Chat ein Assistent für den eigenen Betrieb.</p></div><div className="relative grid gap-px border border-[#b8c6d5] bg-[#b8c6d5] sm:grid-cols-3"><div className="col-span-full flex min-h-[112px] items-center justify-center bg-[#0d3158] p-5 text-white sm:col-span-1 sm:row-span-2"><div className="text-center"><span className="mx-auto flex h-12 w-12 items-center justify-center bg-[#1d6fe8]"><Bot className="h-5 w-5" /></span><strong className="mt-3 block text-sm">Betriebsassistent</strong><span className="mt-1 block text-[9px] text-white/48">verbindet den Kontext</span></div></div>{[[Boxes, 'Produkte & Bestand'], [UserRound, 'Kunden'], [ShoppingCart, 'Angebote & Aufträge'], [RotateCcw, 'Retouren & Reklamationen'], [CircleDollarSign, 'Umsatz & Forderungen'], [ClipboardList, 'Aufgaben']].map(([ItemIcon, label]) => { const Icon = ItemIcon as typeof Bot; return <div key={label as string} className="flex min-h-[112px] items-center gap-3 bg-[#f5f8fb] p-4"><span className="flex h-9 w-9 items-center justify-center border border-[#a9bdd4] bg-white text-[#1d6fe8]"><Icon className="h-4 w-4" /></span><strong className="text-[11px] text-[#34455b]">{label as string}</strong></div>; })}</div></div>
                 </div>
             </section>
 

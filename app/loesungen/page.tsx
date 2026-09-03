@@ -17,7 +17,7 @@ import { solutionPages, type SolutionIcon } from '@/lib/solutions-data';
 
 export const metadata: Metadata = {
     title: 'Lösungen für den Autoteilehandel',
-    description: 'Von Anfrage und OE-Ermittlung über Warenwirtschaft, Einkauf und Retoure bis Finanzen und Betriebsassistent: Partsunion verbindet den kompletten Prozess.',
+    description: 'Von Anfrage und OE-Ermittlung über Warenwirtschaft, Einkauf, Retouren und Reklamationen bis Finanzen und Betriebsassistent: Partsunion verbindet den kompletten Prozess.',
     alternates: { canonical: '/loesungen' },
 };
 

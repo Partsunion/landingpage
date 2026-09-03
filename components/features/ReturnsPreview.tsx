@@ -18,7 +18,7 @@ export function ReturnsPreview() {
     return (
         <div className="w-full h-full bg-card rounded-2xl border border-border p-6 flex flex-col gap-6 shadow-[var(--shadow-card)] relative overflow-hidden">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-sm text-slate-900">Retouren-Eingang</h3>
+                <h3 className="font-bold text-sm text-slate-900">Retouren &amp; Reklamationen</h3>
                 <div className="bg-accent text-primary px-2 py-0.5 rounded text-[10px] font-bold">MODE: SCAN</div>
             </div>
 
@@ -65,17 +65,20 @@ export function ReturnsPreview() {
             </div>
 
             <div className="space-y-3">
-                <div className="text-[10px] font-bold text-slate-500 uppercase">Vergangene Retouren</div>
-                {[1, 2].map((i) => (
-                    <div key={i} className="flex items-center gap-3 p-3 bg-white border border-border rounded-lg text-xs shadow-[var(--shadow-card)]">
+                <div className="text-[10px] font-bold text-slate-500 uppercase">Zuletzt bearbeitet</div>
+                {[
+                    { type: 'Retoure', state: 'Zurück im Bestand', amount: '+1' },
+                    { type: 'Reklamation', state: 'Lieferantenprüfung offen', amount: 'offen' },
+                ].map((item) => (
+                    <div key={item.type} className="flex items-center gap-3 p-3 bg-white border border-border rounded-lg text-xs shadow-[var(--shadow-card)]">
                         <div className="h-8 w-8 bg-muted rounded-full flex items-center justify-center">
                             <RotateCcw size={14} className="text-slate-500" />
                         </div>
                         <div className="flex-1">
-                            <div className="font-bold text-slate-900">Luftfilter (Spezial)</div>
-                            <div className="text-[10px] text-slate-500">Vor 2 Std. • Zurück im Bestand</div>
+                            <div className="font-bold text-slate-900">{item.type} · Luftfilter</div>
+                            <div className="text-[10px] text-slate-500">Vor 2 Std. • {item.state}</div>
                         </div>
-                        <div className="text-[#067647] font-bold">+1</div>
+                        <div className="text-[#067647] font-bold">{item.amount}</div>
                     </div>
                 ))}
             </div>

@@ -203,18 +203,18 @@ export const featureData: FeatureDetail[] = [
     },
     {
         slug: 'retourenmanagement',
-        title: 'Retouren & Garantie',
-        description: 'Machen Sie aus Rücksendungen einen geordneten Prozess.',
+        title: 'Retouren & Reklamationen',
+        description: 'Machen Sie aus Rückgaben, Mängeln und Falschlieferungen geordnete Prozesse.',
         icon: Truck,
         features: [
-            'Retoure mit Artikel, Menge, Grund und Ursprungsbeleg',
+            'Retoure oder Reklamation mit Artikel, Menge, Grund und Ursprungsbeleg',
             'Zustands- und Verantwortlichkeitsprüfung',
             'Wiedereinlagerung erst nach fachlicher Entscheidung',
-            'Verknüpfte Gutschrift oder Lieferantenreklamation',
+            'Kundenreklamation und separate Lieferantenreklamation',
             'Auswertung dokumentierter Retourengründe'
         ],
-        technicalDetails: 'Die Retoure bleibt mit dem Ursprungsbeleg, dem Prüfentscheid und den daraus folgenden Bestands- und Finanzbuchungen verknüpft. Ware wird nicht vor der fachlichen Entscheidung wieder als verfügbar geführt.',
-        benefit: 'Retouren, Bestand, Erstattung und Lieferantenreklamation bleiben als kontrollierter Vorgang nachvollziehbar.',
+        technicalDetails: 'Retoure und Reklamation bleiben mit Ursprungsbeleg, Prüfentscheid und den daraus folgenden Bestands- und Finanzschritten verknüpft. Eine Reklamation bucht weder automatisch Bestand noch eine Gutschrift.',
+        benefit: 'Rückgabe, Kundenreklamation, Bestand, Erstattung und Lieferantenreklamation bleiben kontrolliert nachvollziehbar.',
         category: 'core'
     },
     {

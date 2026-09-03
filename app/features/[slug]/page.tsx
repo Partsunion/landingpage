@@ -26,7 +26,7 @@ const seoTitles: Record<string, string> = {
     'automatische-rechnungserstellung': 'Durchgängiger Belegfluss & Faktura',
     'bestellprozess': 'Disposition & Einkauf für Autoteile',
     'bestandssynchronisation': 'Multi-Channel Warenbestand: ein zentrales Lager für alle Verkaufswege',
-    'retourenmanagement': 'Retouren & Garantie im Autoteilehandel',
+    'retourenmanagement': 'Retouren & Reklamationen im Autoteilehandel',
     'skalierbarkeit': 'Skalierbare ERP-Organisation für den Teilehandel',
     '24-7-einsatzbereit': 'Digitaler Self-Service & Betriebsmodell',
     'geschwindigkeit': 'Effiziente Arbeitsabläufe im Autoteilehandel',

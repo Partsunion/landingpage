@@ -35,7 +35,7 @@ const connectedStages: Array<{ label: string; detail: string; icon: LucideIcon }
     { label: 'Angebot', detail: 'Preis und Termin', icon: BadgeEuro },
     { label: 'Auftrag', detail: 'Freigabe des Kunden', icon: ShoppingCart },
     { label: 'Bestellung', detail: 'Fehlmenge decken', icon: PackageCheck },
-    { label: 'Abschluss', detail: 'Beleg oder Retoure', icon: FileCheck2 },
+    { label: 'Abschluss', detail: 'Beleg oder Folgefall', icon: FileCheck2 },
 ];
 
 const outcomes = [

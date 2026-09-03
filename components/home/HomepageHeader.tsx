@@ -39,7 +39,7 @@ const moduleGroups: Array<{ title: string; links: ModuleLink[] }> = [
         links: [
             { label: 'Einkauf & Disposition', text: 'Fehlmengen kontrolliert decken', href: '/loesungen/einkauf-disposition', icon: PackageSearch },
             { label: 'Bestand & Lager', text: 'Neuware und Einzelstücke', href: '/loesungen/bestand-lager', icon: Boxes },
-            { label: 'Retouren', text: 'Mobil erfassen, geprüft bearbeiten', href: '/loesungen/retouren', icon: RotateCcw },
+            { label: 'Retouren & Reklamationen', text: 'Rückgabe und Mangel sauber bearbeiten', href: '/loesungen/retouren', icon: RotateCcw },
         ],
     },
     {
@@ -47,7 +47,7 @@ const moduleGroups: Array<{ title: string; links: ModuleLink[] }> = [
         links: [
             { label: 'Finanzen & Kasse', text: 'Rechnung, OP und Zahlung', href: '/loesungen/finanzen-kasse', icon: Landmark },
             { label: 'Betriebsassistent', text: 'Fragen, beraten und bearbeiten', href: '/loesungen/betriebsassistent', icon: Bot },
-            { label: 'Händler-App', text: 'Codes, Fotos und Retoure', href: '/loesungen/haendler-app', icon: Smartphone },
+            { label: 'Händler-App', text: 'Codes, Fotos, Retoure und Reklamation', href: '/loesungen/haendler-app', icon: Smartphone },
         ],
     },
 ];

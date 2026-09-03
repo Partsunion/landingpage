@@ -58,11 +58,11 @@ const usps: Usp[] = [
     {
         number: '04',
         eyebrow: 'Partsunion Händler-App',
-        title: 'Retoure direkt am Teil aufnehmen.',
-        text: 'Artikel, Ursprungsbeleg, Menge, Grund und Zustand werden mobil zusammengeführt. Fotos können bei Bedarf ergänzt werden. Bestands- und Finanzwirkung folgen erst nach bestätigter Fachentscheidung.',
+        title: 'Retoure oder Reklamation direkt am Teil aufnehmen.',
+        text: 'Artikel, Ursprungsbeleg, Fallart, Grund und Zustand werden mobil zusammengeführt. Rückgabe, Defekt und Falschlieferung bleiben unterscheidbar; Bestands- und Finanzwirkung folgen erst nach bestätigter Fachentscheidung.',
         href: '/features/retourenmanagement',
         icon: Smartphone,
-        facts: ['Kamera- und Code-Erfassung', 'Retouren, Garantie und Altteilpfand'],
+        facts: ['Kamera- und Code-Erfassung', 'Retouren, Reklamationen und Garantie'],
         className: 'lg:col-span-7',
     },
     {

@@ -24,11 +24,11 @@ const faqs = [
     },
     {
         question: 'Entscheidet der Betriebsassistent selbst, welches Teil passt oder was bestellt wird?',
-        answer: 'Nein. Er beantwortet Fragen aus den freigegebenen Betriebsdaten, empfiehlt den nächsten Schritt und kann die Bearbeitung vorbereiten. Änderungen an Aufträgen, Bestellungen oder Retouren werden erst nach sichtbarer Prüfung und Bestätigung ausgeführt.',
+        answer: 'Nein. Er beantwortet Fragen aus den freigegebenen Betriebsdaten, empfiehlt den nächsten Schritt und kann die Bearbeitung vorbereiten. Änderungen an Aufträgen, Bestellungen, Retouren oder Reklamationen werden erst nach sichtbarer Prüfung und Bestätigung ausgeführt.',
     },
     {
         question: 'Was passiert im Beratungsgespräch?',
-        answer: 'In 30 Minuten gehen wir einen konkreten Ablauf aus deinem Betrieb durch – zum Beispiel eine Teileanfrage, eine Bestellung oder eine Retoure. Anschließend weißt du, welche Partsunion-Bereiche zu deinem Betrieb passen und welche nächsten Schritte sinnvoll sind.',
+        answer: 'In 30 Minuten gehen wir einen konkreten Ablauf aus deinem Betrieb durch – zum Beispiel eine Teileanfrage, eine Bestellung, eine Retoure oder eine Reklamation. Anschließend weißt du, welche Partsunion-Bereiche zu deinem Betrieb passen und welche nächsten Schritte sinnvoll sind.',
     },
 ];
 

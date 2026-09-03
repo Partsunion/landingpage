@@ -23,7 +23,7 @@ const stages: Array<{ label: string; detail: string; icon: LucideIcon }> = [
     { label: 'OE-Prüfung', detail: 'Katalog und Alternativen', icon: ScanLine },
     { label: 'Angebot', detail: 'Teil, Preis und Liefertermin', icon: BadgeEuro },
     { label: 'Auftrag', detail: 'Freigabe und Beschaffung', icon: ShoppingCart },
-    { label: 'Abschluss', detail: 'Beleg, Zahlung und Retoure', icon: FileCheck2 },
+    { label: 'Abschluss', detail: 'Beleg, Zahlung oder Folgefall', icon: FileCheck2 },
 ];
 
 export function ConnectedProcess() {

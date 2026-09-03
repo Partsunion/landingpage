@@ -229,7 +229,7 @@ function ReturnsPhone() {
         <div className="relative mx-auto w-[252px] rounded-[38px] border-[7px] border-[#111923] bg-[#111923] p-1.5 shadow-[0_24px_52px_rgba(24,39,59,.24)]">
             <div className="overflow-hidden rounded-[27px] bg-[#f3f5f7] text-[#162033]">
                 <div className="flex h-7 items-center justify-between bg-[#0e243f] px-4 text-[6px] text-white/75"><span>12:08</span><span>● LTE  ▰</span></div>
-                <div className="flex h-11 items-center border-b border-[#d1d8e0] bg-white px-3"><strong className="text-[11px]">Retoure erfassen</strong><span className="ml-auto text-[8px] font-semibold text-[#687688]">Abbrechen</span></div>
+                <div className="flex h-11 items-center border-b border-[#d1d8e0] bg-white px-3"><strong className="text-[11px]">Retoure / Reklamation</strong><span className="ml-auto text-[8px] font-semibold text-[#687688]">Abbrechen</span></div>
                 <div className="grid grid-cols-3 border-b border-[#d4dbe3] bg-white text-center text-[7px]">
                     {['Artikel', 'Beleg', 'Prüfen'].map((label, index) => <span key={label} className={`relative py-2.5 ${index === 0 ? 'font-bold text-[#155fc8]' : 'text-[#86919e]'}`}>{index + 1}. {label}{index === 0 && <span className="absolute inset-x-0 bottom-0 h-0.5 bg-[#1d6fe8]" />}</span>)}
                 </div>
@@ -242,9 +242,9 @@ function ReturnsPhone() {
                         <div className="border-b border-[#d7dee6] bg-[#f7f9fb] px-3 py-2 font-semibold">Ursprungsbeleg</div>
                         <div className="grid grid-cols-[1fr_auto] gap-2 px-3 py-2.5"><span><strong className="block">LS-2026-1042</strong><span className="mt-0.5 block text-[7px] text-[#798594]">Autotechnik Brandenburg GmbH</span></span><CheckCircle2 className="h-4 w-4 text-[#268052]" /></div>
                     </div>
-                    <div className="mt-2 grid grid-cols-2 border border-[#aebdcd] bg-white text-[8px]"><span className="border-r border-[#d7dee6] px-3 py-2"><span className="block text-[7px] text-[#7b8795]">Menge</span><strong className="mt-1 block">1 Stück</strong></span><span className="px-3 py-2"><span className="block text-[7px] text-[#7b8795]">Grund</span><strong className="mt-1 block">passt nicht</strong></span></div>
+                    <div className="mt-2 grid grid-cols-2 border border-[#aebdcd] bg-white text-[8px]"><span className="border-r border-[#d7dee6] px-3 py-2"><span className="block text-[7px] text-[#7b8795]">Menge</span><strong className="mt-1 block">1 Stück</strong></span><span className="px-3 py-2"><span className="block text-[7px] text-[#7b8795]">Fallart</span><strong className="mt-1 block">Reklamation</strong></span><span className="col-span-2 border-t border-[#d7dee6] px-3 py-2"><span className="block text-[7px] text-[#7b8795]">Grund</span><strong className="mt-1 block">falsches Teil geliefert</strong></span></div>
                     <div className="mt-2 border border-[#aebdcd] bg-white p-2.5"><div className="flex items-center justify-between"><span className="text-[8px] font-semibold">Optionale Fotos</span><span className="text-[7px] text-[#788391]">0 hinzugefügt</span></div><button type="button" className="mt-2 flex w-full items-center justify-center gap-1.5 border border-dashed border-[#aebed0] bg-[#f8fafc] py-2 text-[7px] font-semibold text-[#155fc8]"><Plus className="h-3 w-3" /> Foto ergänzen</button></div>
-                    <div className="mt-3 bg-[#1d6fe8] py-3 text-center text-[9px] font-bold text-white">Retourenentwurf prüfen</div>
+                    <div className="mt-3 bg-[#1d6fe8] py-3 text-center text-[9px] font-bold text-white">Fall zur Prüfung geben</div>
                     <p className="mt-2 px-1 text-center text-[6px] leading-3 text-[#7c8693]">Noch keine Bestands- oder Finanzbuchung.</p>
                 </div>
             </div>
@@ -256,8 +256,8 @@ const assistantScenarios = [
     {
         label: 'Aufträge & Aufgaben',
         question: 'Was muss heute zuerst erledigt werden?',
-        answer: 'Zwei Kundenaufträge sind im Demo-Betrieb durch Fehlmengen blockiert. Ein Retourenfall braucht heute eine Entscheidung.',
-        sources: ['Aufträge', 'Lieferstatus', 'Retourenfristen'],
+        answer: 'Zwei Kundenaufträge sind im Demo-Betrieb durch Fehlmengen blockiert. Eine Reklamation braucht heute eine Entscheidung.',
+        sources: ['Aufträge', 'Lieferstatus', 'Retouren & Reklamationen'],
         action: 'Priorisierte Aufgabenliste für Theke und Einkauf vorbereiten',
         icon: ClipboardCheck,
     },
@@ -270,11 +270,11 @@ const assistantScenarios = [
         icon: Database,
     },
     {
-        label: 'Retouren & Fristen',
-        question: 'Welche Retouren brauchen eine Entscheidung?',
-        answer: 'Drei Retourenfälle sind offen. Bei einem fehlt die Freigabe, bei einem weiteren muss der Ursprungsbeleg geprüft werden.',
-        sources: ['Retourenfälle', 'Belege', 'Freigabestatus'],
-        action: 'Offene Angaben je Retourenfall zur Prüfung vorbereiten',
+        label: 'Retouren & Reklamationen',
+        question: 'Welche Rückgaben oder Reklamationen brauchen eine Entscheidung?',
+        answer: 'Drei Fälle sind offen: eine Rückgabe wartet auf Freigabe, bei einer Reklamation muss der Ursprungsbeleg geprüft werden.',
+        sources: ['Retouren', 'Reklamationen', 'Belege & Fristen'],
+        action: 'Offene Angaben je Fall zur Prüfung vorbereiten',
         icon: RotateCcw,
     },
     {
@@ -305,7 +305,7 @@ export function BusinessAssistantStory() {
                     <div className="max-w-[560px]">
                         <div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#8ab9fb]">Dein Betrieb. Eine Frage entfernt.</div>
                         <h2 className="mt-3 text-[clamp(2rem,3.15vw,3.15rem)] font-semibold leading-[1.05] tracking-[-.045em]">Fragen. Entscheiden. Erledigen lassen.</h2>
-                        <p className="mt-5 text-[15px] leading-7 text-white/68">Der Partsunion Betriebsassistent kennt die freigegebenen Daten deines Unternehmens: Artikel, Bestände, Kunden, Aufträge, Retouren, Umsätze, offene Posten und Aufgaben. Er beantwortet Fragen, empfiehlt den nächsten Schritt und kann ihn nach deiner Bestätigung direkt in Partsunion ausführen.</p>
+                        <p className="mt-5 text-[15px] leading-7 text-white/68">Der Partsunion Betriebsassistent kennt die freigegebenen Daten deines Unternehmens: Artikel, Bestände, Kunden, Aufträge, Retouren, Reklamationen, Umsätze, offene Posten und Aufgaben. Er beantwortet Fragen, empfiehlt den nächsten Schritt und kann ihn nach deiner Bestätigung direkt in Partsunion ausführen.</p>
 
                         <div className="mt-6 grid grid-cols-2 border-y border-white/18 md:hidden">
                             {assistantScenarios.map((item, index) => {
@@ -390,26 +390,26 @@ export function MobileReturnsStory() {
         <section id="retouren" className="scroll-mt-24 overflow-hidden bg-white py-14 md:py-16">
             <div className="mx-auto grid max-w-[1320px] gap-8 px-5 md:px-8 lg:grid-cols-[.88fr_1.12fr] lg:items-center xl:px-10">
                 <div>
-                    <div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#1c6dd8]">Händler-App & Retouren</div>
-                    <h2 className="mt-3 max-w-xl text-[clamp(2rem,3vw,3rem)] font-semibold leading-[1.07] tracking-[-.043em] text-[#132036]">Retoure in einem Zug statt mühseliger Kleinarbeit.</h2>
-                    <p className="mt-4 max-w-xl text-[15px] leading-7 text-[#637083]">Artikelnummer abfotografieren, Ursprungsbeleg zuordnen, Grund und Zustand erfassen und bei Bedarf optionale Fotos ergänzen. Daraus entsteht direkt ein prüfbarer Retourenentwurf.</p>
-                    <div className="mt-6 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center border-y border-[#d5dfea] py-4 text-center text-[#1e2c40]"><span><Camera className="mx-auto h-4 w-4 text-[#1d6fe8]" /><strong className="mt-1.5 block text-[8px]">NUMMER</strong></span><ArrowRight className="h-3 w-3 text-[#98a4b3]" /><span><FileCheck2 className="mx-auto h-4 w-4 text-[#1d6fe8]" /><strong className="mt-1.5 block text-[8px]">BELEG</strong></span><ArrowRight className="h-3 w-3 text-[#98a4b3]" /><span><RotateCcw className="mx-auto h-4 w-4 text-[#1d6fe8]" /><strong className="mt-1.5 block text-[8px]">RETOURE</strong></span></div>
+                    <div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#1c6dd8]">Händler-App · Retouren & Reklamationen</div>
+                    <h2 className="mt-3 max-w-xl text-[clamp(2rem,3vw,3rem)] font-semibold leading-[1.07] tracking-[-.043em] text-[#132036]">Rückgabe oder Reklamation in einem Zug bearbeiten.</h2>
+                    <p className="mt-4 max-w-xl text-[15px] leading-7 text-[#637083]">Artikelnummer abfotografieren, Ursprungsbeleg zuordnen und den Fall als Rückgabe, Defekt oder Falschlieferung einordnen. Grund, Zustand und optionale Fotos ergeben direkt einen prüfbaren Vorgang – auch für die weitere Reklamation beim Lieferanten.</p>
+                    <div className="mt-6 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center border-y border-[#d5dfea] py-4 text-center text-[#1e2c40]"><span><Camera className="mx-auto h-4 w-4 text-[#1d6fe8]" /><strong className="mt-1.5 block text-[8px]">NUMMER</strong></span><ArrowRight className="h-3 w-3 text-[#98a4b3]" /><span><FileCheck2 className="mx-auto h-4 w-4 text-[#1d6fe8]" /><strong className="mt-1.5 block text-[8px]">BELEG</strong></span><ArrowRight className="h-3 w-3 text-[#98a4b3]" /><span><RotateCcw className="mx-auto h-4 w-4 text-[#1d6fe8]" /><strong className="mt-1.5 block text-[8px]">FALLART</strong></span></div>
                     <p className="mt-5 flex items-center gap-2 text-[10px] text-[#697688]"><ShieldCheck className="h-3.5 w-3.5 text-[#1d6fe8]" /> Bestands- und Finanzwirkung erst nach Prüfung</p>
-                    <Link href="/loesungen/retouren" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#155fc8]">Retourenprozess im Detail <ArrowRight className="h-4 w-4" /></Link>
+                    <Link href="/loesungen/retouren" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#155fc8]">Retouren & Reklamationen im Detail <ArrowRight className="h-4 w-4" /></Link>
                 </div>
                 <motion.div initial={reducedMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-70px' }} transition={{ duration: reducedMotion ? 0 : .45 }} className="relative overflow-hidden border border-[#b8c6d6] bg-[#edf1f5] px-5 py-6 md:min-h-[520px] md:py-8">
                     <div className="absolute inset-x-0 top-0 h-1 bg-[#1d6fe8]" />
                     <div className="grid gap-6 sm:grid-cols-[280px_1fr] sm:items-center">
                         <ReturnsPhone />
                         <div className="hidden min-w-0 sm:block">
-                            <span className="text-[8px] font-bold uppercase tracking-[.14em] text-[#607186]">Retourenprüfung</span>
+                            <span className="text-[8px] font-bold uppercase tracking-[.14em] text-[#607186]">Retouren- & Reklamationsprüfung</span>
                             <strong className="mt-2 block max-w-[190px] text-xl leading-6 text-[#14243a]">Vom Teil direkt zum prüfbaren Vorgang.</strong>
                             <div className="mt-6 border-y border-[#bdc9d6]">
                                 {[
                                     ['12:08', 'Artikel erkannt', 'Nummer aus Foto gelesen'],
                                     ['12:08', 'Beleg zugeordnet', 'LS-2026-1042 gefunden'],
                                     ['offen', 'Fachprüfung', 'Menge, Grund und Zustand'],
-                                    ['danach', 'Retoure freigeben', 'Buchung erst nach Bestätigung'],
+                                    ['danach', 'Folge festlegen', 'Bestand, Erstattung oder Lieferantenweg'],
                                 ].map(([time, title, detail], index) => <motion.div key={title} initial={reducedMotion ? false : { opacity: 0, x: 8 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : .28, delay: reducedMotion ? 0 : .18 + index * .09 }} className={`grid grid-cols-[38px_1fr] gap-3 py-3 ${index > 0 ? 'border-t border-[#cad4df]' : ''}`}><span className="font-mono text-[7px] font-bold text-[#1d6fe8]">{time}</span><span><strong className="block text-[9px] text-[#26364a]">{title}</strong><span className="mt-1 block text-[7px] leading-3 text-[#728092]">{detail}</span></span></motion.div>)}
                             </div>
                             <p className="mt-4 flex gap-2 text-[8px] leading-4 text-[#607084]"><ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#1d6fe8]" /> Jede Änderung bleibt mit Zeitpunkt, Mitarbeiter und Freigabestatus nachvollziehbar.</p>
@@ -423,13 +423,13 @@ export function MobileReturnsStory() {
 
 const workAreas: Array<{ number: string; title: string; summary: string; icon: LucideIcon; items: string[]; href: string }> = [
     { number: '01', title: 'Verkauf', summary: 'Von der ersten Anfrage bis zur ausgeglichenen Rechnung.', icon: ShoppingCart, items: ['Anfrage & WhatsApp', 'Theke, Angebot & Auftrag', 'Kundenakte & Belegkette', 'Kasse, Zahlung & offene Posten'], href: '/loesungen/angebot-auftrag' },
-    { number: '02', title: 'Betrieb & Warenwirtschaft', summary: 'Teile, Mengen und Bewegungen nachvollziehbar steuern.', icon: Warehouse, items: ['OE, Artikel & Einzelstücke', 'Lager & Bewegungsjournal', 'Einkauf & Bestellvorschläge', 'Retourenbearbeitung'], href: '/loesungen/bestand-lager' },
+    { number: '02', title: 'Betrieb & Warenwirtschaft', summary: 'Teile, Mengen und Bewegungen nachvollziehbar steuern.', icon: Warehouse, items: ['OE, Artikel & Einzelstücke', 'Lager & Bewegungsjournal', 'Einkauf & Bestellvorschläge', 'Retouren & Reklamationen'], href: '/loesungen/bestand-lager' },
     { number: '03', title: 'Finanzen & Kasse', summary: 'Belege und Zahlen bleiben mit dem Ursprungsvorgang verbunden.', icon: FileCheck2, items: ['Rechnungen & Gutschriften', 'OP, Mahnwesen & Zahlungen', 'Kassenbuch & Tagesabschluss', 'DATEV- & Steuerexporte'], href: '/loesungen/finanzen-kasse' },
 ];
 
 const companionTools = [
     { title: 'Betriebsassistent', text: 'Fragen beantworten, Arbeit vorbereiten und bestätigte Schritte ausführen.', icon: Bot, href: '/loesungen/betriebsassistent' },
-    { title: 'Händler-App', text: 'Artikel, Fotos und Retouren direkt dort erfassen, wo die Ware liegt.', icon: Smartphone, href: '/loesungen/haendler-app' },
+    { title: 'Händler-App', text: 'Artikel, Fotos, Retouren und Reklamationen direkt dort erfassen, wo die Ware liegt.', icon: Smartphone, href: '/loesungen/haendler-app' },
 ];
 
 export function ModuleDirectory() {
