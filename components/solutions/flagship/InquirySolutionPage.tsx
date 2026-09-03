@@ -19,6 +19,7 @@ import {
 import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
 import type { SolutionPageData } from '@/lib/solutions-data';
 import { FlagshipCta, FlagshipSafety, FlagshipSubnav, SolutionHero } from './FlagshipShared';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const counterStages = [
     { label: 'Anfrage', title: 'Anfrage erfassen', detail: 'Der Kunde kommt an die Theke – Partsunion legt den Prozess direkt an.' },
@@ -159,7 +160,7 @@ export function InquirySolutionPage({ page }: { page: SolutionPageData }) {
                 <div className="mx-auto max-w-[1320px] px-5 md:px-8 xl:px-10">
                     <div className="grid gap-10 lg:grid-cols-[.86fr_1.14fr] lg:items-center lg:gap-16">
                         <div className="grid gap-6 sm:grid-cols-[230px_1fr] sm:items-center">
-                            <div className="mx-auto w-full max-w-[250px] border-[7px] border-[#122238] bg-[#e8efe9] shadow-[0_24px_55px_rgba(14,35,62,.2)]">
+                            <PhoneFrame className="mx-auto w-full max-w-[250px]" screenClassName="bg-[#e8efe9]">
                                 <div className="flex h-12 items-center bg-[#174f3d] px-3 text-white"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15"><MessageCircle className="h-3.5 w-3.5" /></span><span className="ml-2"><strong className="block text-[10px]">Dein Teilehändler</strong><span className="block text-[7px] text-white/65">WhatsApp</span></span></div>
                                 <div className="space-y-2 p-3 text-[8px] leading-[1.45] text-[#34465a]">
                                     <div className="mr-4 bg-white p-2.5 shadow-sm"><strong>🌐 Bitte Sprache wählen / Choose language / Dil seçin / Ziman hilbijêre / Wybierz język:</strong><br />1. Deutsch · 2. English<br />3. Türkçe · 4. Kurdî · 5. Polski</div>
@@ -174,7 +175,7 @@ export function InquirySolutionPage({ page }: { page: SolutionPageData }) {
                                     <div className="mr-7 bg-white p-2.5 shadow-sm"><strong>📋 Hier sind die Angebote für Ihr Teil:</strong></div>
                                 </div>
                                 <div className="flex h-9 items-center gap-2 border-t border-[#cbd6ce] bg-[#f7faf8] px-3 text-[#7a8880]"><Mic className="h-3 w-3" /><span className="text-[7px]">Nachricht schreiben</span></div>
-                            </div>
+                            </PhoneFrame>
                             <div className="border-l border-[#c8d5e2] pl-5"><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#16885b]">Aktuelle Botlogik</span><p className="mt-3 text-[12px] leading-5 text-[#647286]">Text, Foto und Sprachnachricht werden nicht zu einem zweiten System. Sie bilden denselben Anfrageprozess, den der Verkäufer auch an der Theke sieht.</p><div className="mt-5 flex flex-wrap gap-1.5">{['Deutsch', 'English', 'Türkçe', 'Kurdî', 'Polski'].map((language) => <span key={language} className="border border-[#b9c9d8] bg-[#f5f8fb] px-2 py-1 text-[8px] font-semibold text-[#536277]">{language}</span>)}</div></div>
                         </div>
 

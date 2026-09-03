@@ -6,6 +6,8 @@ const groups = [
     {
         title: 'Produkt',
         links: [
+            { label: 'Neuteile-Plattform', href: '/plattform/neuteile' },
+            { label: 'Gebrauchtteile-Plattform', href: '/plattform/gebrauchtteile' },
             { label: 'Alle Lösungen', href: '/loesungen' },
             { label: 'Anfrage & WhatsApp', href: '/loesungen/anfragen-whatsapp' },
             { label: 'OE-Ermittlung', href: '/loesungen/oe-ermittlung' },
@@ -17,7 +19,7 @@ const groups = [
         title: 'Unternehmen',
         links: [
             { label: 'Über uns', href: '/about' },
-            { label: 'Blog & Wissen', href: '/blog' },
+            { label: 'Praxisratgeber', href: '/blog' },
             { label: 'Kontakt', href: '/contact' },
             { label: 'Login', href: 'https://app.partsunion.de/auth' },
         ],

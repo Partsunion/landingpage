@@ -25,6 +25,7 @@ import {
 import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
 import type { SolutionPageData } from '@/lib/solutions-data';
 import { FlagshipCta, FlagshipSafety, FlagshipSubnav, SolutionHero } from './FlagshipShared';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const salesStages = [
     { label: 'Anfrage', title: 'Geprüfte Anfrage übernommen', detail: 'Kunde, Fahrzeug, Teilebedarf, OE-Bezug, Preis und Verfügbarkeit stehen bereits am Vorgang.', status: 'Daten vollständig', icon: ClipboardCheck },
@@ -90,7 +91,7 @@ function FlowStatus({ active, setActive }: { active: number; setActive: (value: 
                 </div>
 
                 <div className="bg-[#e6eee8] p-4">
-                    <div className="mx-auto max-w-[225px] overflow-hidden border-[6px] border-[#15263b] bg-[#e8efe9] shadow-[0_16px_35px_rgba(16,40,66,.2)]">
+                    <PhoneFrame className="mx-auto max-w-[225px]" screenClassName="bg-[#e8efe9]">
                         <div className="flex h-10 items-center bg-[#164f3b] px-2.5 text-white"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/15"><MessageCircle className="h-3 w-3" /></span><span className="ml-2"><strong className="block text-[8px]">Dein Teilehändler</strong><span className="block text-[6px] text-white/60">WhatsApp</span></span></div>
                         <div className="min-h-[246px] space-y-2 p-2.5 text-[7px] leading-[1.45] text-[#33455a]">
                             <div className="ml-7 bg-[#d7f0de] p-2">Ich brauche Bremsscheiben vorne für meinen BMW.</div>
@@ -101,7 +102,7 @@ function FlowStatus({ active, setActive }: { active: number; setActive: (value: 
                             {active >= 5 && <motion.div initial={reducedMotion ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mr-2 bg-white p-2 shadow-sm"><strong>Rechnung RE-2026-0894</strong><br />wurde automatisch erstellt.</motion.div>}
                         </div>
                         <div className="flex h-8 items-center border-t border-[#ccd8cf] bg-white px-2.5 text-[6px] text-[#819087]">Nachricht schreiben</div>
-                    </div>
+                    </PhoneFrame>
                 </div>
             </div>
         </div>
@@ -161,7 +162,7 @@ export function OrderSolutionPage({ page }: { page: SolutionPageData }) {
             <section id="zahlung" className="scroll-mt-28 border-b border-[#d7e0e9] bg-white py-14 md:py-20">
                 <div className="mx-auto grid max-w-[1260px] gap-10 px-5 md:px-8 lg:grid-cols-[.82fr_1.18fr] lg:items-center lg:gap-16 xl:px-10">
                     <div className="grid gap-6 sm:grid-cols-[235px_1fr] sm:items-center">
-                        <div className="mx-auto w-full max-w-[245px] overflow-hidden rounded-[28px] border-[7px] border-[#122238] bg-[#e8efe9] shadow-[0_25px_55px_rgba(14,35,62,.2)]">
+                        <PhoneFrame className="mx-auto w-full max-w-[245px]" screenClassName="bg-[#e8efe9]">
                             <div className="flex h-12 items-center bg-[#174f3d] px-3 text-white"><MessageCircle className="h-4 w-4" /><span className="ml-2"><strong className="block text-[9px]">Dein Teilehändler</strong><span className="text-[7px] text-white/60">online</span></span></div>
                             <div className="space-y-2 p-3 text-[8px] leading-[1.5] text-[#34465a]">
                                 <div className="mr-3 bg-white p-2.5 shadow-sm"><strong>Dein Angebot ist fertig.</strong><br />Bremsscheiben vorne<br />Gesamt: 329,80 €</div>
@@ -172,7 +173,7 @@ export function OrderSolutionPage({ page }: { page: SolutionPageData }) {
                                 <div className="mr-7 border-l-2 border-[#2f9862] bg-white p-2.5 shadow-sm"><strong className="text-[#267149]">✓ Zahlung bestätigt</strong><br />Die Zahlung ist deinem Auftrag zugeordnet.</div>
                             </div>
                             <div className="flex h-9 items-center border-t border-[#cbd6ce] bg-[#f7faf8] px-3 text-[7px] text-[#7a8880]">Nachricht schreiben</div>
-                        </div>
+                        </PhoneFrame>
                         <div className="border-l border-[#c8d5e2] pl-5"><Smartphone className="h-5 w-5 text-[#16885b]" /><strong className="mt-4 block text-sm text-[#26364b]">Der Kunde bleibt in seinem gewohnten Kanal.</strong><p className="mt-2 text-[11px] leading-5 text-[#68778a]">Das Angebot, die Auswahl der Zahlungsart und der sichere Zahlungslink kommen direkt in den laufenden WhatsApp-Verlauf.</p></div>
                     </div>
 

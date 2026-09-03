@@ -53,18 +53,24 @@ const moduleGroups: Array<{ title: string; links: ModuleLink[] }> = [
 ];
 
 const directLinks = [
-    { label: 'Plattform', href: '/plattform' },
-    { label: 'Wissen', href: '/blog' },
+    { label: 'Praxisratgeber', href: '/blog' },
     { label: 'Unternehmen', href: '/about' },
+];
+
+const platformLinks = [
+    { label: 'Neuteile-Plattform', text: 'Anfrage, OE, Einkauf, Lager und Finanzen', href: '/plattform/neuteile', icon: PackageSearch },
+    { label: 'Gebrauchtteile-Plattform', text: 'Einzelstücke, Preisermittlung, Inserate und eBay', href: '/plattform/gebrauchtteile', icon: Boxes },
 ];
 
 export function HomepageHeader() {
     const reducedMotion = useHydrationSafeReducedMotion();
     const [productOpen, setProductOpen] = useState(false);
+    const [platformOpen, setPlatformOpen] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const closeAll = () => {
         setProductOpen(false);
+        setPlatformOpen(false);
         setMobileOpen(false);
     };
 
@@ -96,7 +102,7 @@ export function HomepageHeader() {
                                 if (!event.currentTarget.contains(event.relatedTarget)) setProductOpen(false);
                             }}
                         >
-                            <button type="button" onClick={() => setProductOpen((open) => !open)} className={`flex h-10 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition ${productOpen ? 'bg-white/10 text-white' : 'text-white/76 hover:bg-white/[.07] hover:text-white'}`} aria-haspopup="true" aria-expanded={productOpen}>
+                            <button type="button" onClick={() => { setPlatformOpen(false); setProductOpen((open) => !open); }} className={`flex h-10 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition ${productOpen ? 'bg-white/10 text-white' : 'text-white/76 hover:bg-white/[.07] hover:text-white'}`} aria-haspopup="true" aria-expanded={productOpen}>
                                 Lösungen <ChevronDown className={`h-3.5 w-3.5 transition-transform ${productOpen ? 'rotate-180' : ''}`} />
                             </button>
 
@@ -136,6 +142,31 @@ export function HomepageHeader() {
                             </AnimatePresence>
                         </div>
 
+                        <div
+                            className="flex h-full items-center"
+                            onBlur={(event) => {
+                                if (!event.currentTarget.contains(event.relatedTarget)) setPlatformOpen(false);
+                            }}
+                        >
+                            <button type="button" onClick={() => { setProductOpen(false); setPlatformOpen((open) => !open); }} className={`flex h-10 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition ${platformOpen ? 'bg-white/10 text-white' : 'text-white/76 hover:bg-white/[.07] hover:text-white'}`} aria-haspopup="true" aria-expanded={platformOpen}>
+                                Plattformen <ChevronDown className={`h-3.5 w-3.5 transition-transform ${platformOpen ? 'rotate-180' : ''}`} />
+                            </button>
+                            <AnimatePresence>
+                                {platformOpen && (
+                                    <motion.div
+                                        initial={reducedMotion ? false : { opacity: 0, y: -7 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={reducedMotion ? undefined : { opacity: 0, y: -5 }}
+                                        transition={{ duration: reducedMotion ? 0 : 0.18 }}
+                                        className="absolute left-1/2 top-[72px] w-[760px] max-w-[calc(100vw-64px)] -translate-x-1/2 border border-[#c9d3df] bg-white p-6 text-[#152033] shadow-[0_24px_60px_rgba(6,18,36,.22)]"
+                                    >
+                                        <div className="mb-4 flex items-center justify-between border-b border-[#d7dee7] pb-4"><span><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#2376e5]">Plattformen</span><strong className="ml-3 text-sm font-semibold">Zwei Teilewelten. Ein Betrieb.</strong></span><Link href="/plattform" onClick={closeAll} className="inline-flex items-center gap-2 text-xs font-semibold text-[#155fc8]">Gesamtüberblick <ArrowRight className="h-3.5 w-3.5" /></Link></div>
+                                        <div className="grid grid-cols-2 gap-4">{platformLinks.map((item) => { const Icon = item.icon; return <Link key={item.href} href={item.href} onClick={closeAll} className="group border border-[#d6dee8] bg-[#f7f9fb] p-5 transition hover:border-[#8db4e6] hover:bg-[#eef5fd]"><span className="flex h-10 w-10 items-center justify-center border border-[#afc4dc] bg-white text-[#1d6fe8]"><Icon className="h-5 w-5" /></span><strong className="mt-5 block text-base">{item.label}</strong><span className="mt-2 block text-xs leading-5 text-[#6c7889]">{item.text}</span><span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#155fc8]">Plattform ansehen <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span></Link>; })}</div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
                         {directLinks.map((link) => <Link key={link.label} href={link.href} onClick={closeAll} className="rounded-md px-3.5 py-2.5 text-sm font-medium text-white/72 transition hover:bg-white/[.07] hover:text-white">{link.label}</Link>)}
                     </nav>
 
@@ -163,7 +194,10 @@ export function HomepageHeader() {
                         className="max-h-[calc(100vh-72px)] overflow-y-auto border-b border-[#ccd6e3] bg-white text-[#162134] shadow-[0_24px_55px_rgba(4,15,31,.28)]"
                     >
                         <nav className="mx-auto max-w-[760px] px-5 py-5" aria-label="Mobile Navigation">
-                            <div className="mb-3 text-[10px] font-bold uppercase tracking-[.14em] text-[#6c7787]">Produktbereiche</div>
+                            <div className="mb-3 text-[10px] font-bold uppercase tracking-[.14em] text-[#6c7787]">Plattformen</div>
+                            <div className="grid gap-2 sm:grid-cols-2">{platformLinks.map((item) => { const Icon = item.icon; return <Link key={item.href} href={item.href} onClick={closeAll} className="flex items-center gap-3 border border-[#d8e0e9] bg-[#f7f9fb] p-3"><span className="flex h-8 w-8 items-center justify-center bg-white text-[#1d6fe8]"><Icon className="h-4 w-4" /></span><span><strong className="block text-sm">{item.label}</strong><span className="mt-0.5 block text-[10px] text-[#758294]">{item.text}</span></span></Link>; })}</div>
+                            <Link href="/plattform" onClick={closeAll} className="mt-2 flex items-center justify-between py-2 text-xs font-semibold text-[#155fc8]">Beide Plattformen im Überblick <ArrowRight className="h-3.5 w-3.5" /></Link>
+                            <div className="mb-3 mt-4 border-t border-[#e1e6ed] pt-4 text-[10px] font-bold uppercase tracking-[.14em] text-[#6c7787]">Lösungen</div>
                             {moduleGroups.map((group) => (
                                 <div key={group.title} className="border-t border-[#e1e6ed] py-4 first:border-t-0">
                                     <div className="mb-2 text-xs font-bold text-[#1c6ed8]">{group.title}</div>

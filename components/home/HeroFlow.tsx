@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 import { whatsappPreviewData } from '@/components/landing/WhatsAppPreview';
 import type { ChatMessage } from '@/components/landing/feature-previews/ChatPreview';
 import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 type FlowScene = {
     label: string;
@@ -150,9 +151,7 @@ function PhoneConversation({ active, reducedMotion }: { active: number; reducedM
     const translateY = [0, 0, -36, -72, -158, -214][active] ?? 0;
 
     return (
-        <div data-hero-phone className="relative z-20 w-full rounded-[27px] border-[5px] border-[#111827] bg-[#111827] p-1 shadow-[0_22px_55px_rgba(7,17,34,.28)]">
-            <div className="absolute left-1/2 top-1.5 z-20 h-3.5 w-14 -translate-x-1/2 rounded-full bg-[#111827]" />
-            <div className="overflow-hidden rounded-[19px] bg-[#e9eee9]">
+        <PhoneFrame className="z-20 w-full" screenClassName="bg-[#e9eee9]" >
                 <div className="flex h-10 items-end gap-1.5 bg-[#008069] px-2 pb-1.5 text-white sm:h-11">
                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/15 text-[7px] font-bold">{whatsappPreviewData.customerInitials}</span>
                     <span className="min-w-0"><strong className="block truncate text-[7px] leading-none sm:text-[8px]">{whatsappPreviewData.customerName}</strong><span className="text-[5px] text-white/70">online</span></span>
@@ -165,8 +164,7 @@ function PhoneConversation({ active, reducedMotion }: { active: number; reducedM
                     </motion.div>
                 </div>
                 <div className="flex h-8 items-center gap-1 bg-[#f7f8f8] px-1.5 text-[5px] text-[#89929a]"><span className="flex-1 rounded-full bg-white px-2 py-1.5">Nachricht</span><span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#008069] text-white">➤</span></div>
-            </div>
-        </div>
+        </PhoneFrame>
     );
 }
 

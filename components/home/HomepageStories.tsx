@@ -27,6 +27,7 @@ import {
     type LucideIcon,
 } from 'lucide-react';
 import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const catalogBrands = ['VW', 'AUDI', 'BMW', 'MB', 'FORD', 'OPEL', 'RENAULT', 'ŠKODA'];
 
@@ -226,8 +227,7 @@ export function OrderSupplyStory() {
 
 function ReturnsPhone() {
     return (
-        <div className="relative mx-auto w-[252px] rounded-[38px] border-[7px] border-[#111923] bg-[#111923] p-1.5 shadow-[0_24px_52px_rgba(24,39,59,.24)]">
-            <div className="overflow-hidden rounded-[27px] bg-[#f3f5f7] text-[#162033]">
+        <PhoneFrame className="mx-auto w-[252px]" screenClassName="bg-[#f3f5f7] text-[#162033]">
                 <div className="flex h-7 items-center justify-between bg-[#0e243f] px-4 text-[6px] text-white/75"><span>12:08</span><span>● LTE  ▰</span></div>
                 <div className="flex h-11 items-center border-b border-[#d1d8e0] bg-white px-3"><strong className="text-[11px]">Retoure / Reklamation</strong><span className="ml-auto text-[8px] font-semibold text-[#687688]">Abbrechen</span></div>
                 <div className="grid grid-cols-3 border-b border-[#d4dbe3] bg-white text-center text-[7px]">
@@ -247,8 +247,7 @@ function ReturnsPhone() {
                     <div className="mt-3 bg-[#1d6fe8] py-3 text-center text-[9px] font-bold text-white">Fall zur Prüfung geben</div>
                     <p className="mt-2 px-1 text-center text-[6px] leading-3 text-[#7c8693]">Noch keine Bestands- oder Finanzbuchung.</p>
                 </div>
-            </div>
-        </div>
+        </PhoneFrame>
     );
 }
 

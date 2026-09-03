@@ -7,7 +7,7 @@ import {
     ArrowRight, ArrowUpRight, BadgeEuro, Bot, Boxes, Camera, CarFront,
     ChartNoAxesCombined, CheckCircle2, CircleDollarSign, CreditCard, Database,
     ExternalLink, FileCheck2, FileSpreadsheet, Inbox, Landmark, PackageCheck,
-    Receipt, ScanLine, Search, ShieldCheck, ShoppingCart, Store, Tags, Warehouse,
+    PackageSearch, Receipt, ScanLine, Search, ShieldCheck, ShoppingCart, Store, Tags, Warehouse,
     type LucideIcon,
 } from 'lucide-react';
 
@@ -105,7 +105,9 @@ export function PlattformSections() {
                 </div>
             </section>
 
-            <nav aria-label="Bereiche der Plattform" className="sticky top-[72px] z-30 hidden border-b border-[#d6dee8] bg-white/95 backdrop-blur-lg lg:block"><div className="mx-auto grid h-16 max-w-[1480px] grid-cols-5 px-8 xl:px-10">{chapters.map((chapter, index) => <Link key={chapter.href} href={chapter.href} className={`group flex items-center gap-3 px-4 text-xs font-semibold text-[#4e5d72] transition hover:bg-[#f3f7fc] hover:text-[#155fc8] ${index ? 'border-l border-[#e2e7ed]' : ''}`}><span className="font-mono text-[9px] text-[#8c98a8] group-hover:text-[#2b79e2]">{chapter.number}</span>{chapter.label}</Link>)}</div></nav>
+            <nav aria-label="Plattform auswählen" className="border-b border-[#d6dee8] bg-white"><div className="mx-auto grid max-w-[1480px] md:grid-cols-[1fr_1fr_auto] md:px-8 xl:px-10"><Link href="/plattform/neuteile" className="group flex min-h-16 items-center gap-3 px-5 text-sm font-semibold text-[#33445a] transition hover:bg-[#eef5fd] hover:text-[#155fc8] md:border-x md:border-[#e0e6ed]"><PackageSearch className="h-4 w-4 text-[#1d6fe8]" /> Neuteile-Plattform <ArrowRight className="ml-auto h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></Link><Link href="/plattform/gebrauchtteile" className="group flex min-h-16 items-center gap-3 border-t border-[#e0e6ed] px-5 text-sm font-semibold text-[#33445a] transition hover:bg-[#eef5fd] hover:text-[#155fc8] md:border-y-0 md:border-r"><Boxes className="h-4 w-4 text-[#1d6fe8]" /> Gebrauchtteile-Plattform <ArrowRight className="ml-auto h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></Link><span className="flex min-h-14 items-center justify-center px-5 text-xs font-semibold text-[#68768a]">Gesamtüberblick</span></div></nav>
+
+            <nav aria-label="Bereiche der Plattform" className="sticky top-[72px] z-30 hidden border-b border-[#d6dee8] bg-white lg:block"><div className="mx-auto grid h-16 max-w-[1480px] grid-cols-5 px-8 xl:px-10">{chapters.map((chapter, index) => <Link key={chapter.href} href={chapter.href} className={`group flex items-center gap-3 px-4 text-xs font-semibold text-[#4e5d72] transition hover:bg-[#f3f7fc] hover:text-[#155fc8] ${index ? 'border-l border-[#e2e7ed]' : ''}`}><span className="font-mono text-[9px] text-[#8c98a8] group-hover:text-[#2b79e2]">{chapter.number}</span>{chapter.label}</Link>)}</div></nav>
 
             <section id="ablauf" className="scroll-mt-36 border-b border-[#dce3eb] bg-white py-14 md:py-20">
                 <div className="mx-auto max-w-[1480px] px-5 md:px-8 xl:px-10">

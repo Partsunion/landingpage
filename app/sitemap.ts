@@ -44,6 +44,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${BASE_URL}/`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
         { url: `${BASE_URL}/live-demo`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/plattform`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/plattform/neuteile`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+        { url: `${BASE_URL}/plattform/gebrauchtteile`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
         { url: `${BASE_URL}/loesungen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
         { url: `${BASE_URL}/beratung`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/download`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
@@ -68,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: topFeatures.has(f.slug) ? 0.75 : 0.65,
         })),
 
-        // ─── Blog ─────────────────────────────────────────────────────
+        // ─── Praxisratgeber ───────────────────────────────────────────
         { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         ...blogPosts.map((p) => ({
             url: `${BASE_URL}/blog/${p.slug}`,

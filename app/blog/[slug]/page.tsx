@@ -70,14 +70,14 @@ export default async function BlogPostPage({ params }: Props) {
         '@type': 'BreadcrumbList',
         itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
-            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://partsunion.de/blog' },
+            { '@type': 'ListItem', position: 2, name: 'Praxisratgeber', item: 'https://partsunion.de/blog' },
             { '@type': 'ListItem', position: 3, name: post.title, item: `https://partsunion.de/blog/${post.slug}` },
         ],
     };
 
     const articleLd = {
         '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
+        '@type': 'Article',
         headline: post.title,
         description: post.description,
         url: `https://partsunion.de/blog/${post.slug}`,
@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: Props) {
                         className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-                        Alle Beiträge
+                        Alle Ratgeber
                     </Link>
                 </nav>
 

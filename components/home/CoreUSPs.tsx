@@ -117,15 +117,6 @@ export function CoreUSPs() {
                                 className={`group relative isolate flex min-h-[286px] min-w-[84vw] snap-center flex-col overflow-hidden rounded-xl border border-white/12 bg-[#12243d] p-6 shadow-[0_18px_45px_rgba(0,0,0,.16)] md:min-w-0 ${usp.className}`}
                             >
                                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#69a0ff]/75 to-transparent" />
-                                {!reducedMotion && (
-                                    <motion.span
-                                        aria-hidden="true"
-                                        className="pointer-events-none absolute -top-24 h-48 w-20 rotate-[18deg] bg-gradient-to-r from-transparent via-[#4b86ea]/10 to-transparent blur-xl"
-                                        animate={{ left: ['-25%', '125%'] }}
-                                        transition={{ duration: 6.5 + index * 0.6, repeat: Infinity, repeatDelay: 2.4, ease: 'easeInOut' }}
-                                    />
-                                )}
-
                                 <div className="relative z-10 flex items-center justify-between">
                                     <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#4774af]/55 bg-[#17345a] text-[#8db6ff] transition-colors group-hover:border-[#6e9fe8] group-hover:bg-[#1d6fe8] group-hover:text-white">
                                         <Icon className="h-5 w-5" />

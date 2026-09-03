@@ -7,6 +7,8 @@ import { Mail, Linkedin } from 'lucide-react';
 const footerLinks = {
     platform: [
         { label: 'Die Plattform im Überblick', href: '/plattform' },
+        { label: 'Neuteile-Plattform', href: '/plattform/neuteile' },
+        { label: 'Gebrauchtteile-Plattform', href: '/plattform/gebrauchtteile' },
         { label: 'ERP für den Teilehandel', href: '/features/erp-autoteilehandel' },
         { label: 'Warenwirtschaft (WaWi)', href: '/features/warenwirtschaft-autoteilhandel' },
         { label: 'Digitale Anfragen', href: '/features/whatsapp-bot' },
@@ -24,7 +26,7 @@ const footerLinks = {
     ],
     company: [
         { label: 'Über uns', href: '/about' },
-        { label: 'Blog', href: '/blog' },
+        { label: 'Praxisratgeber', href: '/blog' },
         { label: 'Kontakt', href: '/contact' },
         { label: 'Beratungstermin', href: '/#beratung' },
     ],

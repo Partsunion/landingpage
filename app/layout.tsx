@@ -16,10 +16,17 @@ export const metadata: Metadata = {
     template: "%s | Partsunion",
   },
   description:
-    "Partsunion verbindet Teileanfragen, Fahrzeugbezug, Verkauf, Einkauf, Lager und Rechnung in einem durchgängigen Ablauf für den Autoteilehandel.",
+    "Partsunion ist ERP und Warenwirtschaft für den Autoteilehandel: Teileanfragen, OE-Ermittlung, Neuteile, Gebrauchtteile, Einkauf, Lager, Kasse, Rechnung und Banking in einem Ablauf.",
   keywords: [
     "Autoteile Software",
-    "Enterprise ERP Autoteilehandel",
+    "Neuteile Warenwirtschaft",
+    "Gebrauchtteile Software",
+    "Autoverwerter Software",
+    "Autoverwertung Warenwirtschaft",
+    "Gebrauchtteilehandel Warenwirtschaft",
+    "Autoteile eBay verkaufen",
+    "eBay Motors Teile einstellen",
+    "Gebrauchtteile Preisermittlung",
     "Autoteilehändler Automatisierung",
     "Betriebssystem Autoteilehandel",
     "ERP Autoteile",
@@ -149,7 +156,7 @@ export default function RootLayout({
                     height: 512,
                   },
                   description:
-                    "Partsunion entwickelt ein branchenspezifisches Enterprise-ERP für den Autoteilehandel: von der Teileidentifikation über Beschaffung und Lager bis zu Verkauf und Finanzen.",
+                    "Partsunion entwickelt ERP und Warenwirtschaft für den Autoteilehandel: von Teileidentifikation und Beschaffung über Neuteile und gebrauchte Einzelstücke bis zu Verkauf und Finanzen.",
                   areaServed: "DE",
                   knowsLanguage: ["de", "en"],
                   sameAs: [],
@@ -160,7 +167,7 @@ export default function RootLayout({
                   url: "https://partsunion.de",
                   name: "Partsunion",
                   description:
-                    "Enterprise-ERP für den Autoteilehandel: Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen.",
+                    "ERP und Warenwirtschaft für den Autoteilehandel: Teileidentifikation, Neu- und Gebrauchtteile, Beschaffung, Lager, Verkauf und Finanzen.",
                   publisher: { "@id": "https://partsunion.de/#organization" },
                   inLanguage: "de-DE",
                 },
@@ -177,7 +184,7 @@ export default function RootLayout({
                   applicationSubCategory: "ERP & Warenwirtschaft (Autoteilehandel)",
                   operatingSystem: "Web",
                   description:
-                    "Branchenspezifisches ERP für den Autoteilehandel mit Teileidentifikation, Einkauf, Warenwirtschaft, Verkauf, Faktura, Finanzfunktionen und White-Label-B2B-Kundenportal. WhatsApp kann als Eingangskanal genutzt werden.",
+                    "Branchenspezifisches ERP und Warenwirtschaft für den Autoteilehandel mit Teileidentifikation, Neuteile- und Gebrauchtteileverwaltung, Einkauf, Lager, Verkauf, Kasse, Faktura und Finanzfunktionen.",
                   url: "https://partsunion.de",
                   offers: {
                     "@type": "Offer",
@@ -206,13 +213,15 @@ export default function RootLayout({
                     "White-Label B2B-Kundenportal mit kundenspezifischen Preisen",
                     "Mandanten-Isolation, 2FA, Audit-Log, DSGVO Auskunft & Löschung",
                     "WhatsApp als optionaler Eingangskanal für Kundenanfragen",
+                    "Gebrauchte Einzelstücke mit Herkunft, Zustand, Fotos und eindeutigem Bestand",
+                    "Preisermittlung und vorbereitete eBay-Inserate für Gebrauchtteile",
                   ],
                   provider: { "@id": "https://partsunion.de/#organization" },
                 },
                 {
                   "@type": "Service",
                   "@id": "https://partsunion.de/#service",
-                  name: "Enterprise-ERP für Autoteilehändler",
+                  name: "ERP und Warenwirtschaft für Autoteilehändler",
                   serviceType: "SaaS",
                   provider: { "@id": "https://partsunion.de/#organization" },
                   areaServed: { "@type": "Country", name: "Deutschland" },
