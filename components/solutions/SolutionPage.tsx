@@ -21,6 +21,7 @@ import { AssistantSolutionPage } from './flagship/AssistantSolutionPage';
 import { SolutionHero } from './flagship/FlagshipShared';
 import { InquirySolutionPage } from './flagship/InquirySolutionPage';
 import { OemSolutionPage } from './flagship/OemSolutionPage';
+import { OrderSolutionPage } from './flagship/OrderSolutionPage';
 import { solutionStories } from '@/lib/solution-stories';
 import { getSolutionPage, type SolutionIcon, type SolutionPageData } from '@/lib/solutions-data';
 
@@ -142,6 +143,10 @@ export function SolutionPage({ page }: { page: SolutionPageData }) {
 
     if (page.visual === 'assistant') {
         return <AssistantSolutionPage page={page} />;
+    }
+
+    if (page.visual === 'order') {
+        return <OrderSolutionPage page={page} />;
     }
 
     return <GenericSolutionPage page={page} />;
