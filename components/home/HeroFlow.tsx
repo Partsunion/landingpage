@@ -180,15 +180,13 @@ const coreModules = [
 export function HeroFlow() {
     const reducedMotion = useHydrationSafeReducedMotion();
     const [active, setActive] = useState(0);
-    const [paused, setPaused] = useState(false);
     const scene = scenes[active];
     const SceneIcon = scene.icon;
 
     useEffect(() => {
-        if (reducedMotion || paused) return;
         const timer = window.setTimeout(() => setActive((value) => (value + 1) % scenes.length), 4200);
         return () => window.clearTimeout(timer);
-    }, [active, paused, reducedMotion]);
+    }, [active]);
 
     return (
         <section className="relative overflow-hidden border-b border-[#d9e1ec] bg-white pt-[72px]">
@@ -227,10 +225,6 @@ export function HeroFlow() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: reducedMotion ? 0 : 0.68, delay: reducedMotion ? 0 : 0.12 }}
                     className="relative min-w-0"
-                    onMouseEnter={() => setPaused(true)}
-                    onMouseLeave={() => setPaused(false)}
-                    onFocusCapture={() => setPaused(true)}
-                    onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}
                 >
                     <div className="relative overflow-hidden border border-[#aebdce] bg-white shadow-[0_26px_60px_rgba(25,46,76,.16)]">
                         <div className="flex min-h-12 items-center gap-3 border-b border-[#cfd8e3] bg-[#f8fafc] px-3 text-[#17243a] sm:px-4">
@@ -267,7 +261,7 @@ export function HeroFlow() {
                         </div>
 
                         <div className="grid grid-cols-6 border-t border-[#cbd5e1] bg-white">
-                            {scenes.map((item, index) => <button key={item.shortLabel} type="button" data-hero-scene={index} onClick={() => setActive(index)} className={`relative min-w-0 overflow-hidden border-r border-[#d7dee7] px-0.5 py-2.5 text-[5.5px] font-bold uppercase tracking-[-.01em] transition last:border-r-0 sm:px-1 sm:py-3 sm:text-[7px] sm:tracking-[.04em] ${active === index ? 'bg-[#edf4ff] text-[#155fc8]' : 'bg-white text-[#8290a2] hover:bg-[#f7f9fc] hover:text-[#405169]'}`} aria-label={`Schritt ${index + 1}: ${item.label}`} aria-pressed={active === index} aria-current={active === index ? 'step' : undefined}>{item.shortLabel}{active === index && <motion.span layoutId="hero-active-step" className="absolute inset-x-0 top-0 h-0.5 bg-[#1d6fe8]" />}</button>)}
+                            {scenes.map((item, index) => <button key={item.shortLabel} type="button" data-hero-scene={index} onClick={() => setActive(index)} className={`relative min-w-0 overflow-hidden border-r border-[#d7dee7] px-0.5 py-2.5 text-[5.5px] font-bold uppercase tracking-[-.01em] transition last:border-r-0 sm:px-1 sm:py-3 sm:text-[7px] sm:tracking-[.04em] ${active === index ? 'bg-[#edf4ff] text-[#155fc8]' : 'bg-white text-[#8290a2] hover:bg-[#f7f9fc] hover:text-[#405169]'}`} aria-label={`Schritt ${index + 1}: ${item.label}`} aria-pressed={active === index} aria-current={active === index ? 'step' : undefined}>{item.shortLabel}{active === index && <motion.span key={`progress-${active}`} initial={reducedMotion ? false : { scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: reducedMotion ? 0 : 4.2, ease: 'linear' }} className="absolute inset-x-0 top-0 h-0.5 origin-left bg-[#1d6fe8]" />}</button>)}
                         </div>
                         <div className="flex items-center justify-between border-t border-[#d7dee7] bg-[#f8fafc] px-3 py-2 text-[6px] text-[#8793a2] sm:text-[7px]"><span>Originale Partsunion-Ansichten</span><span className="font-bold">DEMO-DATEN</span></div>
                     </div>

@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import { PlattformSections } from './PlattformSections';
 
 export const metadata: Metadata = {
-    title: 'Die Plattform – Enterprise-ERP für den Autoteilehandel',
+    title: 'Die Plattform – ERP, Warenwirtschaft und Banking für den Autoteilehandel',
     description:
-        'Die Partsunion-Plattform im Detail: Teileidentifikation, Verkauf, Einkauf, Lager und Finanzen auf einer gemeinsamen Datenbasis — mit durchgängigen Belegen, Rollen und Compliance-Prozessen.',
+        'Partsunion verbindet Teileidentifikation, Verkauf, Einkauf, Lager, Gebrauchtteile, eBay, Banking und Buchungen in einer Plattform für den Autoteilehandel.',
     alternates: { canonical: 'https://partsunion.de/plattform' },
     openGraph: {
-        title: 'Die Partsunion-Plattform – Enterprise-ERP für den Teilehandel',
+        title: 'Die Partsunion-Plattform – vom Teil bis zur Buchung',
         description:
-            'Verkauf, Beschaffung, Lager und Finanzen auf einer Datenbasis — mit digitalem Auftragseingang, nachvollziehbaren Belegketten und DATEV-Export.',
+            'ERP, WaWi, Theke, Kasse, Gebrauchtteile, Banking und Buchungen auf einer gemeinsamen Datenbasis.',
         url: 'https://partsunion.de/plattform',
     },
 };
