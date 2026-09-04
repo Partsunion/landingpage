@@ -35,5 +35,8 @@ jobs:
       - name: Build static production site
         run: npm run build
 
+      - name: Check search and AI discoverability
+        run: npm run seo:check
+
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
