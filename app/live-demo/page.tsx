@@ -5,7 +5,7 @@ import { FinalCTA } from '@/components/landing/FinalCTA';
 export const metadata: Metadata = {
   title: 'Produktansichten: Partsunion im Arbeitsalltag',
   description:
-    'Sieh dir echte Partsunion-Produktansichten an: WhatsApp-Anfragen, Verkauf, Lager, Betriebsassistent, Rechnungen und Banking. Kläre deinen Bedarf im Beratungsgespräch.',
+    'Sieh echte Partsunion-Produktansichten für WhatsApp-Anfragen, Verkauf, Lager, Betriebsassistent, Rechnungen und Banking – mit Beispieldaten erklärt.',
   alternates: { canonical: 'https://partsunion.de/live-demo' },
   openGraph: {
     title: 'Partsunion-Produktansichten',

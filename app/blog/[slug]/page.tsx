@@ -16,10 +16,10 @@ const seoTitles: Record<string, string> = {
   'retourenquote-autoteilhandel-senken': 'Retouren senken: 90-Tage-Plan für Teilehändler',
   'whatsapp-bot-fuer-autoteilhaendler': 'WhatsApp-Bot im Teilehandel sinnvoll einführen',
   'oem-ermittlung-aus-vin-hsn-tsn': 'OE-Nummer aus VIN, HSN/TSN und Fahrzeugschein',
-  'warenwirtschaft-autoteilhandel-checkliste': 'Warenwirtschaft für Autoteilehändler: Checkliste',
-  'erp-vs-generisch-autoteilhandel': 'ERP für den Teilehandel: Branchenlösung im Vergleich',
+  'warenwirtschaft-autoteilhandel-checkliste': 'Warenwirtschaft Autoteile: Auswahl-Checkliste',
+  'erp-vs-generisch-autoteilhandel': 'ERP für Autoteile: Systeme im Vergleich',
   'gobd-tse-kasse-autohandel': 'GoBD und TSE-Kasse im Autoteilehandel',
-  'foto-wareneingang-retoure-lager-ki': 'Foto-Wareneingang und Retouren im Autoteile-Lager',
+  'foto-wareneingang-retoure-lager-ki': 'Foto-Wareneingang im Autoteilelager',
   'b2b-kundenportal-autoteilhandel-aufbauen': 'B2B-Kundenportal für Autoteilehändler aufbauen',
   'e-rechnungspflicht-zugferd-xrechnung-handel': 'E-Rechnung mit ZUGFeRD und XRechnung im Handel',
   'differenzbesteuerung-25a-gebrauchtteile': '§ 25a Differenzbesteuerung bei Gebrauchtteilen',
@@ -65,18 +65,38 @@ export default async function BlogPostPage({ params }: Props) {
     .filter((p) => p.slug !== slug)
     .sort((a, b) => Number(b.category === post.category) - Number(a.category === post.category))
     .slice(0, 3);
+  const url = `https://partsunion.de/blog/${slug}`;
   const articleLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.description,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
-    author: { '@id': 'https://partsunion.de/#organization' },
-    publisher: { '@id': 'https://partsunion.de/#organization' },
-    image: 'https://partsunion.de/opengraph-image',
-    inLanguage: 'de-DE',
-    mainEntityOfPage: `https://partsunion.de/blog/${slug}`,
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Praxisratgeber',
+            item: 'https://partsunion.de/blog',
+          },
+          { '@type': 'ListItem', position: 3, name: post.title, item: url },
+        ],
+      },
+      {
+        '@type': 'Article',
+        '@id': `${url}#article`,
+        headline: post.title,
+        description: post.description,
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt,
+        author: { '@id': 'https://partsunion.de/#organization' },
+        publisher: { '@id': 'https://partsunion.de/#organization' },
+        image: 'https://partsunion.de/opengraph-image',
+        inLanguage: 'de-DE',
+        mainEntityOfPage: url,
+      },
+    ],
   };
   return (
     <div className="mk">

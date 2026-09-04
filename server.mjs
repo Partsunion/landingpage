@@ -7,7 +7,14 @@ import { compressedAssetIndex, serveCompressed } from './lib/compressed-assets.m
 
 const port = Number.parseInt(process.env.PORT ?? '8080', 10);
 const publicDirectory = resolve(process.cwd(), 'out');
-const maintenanceEnabled = process.env.MAINTENANCE_MODE === 'true';
+// A public-site shutdown must be an explicit emergency decision. The former
+// single-variable switch was too easy to leave enabled after a release and in
+// that state also returned 503 for robots.txt and sitemap.xml. Requiring the
+// confirmation value makes an old MAINTENANCE_MODE=true deployment inert after
+// the next release while preserving a deliberate emergency maintenance path.
+const maintenanceEnabled =
+  process.env.MAINTENANCE_MODE === 'true' &&
+  process.env.MAINTENANCE_DEPLOY_CONFIRMATION === 'BLOCK_PUBLIC_SEARCH_AND_USERS';
 const maintenanceHosts = new Set(
   (process.env.MAINTENANCE_HOSTS ?? 'partsunion.de,www.partsunion.de')
     .split(',')

@@ -10,12 +10,12 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 const seoTitles: Record<string, string> = {
-  'oem-ermittlung': 'OE-Ermittlung für Autoteilehändler',
-  'whatsapp-bot': 'WhatsApp-Anfragen im Autoteilehandel',
+  'oem-ermittlung': 'OE-Nummern prüfen: Daten und Fachfreigabe',
+  'whatsapp-bot': 'WhatsApp-Anfragen ins ERP übernehmen',
   'automatische-rechnungserstellung': 'Angebot, Auftrag und Rechnung verbinden',
   bestellprozess: 'Einkauf und Disposition für Autoteile',
   bestandssynchronisation: 'Warenbestand für alle Verkaufskanäle',
-  retourenmanagement: 'Retouren und Reklamationen im Teilehandel',
+  retourenmanagement: 'Retourenprozess: Prüfung und Gutschrift',
   skalierbarkeit: 'ERP für Filialen und wachsende Teilehändler',
   '24-7-einsatzbereit': 'Digitale Anfragen und B2B-Self-Service',
   geschwindigkeit: 'Arbeitsabläufe im Autoteilehandel verbinden',
@@ -56,18 +56,73 @@ export default async function FeatureDetailPage({ params }: Props) {
   const feature = featureData.find((f) => f.slug === slug);
   if (!feature) notFound();
   const content = featureContent[slug] || {};
+  const url = `https://partsunion.de/features/${slug}`;
+  const title = seoTitles[slug] || feature.title;
+  const description =
+    feature.description.length >= 90
+      ? feature.description
+      : `${feature.description} Im Partsunion ERP für Autoteilehändler.`;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Funktionen',
+            item: 'https://partsunion.de/features',
+          },
+          { '@type': 'ListItem', position: 3, name: feature.title, item: url },
+        ],
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: title,
+        description,
+        inLanguage: 'de-DE',
+        isPartOf: { '@id': 'https://partsunion.de/#website' },
+        about: { '@id': 'https://partsunion.de/#software' },
+        breadcrumb: { '@id': `${url}#breadcrumb` },
+      },
+      ...(content.faqs
+        ? [
+            {
+              '@type': 'FAQPage',
+              '@id': `${url}#faq`,
+              mainEntity: content.faqs.map((item) => ({
+                '@type': 'Question',
+                name: item.q,
+                acceptedAnswer: { '@type': 'Answer', text: item.a },
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
   const related = featureData
     .filter((f) => f.slug !== slug && f.category === feature.category)
     .slice(0, 3);
   return (
     <article className="mk">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        }}
+      />
       <section className="mk-page-hero">
         <div className="mk-wrap">
           <Breadcrumb
             items={[{ label: 'Funktionen', href: '/features' }, { label: feature.title }]}
           />
           <p className="mk-kicker">Funktionen im Detail</p>
-          <h1>{seoTitles[slug] || feature.title}</h1>
+          <h1>{title}</h1>
           <p className="mk-copy">{content.subtitle || feature.description}</p>
           <div className="mk-actions">
             <DemoLink />

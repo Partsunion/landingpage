@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Breadcrumb, DemoLink, FAQ } from '@/components/marketing/Shared';
 export const metadata: Metadata = {
-  title: 'ERP-Systemansätze für den Autoteilehandel im Vergleich',
+  title: 'ERP für Autoteilehändler im Vergleich',
   description:
     'Vergleiche Branchen-ERP, allgemeine Warenwirtschaft und Tabellen anhand deiner Teilevorgänge. Eine konkrete Prüfliste für Funktionen, Daten und Einführung.',
   alternates: { canonical: 'https://partsunion.de/vergleich' },

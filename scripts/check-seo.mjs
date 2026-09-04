@@ -25,6 +25,10 @@ function decodeText(value) {
         .replaceAll('&amp;', '&')
         .replaceAll('&quot;', '"')
         .replaceAll('&#x27;', "'")
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&nbsp;', ' ')
+        .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
         .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)));
 }
 
@@ -48,6 +52,7 @@ async function htmlFiles(directory) {
 
 const keyPageByFile = new Map(keyPages.map(([label, file, canonical]) => [file, { label, canonical }]));
 const indexableCanonicals = [];
+const pageRecords = [];
 const exportedHtml = await htmlFiles(output).catch(() => []);
 
 for (const absoluteFile of exportedHtml) {
@@ -67,14 +72,14 @@ for (const absoluteFile of exportedHtml) {
     const canonicalHref = contentOf(html, /<link rel="canonical" href="([^"]+)"\s*\/?>/i);
     const h1Count = (html.match(/<h1(?:\s|>)/gi) ?? []).length;
 
-    assert(title.length >= 15 && title.length <= 70, `${label}: Title hat ${title.length} statt 15–70 Zeichen.`);
-    const minimumDescription = keyPage ? 90 : 70;
-    assert(description.length >= minimumDescription && description.length <= 180, `${label}: Description hat ${description.length} statt ${minimumDescription}–180 Zeichen.`);
+    assert(title.length >= 15 && title.length <= 60, `${label}: Title hat ${title.length} statt 15–60 Zeichen.`);
+    assert(description.length >= 120 && description.length <= 160, `${label}: Description hat ${description.length} statt 120–160 Zeichen.`);
     assert(canonicalHref === expectedCanonical, `${label}: Canonical ist „${canonicalHref || 'fehlend'}“ statt „${expectedCanonical}“.`);
     assert(h1Count === 1, `${label}: erwartet genau eine H1, gefunden ${h1Count}.`);
     assert(/<meta property="og:title"/i.test(html), `${label}: og:title fehlt.`);
     assert(/<meta property="og:description"/i.test(html), `${label}: og:description fehlt.`);
     indexableCanonicals.push(canonicalHref);
+    const internalPaths = [];
 
     for (const image of html.matchAll(/<img\b[^>]*>/gi)) {
         assert(/\balt="[^"]*"/i.test(image[0]), `${label}: Bild ohne alt-Attribut gefunden.`);
@@ -85,6 +90,7 @@ for (const absoluteFile of exportedHtml) {
         if (!href.startsWith('/') || href.startsWith('//') || href.startsWith('/_next/')) continue;
         const path = href.split(/[?#]/)[0];
         if (!path) continue;
+        internalPaths.push(path === '/' ? '/' : path.replace(/\/$/, ''));
         const candidates = path === '/'
             ? [join(output, 'index.html')]
             : [join(output, `${path}.html`), join(output, path, 'index.html'), join(output, path)];
@@ -99,6 +105,47 @@ for (const absoluteFile of exportedHtml) {
             errors.push(`${label}: ungültiges JSON-LD (${error.message}).`);
         }
     }
+
+    const requiresBreadcrumb =
+        file.startsWith('features/') ||
+        file.startsWith('loesungen/') ||
+        file.startsWith('blog/') ||
+        ['whatsapp-bot.html', 'betriebsassistent.html', 'buchhaltung-banking.html', 'einfuehrung.html'].includes(file);
+    if (requiresBreadcrumb)
+        assert(html.includes('\"@type\":\"BreadcrumbList\"'), `${label}: BreadcrumbList-Schema fehlt.`);
+
+    pageRecords.push({ label, title, description, canonicalHref, internalPaths });
+}
+
+for (const [field, values] of [
+    ['Title', pageRecords.map((page) => [page.title, page.label])],
+    ['Description', pageRecords.map((page) => [page.description, page.label])],
+    ['Canonical', pageRecords.map((page) => [page.canonicalHref, page.label])],
+]) {
+    const occurrences = new Map();
+    for (const [value, label] of values) {
+        if (!occurrences.has(value)) occurrences.set(value, []);
+        occurrences.get(value).push(label);
+    }
+    for (const [value, labels] of occurrences) {
+        assert(labels.length === 1, `${field} doppelt auf ${labels.join(', ')}: „${value}“`);
+    }
+}
+
+const incomingByCanonical = new Map(pageRecords.map((page) => [page.canonicalHref, new Set()]));
+for (const page of pageRecords) {
+    for (const path of page.internalPaths) {
+        const canonical = path === '/' ? 'https://partsunion.de' : `https://partsunion.de${path}`;
+        if (canonical !== page.canonicalHref && incomingByCanonical.has(canonical))
+            incomingByCanonical.get(canonical).add(page.canonicalHref);
+    }
+}
+for (const page of pageRecords) {
+    if (page.canonicalHref === 'https://partsunion.de') continue;
+    assert(
+        incomingByCanonical.get(page.canonicalHref).size > 0,
+        `${page.label}: indexierbare Seite hat keinen eingehenden internen Link.`,
+    );
 }
 
 const rootHtml = await readFile(join(output, 'index.html'), 'utf8').catch(() => '');
@@ -134,6 +181,8 @@ for (const canonical of indexableCanonicals) {
 }
 assert(!sitemap.includes('<loc>https://partsunion.de/termin</loc>'), 'sitemap.xml: noindex-Seite /termin darf nicht enthalten sein.');
 assert(!sitemap.includes('<loc>https://bot.partsunion.de</loc>'), 'sitemap.xml: noindex-Demo darf nicht enthalten sein.');
+assert(!sitemap.includes('<loc>https://partsunion.de/download</loc>'), 'sitemap.xml: noindex-Downloadseite darf nicht enthalten sein.');
+assert(!sitemap.includes('<loc>https://partsunion.de/live-demo/teileermittlung</loc>'), 'sitemap.xml: noindex-Werkzeugseite darf nicht enthalten sein.');
 assert(!sitemap.includes(new Date().toISOString()), 'sitemap.xml: lastModified darf nicht bei jedem Build auf die aktuelle Uhrzeit springen.');
 
 if (errors.length) {

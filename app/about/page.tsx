@@ -3,9 +3,9 @@ import { Layers3 } from 'lucide-react';
 import { Breadcrumb, DemoLink } from '@/components/marketing/Shared';
 import { FinalCTA } from '@/components/landing/FinalCTA';
 export const metadata: Metadata = {
-  title: 'Über Partsunion – aus dem Teilehandel für den Teilehandel',
+  title: 'Über Partsunion: Software aus dem Teilehandel',
   description:
-    'Warum wir Partsunion bauen: Mitgründer Elias kennt den Teilehandel aus eigener Erfahrung. Daraus entsteht Software für gemeinsame Abläufe in Theke, Lager und Büro.',
+    'Mitgründer Elias kennt den Teilehandel aus eigener Erfahrung. Erfahre, warum Partsunion Theke, Lager, Büro und digitale Anfragen in einer Plattform verbindet.',
   alternates: { canonical: 'https://partsunion.de/about' },
   openGraph: {
     title: 'Die Geschichte hinter Partsunion',

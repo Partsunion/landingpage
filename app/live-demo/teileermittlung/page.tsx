@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     alternates: {
         canonical: 'https://partsunion.de/live-demo/teileermittlung',
     },
+    robots: {
+        index: false,
+        follow: true,
+        googleBot: { index: false, follow: true },
+    },
     openGraph: {
         title: 'Live Demo – VIN-genaue OE-Teileermittlung | Partsunion',
         description: 'Fahrzeugschein oder VIN + Teil – Partsunion prüft lizenzierte Herstellerkataloge und rät bei Varianten nicht.',

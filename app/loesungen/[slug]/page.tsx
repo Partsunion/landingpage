@@ -15,6 +15,13 @@ const seoDescriptions: Record<string, string> = {
     'haendler-app': 'Mit der Partsunion Händler-App werden Artikelnummern, Fotos, Fahrzeuge, Retouren und Reklamationen direkt am Teil erfasst und weiterbearbeitet.',
 };
 
+const seoTitles: Record<string, string> = {
+    'finanzen-kasse': 'Kassensystem für Autoteilehandel: WaWi & ERP',
+    'oe-ermittlung': 'OE-Ermittlung aus VIN & Fahrzeugschein',
+    'retouren': 'Retouren & Reklamationen im Autoteilehandel',
+    'betriebsassistent': 'Betriebsassistent im ERP-Arbeitsablauf',
+};
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -26,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const page = getSolutionPage(slug);
     if (!page) return {};
     return {
-        title: page.slug === 'finanzen-kasse' ? 'Kassensystem für den Autoteilehandel mit WaWi & ERP' : page.slug === 'oe-ermittlung' ? 'Automatische OE-Ermittlung mit VIN & Fahrzeugschein' : `${page.navLabel} für den Autoteilehandel`,
+        title: seoTitles[page.slug] ?? `${page.navLabel} für den Autoteilehandel`,
         description: seoDescriptions[page.slug] ?? page.intro,
         alternates: { canonical: `/loesungen/${page.slug}` },
         openGraph: {

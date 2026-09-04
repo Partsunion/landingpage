@@ -44,3 +44,10 @@ Nach Aufhebung des Wartungsmodus:
    Praxisratgeber kontrollieren.
 5. Keine erfundenen Bewertungen, Rankings oder nicht belegten Leistungswerte
    in Text oder strukturierten Daten ergänzen; `CLAIMS_EVIDENCE.md` beachten.
+
+Der Produktionsserver ignoriert ein versehentlich stehen gebliebenes
+`MAINTENANCE_MODE=true`. Eine vollständige öffentliche Abschaltung ist nur als
+bewusster Notfallpfad möglich, wenn zusätzlich
+`MAINTENANCE_DEPLOY_CONFIRMATION=BLOCK_PUBLIC_SEARCH_AND_USERS` gesetzt ist.
+Dieser Pfad darf nur kurzzeitig aktiv sein, weil er Nutzern und Suchmaschinen
+HTTP 503 ausliefert.

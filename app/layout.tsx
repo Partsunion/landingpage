@@ -2,11 +2,7 @@ import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
 import './marketing.css';
-import './home-upgrade.css';
-import './system-workflow.css';
 import './mega-menu.css';
-import './topic-pages.css';
-import './consultation.css';
 
 // Google Search Console / Bing Webmaster verification.
 // Sobald der GSC-Verifizierungs-Code vorliegt: hier eintragen + neu deployen.

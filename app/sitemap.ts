@@ -17,7 +17,7 @@ const BASE_URL = 'https://partsunion.de';
  *
  * Prioritäten:
  *   1.0   Homepage
- *   0.9   Live-Demo (Konversions-Page) und Feature-Übersicht
+ *   0.9   Produktansichten (Konversions-Page) und Feature-Übersicht
  *   0.85  Kontakt + Beratungs-Anker
  *   0.75  Top-Feature-Pages (oem, whatsapp-bot, bestandssync, retouren)
  *   0.65  Übrige Feature-Detail-Seiten
@@ -53,12 +53,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: siteContentUpdated,
       changeFrequency: 'weekly',
       priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/live-demo/teileermittlung`,
-      lastModified: siteContentUpdated,
-      changeFrequency: 'weekly',
-      priority: 0.85,
     },
     {
       url: `${BASE_URL}/plattform`,
@@ -102,12 +96,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     })),
-    {
-      url: `${BASE_URL}/download`,
-      lastModified: siteContentUpdated,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
     {
       url: `${BASE_URL}/features`,
       lastModified: siteContentUpdated,

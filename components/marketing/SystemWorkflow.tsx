@@ -1,3 +1,4 @@
+import '@/app/system-workflow.css';
 import {
   ArrowDown,
   ArrowRight,

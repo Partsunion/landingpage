@@ -16,7 +16,11 @@ export const metadata: Metadata = {
     description:
         'Partsunion Desktop-App als signierte und von Apple notarisierte Partner-Preview für macOS herunterladen.',
     alternates: { canonical: 'https://partsunion.de/download' },
-    robots: { index: true, follow: true },
+    robots: {
+        index: false,
+        follow: true,
+        googleBot: { index: false, follow: true },
+    },
     openGraph: {
         title: 'Partsunion Desktop-App herunterladen',
         description: 'Signierte und von Apple notarisierte Partner-Preview für macOS.',

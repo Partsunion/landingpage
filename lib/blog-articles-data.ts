@@ -238,7 +238,7 @@ export const generatedArticles: GeneratedArticle[] = [
       slug: 'erp-vs-generisch-autoteilhandel',
       title: 'ERP für den Teilehandel: branchenspezifisch vs. generisch im Vergleich',
       description:
-        'ERP-Vergleich für Autoteile: Warum generische Systeme im Teilehandel oft Customizing brauchen und was eine branchenspezifische Lösung besser löst — OEM, WhatsApp, DACH-Steuer.',
+        'ERP-Vergleich für Autoteile: Erfahre, wo generische Systeme Anpassungen brauchen und wie Branchenlösungen OE-Suche, WhatsApp, Lager und DACH-Belege verbinden.',
       excerpt:
         'Generisches ERP anpassen oder branchenspezifisch starten? Der ehrliche Vergleich für den Autoteilehandel — von OEM-Logik über WhatsApp bis DACH-Steuer und Einführungszeit.',
       category: 'Ratgeber',

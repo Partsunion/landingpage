@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/consultation.css';
 import Link from 'next/link';
 import { useId, useRef, useState } from 'react';
 import { ArrowRight, CalendarDays, Check, CheckCircle2, Clock3, Mail } from 'lucide-react';

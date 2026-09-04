@@ -70,7 +70,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'sinkende-retouren',
         title: 'Fitment & Prüfpfade',
-        description: 'Fahrzeugbezug, OE-Referenzen und Alternativen werden nachvollziehbar geprüft.',
+        description: 'Fahrzeugbezug, OE-Referenzen und Alternativen nachvollziehbar prüfen, damit offene Varianten vor Angebot und Auftrag sichtbar geklärt werden.',
         icon: ShieldCheck,
         features: [
             'Erfassung von VIN, HSN und TSN',
@@ -125,7 +125,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'oem-ermittlung',
         title: 'Automatische OE-Ermittlung',
-        description: 'Fahrzeugschein auslesen, VIN decodieren und OE-Nummern automatisch ermitteln – direkt im verbundenen Teilevorgang.',
+        description: 'Fahrzeugschein auslesen, VIN decodieren und OE-Nummern im verbundenen Teilevorgang ermitteln – mit sichtbarem Prüfstatus bei offenen Varianten.',
         icon: Search,
         features: [
             'Scan von Fahrzeugscheinen (OCR)',
@@ -161,7 +161,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'automatische-rechnungserstellung',
         title: 'Belegfluss & Faktura',
-        description: 'Vom Angebot über Auftrag und Lieferung bis zur festgeschriebenen Rechnung.',
+        description: 'Partsunion verbindet Angebot, Auftrag, Lieferung und festgeschriebene Rechnung auf gemeinsamen Belegdaten mit nachvollziehbaren Referenzen.',
         icon: FileText,
         features: [
             'Automatische Generierung als PDF',
@@ -191,7 +191,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'bestandssynchronisation',
         title: 'Multi-Channel Warenbestand',
-        description: 'Ein zentrales Lager für alle Verkaufswege — sauber gebucht, kein Doppelverkauf.',
+        description: 'Ein zentraler Warenbestand für Theke, Aufträge und weitere Verkaufskanäle – mit Ledger, Reservierungen und nachvollziehbaren Lagerbewegungen.',
         icon: RefreshCw,
         features: [
             'Ein zentrales Lager für Theke (POS), Aufträge und Angebote',
@@ -206,7 +206,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'retourenmanagement',
         title: 'Retouren & Reklamationen',
-        description: 'Machen Sie aus Rückgaben, Mängeln und Falschlieferungen geordnete Prozesse.',
+        description: 'Retouren und Reklamationen mit Ursprungsbeleg, Prüfentscheidung, Bestandsbewegung und Gutschrift als kontrollierten Prozess bearbeiten.',
         icon: Truck,
         features: [
             'Retoure oder Reklamation mit Artikel, Menge, Grund und Ursprungsbeleg',
@@ -222,7 +222,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'gobd-tse-zugferd-datev',
         title: 'Nachvollziehbare Faktura & Kassenbuch',
-        description: 'GoBD-orientierte Belegführung sowie vorbereitete TSE-, DSFinV-K-, ZUGFeRD- und DATEV-Pfade.',
+        description: 'GoBD-orientierte Belegführung mit vorbereiteten TSE-, DSFinV-K-, ZUGFeRD-, XRechnung- und DATEV-Pfaden für den Autoteilehandel.',
         icon: Landmark,
         features: [
             'GoBD-orientierte Festschreibung mit verknüpftem Korrekturpfad',
@@ -273,7 +273,7 @@ export const featureData: FeatureDetail[] = [
     {
         slug: 'warenwirtschaft-autoteilhandel',
         title: 'Warenwirtschaftssystem für den Autoteilehandel',
-        description: 'Eine vollständige Warenwirtschaft für Kfz-Teile — mit Wareneingang, ATP-Reservierungen, Disposition und Inventur.',
+        description: 'Warenwirtschaft für Kfz-Teile mit Wareneingang, Lagerledger, ATP-Reservierungen, Disposition, Inventur und verbundenem Verkaufsprozess.',
         icon: Boxes,
         features: [
             'Artikel, Bestand & Bewegungsjournal (Ledger)',

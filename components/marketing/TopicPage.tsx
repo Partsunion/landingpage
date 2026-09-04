@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import '@/app/topic-pages.css';
 import {
   ArrowDown,
   ArrowRight,
@@ -195,19 +196,47 @@ const graphics = {
 export function TopicPage({ slug }: { slug: TopicSlug }) {
   const page = topicPages[slug];
   const Graphic = graphics[slug];
-  const breadcrumb = {
+  const url = `https://partsunion.de/${slug}`;
+  const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
-      { '@type': 'ListItem', position: 2, name: page.label, item: `https://partsunion.de/${slug}` },
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+          { '@type': 'ListItem', position: 2, name: page.label, item: url },
+        ],
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: page.title,
+        description: page.description,
+        inLanguage: 'de-DE',
+        isPartOf: { '@id': 'https://partsunion.de/#website' },
+        about: { '@id': 'https://partsunion.de/#software' },
+        breadcrumb: { '@id': `${url}#breadcrumb` },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        mainEntity: page.questions.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
     ],
   };
   return (
     <article className={`mk tp-page tp-page-${slug}`}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        }}
       />
       <section className="tp-hero">
         <div className="mk-wrap">
