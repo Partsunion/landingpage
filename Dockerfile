@@ -30,7 +30,7 @@ WORKDIR /app
 ARG VCS_REF=unknown
 ARG BUILD_DATE=unknown
 ARG APP_RELEASE=landingpage@unversioned
-ARG VCS_REPOSITORY=https://github.com/nyroxsystems-boop/landingpage
+ARG VCS_REPOSITORY=https://github.com/Partsunion/landingpage
 LABEL org.opencontainers.image.source="$VCS_REPOSITORY" \
       org.opencontainers.image.revision="$VCS_REF" \
       org.opencontainers.image.created="$BUILD_DATE" \
