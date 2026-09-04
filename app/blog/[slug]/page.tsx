@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Clock, CalendarDays } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, CalendarDays, Building2 } from 'lucide-react';
 import { blogPosts, getPostBySlug } from '@/lib/blog-posts';
 import { getGeneratedArticle } from '@/lib/blog-articles-data';
 import { ArticleRetouren } from './articles/retouren';
@@ -13,6 +13,19 @@ interface Props {
     params: Promise<{ slug: string }>;
 }
 
+const seoTitles: Record<string, string> = {
+    'retourenquote-autoteilhandel-senken': 'Retourenquote senken: 90-Tage-Plan für Teilehändler',
+    'whatsapp-bot-fuer-autoteilhaendler': 'WhatsApp-Bot für Autoteilehändler: Praxisleitfaden',
+    'oem-ermittlung-aus-vin-hsn-tsn': 'OE-Nummer aus VIN, HSN/TSN und Fahrzeugschein',
+    'warenwirtschaft-autoteilhandel-checkliste': 'Warenwirtschaft für Autoteilehändler: Checkliste',
+    'erp-vs-generisch-autoteilhandel': 'ERP für den Teilehandel: Branchenlösung im Vergleich',
+    'gobd-tse-kasse-autohandel': 'GoBD und TSE-Kasse im Autoteilehandel',
+    'foto-wareneingang-retoure-lager-ki': 'Foto-Wareneingang und Retouren im Autoteile-Lager',
+    'b2b-kundenportal-autoteilhandel-aufbauen': 'B2B-Kundenportal für Autoteilehändler aufbauen',
+    'e-rechnungspflicht-zugferd-xrechnung-handel': 'E-Rechnung mit ZUGFeRD und XRechnung im Handel',
+    'differenzbesteuerung-25a-gebrauchtteile': '§ 25a Differenzbesteuerung bei Gebrauchtteilen',
+};
+
 export async function generateStaticParams() {
     return blogPosts.map((p) => ({ slug: p.slug }));
 }
@@ -23,13 +36,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!post) return { title: 'Beitrag nicht gefunden' };
 
     const url = `https://partsunion.de/blog/${post.slug}`;
+    const seoTitle = seoTitles[post.slug] ?? post.title;
     return {
-        title: post.title,
+        title: seoTitle,
         description: post.description,
         keywords: post.keywords,
         alternates: { canonical: url },
         openGraph: {
-            title: post.title,
+            title: `${seoTitle} | Partsunion`,
             description: post.description,
             url,
             type: 'article',
@@ -43,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.title,
+            title: `${seoTitle} | Partsunion`,
             description: post.description,
             images: ['/opengraph-image'],
         },
@@ -87,8 +101,11 @@ export default async function BlogPostPage({ params }: Props) {
         timeRequired: `PT${post.readingMinutes}M`,
         keywords: post.keywords.join(', '),
         inLanguage: 'de-DE',
-        author: { '@type': 'Organization', name: 'Partsunion', url: 'https://partsunion.de' },
+        author: { '@id': 'https://partsunion.de/#organization' },
         publisher: { '@id': 'https://partsunion.de/#organization' },
+        image: 'https://partsunion.de/opengraph-image',
+        articleSection: post.category,
+        isPartOf: { '@id': 'https://partsunion.de/#website' },
         mainEntityOfPage: { '@type': 'WebPage', '@id': `https://partsunion.de/blog/${post.slug}` },
     };
 
@@ -151,6 +168,27 @@ export default async function BlogPostPage({ params }: Props) {
                     <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                         {post.excerpt}
                     </p>
+                    <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-4 text-xs text-muted-foreground">
+                        <Link href="/about" rel="author" className="inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary">
+                            <Building2 className="h-3.5 w-3.5" />
+                            Von Partsunion
+                        </Link>
+                        <span aria-hidden="true">·</span>
+                        <span>Praxisratgeber für den Autoteilehandel</span>
+                        {post.updatedAt !== post.publishedAt && (
+                            <>
+                                <span aria-hidden="true">·</span>
+                                <span>
+                                    Aktualisiert am{' '}
+                                    <time dateTime={post.updatedAt}>
+                                        {new Date(post.updatedAt).toLocaleDateString('de-DE', {
+                                            day: 'numeric', month: 'long', year: 'numeric',
+                                        })}
+                                    </time>
+                                </span>
+                            </>
+                        )}
+                    </div>
                 </header>
 
                 {/* Body */}

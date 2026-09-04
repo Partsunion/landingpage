@@ -47,7 +47,7 @@ const faqs = [
     },
 ];
 
-// FAQPage structured data → eligible for Google rich-result FAQ snippets.
+// FAQPage structured data spiegelt ausschließlich die sichtbaren Antworten.
 const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

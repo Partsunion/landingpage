@@ -4,7 +4,7 @@ import { ArrowRight, Calculator, ClipboardCheck } from 'lucide-react';
 import { RoiCalculator } from './RoiCalculator';
 
 export const metadata: Metadata = {
-    title: 'Business-Case-Rechner — Prozesskosten transparent vergleichen',
+    title: 'Business-Case-Rechner für Autoteilehändler',
     description:
         'Vergleichen Sie heutigen Prozessaufwand und ein eigenes Zielszenario — ausschließlich mit Ihren Volumen-, Zeit-, Kosten- und Budgetannahmen.',
     keywords: [

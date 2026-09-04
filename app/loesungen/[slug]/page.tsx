@@ -3,6 +3,18 @@ import { notFound } from 'next/navigation';
 import { SolutionPage } from '@/components/solutions/SolutionPage';
 import { getSolutionPage, solutionPages } from '@/lib/solutions-data';
 
+const seoDescriptions: Record<string, string> = {
+    'anfragen-whatsapp': 'Partsunion bündelt Anfragen aus WhatsApp, Telefon, Theke und E-Mail, verbindet Kunde, Fahrzeug und Teilebedarf und bereitet das Angebot vor.',
+    'oe-ermittlung': 'Partsunion verbindet VIN, HSN/TSN oder Fahrzeugschein mit Herstellerkatalogen, OE-Bezug, Rückfragen, eigenem Bestand und Preis.',
+    'angebot-auftrag': 'Partsunion führt bestätigte Anfragedaten ohne Neuerfassung in Angebot, Auftrag, Rechnung und Zahlung weiter – auch im WhatsApp-Ablauf.',
+    'einkauf-disposition': 'Partsunion erkennt Fehlmengen, prüft Bestand und offene Zugänge, vergleicht Lieferanten und erstellt einen kontrollierten Bestellentwurf.',
+    'bestand-lager': 'Partsunion führt Mengenartikel und gebrauchte Einzelstücke mit Reservierung, Lagerort, Einkauf, Verkauf und Bewegungsjournal in einer WaWi.',
+    'retouren': 'Partsunion verbindet Retoure oder Reklamation mit Artikel, Ursprungsbeleg, Grund, Zustand, Fotos, Bestand und weiterer Bearbeitung.',
+    'finanzen-kasse': 'Partsunion verbindet Verkauf und Einkauf mit Rechnung, Zahlung, offenen Posten, Banking und Kasse auf einer gemeinsamen Belegbasis.',
+    'betriebsassistent': 'Der Partsunion Betriebsassistent beantwortet Fragen zu Produkten, Bestand, Aufträgen und Zahlen und bereitet bestätigbare Arbeitsschritte vor.',
+    'haendler-app': 'Mit der Partsunion Händler-App werden Artikelnummern, Fotos, Fahrzeuge, Retouren und Reklamationen direkt am Teil erfasst und weiterbearbeitet.',
+};
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -15,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     if (!page) return {};
     return {
         title: `${page.navLabel} für den Autoteilehandel`,
-        description: page.intro,
+        description: seoDescriptions[page.slug] ?? page.intro,
         alternates: { canonical: `/loesungen/${page.slug}` },
         openGraph: {
             title: `${page.navLabel} | Partsunion`,
@@ -30,5 +42,52 @@ export default async function SolutionRoute({ params }: { params: Promise<{ slug
     const { slug } = await params;
     const page = getSolutionPage(slug);
     if (!page) notFound();
-    return <SolutionPage page={page} />;
+
+    const url = `https://partsunion.de/loesungen/${page.slug}`;
+    const structuredData = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'BreadcrumbList',
+                '@id': `${url}#breadcrumb`,
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
+                    { '@type': 'ListItem', position: 2, name: 'Lösungen', item: 'https://partsunion.de/loesungen' },
+                    { '@type': 'ListItem', position: 3, name: page.navLabel, item: url },
+                ],
+            },
+            {
+                '@type': 'WebPage',
+                '@id': `${url}#webpage`,
+                url,
+                name: `${page.navLabel} für den Autoteilehandel`,
+                description: seoDescriptions[page.slug] ?? page.intro,
+                inLanguage: 'de-DE',
+                isPartOf: { '@id': 'https://partsunion.de/#website' },
+                about: { '@id': `${url}#service` },
+                breadcrumb: { '@id': `${url}#breadcrumb` },
+            },
+            {
+                '@type': 'Service',
+                '@id': `${url}#service`,
+                name: page.navLabel,
+                serviceType: `${page.navLabel} im Autoteilehandel`,
+                description: page.intro,
+                provider: { '@id': 'https://partsunion.de/#organization' },
+                audience: {
+                    '@type': 'BusinessAudience',
+                    audienceType: 'Autoteilehändler, Autoverwerter und Werkstattbetriebe mit Teileverkauf',
+                },
+                category: page.group,
+                mainEntityOfPage: { '@id': `${url}#webpage` },
+            },
+        ],
+    };
+
+    return (
+        <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+            <SolutionPage page={page} />
+        </>
+    );
 }

@@ -6,8 +6,8 @@ import "./globals.css";
 // Google Search Console / Bing Webmaster verification.
 // Sobald der GSC-Verifizierungs-Code vorliegt: hier eintragen + neu deployen.
 // (Meta-Tag-Methode — Next gibt <meta name="google-site-verification"> aus.)
-const GSC_VERIFICATION = "";   // z. B. "abcDEF123…" aus Search Console
-const BING_VERIFICATION = "";  // z. B. "0123ABC…" aus Bing Webmaster Tools
+const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() ?? "";
+const BING_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim() ?? "";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://partsunion.de"),
@@ -136,8 +136,8 @@ export default function RootLayout({
           to Google would only open an unused connection to Google servers
           (violating DSGVO), so they are intentionally omitted.
         */}
-        {/* Schema.org structured data (Organization + WebSite + SoftwareApplication)
-            for SEO rich snippets, Knowledge Graph eligibility and Sitelinks Search Box. */}
+        {/* Gemeinsamer, faktenbasierter Entity-Graph für klassische Suche und
+            quellenbasierte Antwortsysteme. Keine Bewertungen oder Rankings. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -148,18 +148,42 @@ export default function RootLayout({
                   "@type": "Organization",
                   "@id": "https://partsunion.de/#organization",
                   name: "Partsunion",
+                  legalName: "PartsUnion UG (haftungsbeschränkt)",
                   url: "https://partsunion.de",
+                  email: "info@partsunion.de",
                   logo: {
                     "@type": "ImageObject",
                     url: "https://partsunion.de/logo.png",
-                    width: 512,
-                    height: 512,
+                    width: 500,
+                    height: 500,
                   },
                   description:
                     "Partsunion entwickelt ERP und Warenwirtschaft für den Autoteilehandel: von Teileidentifikation und Beschaffung über Neuteile und gebrauchte Einzelstücke bis zu Verkauf und Finanzen.",
                   areaServed: "DE",
                   knowsLanguage: ["de", "en"],
-                  sameAs: [],
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "Zum Sommersberg 27",
+                    postalCode: "50321",
+                    addressLocality: "Brühl",
+                    addressCountry: "DE",
+                  },
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    contactType: "sales and customer service",
+                    email: "info@partsunion.de",
+                    availableLanguage: ["German", "English"],
+                    areaServed: "DE",
+                  },
+                  knowsAbout: [
+                    "Autoteilehandel",
+                    "Autoverwertung",
+                    "Warenwirtschaft",
+                    "Teileidentifikation",
+                    "OE-Nummern",
+                    "Neuteile",
+                    "Gebrauchtteile",
+                  ],
                 },
                 {
                   "@type": "WebSite",
@@ -182,16 +206,24 @@ export default function RootLayout({
                   ],
                   applicationCategory: "BusinessApplication",
                   applicationSubCategory: "ERP & Warenwirtschaft (Autoteilehandel)",
+                  applicationSuite: "Partsunion",
                   operatingSystem: "Web",
                   description:
                     "Branchenspezifisches ERP und Warenwirtschaft für den Autoteilehandel mit Teileidentifikation, Neuteile- und Gebrauchtteileverwaltung, Einkauf, Lager, Verkauf, Kasse, Faktura und Finanzfunktionen.",
                   url: "https://partsunion.de",
-                  offers: {
-                    "@type": "Offer",
-                    priceCurrency: "EUR",
-                    availability: "https://schema.org/InStock",
-                    url: "https://partsunion.de/#beratung",
-                  },
+                  image: "https://partsunion.de/opengraph-image",
+                  screenshot: [
+                    "https://partsunion.de/product/anfrage-inbox.png",
+                    "https://partsunion.de/product/artikel-bestand.png",
+                    "https://partsunion.de/product/betriebsassistent.png",
+                  ],
+                  brand: { "@id": "https://partsunion.de/#organization" },
+                  audience: [
+                    { "@type": "BusinessAudience", audienceType: "Autoteilehändler" },
+                    { "@type": "BusinessAudience", audienceType: "Autoverwerter" },
+                    { "@type": "BusinessAudience", audienceType: "Teilegroßhandel" },
+                    { "@type": "BusinessAudience", audienceType: "Werkstattbetrieb mit Teileverkauf" },
+                  ],
                   // NOTE: Kein aggregateRating. Es gibt (Stand Go-Live) noch keine
                   // echten, verifizierten Kundenbewertungen. Erfundene Sterne-Ratings
                   // verstoßen gegen UWG §5 (irreführende Werbung) und Googles
@@ -211,7 +243,7 @@ export default function RootLayout({
                     "Faktura und Finanzen mit ZUGFeRD/XRechnung, TSE, DATEV-Export und GoBD-Funktionen",
                     "Über 40 datengetriebene Auswertungen aus echten Belegen",
                     "White-Label B2B-Kundenportal mit kundenspezifischen Preisen",
-                    "Mandanten-Isolation, 2FA, Audit-Log, DSGVO Auskunft & Löschung",
+                    "Mandantenbezogene Rollen, 2FA, Audit-Log sowie DSGVO-Auskunft und -Löschung",
                     "WhatsApp als optionaler Eingangskanal für Kundenanfragen",
                     "Gebrauchte Einzelstücke mit Herkunft, Zustand, Fotos und eindeutigem Bestand",
                     "Preisermittlung und vorbereitete eBay-Inserate für Gebrauchtteile",
@@ -229,7 +261,7 @@ export default function RootLayout({
                     "Branchenspezifische ERP-Plattform für Teileidentifikation, Beschaffung, Lager, Verkauf und Finanzen im Autoteilehandel.",
                   audience: {
                     "@type": "BusinessAudience",
-                    audienceType: "Autoteilehändler, Werkstätten, Teile-Großhändler",
+                    audienceType: "Autoteilehändler, Autoverwerter, Teilegroßhandel und Werkstattbetriebe mit Teileverkauf",
                   },
                 },
               ],

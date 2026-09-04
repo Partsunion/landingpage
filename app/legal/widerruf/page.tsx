@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Widerrufsbelehrung - Partsunion',
-    description: 'Widerrufsbelehrung für Partsunion-Verträge',
+    title: 'Widerrufsbelehrung',
+    description: 'Widerrufsbelehrung für Partsunion Verträge mit Angaben zu Frist, Ausübung, Folgen des Widerrufs und dem gesetzlichen Muster-Widerrufsformular.',
+    alternates: { canonical: 'https://partsunion.de/legal/widerruf' },
 };
 
 export default function WiderrufPage() {

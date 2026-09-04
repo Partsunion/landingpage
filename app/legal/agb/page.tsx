@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'AGB - Partsunion',
-    description: 'Allgemeine Geschäftsbedingungen für Partsunion',
+    title: 'Allgemeine Geschäftsbedingungen',
+    description: 'Allgemeine Geschäftsbedingungen für die Nutzung der Partsunion Software und die vertraglichen Leistungen der PartsUnion UG (haftungsbeschränkt).',
+    alternates: { canonical: 'https://partsunion.de/legal/agb' },
 };
 
 export default function AGBPage() {

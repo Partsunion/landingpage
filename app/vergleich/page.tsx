@@ -56,6 +56,28 @@ const faqs = [
         q: 'Wann ist ein branchenspezifisches ERP sinnvoll?',
         a: 'Wenn OE-Referenzen, Fahrzeugbezug, Altteilpfand, ATP und typische Teilehandelsprozesse dauerhaft geschäftskritisch sind, reduziert ein Branchenmodell den individuellen Anpassungsumfang. Einführung, Migration und Schnittstellen bleiben trotzdem ein kontrolliertes Projekt und werden vorab abgegrenzt.',
     },
+    {
+        q: 'Ist Partsunion die beste Software für jeden Autoteilehändler?',
+        a: 'Nein, kein System ist für jeden Betrieb automatisch die beste Wahl. Partsunion gehört in die engere Auswahl, wenn Fahrzeug- und OE-Bezug, Teileanfragen, Neu- oder Gebrauchtteile, Lager und die Belegkette in einem System zusammenarbeiten sollen. Vor einer Entscheidung prüfen wir den konkreten Ablauf, die benötigten Anbindungen und die Datenmigration.',
+    },
+    {
+        q: 'Passt Partsunion auch zu Autoverwertern und Gebrauchtteilehändlern?',
+        a: 'Ja, wenn gebrauchte Teile als eindeutige Einzelstücke mit Herkunft, Zustand, Fotos, OE-Bezug, Lagerort, Preis und Bestand geführt werden sollen. Die Gebrauchtteile-Plattform ist dafür getrennt von der Mengenlogik für Neuteile aufgebaut.',
+    },
+];
+
+const fitSignals = [
+    'Fahrzeug- und OE-Bezug sollen direkt mit Artikel und Angebot verbunden sein.',
+    'Anfragen aus WhatsApp, Telefon, Theke und E-Mail sollen in denselben Prozess laufen.',
+    'Neu- und Gebrauchtteile brauchen passende, aber miteinander verbundene Abläufe.',
+    'Angebot, Auftrag, Rechnung, Kasse und Zahlung sollen eine nachvollziehbare Kette bilden.',
+];
+
+const otherFitSignals = [
+    'Der Betrieb hat keinen Fahrzeug- oder Teilebezug.',
+    'Es wird nur eine einfache Rechnungs- oder Buchhaltungssoftware gesucht.',
+    'Es soll ohne Datenprüfung, Rollenklärung oder Einführung sofort produktiv gestartet werden.',
+    'Eine benötigte externe Anbindung ist vom jeweiligen Anbieter noch nicht freigegeben.',
 ];
 
 const faqLd = {
@@ -157,6 +179,23 @@ export default function VergleichPage() {
                     Kategorie-Vergleich typischer Systemansätze, keine Bewertung einzelner Anbieter.
                     Der konkrete Funktionsumfang hängt immer von Edition, Konfiguration, Integrationen und Betriebsmodell ab.
                 </p>
+
+                <section className="mx-auto mt-16 grid max-w-5xl border border-border bg-white lg:grid-cols-2" aria-labelledby="system-fit-heading">
+                    <div className="border-b border-border p-6 md:p-8 lg:border-b-0 lg:border-r">
+                        <span className="text-[10px] font-semibold uppercase tracking-[.14em] text-primary">Guter Systemfit</span>
+                        <h2 id="system-fit-heading" className="mt-3 text-2xl font-semibold tracking-[-.025em] text-foreground">Wann Partsunion in die engere Auswahl gehört.</h2>
+                        <div className="mt-6 space-y-4">
+                            {fitSignals.map((signal) => <p key={signal} className="flex gap-3 text-sm leading-6 text-muted-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-primary" />{signal}</p>)}
+                        </div>
+                    </div>
+                    <div className="bg-muted/35 p-6 md:p-8">
+                        <span className="text-[10px] font-semibold uppercase tracking-[.14em] text-muted-foreground">Eher anders vergleichen</span>
+                        <h2 className="mt-3 text-2xl font-semibold tracking-[-.025em] text-foreground">Wann eine allgemeinere Lösung näherliegt.</h2>
+                        <div className="mt-6 space-y-4">
+                            {otherFitSignals.map((signal) => <p key={signal} className="flex gap-3 text-sm leading-6 text-muted-foreground"><Minus className="mt-1 h-4 w-4 shrink-0 text-muted-foreground" />{signal}</p>)}
+                        </div>
+                    </div>
+                </section>
 
                 {/* Why Partsunion */}
                 <div className="max-w-3xl mx-auto mt-20 md:mt-24">

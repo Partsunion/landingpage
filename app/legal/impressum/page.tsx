@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Impressum - Partsunion',
-    description: 'Impressum der PartsUnion UG (haftungsbeschränkt)',
+    title: 'Impressum',
+    description: 'Impressum und Anbieterkennzeichnung der PartsUnion UG (haftungsbeschränkt) mit Anschrift, Vertretungsberechtigten und Registerangaben.',
+    alternates: { canonical: 'https://partsunion.de/legal/impressum' },
 };
 
 export default function ImpressumPage() {

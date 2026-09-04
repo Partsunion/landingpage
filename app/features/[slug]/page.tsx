@@ -21,22 +21,22 @@ export async function generateStaticParams() {
  * the feature title if no specific override is defined.
  */
 const seoTitles: Record<string, string> = {
-    'oem-ermittlung': 'Teileidentifikation & OE-Referenzen für Autoteilehändler',
-    'whatsapp-bot': 'Digitale Anfragebearbeitung für den Autoteilehandel',
-    'automatische-rechnungserstellung': 'Durchgängiger Belegfluss & Faktura',
-    'bestellprozess': 'Disposition & Einkauf für Autoteile',
-    'bestandssynchronisation': 'Multi-Channel Warenbestand: ein zentrales Lager für alle Verkaufswege',
-    'retourenmanagement': 'Retouren & Reklamationen im Autoteilehandel',
-    'skalierbarkeit': 'Skalierbare ERP-Organisation für den Teilehandel',
-    '24-7-einsatzbereit': 'Digitaler Self-Service & Betriebsmodell',
-    'geschwindigkeit': 'Effiziente Arbeitsabläufe im Autoteilehandel',
-    'sinkende-retouren': 'Fitment & dokumentierte Teileprüfung',
-    'sprachuebergreifend': 'Mehrsprachige digitale Anfragen',
-    'team-entlastung': 'Arbeitsvorräte, Rollen & geführte Teamarbeit',
-    'gobd-tse-zugferd-datev': 'GoBD-orientierte Faktura, TSE, ZUGFeRD & DATEV',
-    'b2b-kundenportal-white-label': 'White-Label B2B-Kundenportal mit kundenspezifischen Preisen',
-    'erp-autoteilehandel': 'ERP-System für den Autoteilehandel — Software für den Teilehandel',
-    'warenwirtschaft-autoteilhandel': 'Warenwirtschaftssystem (WaWi) für den Autoteilehandel',
+    'oem-ermittlung': 'OE-Ermittlung für Autoteilehändler',
+    'whatsapp-bot': 'WhatsApp-Anfragen im Autoteilehandel',
+    'automatische-rechnungserstellung': 'Angebot, Auftrag und Rechnung verbinden',
+    'bestellprozess': 'Einkauf und Disposition für Autoteile',
+    'bestandssynchronisation': 'Warenbestand für alle Verkaufskanäle',
+    'retourenmanagement': 'Retouren und Reklamationen im Teilehandel',
+    'skalierbarkeit': 'ERP für Filialen und wachsende Teilehändler',
+    '24-7-einsatzbereit': 'Digitale Anfragen und B2B-Self-Service',
+    'geschwindigkeit': 'Arbeitsabläufe im Autoteilehandel verbinden',
+    'sinkende-retouren': 'Passende Teile prüfen und Retouren senken',
+    'sprachuebergreifend': 'Mehrsprachige Anfragen im Teilehandel',
+    'team-entlastung': 'Arbeitsvorräte und Rollen im Teilehandel',
+    'gobd-tse-zugferd-datev': 'GoBD, TSE, ZUGFeRD und DATEV im Teilehandel',
+    'b2b-kundenportal-white-label': 'B2B-Kundenportal für Autoteilehändler',
+    'erp-autoteilehandel': 'ERP-System für den Autoteilehandel',
+    'warenwirtschaft-autoteilhandel': 'Warenwirtschaft für den Autoteilehandel',
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -47,10 +47,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const url = `https://partsunion.de/features/${feature.slug}`;
     const seoTitle = seoTitles[feature.slug] ?? feature.title;
     const fullTitle = `${seoTitle} | Partsunion`;
+    const seoDescription = feature.description.length >= 90
+        ? feature.description
+        : `${feature.description} Im Partsunion ERP für Autoteilehändler.`;
 
     return {
         title: seoTitle,
-        description: feature.description,
+        description: seoDescription,
         keywords: [
             feature.title,
             'Autoteilehändler',
@@ -61,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         alternates: { canonical: url },
         openGraph: {
             title: fullTitle,
-            description: feature.description,
+            description: seoDescription,
             url,
             type: 'article',
             locale: 'de_DE',
@@ -72,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         twitter: {
             card: 'summary_large_image',
             title: fullTitle,
-            description: feature.description,
+            description: seoDescription,
         },
     };
 }

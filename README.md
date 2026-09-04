@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Partsunion Website
 
 ## Getting Started
 
-First, run the development server:
+Die Website wird mit Next.js statisch exportiert. Lokal starten:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Danach [http://localhost:3000](http://localhost:3000) öffnen.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Qualität und SEO
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+npm run seo:check
+```
 
-## Learn More
+`seo:check` prüft nach dem Build alle indexierbaren HTML-Seiten auf Title,
+Description, selbstreferenzierendes Canonical, genau eine H1, Open-Graph-Daten,
+gültiges JSON-LD und Aufnahme in die Sitemap. Zusätzlich werden `robots.txt`,
+`llms.txt` und `llms-full.txt` kontrolliert.
 
-To learn more about Next.js, take a look at the following resources:
+Such- und Antwortbots wie OAI-SearchBot, PerplexityBot und Claude-SearchBot sind
+in `public/robots.txt` erlaubt. Reine Trainingscrawler werden separat behandelt.
+Die Trennung darf nicht versehentlich wieder zusammengeführt werden.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Verifizierungscodes werden beim Build über diese Variablen gesetzt:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=...
+NEXT_PUBLIC_BING_SITE_VERIFICATION=...
+```
 
-## Deploy on Vercel
+Nach Aufhebung des Wartungsmodus:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. `https://partsunion.de/robots.txt` und `/sitemap.xml` ohne Passwort prüfen.
+2. Domain in Google Search Console und Bing Webmaster Tools verifizieren.
+3. Sitemap in beiden Diensten einreichen.
+4. Indexierung der Startseite, Plattformseiten, Lösungen, Vergleichsseite und
+   Praxisratgeber kontrollieren.
+5. Keine erfundenen Bewertungen, Rankings oder nicht belegten Leistungswerte
+   in Text oder strukturierten Daten ergänzen; `CLAIMS_EVIDENCE.md` beachten.

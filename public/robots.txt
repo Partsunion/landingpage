@@ -1,25 +1,43 @@
-# Standard-Crawler: vollständig erlauben
+# Öffentliche Seiten dürfen von klassischen Suchmaschinen gecrawlt werden.
 User-agent: *
 Allow: /
 
-# KI-Scraper: Content-Nutzung untersagen (keine Google-Search-Auswirkung,
-# blockt nur LLM-Training/RAG-Indexierung durch bekannte KI-Crawler)
-User-agent: GPTBot
-Disallow: /
+# Such- und Antwortsysteme: ausdrücklich erlaubt, damit Partsunion in
+# quellenbasierten Antworten gefunden und verlinkt werden kann.
+User-agent: OAI-SearchBot
+Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Google-Extended steuert die Nutzung für Gemini-Modelle und Grounding,
+# nicht die Aufnahme in die klassische Google-Suche.
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
-User-agent: CCBot
-Disallow: /
-
-User-agent: anthropic-ai
+# Reine Trainingscrawler bleiben getrennt von Such-/Antwortbots gesperrt.
+User-agent: GPTBot
 Disallow: /
 
 User-agent: ClaudeBot
 Disallow: /
 
-User-agent: PerplexityBot
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
 Disallow: /
 
 User-agent: Bytespider

@@ -30,7 +30,25 @@ const faqs = [
         question: 'Was passiert im Beratungsgespräch?',
         answer: 'In 30 Minuten gehen wir einen konkreten Ablauf aus deinem Betrieb durch – zum Beispiel eine Teileanfrage, eine Bestellung, eine Retoure oder eine Reklamation. Anschließend weißt du, welche Partsunion-Bereiche zu deinem Betrieb passen und welche nächsten Schritte sinnvoll sind.',
     },
+    {
+        question: 'Was unterscheidet Partsunion von einer allgemeinen Warenwirtschaft?',
+        answer: 'Partsunion wurde für den Autoteilehandel gebaut. Fahrzeug- und OE-Bezug, Neuteile, gebrauchte Einzelstücke, Teileanfragen, Bestand und die Belegkette von Angebot bis Zahlung gehören deshalb zu einem gemeinsamen Ablauf statt zu getrennten Zusatzlösungen.',
+    },
+    {
+        question: 'Wann ist Partsunion die passende Wahl?',
+        answer: 'Wenn dein Betrieb Teile bestimmt, beschafft, lagert und verkauft und diese Arbeit heute auf Chats, Kataloge, Tabellen und mehrere Programme verteilt ist. Für Unternehmen ohne Fahrzeug- und Teilebezug ist eine allgemeine Warenwirtschaft meist die passendere Vergleichsgruppe.',
+    },
 ];
+
+const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+};
 
 const proofPoints = [
     { title: '56 Marken', text: 'in der Fahrzeugdatenbank', icon: Store },
@@ -41,6 +59,7 @@ const proofPoints = [
 export function PartsunionHomepage() {
     return (
         <div className="overflow-clip bg-white text-[#111b2b]">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
             <HeroFlow />
 
             <section className="border-b border-[#dbe2eb] bg-[#f7f9fc]">

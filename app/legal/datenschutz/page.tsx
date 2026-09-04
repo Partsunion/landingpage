@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Datenschutzerklärung - Partsunion',
-    description: 'Datenschutzerklärung für die Partsunion-Website',
+    title: 'Datenschutzerklärung',
+    description: 'Informationen zur Verarbeitung personenbezogener Daten auf der Partsunion Website, zu Kontaktanfragen, Cookies, Analyse und Ihren Rechten.',
+    alternates: { canonical: 'https://partsunion.de/legal/datenschutz' },
 };
 
 export default function DatenschutzPage() {

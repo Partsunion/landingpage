@@ -6,7 +6,7 @@ import type { ArticleBlock, ArticleFaq } from '@/lib/blog-articles-data';
  * Generic block renderer for data-authored articles. Plain semantic elements —
  * styling comes from the `.blog-content` wrapper in app/blog/[slug]/page.tsx.
  * Internal `linklist` blocks power topical-cluster internal linking; `faqs`
- * additionally emit FAQPage structured data for rich results.
+ * additionally emit FAQPage structured data matching the visible answers.
  */
 
 function Block({ block }: { block: ArticleBlock }) {
