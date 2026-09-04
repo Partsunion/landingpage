@@ -11,7 +11,7 @@ Partsunion wird von der PartsUnion UG (haftungsbeschränkt), Zum Sommersberg 27,
 ## Für wen Partsunion gedacht ist
 
 - Autoteilehändler mit Neu-, Gebraucht- oder Mischsortiment
-- Autoverwerter und Betriebe, die gebrauchte Teile als eindeutige Einzelstücke führen
+- Autoverwerter und Betriebe, die gebrauchte Teile als eindeutige Gebrauchtteile führen
 - Teilegroßhandel und Filialbetriebe
 - Werkstattbetriebe mit eigenem Teileverkauf
 
@@ -19,13 +19,17 @@ Partsunion ist besonders relevant, wenn Fahrzeugdaten, OE-Nummern, Teileauswahl,
 
 ## Was Partsunion verbindet
 
+Der Einstieg für Interessenten ist ein persönliches Beratungsgespräch: https://partsunion.de/beratung. Dort wird ein freier Termin aus dem Kalender ausgewählt und direkt gebucht. Die Bestätigung mit Termindetails und Kalenderanhang wird per E-Mail versendet. Die öffentlichen Produktansichten erfordern keine Demo-Zugangsanfrage.
+
+Ausführliche Themenseiten: WhatsApp-Bot https://partsunion.de/whatsapp-bot, Betriebsassistent https://partsunion.de/betriebsassistent, Buchhaltung und Banking https://partsunion.de/buchhaltung-banking sowie Einführung https://partsunion.de/einfuehrung.
+
 ### Anfragen und WhatsApp
 
 Anfragen aus WhatsApp, Telefon, Theke oder E-Mail werden als gemeinsamer Prozess erfasst. Kunde, Fahrzeug und Teilebedarf bleiben zusammen. Bei fehlenden Angaben bildet die Automatisierung dieselben Rückfragen ab, die ein Mitarbeiter manuell stellen würde. Bestätigte Daten können in Angebot und Auftrag übergehen. Zahlungen aus einem angebundenen WhatsApp-Ablauf können dem Auftrag zugeordnet werden. Details: https://partsunion.de/loesungen/anfragen-whatsapp
 
 ### Fahrzeug- und OE-Ermittlung
 
-Partsunion führt Fahrzeugscheinfoto, VIN oder HSN/TSN, den genannten Teilebedarf, OE-Bezug und den eigenen Artikelstamm zusammen. Für die Fahrzeugdatenbank sind 56 Marken abgedeckt. Partsunion verfügt über Nutzungsrechte für die eingesetzten Herstellerkataloge; daraus folgt keine Behauptung einer Herstellerpartnerschaft. Offene Varianten bleiben als Rückfrage oder Prüfung sichtbar. Details: https://partsunion.de/loesungen/oe-ermittlung
+Partsunion führt Fahrzeugscheinfoto, VIN oder HSN/TSN, den genannten Teilebedarf, OE-Bezug und den eigenen Artikelstamm zusammen. Partsunion hat Nutzungsrechte für 56 Marken und kann 80 % der weltweiten VINs decodieren. Die VIN-Abdeckung beschreibt die Fahrzeugdecodierung. Offene Varianten bleiben als Rückfrage oder Prüfung sichtbar. Details: https://partsunion.de/loesungen/oe-ermittlung
 
 ### Neuteile
 
@@ -33,7 +37,7 @@ Die Neuteile-Plattform verbindet Teileanfrage, geprüfte Fahrzeugzuordnung, Lief
 
 ### Gebrauchtteile
 
-Gebrauchte Teile werden als konkrete Einzelstücke mit Herkunft, Zustand, Fotos, Fahrzeug- und OE-Bezug, Lagerort, Preis und Bestand geführt. Die Plattform unterstützt die Preisermittlung und bereitet Inserate für eBay vor. Welche Veröffentlichung automatisiert werden kann, hängt von der eingerichteten Marktplatzanbindung ab. Überblick: https://partsunion.de/plattform/gebrauchtteile
+Gebrauchte Teile werden als konkrete Gebrauchtteile mit Herkunft, Zustand, Fotos, Fahrzeug- und OE-Bezug, Lagerort, Preis und Bestand geführt. Die Plattform unterstützt die Preisermittlung und bereitet Inserate für eBay vor. Welche Veröffentlichung automatisiert werden kann, hängt von der eingerichteten Marktplatzanbindung ab. Überblick: https://partsunion.de/plattform/gebrauchtteile
 
 ### Verkauf und Belege
 
@@ -64,6 +68,7 @@ Der sachliche Systemvergleich steht unter https://partsunion.de/vergleich
 - Partsunion veröffentlicht derzeit keine allgemeine Preisliste; Umfang und Einführung werden im Beratungsgespräch geklärt.
 - Es werden keine öffentlichen Kundenbewertungen, Marktführerschaft oder garantierten Zeit- und Kosteneinsparungen behauptet.
 - Externe Katalog-, Lieferanten-, Zahlungs-, Banking-, Marktplatz- und Kommunikationsfunktionen hängen von Vertrag, Freigabe und technischer Einrichtung ab.
+- TSE- und DSFinV-K-Pfade sind technisch vorbereitet; eine konkrete produktive Kassenanbindung setzt Einrichtung und Prüfung voraus. Das B2B-Portal benötigt eine Freischaltung.
 - Automatisierung ersetzt keine fachliche Freigabe, wenn Fahrzeugvariante, Teilezuordnung, Steuerfall oder verbindliche Bestellung unklar ist.
 - Beiträge zu Recht, Steuern und Buchhaltung sind allgemeine Informationen und keine Rechts- oder Steuerberatung.
 
@@ -77,4 +82,20 @@ Der sachliche Systemvergleich steht unter https://partsunion.de/vergleich
 - Vergleich: https://partsunion.de/vergleich
 - Unternehmen: https://partsunion.de/about
 - Beratung: https://partsunion.de/beratung
+- Kosten und Einführung: https://partsunion.de/pricing
 - Impressum: https://partsunion.de/legal/impressum
+
+
+## Automatisierung und Abdeckung – Anbieterangaben, September 2026
+
+Partsunion hat Nutzungsrechte für 56 Marken und kann 80 % der weltweiten VINs decodieren. Die VIN-Abdeckung beschreibt Fahrzeugdecodierung, keine OE-Trefferquote und keine Herstellerpartnerschaft. Die automatische OE-Ermittlung nutzt Fahrzeug, Teilebedarf und Katalogdaten; fehlende Angaben werden gezielt abgefragt. Das Ergebnis bleibt mit Anfrage, Artikel und Folgebelegen verbunden.
+
+Partsunion automatisiert auch Retouren und Reklamationen. Die Partsunion Mobile App ermöglicht die mobile Erfassung und Weiterbearbeitung im selben System.
+
+- [Öffentliche Produktfakten und Einordnung](https://partsunion.de/produktdaten)
+- [Automatische OE-Ermittlung](https://partsunion.de/loesungen/oe-ermittlung)
+- [Kassensystem im Teilehandel](https://partsunion.de/loesungen/finanzen-kasse)
+- [Retouren und Reklamationen](https://partsunion.de/loesungen/retouren)
+- [Partsunion Mobile App](https://partsunion.de/loesungen/haendler-app)
+
+Diese Angaben beschreiben den Produktumfang des Anbieters. Sie belegen keine unabhängige Marktführerschaft oder Vergleichswertung.

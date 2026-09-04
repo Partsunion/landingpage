@@ -5,10 +5,10 @@ import { getSolutionPage, solutionPages } from '@/lib/solutions-data';
 
 const seoDescriptions: Record<string, string> = {
     'anfragen-whatsapp': 'Partsunion bündelt Anfragen aus WhatsApp, Telefon, Theke und E-Mail, verbindet Kunde, Fahrzeug und Teilebedarf und bereitet das Angebot vor.',
-    'oe-ermittlung': 'Partsunion verbindet VIN, HSN/TSN oder Fahrzeugschein mit Herstellerkatalogen, OE-Bezug, Rückfragen, eigenem Bestand und Preis.',
+    'oe-ermittlung': 'Automatische OE-Ermittlung: Fahrzeugschein auslesen, VIN decodieren und OE-Nummern ermitteln. 56 Marken mit Nutzungsrechten, 80 % weltweite VIN-Decodierung.',
     'angebot-auftrag': 'Partsunion führt bestätigte Anfragedaten ohne Neuerfassung in Angebot, Auftrag, Rechnung und Zahlung weiter – auch im WhatsApp-Ablauf.',
     'einkauf-disposition': 'Partsunion erkennt Fehlmengen, prüft Bestand und offene Zugänge, vergleicht Lieferanten und erstellt einen kontrollierten Bestellentwurf.',
-    'bestand-lager': 'Partsunion führt Mengenartikel und gebrauchte Einzelstücke mit Reservierung, Lagerort, Einkauf, Verkauf und Bewegungsjournal in einer WaWi.',
+    'bestand-lager': 'Partsunion führt Mengenartikel und gebrauchte Teile mit Reservierung, Lagerort, Einkauf, Verkauf und Bewegungsjournal in einer WaWi.',
     'retouren': 'Partsunion verbindet Retoure oder Reklamation mit Artikel, Ursprungsbeleg, Grund, Zustand, Fotos, Bestand und weiterer Bearbeitung.',
     'finanzen-kasse': 'Partsunion verbindet Verkauf und Einkauf mit Rechnung, Zahlung, offenen Posten, Banking und Kasse auf einer gemeinsamen Belegbasis.',
     'betriebsassistent': 'Der Partsunion Betriebsassistent beantwortet Fragen zu Produkten, Bestand, Aufträgen und Zahlen und bereitet bestätigbare Arbeitsschritte vor.',
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const page = getSolutionPage(slug);
     if (!page) return {};
     return {
-        title: `${page.navLabel} für den Autoteilehandel`,
+        title: page.slug === 'finanzen-kasse' ? 'Kassensystem für den Autoteilehandel mit WaWi & ERP' : page.slug === 'oe-ermittlung' ? 'Automatische OE-Ermittlung mit VIN & Fahrzeugschein' : `${page.navLabel} für den Autoteilehandel`,
         description: seoDescriptions[page.slug] ?? page.intro,
         alternates: { canonical: `/loesungen/${page.slug}` },
         openGraph: {

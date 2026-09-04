@@ -1,215 +1,134 @@
 'use client';
-
-import { useState } from 'react';
-import { Button } from '@/components/ui/Button';
+import { useId, useRef, useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { submitLead } from '@/lib/leads';
-import { CheckCircle2, Send } from 'lucide-react';
-
-/**
- * Contact page form — shares the /api/leads endpoint with the
- * ConsultationForm on the home page. All submissions are rate-limited,
- * spam-filtered, and forwarded to the CRM.
- *
- * DSGVO: explicit consent checkbox, no submission without it.
- */
+import { track } from '@/components/layout/Analytics';
 export function ContactForm() {
-    const [formState, setFormState] = useState({
-        vorname: '',
-        nachname: '',
-        email: '',
-        unternehmen: '',
-        nachricht: '',
-    });
-    const [consent, setConsent] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-        setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setError(null);
-
-        const honeypot = new FormData(e.currentTarget).get('website');
-        const website = typeof honeypot === 'string' ? honeypot.trim() : '';
-
-        if (!consent) {
-            setError('Bitte bestätigen Sie die Verarbeitung Ihrer Daten.');
-            return;
-        }
-
-        setIsSubmitting(true);
-        try {
-            await submitLead({
-                firma: formState.unternehmen || '—',
-                ansprechpartner: `${formState.vorname} ${formState.nachname}`.trim() || '—',
-                telefon: '',
-                email: formState.email,
-                nachricht: formState.nachricht,
-                source: 'contact-page',
-                consent: true,
-                website,
-            });
-            setIsSubmitted(true);
-        } catch (err: unknown) {
-            const message =
-                err instanceof Error
-                    ? err.message
-                    : 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.';
-            setError(message);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (isSubmitted) {
-        return (
-            <div className="flex flex-col items-center justify-center rounded-2xl border border-primary/20 bg-primary/5 p-10 text-center">
-                <CheckCircle2 className="h-12 w-12 text-primary" />
-                <h3 className="mt-4 text-xl font-bold">Vielen Dank für Ihre Nachricht!</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                    Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden bei
-                    Ihnen zurück.
-                </p>
-            </div>
-        );
+  const id = useId();
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
+  const started = useRef(false);
+  const sending = useRef(false);
+  const success = useRef<HTMLDivElement>(null);
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (sending.current) return;
+    const data = new FormData(e.currentTarget);
+    const get = (name: string) => String(data.get(name) || '').trim();
+    sending.current = true;
+    setBusy(true);
+    setError('');
+    try {
+      await submitLead({
+        firma: get('firma'),
+        ansprechpartner: get('name'),
+        email: get('email'),
+        telefon: '',
+        nachricht: get('nachricht'),
+        website: get('website'),
+        consent: !!data.get('consent'),
+        source: 'contact-page',
+      });
+      setDone(true);
+      track('Lead Submitted', { source: 'contact-page' });
+      requestAnimationFrame(() => success.current?.focus());
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Deine Nachricht konnte nicht gesendet werden.',
+      );
+      track('Lead Submit Failed', { source: 'contact-page' });
+    } finally {
+      sending.current = false;
+      setBusy(false);
     }
-
-    return (
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                <div className="space-y-2">
-                    <label className="text-sm font-medium" htmlFor="vorname">
-                        Vorname *
-                    </label>
-                    <input
-                        id="vorname"
-                        name="vorname"
-                        value={formState.vorname}
-                        onChange={handleChange}
-                        required
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                        placeholder="Max"
-                    />
-                </div>
-                <div className="space-y-2">
-                    <label className="text-sm font-medium" htmlFor="nachname">
-                        Nachname *
-                    </label>
-                    <input
-                        id="nachname"
-                        name="nachname"
-                        value={formState.nachname}
-                        onChange={handleChange}
-                        required
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                        placeholder="Mustermann"
-                    />
-                </div>
-            </div>
-
-            <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="email">
-                    E-Mail *
-                </label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    placeholder="max@firma.de"
-                />
-            </div>
-
-            <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="unternehmen">
-                    Unternehmen
-                </label>
-                <input
-                    id="unternehmen"
-                    name="unternehmen"
-                    value={formState.unternehmen}
-                    onChange={handleChange}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    placeholder="Autoteile Meyer GmbH"
-                />
-            </div>
-
-            <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="nachricht">
-                    Nachricht *
-                </label>
-                <textarea
-                    id="nachricht"
-                    name="nachricht"
-                    value={formState.nachricht}
-                    onChange={handleChange}
-                    required
-                    className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    placeholder="Wie können wir Ihnen helfen?"
-                />
-            </div>
-
-            {/* Honeypot — bots fill this, humans don't see it */}
-            <div className="hidden" aria-hidden="true">
-                <label>
-                    Website (bitte leer lassen)
-                    <input type="text" name="website" tabIndex={-1} autoComplete="off" />
-                </label>
-            </div>
-
-            <label className="flex items-start gap-3 cursor-pointer select-none text-xs text-muted-foreground">
-                <input
-                    type="checkbox"
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-2 focus:ring-primary cursor-pointer"
-                />
-                <span>
-                    Ich willige ein, dass meine Angaben zur Kontaktaufnahme und für Rückfragen
-                    gespeichert werden. Details in der{' '}
-                    <a
-                        href="/legal/datenschutz"
-                        className="text-primary hover:underline"
-                    >
-                        Datenschutzerklärung
-                    </a>
-                    .
-                </span>
-            </label>
-
-            {error && (
-                <div className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-                    {error}
-                </div>
-            )}
-
-            <Button
-                type="submit"
-                className="w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isSubmitting || !consent}
+  }
+  return (
+    <div className="mk-form">
+      {done ? (
+        <div className="mk-success" role="status" tabIndex={-1} ref={success}>
+          <CheckCircle2 aria-hidden="true" />
+          <h2 style={{ fontSize: 28 }}>Deine Nachricht ist angekommen.</h2>
+          <p className="mk-copy">Wir melden uns bei dir per E-Mail.</p>
+        </div>
+      ) : (
+        <>
+          <h2 style={{ fontSize: 26 }}>Nachricht schreiben</h2>
+          <p className="mk-small" style={{ marginTop: 8 }}>
+            Mit * markierte Angaben benötigen wir für deine Anfrage.
+          </p>
+          <form
+            className="mk-form-fields"
+            onSubmit={submit}
+            aria-busy={busy}
+            onFocusCapture={() => {
+              if (!started.current) {
+                started.current = true;
+                track('Lead Form Started', { source: 'contact-page' });
+              }
+            }}
+          >
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                left: '-9999px',
+                width: 1,
+                height: 1,
+                overflow: 'hidden',
+              }}
             >
-                {isSubmitting ? (
-                    <>
-                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground" />
-                        Wird gesendet...
-                    </>
-                ) : (
-                    <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Nachricht senden
-                    </>
-                )}
-            </Button>
-        </form>
-    );
+              <label htmlFor={`${id}-web`}>Website</label>
+              <input id={`${id}-web`} name="website" tabIndex={-1} autoComplete="off" />
+            </div>
+            <div className="mk-field">
+              <label htmlFor={`${id}-name`}>Dein Name *</label>
+              <input id={`${id}-name`} name="name" autoComplete="name" maxLength={120} required />
+            </div>
+            <div className="mk-field">
+              <label htmlFor={`${id}-email`}>E-Mail *</label>
+              <input
+                id={`${id}-email`}
+                name="email"
+                type="email"
+                autoComplete="email"
+                maxLength={254}
+                required
+              />
+            </div>
+            <div className="mk-field">
+              <label htmlFor={`${id}-firma`}>
+                Firma <span>(optional)</span>
+              </label>
+              <input id={`${id}-firma`} name="firma" autoComplete="organization" maxLength={160} />
+            </div>
+            <div className="mk-field">
+              <label htmlFor={`${id}-text`}>Deine Nachricht *</label>
+              <textarea id={`${id}-text`} name="nachricht" rows={4} maxLength={1200} required />
+            </div>
+            <label className="mk-consent">
+              <input name="consent" type="checkbox" required />
+              <span>
+                Partsunion darf meine Angaben zur Bearbeitung dieser Anfrage und für Rückfragen
+                verwenden. Mehr in der <Link href="/legal/datenschutz">Datenschutzerklärung</Link>.
+              </span>
+            </label>
+            {error && (
+              <p role="alert" className="mk-error">
+                {error}{' '}
+                <a href="mailto:info@partsunion.de" style={{ textDecoration: 'underline' }}>
+                  Per E-Mail schreiben
+                </a>
+              </p>
+            )}
+            <button className="mk-button" type="submit" disabled={busy}>
+              {busy ? 'Nachricht wird gesendet …' : 'Nachricht senden'}
+              <ArrowRight aria-hidden="true" />
+            </button>
+          </form>
+        </>
+      )}
+    </div>
+  );
 }

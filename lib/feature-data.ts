@@ -124,18 +124,20 @@ export const featureData: FeatureDetail[] = [
     // ============================================
     {
         slug: 'oem-ermittlung',
-        title: 'Teileidentifikation & OE-Referenzen',
-        description: 'Fahrzeugmerkmale, OE-Nummern, Cross-References und Alternativen in einem Prüfpfad.',
+        title: 'Automatische OE-Ermittlung',
+        description: 'Fahrzeugschein auslesen, VIN decodieren und OE-Nummern automatisch ermitteln – direkt im verbundenen Teilevorgang.',
         icon: Search,
         features: [
             'Scan von Fahrzeugscheinen (OCR)',
-            'Abgleich mit Teilekatalogen und Hersteller-Datenbanken',
+            'Nutzungsrechte für 56 Marken',
+            'Decodierung von 80 % der weltweiten VINs',
+            'Automatischer Abgleich mit Teilekatalogen und Hersteller-Datenbanken',
             'Erkennung von Baujahr-spezifischen Änderungen',
             'Cross-Reference auf Alternativ-Hersteller',
             'Preisgruppenauflösung im Verkaufsvorgang',
             'Sichtbarer Prüfstatus bei unsicheren Zuordnungen'
         ],
-        technicalDetails: 'Dokumenterfassung unterstützt die Extraktion von HSN, TSN und VIN. Katalog-, Hersteller- und Cross-Reference-Daten werden über nachvollziehbare Prüfregeln zusammengeführt.',
+        technicalDetails: 'Fahrzeugschein-Auswertung, VIN-Decodierung und Teilebedarf bilden den Ausgangspunkt der automatischen OE-Ermittlung. Katalog- und Cross-Reference-Daten werden im Fahrzeugkontext geprüft. Die VIN-Abdeckung beschreibt die Decodierung, nicht die Trefferquote bei der OE-Zuordnung.',
         benefit: 'Teileentscheidungen basieren auf verbundenen Fahrzeug- und Artikeldaten statt auf verteilten Notizen.',
         category: 'core'
     },

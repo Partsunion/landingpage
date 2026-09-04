@@ -25,66 +25,173 @@ const BASE_URL = 'https://partsunion.de';
  *   0.3   Legal-Pages
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-    const siteContentUpdated = new Date('2026-09-04T00:00:00+02:00');
+  const siteContentUpdated = new Date('2026-09-04T00:00:00+02:00');
 
-    const topFeatures = new Set([
-        'erp-autoteilehandel',
-        'warenwirtschaft-autoteilhandel',
-        'gobd-tse-zugferd-datev',
-        'b2b-kundenportal-white-label',
-        'oem-ermittlung',
-        'whatsapp-bot',
-        'bestandssynchronisation',
-        'retourenmanagement',
-        'sinkende-retouren',
-        'geschwindigkeit',
-    ]);
+  const topFeatures = new Set([
+    'erp-autoteilehandel',
+    'warenwirtschaft-autoteilhandel',
+    'gobd-tse-zugferd-datev',
+    'b2b-kundenportal-white-label',
+    'oem-ermittlung',
+    'whatsapp-bot',
+    'bestandssynchronisation',
+    'retourenmanagement',
+    'sinkende-retouren',
+    'geschwindigkeit',
+  ]);
 
-    return [
-        // ─── Konversions-kritisch ─────────────────────────────────────
-        { url: `${BASE_URL}/`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 1.0 },
-        { url: `${BASE_URL}/live-demo`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.9 },
-        { url: `${BASE_URL}/live-demo/teileermittlung`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.85 },
-        { url: `${BASE_URL}/plattform`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.9 },
-        { url: `${BASE_URL}/plattform/neuteile`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.95 },
-        { url: `${BASE_URL}/plattform/gebrauchtteile`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.95 },
-        { url: `${BASE_URL}/loesungen`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.95 },
-        { url: `${BASE_URL}/beratung`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.9 },
-        { url: `${BASE_URL}/download`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.9 },
-        { url: `${BASE_URL}/features`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.9 },
-        { url: `${BASE_URL}/vergleich`, lastModified: siteContentUpdated, changeFrequency: 'monthly', priority: 0.85 },
-        { url: `${BASE_URL}/contact`, lastModified: siteContentUpdated, changeFrequency: 'monthly', priority: 0.85 },
-        { url: `${BASE_URL}/about`, lastModified: siteContentUpdated, changeFrequency: 'monthly', priority: 0.7 },
-        { url: `${BASE_URL}/pricing`, lastModified: siteContentUpdated, changeFrequency: 'monthly', priority: 0.5 },
+  return [
+    // ─── Konversions-kritisch ─────────────────────────────────────
+    {
+      url: `${BASE_URL}/`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/live-demo`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/live-demo/teileermittlung`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/plattform`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/plattform/neuteile`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${BASE_URL}/plattform/gebrauchtteile`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${BASE_URL}/loesungen`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${BASE_URL}/beratung`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    ...[
+      'whatsapp-bot',
+      'betriebsassistent',
+      'buchhaltung-banking',
+      'einfuehrung',
+      'produktdaten',
+    ].map((slug) => ({
+      url: `${BASE_URL}/${slug}`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    })),
+    {
+      url: `${BASE_URL}/download`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/features`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/vergleich`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/pricing`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
 
-        ...solutionPages.map((page) => ({
-            url: `${BASE_URL}/loesungen/${page.slug}`,
-            lastModified: siteContentUpdated,
-            changeFrequency: 'monthly' as const,
-            priority: 0.85,
-        })),
+    ...solutionPages.map((page) => ({
+      url: `${BASE_URL}/loesungen/${page.slug}`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    })),
 
-        // ─── Feature-Detail-Pages ─────────────────────────────────────
-        ...featureData.map((f) => ({
-            url: `${BASE_URL}/features/${f.slug}`,
-            lastModified: siteContentUpdated,
-            changeFrequency: 'monthly' as const,
-            priority: topFeatures.has(f.slug) ? 0.75 : 0.65,
-        })),
+    // ─── Feature-Detail-Pages ─────────────────────────────────────
+    ...featureData.map((f) => ({
+      url: `${BASE_URL}/features/${f.slug}`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly' as const,
+      priority: topFeatures.has(f.slug) ? 0.75 : 0.65,
+    })),
 
-        // ─── Praxisratgeber ───────────────────────────────────────────
-        { url: `${BASE_URL}/blog`, lastModified: siteContentUpdated, changeFrequency: 'weekly', priority: 0.8 },
-        ...blogPosts.map((p) => ({
-            url: `${BASE_URL}/blog/${p.slug}`,
-            lastModified: new Date(p.updatedAt),
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        })),
+    // ─── Praxisratgeber ───────────────────────────────────────────
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...blogPosts.map((p) => ({
+      url: `${BASE_URL}/blog/${p.slug}`,
+      lastModified: new Date(p.updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
 
-        // ─── Legal ─────────────────────────────────────────────────────
-        { url: `${BASE_URL}/legal/impressum`, lastModified: siteContentUpdated, changeFrequency: 'yearly', priority: 0.3 },
-        { url: `${BASE_URL}/legal/datenschutz`, lastModified: siteContentUpdated, changeFrequency: 'yearly', priority: 0.3 },
-        { url: `${BASE_URL}/legal/agb`, lastModified: siteContentUpdated, changeFrequency: 'yearly', priority: 0.3 },
-        { url: `${BASE_URL}/legal/widerruf`, lastModified: siteContentUpdated, changeFrequency: 'yearly', priority: 0.3 },
-    ];
+    // ─── Legal ─────────────────────────────────────────────────────
+    {
+      url: `${BASE_URL}/legal/impressum`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/legal/datenschutz`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/legal/agb`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/legal/widerruf`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+  ];
 }

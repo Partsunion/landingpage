@@ -19,7 +19,7 @@ const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Partsunion Plattform für Neuteile und Gebrauchtteile',
-    description: 'ERP und Warenwirtschaft für den Autoteilehandel mit getrennten Abläufen für Neuware und gebrauchte Einzelstücke.',
+    description: 'ERP und Warenwirtschaft für den Autoteilehandel mit getrennten Abläufen für Neuware und gebrauchte Teile.',
     url: 'https://partsunion.de/plattform',
     isPartOf: { '@id': 'https://partsunion.de/#website' },
     about: { '@id': 'https://partsunion.de/#software' },

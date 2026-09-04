@@ -38,5 +38,11 @@ jobs:
       - name: Check search and AI discoverability
         run: npm run seo:check
 
+      - name: Check product screenshots and topic mappings
+        run: node --experimental-strip-types scripts/check-product-images.mjs
+
+      - name: Check landing logic and static asset serving
+        run: npm test
+
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high

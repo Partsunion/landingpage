@@ -1,0 +1,344 @@
+.bk-section {
+  padding-block: 88px;
+  background: #eef2f6;
+  scroll-margin-top: 100px;
+}
+.bk-standalone {
+  padding-top: 130px;
+}
+.bk-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  overflow: hidden;
+  border: 1px solid #d8e0e8;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 16px 48px -32px #0b213c38;
+}
+.bk-intro {
+  padding: 48px 42px;
+  color: #fff;
+  background: #0c2342;
+}
+.bk-intro .mk-kicker {
+  color: #bacde5;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+}
+.bk-intro .mk-kicker:before {
+  background: #8ab7ff;
+}
+.bk-intro h1,
+.bk-intro h2 {
+  max-width: 11em;
+  margin-block: 24px 20px;
+  font-size: clamp(34px, 3.4vw, 49px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.09;
+  color: #fff;
+  text-wrap: balance;
+}
+.bk-copy {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.bk-intro > .bk-copy {
+  color: #c6d5e8;
+}
+.bk-meeting-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 24px;
+  font-size: 13px;
+  color: #e3edfa;
+}
+.bk-meeting-meta span,
+.bk-direct {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.bk-meeting-meta svg,
+.bk-direct svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: #91baff;
+}
+.bk-agenda {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #ffffff26;
+}
+.bk-agenda-title {
+  margin-bottom: 24px;
+  font-size: 12px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #b0c5df;
+}
+.bk-agenda ol {
+  display: grid;
+  gap: 25px;
+  padding: 0;
+  list-style: none;
+}
+.bk-agenda li {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr);
+  gap: 14px;
+}
+.bk-agenda li > span {
+  font-size: 12px;
+  line-height: 24px;
+  color: #91baff;
+  font-variant-numeric: tabular-nums;
+}
+.bk-agenda strong {
+  font-size: 15px;
+  font-weight: 550;
+}
+.bk-agenda li p {
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #bbcee6;
+}
+.bk-direct {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #e6effc;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.bk-form.mk-form {
+  border: 0;
+  border-radius: 0;
+  padding: 40px;
+  min-width: 0;
+}
+.bk-form > h2,
+.bk-form > h3,
+.bk-success > h2,
+.bk-success > h3 {
+  font-size: 25px;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.bk-form-intro {
+  max-width: 33em;
+}
+.bk-fields {
+  gap: 22px;
+  margin-top: 28px;
+}
+.bk-step {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.bk-step legend {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0;
+  margin-bottom: 15px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.bk-step legend > span {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #e7effd;
+  font-size: 10px;
+  color: #175cda;
+}
+.bk-calendar {
+  display: grid;
+  gap: 14px;
+  padding: 19px;
+  border: 1px solid #dce6f4;
+  border-radius: 6px;
+  background: #f5f8fd;
+}
+.bk-calendar-hint.mk-small {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #425972;
+}
+.bk-timezone.mk-small {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #4e6075;
+}
+.bk-calendar .mk-form-row {
+  gap: 12px;
+  grid-template-columns: 1.15fr 0.85fr;
+}
+.bk-calendar select {
+  padding-inline: 10px;
+  font-size: 14px;
+  min-width: 0;
+}
+.bk-selection {
+  padding-top: 12px;
+  border-top: 1px solid #dce6f4;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #16447e;
+}
+.bk-details > .mk-form-row {
+  margin-top: 16px;
+}
+.bk-details .mk-optional {
+  margin-top: 8px;
+}
+.bk-optional-fields {
+  display: grid;
+  gap: 16px;
+  padding-top: 6px;
+}
+.bk-form .mk-consent {
+  font-size: 12px;
+}
+.bk-form .mk-button {
+  min-height: 52px;
+  font-size: 14px;
+  gap: 12px;
+  padding-inline: 15px;
+}
+.bk-submit-note.mk-small {
+  margin-top: -12px;
+  text-align: center;
+  font-size: 12px;
+}
+.bk-error-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.bk-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.bk-success {
+  padding-block: 40px;
+}
+.bk-confirmation {
+  display: flex;
+  gap: 14px;
+  margin-block: 26px;
+  padding: 20px;
+  border: 1px solid #dce6f4;
+  border-radius: 6px;
+  background: #f5f8fd;
+}
+.bk-confirmation > svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: #175cda;
+}
+.bk-confirmation span,
+.bk-confirmation strong {
+  display: block;
+}
+.bk-confirmation span {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #4e6075;
+}
+.bk-confirmation strong {
+  margin-block: 5px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+@media (max-width: 1000px) {
+  .bk-shell {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+  .bk-intro,
+  .bk-form.mk-form {
+    padding: 32px 26px;
+  }
+  .bk-intro .mk-kicker {
+    line-height: 1.6;
+  }
+  .bk-intro h1,
+  .bk-intro h2 {
+    font-size: 37px;
+  }
+  .bk-calendar {
+    padding: 15px;
+  }
+}
+@media (max-width: 760px) {
+  .bk-section {
+    padding-block: 52px;
+  }
+  .bk-standalone {
+    padding-top: 110px;
+  }
+  .bk-shell {
+    grid-template-columns: 1fr;
+  }
+  .bk-intro {
+    padding: 30px 26px;
+  }
+  .bk-intro h1,
+  .bk-intro h2 {
+    max-width: 15em;
+    margin-block: 18px 14px;
+    font-size: 36px;
+  }
+  .bk-copy {
+    font-size: 15px;
+  }
+  .bk-meeting-meta {
+    margin-top: 18px;
+    font-size: 12px;
+  }
+  .bk-agenda,
+  .bk-direct {
+    display: none;
+  }
+  .bk-form.mk-form {
+    padding: 28px 24px;
+  }
+  .bk-form > h2,
+  .bk-form > h3 {
+    font-size: 23px;
+  }
+  .bk-details > .mk-form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bk-calendar .mk-form-row {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+@media (max-width: 420px) {
+  .bk-intro,
+  .bk-form.mk-form {
+    padding-inline: 21px;
+  }
+  .bk-intro h1,
+  .bk-intro h2 {
+    font-size: 33px;
+  }
+  .bk-calendar .mk-form-row,
+  .bk-details > .mk-form-row {
+    grid-template-columns: 1fr;
+  }
+  .bk-calendar select {
+    font-size: 16px;
+  }
+}

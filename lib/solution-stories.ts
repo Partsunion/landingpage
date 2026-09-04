@@ -97,7 +97,7 @@ export const solutionStories = {
         situations: [
             { moment: 'Zugang', title: 'Ware kommt an und erhält einen Lagerort.', text: 'Wareneingang, Menge, Herkunft und Prüfung bilden den dokumentierten neuen Stand.' },
             { moment: 'Nutzung', title: 'Ware wird reserviert, bewegt oder verkauft.', text: 'Jede Änderung bleibt mit Auftrag, Mitarbeiter und Lagerbewegung verbunden.' },
-            { moment: 'Einzelstück', title: 'Ein konkretes Exemplar behält seine Identität.', text: 'Zustand, Fotos, Herkunft und individueller Wert folgen dem Teil durch den Betrieb.' },
+            { moment: 'Gebrauchtteil', title: 'Ein konkretes Exemplar behält seine Identität.', text: 'Zustand, Fotos, Herkunft und individueller Wert folgen dem Teil durch den Betrieb.' },
         ],
         comparisonTitle: 'Bestand nicht überschreiben, sondern verstehen.',
         workflowTitle: 'So entsteht ein belastbarer Lagerstand.',

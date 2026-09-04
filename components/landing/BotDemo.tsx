@@ -560,7 +560,7 @@ export function BotDemo() {
     const requestDone = stage === 'complete';
 
     return (
-        <main className="relative min-h-screen overflow-hidden px-4 pb-14 pt-28">
+        <div className="relative min-h-screen overflow-hidden px-4 pb-14 pt-28">
             <div className="absolute inset-0 grid-pattern opacity-35" />
             <div className="absolute left-1/2 top-20 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
 
@@ -952,6 +952,6 @@ export function BotDemo() {
                     onConfirm={() => void completeDemoPayment()}
                 />
             )}
-        </main>
+        </div>
     );
 }

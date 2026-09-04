@@ -3,12 +3,12 @@ import { PlatformDetailPage } from '@/components/platform/PlatformDetailPage';
 
 export const metadata: Metadata = {
     title: 'Gebrauchtteile-Software für Autoverwerter',
-    description: 'Warenwirtschaft für Autoverwerter und Gebrauchtteilehändler: Einzelstücke verwalten, Marktpreise prüfen, Inserate vorbereiten und eBay anbinden.',
-    keywords: ['Gebrauchtteile Software', 'Autoverwerter Software', 'Autoverwertung Warenwirtschaft', 'Gebrauchtteilehandel Warenwirtschaft', 'Software Gebrauchtteilehändler', 'Autoteile eBay verkaufen', 'eBay Motors Teile einstellen', 'Gebrauchtteile Preisermittlung', 'Einzelstückverwaltung Autoteile', 'Differenzbesteuerung Gebrauchtteile'],
+    description: 'Warenwirtschaft für Autoverwerter und Gebrauchtteilehändler: Gebrauchtteile verwalten, Marktpreise prüfen, Inserate vorbereiten und eBay anbinden.',
+    keywords: ['Gebrauchtteile Software', 'Autoverwerter Software', 'Autoverwertung Warenwirtschaft', 'Gebrauchtteilehandel Warenwirtschaft', 'Software Gebrauchtteilehändler', 'Autoteile eBay verkaufen', 'eBay Motors Teile einstellen', 'Gebrauchtteile Preisermittlung', 'Gebrauchtteileverwaltung Autoteile', 'Differenzbesteuerung Gebrauchtteile'],
     alternates: { canonical: 'https://partsunion.de/plattform/gebrauchtteile' },
     openGraph: {
         title: 'Partsunion Gebrauchtteile-Plattform',
-        description: 'Vom ausgebauten Einzelstück über Preisermittlung und Inserat bis zu Verkauf und Rechnung.',
+        description: 'Vom ausgebauten Gebrauchtteil über Preisermittlung und Inserat bis zu Verkauf und Rechnung.',
         url: 'https://partsunion.de/plattform/gebrauchtteile',
         type: 'website',
         locale: 'de_DE',
@@ -20,7 +20,7 @@ const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Gebrauchtteile-Plattform für Autoteilehändler',
-    description: 'Warenwirtschaft für gebrauchte Autoteile, Einzelstücke, Preisermittlung und Inserate.',
+    description: 'Warenwirtschaft für gebrauchte Autoteile, Gebrauchtteile, Preisermittlung und Inserate.',
     url: 'https://partsunion.de/plattform/gebrauchtteile',
     isPartOf: { '@id': 'https://partsunion.de/#website' },
     about: { '@id': 'https://partsunion.de/#software' },

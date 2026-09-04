@@ -422,7 +422,7 @@ export function MobileReturnsStory() {
 
 const workAreas: Array<{ number: string; title: string; summary: string; icon: LucideIcon; items: string[]; href: string }> = [
     { number: '01', title: 'Verkauf', summary: 'Von der ersten Anfrage bis zur ausgeglichenen Rechnung.', icon: ShoppingCart, items: ['Anfrage & WhatsApp', 'Theke, Angebot & Auftrag', 'Kundenakte & Belegkette', 'Kasse, Zahlung & offene Posten'], href: '/loesungen/angebot-auftrag' },
-    { number: '02', title: 'Betrieb & Warenwirtschaft', summary: 'Teile, Mengen und Bewegungen nachvollziehbar steuern.', icon: Warehouse, items: ['OE, Artikel & Einzelstücke', 'Lager & Bewegungsjournal', 'Einkauf & Bestellvorschläge', 'Retouren & Reklamationen'], href: '/loesungen/bestand-lager' },
+    { number: '02', title: 'Betrieb & Warenwirtschaft', summary: 'Teile, Mengen und Bewegungen nachvollziehbar steuern.', icon: Warehouse, items: ['OE, Artikel & Gebrauchtteile', 'Lager & Bewegungsjournal', 'Einkauf & Bestellvorschläge', 'Retouren & Reklamationen'], href: '/loesungen/bestand-lager' },
     { number: '03', title: 'Finanzen & Kasse', summary: 'Belege und Zahlen bleiben mit dem Ursprungsvorgang verbunden.', icon: FileCheck2, items: ['Rechnungen & Gutschriften', 'OP, Mahnwesen & Zahlungen', 'Kassenbuch & Tagesabschluss', 'DATEV- & Steuerexporte'], href: '/loesungen/finanzen-kasse' },
 ];
 

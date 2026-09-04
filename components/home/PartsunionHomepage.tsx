@@ -1,102 +1,547 @@
 import Link from 'next/link';
-import { ArrowRight, BookOpenCheck, Layers3, Store } from 'lucide-react';
-import { FinalCTA } from '@/components/landing/FinalCTA';
-import { HeroFlow } from './HeroFlow';
-import { ImplementationPath } from './ImplementationPath';
 import {
-    BusinessAssistantStory,
-    MobileReturnsStory,
-    ModuleDirectory,
-    OrderSupplyStory,
-    WhatsappOeStory,
-} from './HomepageStories';
-import { ProcessComparison } from './ProcessComparison';
-import { ProductShowcase } from './ProductShowcase';
+  ArrowRight,
+  Check,
+  FileText,
+  Layers3,
+  MessageCircle,
+  PackageSearch,
+  ShoppingCart,
+  Users,
+  WalletCards,
+  Warehouse,
+  Workflow,
+  ShieldCheck,
+  RotateCcw,
+  Smartphone,
+  ScanLine,
+} from 'lucide-react';
+import { SystemWorkflow, MobileReturnsGraphic } from '@/components/marketing/SystemWorkflow';
+import { FinalCTA } from '@/components/landing/FinalCTA';
+import { ProductPreview } from '@/components/marketing/ProductPreview';
+import { AssistantGraphic, FinanceGraphic } from '@/components/marketing/WorkflowGraphics';
+import {
+  AudienceLinks,
+  ConsultationLink,
+  FAQ,
+  homeFaqs,
+  Implementation,
+} from '@/components/marketing/Shared';
 
-const faqs = [
-    {
-        question: 'Für welche Betriebe ist Partsunion gedacht?',
-        answer: 'Für Autoteilehändler, Werkstattbetriebe sowie Filial- und Großhandelsbetriebe mit Neu-, Gebraucht- oder Mischsortiment – besonders dort, wo Teileprüfung, Verkauf, Lager und Belege heute auf mehrere Werkzeuge verteilt sind.',
-    },
-    {
-        question: 'Wie beginnt die Einführung in unserem Betrieb?',
-        answer: 'Wir starten mit einem echten Arbeitsprozess aus deinem Alltag. Daraus leiten wir ab, welche Arbeitsbereiche, Rollen und Daten zuerst vorbereitet werden sollten. Theke, Lager und Büro bekommen genau die Schritte, die sie für ihre Arbeit brauchen.',
-    },
-    {
-        question: 'Entscheidet der Betriebsassistent selbst, welches Teil passt oder was bestellt wird?',
-        answer: 'Nein. Er beantwortet Fragen aus den freigegebenen Betriebsdaten, empfiehlt den nächsten Schritt und kann die Bearbeitung vorbereiten. Änderungen an Aufträgen, Bestellungen, Retouren oder Reklamationen werden erst nach sichtbarer Prüfung und Bestätigung ausgeführt.',
-    },
-    {
-        question: 'Was passiert im Beratungsgespräch?',
-        answer: 'In 30 Minuten gehen wir einen konkreten Ablauf aus deinem Betrieb durch – zum Beispiel eine Teileanfrage, eine Bestellung, eine Retoure oder eine Reklamation. Anschließend weißt du, welche Partsunion-Bereiche zu deinem Betrieb passen und welche nächsten Schritte sinnvoll sind.',
-    },
-    {
-        question: 'Was unterscheidet Partsunion von einer allgemeinen Warenwirtschaft?',
-        answer: 'Partsunion wurde für den Autoteilehandel gebaut. Fahrzeug- und OE-Bezug, Neuteile, gebrauchte Einzelstücke, Teileanfragen, Bestand und die Belegkette von Angebot bis Zahlung gehören deshalb zu einem gemeinsamen Ablauf statt zu getrennten Zusatzlösungen.',
-    },
-    {
-        question: 'Wann ist Partsunion die passende Wahl?',
-        answer: 'Wenn dein Betrieb Teile bestimmt, beschafft, lagert und verkauft und diese Arbeit heute auf Chats, Kataloge, Tabellen und mehrere Programme verteilt ist. Für Unternehmen ohne Fahrzeug- und Teilebezug ist eine allgemeine Warenwirtschaft meist die passendere Vergleichsgruppe.',
-    },
-];
-
-const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.question,
-        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-    })),
-};
-
-const proofPoints = [
-    { title: '56 Marken', text: 'in der Fahrzeugdatenbank', icon: Store },
-    { title: 'Herstellerkataloge', text: 'Nutzungsrechte vorhanden', icon: BookOpenCheck },
-    { title: 'Ein gemeinsames System', text: 'ERP, WaWi, Theke und Kasse', icon: Layers3 },
+const modules = [
+  {
+    icon: PackageSearch,
+    title: 'Automatische OE-Ermittlung',
+    text: 'Fahrzeugschein auslesen, VIN decodieren und passende OE-Nummern ermitteln. Fahrzeug, Teilebedarf und Ergebnis bleiben miteinander verbunden.',
+    href: '/loesungen/oe-ermittlung',
+    link: 'OE-Ermittlung verstehen',
+  },
+  {
+    icon: ShoppingCart,
+    title: 'Verkaufen und beschaffen',
+    text: 'Anfrage, Angebot, Auftrag und Einkauf bauen aufeinander auf. Dein Team erkennt, was verfügbar ist und was noch bestellt werden muss.',
+    href: '/loesungen/angebot-auftrag',
+    link: 'Verkauf und Einkauf',
+  },
+  {
+    icon: Warehouse,
+    title: 'Lager und Warenwirtschaft',
+    text: 'Bestände, Reservierungen und Lagerplätze für Neuware. Zustand, Fotos und Herkunft für gebrauchte Teile. Immer mit Bezug zu Einkauf und Verkauf.',
+    href: '/loesungen/bestand-lager',
+    link: 'Warenwirtschaft ansehen',
+  },
+  {
+    icon: FileText,
+    title: 'Belege und Buchhaltung',
+    text: 'Aufträge in Rechnungen weiterführen, Eingangsbelege bearbeiten und Buchungsdaten für die Übergabe vorbereiten.',
+    href: '/buchhaltung-banking',
+    link: 'Belege und Buchungen',
+  },
+  {
+    icon: WalletCards,
+    title: 'Banking und Zahlungen',
+    text: 'Bankumsätze mit offenen Belegen abgleichen. Beträge, Zuordnungen und Abweichungen im Zusammenhang prüfen.',
+    href: '/buchhaltung-banking#banking',
+    link: 'Zahlungen zuordnen',
+  },
+  {
+    icon: WalletCards,
+    title: 'Kassensystem für die Theke',
+    text: 'Artikel, Kunde, Verkauf und Zahlung in einem Ablauf. Die Kasse arbeitet mit demselben Bestand wie dein Team im Büro und Lager.',
+    href: '/loesungen/finanzen-kasse',
+    link: 'Kasse und Thekenverkauf',
+  },
+  {
+    icon: RotateCcw,
+    title: 'Retouren und Reklamationen',
+    text: 'Rückläufer automatisch dem ursprünglichen Vorgang zuordnen und die Bearbeitung steuern. Prüfung, Warenbewegung und Gutschrift bleiben nachvollziehbar.',
+    href: '/loesungen/retouren',
+    link: 'Rückabwicklung automatisieren',
+  },
+  {
+    icon: Smartphone,
+    title: 'Partsunion Mobile App',
+    text: 'Informationen direkt an der Ware erfassen und mobil auf Vorgänge zugreifen. Dein Team arbeitet unterwegs mit derselben Plattform weiter.',
+    href: '/loesungen/haendler-app',
+    link: 'Die Mobile App entdecken',
+  },
+  {
+    icon: Users,
+    title: 'Gemeinsam weiterarbeiten',
+    text: 'Kunden, Nachrichten, Aufgaben und Vorgänge zusammenführen. Damit die nächste Person mit dem vorhandenen Wissen übernimmt.',
+    href: '/betriebsassistent',
+    link: 'Den Betrieb im Blick behalten',
+  },
 ];
 
 export function PartsunionHomepage() {
-    return (
-        <div className="overflow-clip bg-white text-[#111b2b]">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-            <HeroFlow />
-
-            <section className="border-b border-[#dbe2eb] bg-[#f7f9fc]">
-                <div className="mx-auto grid max-w-[1420px] grid-cols-3 divide-x divide-[#dbe2eb] px-2 sm:px-5 md:px-8 xl:px-10">
-                    {proofPoints.map((point, index) => { const Icon = point.icon; return <div key={point.title} className="flex min-w-0 items-start gap-2.5 px-2.5 py-3 sm:items-center sm:gap-3 sm:px-5 sm:py-4 md:py-5 lg:px-7"><span className="font-mono text-[7px] font-bold text-[#1d6fe8] sm:text-[8px]">0{index + 1}</span><Icon className="hidden h-4 w-4 shrink-0 text-[#54708f] sm:block" /><span className="min-w-0"><strong className="block text-[9px] font-semibold leading-4 sm:text-sm">{point.title}</strong><span className="mt-0.5 hidden text-[10px] leading-4 text-[#697586] sm:block md:text-[11px]">{point.text}</span></span></div>; })}
-                </div>
-            </section>
-
-            <ProcessComparison />
-            <BusinessAssistantStory />
-            <WhatsappOeStory />
-            <OrderSupplyStory />
-            <MobileReturnsStory />
-
-            <section id="produkt" className="scroll-mt-28 border-t border-[#dbe2eb] bg-[#f5f8fc] py-14 md:py-18">
-                <div className="mx-auto max-w-[1420px] px-5 md:px-8 xl:px-10">
-                    <div className="grid gap-6 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
-                        <div><div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#1c6dd8]">Echte Produktansichten</div><h2 className="mt-3 text-[clamp(2rem,3.1vw,3.05rem)] font-semibold leading-[1.07] tracking-[-.045em]">Das ist Partsunion im Tagesgeschäft.</h2></div>
-                        <p className="max-w-2xl text-[15px] leading-7 text-[#5f6b7b] lg:justify-self-end">Verkaufsarbeitsplatz, Anfragen, Auftrag, Warenwirtschaft und Finanzen – direkt aus dem aktuellen Partsunion-Demosystem.</p>
-                    </div>
-                    <ProductShowcase />
-                </div>
-            </section>
-
-            <ModuleDirectory />
-            <ImplementationPath />
-
-            <section className="border-t border-[#dbe2eb] bg-[#f7f9fc] py-14 md:py-16">
-                <div className="mx-auto grid max-w-[1180px] gap-8 px-5 md:px-8 lg:grid-cols-[310px_1fr] xl:px-10">
-                    <div><div className="text-[10px] font-bold uppercase tracking-[.15em] text-[#1c6dd8]">Kurz beantwortet</div><h2 className="mt-3 text-[32px] font-semibold leading-[1.1] tracking-[-.04em]">Fragen vor dem ersten Gespräch.</h2><p className="mt-3 text-sm leading-6 text-[#647183]">Oder direkt den eigenen Ablauf mit uns durchgehen.</p><Link href="/beratung" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#155fc8]">Beratung vereinbaren <ArrowRight className="h-4 w-4" /></Link></div>
-                    <div className="border-t border-[#cfd8e3]">
-                        {faqs.map((faq, index) => <details key={faq.question} className="group border-b border-[#cfd8e3] py-1"><summary className="flex cursor-pointer list-none items-center gap-4 py-4 text-sm font-semibold marker:hidden"><span className="font-mono text-[9px] font-bold text-[#1d6fe8]">0{index + 1}</span>{faq.question}<span className="ml-auto text-xl font-light text-[#778291] transition group-open:rotate-45">+</span></summary><p className="pb-5 pl-8 text-sm leading-6 text-[#647183]">{faq.answer}</p></details>)}
-                    </div>
-                </div>
-            </section>
-
-            <FinalCTA />
+  return (
+    <div className="mk hu-home">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: homeFaqs.map((f) => ({
+              '@type': 'Question',
+              name: f.question,
+              acceptedAnswer: { '@type': 'Answer', text: f.answer },
+            })),
+          }),
+        }}
+      />
+      <section className="hu-hero">
+        <div className="mk-wrap">
+          <div className="hu-hero-grid">
+            <div>
+              <p className="mk-kicker">Die All-in-One-Plattform für Autoteilehändler</p>
+              <h1>
+                Dein Teilehandel.
+                <br />
+                <span>
+                  Alles verbunden.
+                  <br />
+                  Ein System.
+                </span>
+              </h1>
+              <p className="mk-copy">
+                Vom Fahrzeugschein zum passenden Teil. Von der Anfrage bis zur Zahlung. Partsunion
+                automatisiert deine Abläufe und verbindet automatische OE-Ermittlung, WhatsApp-Bot,
+                ERP, Warenwirtschaft und Kasse in einem System.
+              </p>
+              <div className="mk-actions">
+                <ConsultationLink />
+                <a href="#oe-ermittlung" className="mk-link">
+                  So greift alles ineinander <ArrowRight aria-hidden="true" />
+                </a>
+              </div>
+              <p className="hu-hero-note">
+                <Check aria-hidden="true" /> Persönliches Beratungsgespräch · ca. 30 Minuten ·
+                unverbindlich
+              </p>
+            </div>
+            <SystemWorkflow />
+          </div>
+          <div className="hu-hero-bottom">
+            <a href="#oe-ermittlung">
+              <ScanLine aria-hidden="true" /> Fahrzeugschein → VIN → OE{' '}
+              <ArrowRight aria-hidden="true" />
+            </a>
+            <a href="#warenwirtschaft">
+              <Workflow aria-hidden="true" /> ERP, WaWi & Kasse <ArrowRight aria-hidden="true" />
+            </a>
+            <a href="#whatsapp">
+              <MessageCircle aria-hidden="true" /> WhatsApp & Betriebsassistent{' '}
+              <ArrowRight aria-hidden="true" />
+            </a>
+          </div>
         </div>
-    );
+      </section>
+
+      <section id="oe-ermittlung" className="mk-section sw-oe-section">
+        <div className="mk-wrap">
+          <div className="mk-section-intro">
+            <div>
+              <p className="mk-kicker">Automatische OE-Ermittlung · von Anfang an verbunden</p>
+              <h2>
+                Der Fahrzeugschein ist der Anfang.
+                <br />
+                Das passende Teil der nächste Schritt.
+              </h2>
+            </div>
+            <div>
+              <p className="mk-copy">
+                Partsunion liest Fahrzeugdaten aus dem Fahrzeugschein, decodiert die VIN und
+                ermittelt OE-Nummern anhand von Fahrzeug, Teilebedarf und Katalogdaten. Das Ergebnis
+                fließt direkt in den nächsten Arbeitsbereich – ohne dieselben Angaben erneut
+                einzutippen.
+              </p>
+              <Link href="/loesungen/oe-ermittlung" className="mk-link">
+                Die automatische OE-Ermittlung im Detail <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <div className="sw-facts">
+            <div>
+              <strong>
+                56<span> Marken</span>
+              </strong>
+              <p>Nutzungsrechte für unsere Fahrzeug- und Teileidentifikation.</p>
+            </div>
+            <div>
+              <strong>
+                80<span> %</span>
+              </strong>
+              <p>der weltweiten VINs können wir decodieren.</p>
+            </div>
+            <div>
+              <strong>
+                1<span> durchgängiger Ablauf</span>
+              </strong>
+              <p>Fahrzeug, OE-Ergebnis, Artikel und Auftrag bleiben verknüpft.</p>
+            </div>
+          </div>
+          <p className="sw-facts-note">
+            VIN-Abdeckung beschreibt die Decodierung. Die eindeutige OE-Zuordnung hängt von
+            Fahrzeug, Teilebedarf und verfügbaren Katalogdaten ab. Bei offenen Varianten fragt das
+            System gezielt nach.
+          </p>
+        </div>
+      </section>
+
+      <section id="warenwirtschaft" className="mk-section mk-paper">
+        <div className="mk-wrap">
+          <div className="mk-section-intro">
+            <div>
+              <p className="mk-kicker">ERP, Warenwirtschaft & Automatisierung</p>
+              <h2>
+                Arbeitsbereiche, die
+                <br />
+                miteinander weiterdenken.
+              </h2>
+            </div>
+            <p className="mk-copy">
+              Eine Anfrage wird zum Angebot. Ein Auftrag reserviert Ware. Die Rechnung führt zur
+              Zahlung. Partsunion verbindet deine Prozessketten auf einer gemeinsamen Datenbasis –
+              bis zu Retoure und Reklamation.
+            </p>
+          </div>
+          <div className="hu-modules">
+            {modules.map(({ icon: Icon, title, text, href, link }) => (
+              <article className="hu-module" key={title}>
+                <Icon aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <Link href={href} className="mk-link">
+                  {link}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div id="produkt" className="hu-product-area">
+            <div className="hu-section-head">
+              <h3>Dein System. In echten Produktansichten.</h3>
+              <p className="mk-small">
+                Wähle einen Arbeitsbereich. Die Ansichten zeigen das Produkt mit Beispieldaten und
+                lassen sich vergrößern.
+              </p>
+            </div>
+            <ProductPreview />
+          </div>
+          <div className="mk-actions">
+            <Link href="/plattform" className="mk-link">
+              Die ganze Plattform entdecken <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link href="/features" className="mk-link">
+              Alle Funktionen im Detail <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="whatsapp" className="mk-section">
+        <div className="mk-wrap">
+          <div className="hu-split">
+            <div>
+              <span className="hu-section-label">
+                <MessageCircle aria-hidden="true" /> Dein automatisierter Kundenkontakt
+              </span>
+              <h2>
+                Deine Kunden bleiben bei WhatsApp.
+                <br />
+                Die Anfrage kommt im System an.
+              </h2>
+              <p className="mk-copy">
+                Ein Foto vom Fahrzeugschein, eine Sprachnachricht, „habt ihr das Teil?“: So beginnt
+                euer Alltag. Der Partsunion-Bot hilft, daraus die Angaben zu machen, mit denen dein
+                Team tatsächlich arbeiten kann.
+              </p>
+              <Link href="/whatsapp-bot" className="mk-link">
+                Den WhatsApp-Bot kennenlernen <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="hu-list">
+              <div>
+                <span>01</span>
+                <div>
+                  <h3>Bedarf aufnehmen und Angaben klären</h3>
+                  <p>
+                    Der Kunde schreibt im vertrauten Chat. Fahrzeug, gesuchtes Teil und mitgesendete
+                    Medien werden in der Anfrage zusammengeführt. Fehlende Angaben werden
+                    nachgefragt.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <span>02</span>
+                <div>
+                  <h3>Fahrzeugschein auslesen. OE automatisch ermitteln.</h3>
+                  <p>
+                    Der Bot übergibt Fahrzeugdaten und Teilebedarf an die automatische
+                    OE-Ermittlung. Unklare Ausführungen werden gezielt abgefragt. Das Ergebnis
+                    bleibt mit dem Chat verbunden und kann in Angebot und Auftrag weitergeführt
+                    werden.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <span>03</span>
+                <div>
+                  <h3>Übernehmen, ohne von vorn anzufangen</h3>
+                  <p>
+                    Dein Team sieht Nachricht, Fahrzeugdaten und Bearbeitungsstand gemeinsam. Wenn
+                    fachliche Erfahrung gefragt ist, übernimmt ein Mensch mit dem vorhandenen
+                    Kontext. Mit eingerichteten Anbindungen kann die geprüfte Anfrage bis zur
+                    Angebotsauswahl im WhatsApp-Dialog weitergehen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="hu-product-area">
+            <ProductPreview
+              image="whatsapp-dialog"
+              alt="WhatsApp-Anfrage: Kundendialog, Fahrzeugdaten und Bearbeitungsstand im Partsunion-System"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="betriebsassistent" className="mk-section hu-navy">
+        <div className="mk-wrap hu-split">
+          <div>
+            <p className="mk-kicker">Dein Betriebsassistent · Wissen über Arbeitsbereiche hinweg</p>
+            <h2>
+              Frag deinen Betrieb.
+              <br />
+              Der Betriebsassistent findet den Zusammenhang.
+            </h2>
+            <p className="mk-copy">
+              Welche Aufträge hängen? Wo fehlt Ware? Was braucht als Nächstes Aufmerksamkeit? Stelle
+              deine Frage in normalen Worten und arbeite mit den passenden Vorgängen weiter.
+            </p>
+            <div className="hu-list">
+              <div>
+                <span>01</span>
+                <div>
+                  <h3>Überblick aus deinen Betriebsdaten</h3>
+                  <p>
+                    Aufträge, Kunden und Bestände im Zusammenhang finden. Mit Verweisen zu den
+                    zugrunde liegenden Vorgängen.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <span>02</span>
+                <div>
+                  <h3>Vom Ergebnis zum nächsten Schritt</h3>
+                  <p>
+                    Informationen nachschlagen und mögliche Aktionen vorbereiten. Dein Team prüft
+                    den Vorschlag und entscheidet über die Ausführung.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Link href="/betriebsassistent" className="mk-link">
+              Mehr zum Betriebsassistenten <ArrowRight aria-hidden="true" />
+            </Link>
+            <div className="hu-principle">
+              <ShieldCheck aria-hidden="true" />
+              <span>
+                Berechtigungen bleiben maßgeblich. Änderungen erfolgen nach Prüfung und Freigabe.
+              </span>
+            </div>
+          </div>
+          <AssistantGraphic />
+        </div>
+      </section>
+
+      <section id="finanzen" className="mk-section">
+        <div className="mk-wrap hu-split">
+          <FinanceGraphic />
+          <div>
+            <p className="mk-kicker">Buchhaltung & Banking</p>
+            <h2>
+              Verkauft ist gut.
+              <br />
+              Sauber zugeordnet ist besser.
+            </h2>
+            <p className="mk-copy">
+              Nach dem Auftrag geht die Arbeit im Büro weiter. Partsunion verbindet Rechnungen,
+              Belege und Bankumsätze, damit du Zahlungen zuordnen und Buchungsdaten nachvollziehbar
+              vorbereiten kannst.
+            </p>
+            <div className="hu-list">
+              <div>
+                <span>01</span>
+                <div>
+                  <h3>Belege am Vorgang halten</h3>
+                  <p>
+                    Rechnungen, Gutschriften und Eingangsbelege mit Bezug zu Kunden, Lieferanten und
+                    Aufträgen bearbeiten.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <span>02</span>
+                <div>
+                  <h3>Zahlungen abgleichen</h3>
+                  <p>
+                    Bankumsätze mit offenen Belegen vergleichen, Zuordnungen bestätigen und
+                    Abweichungen prüfen.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <span>03</span>
+                <div>
+                  <h3>Die Buchhaltung vorbereiten</h3>
+                  <p>
+                    Buchungsdaten und Belege für die Übergabe zusammenstellen. Konten, Importwege
+                    und Exporte stimmen wir auf deinen Betrieb ab.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Link href="/buchhaltung-banking" className="mk-link">
+              Buchhaltung und Banking ansehen <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="retouren-mobile" className="mk-section hu-navy">
+        <div className="mk-wrap">
+          <div className="mk-section-intro">
+            <div>
+              <p className="mk-kicker">Mobile App · Retouren · Reklamationen</p>
+              <h2>
+                Auch nach dem Verkauf.
+                <br />
+                Auch abseits des Schreibtischs.
+              </h2>
+            </div>
+            <p className="mk-copy">
+              Ein Rückläufer gehört zum ursprünglichen Verkauf. Ein Foto gehört zum betroffenen
+              Artikel. Partsunion automatisiert die Bearbeitung von Retouren und Reklamationen und
+              hält Informationen dort zusammen, wo dein Team sie braucht – auch in der Mobile App.
+            </p>
+          </div>
+          <MobileReturnsGraphic />
+          <div className="mk-actions">
+            <Link href="/loesungen/retouren" className="mk-link">
+              Retouren und Reklamationen <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link href="/loesungen/haendler-app" className="mk-link">
+              Partsunion Mobile App <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mk-section mk-paper hu-audiences">
+        <div className="mk-wrap">
+          <div className="mk-section-intro">
+            <div>
+              <p className="mk-kicker">Dein Sortiment bestimmt den Ablauf</p>
+              <h2>
+                Neuteile. Gebrauchtteile.
+                <br />
+                Oder beides.
+              </h2>
+            </div>
+            <p className="mk-copy">
+              Neuware braucht Mengen, Beschaffung und Verfügbarkeit. Bei gebrauchten Teilen zählen
+              das konkrete Gebrauchtteil, Zustand und Herkunft. Partsunion verbindet beide
+              Arbeitsweisen.
+            </p>
+          </div>
+          <AudienceLinks />
+          <div className="hu-proofline">
+            <Layers3 aria-hidden="true" />
+            <p>
+              <strong>Aus dem Teilehandel entstanden.</strong> Mitgründer Elias führte selbst einen
+              Teilehandel. Aus den vielen getrennten Werkzeugen im Alltag wurde die Idee für
+              Partsunion.{' '}
+              <Link href="/about" className="mk-link">
+                Unsere Geschichte <ArrowRight aria-hidden="true" />
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mk-section">
+        <div className="mk-wrap">
+          <div className="mk-section-intro">
+            <div>
+              <p className="mk-kicker">Einführung mit Plan</p>
+              <h2>
+                Wir starten mit deinem Betrieb.
+                <br />
+                Und einem Gespräch.
+              </h2>
+            </div>
+            <div>
+              <p className="mk-copy">
+                Im Beratungsgespräch klären wir deine Abläufe, bestehende Programme und den
+                sinnvollen Einstieg. Danach weißt du, welche Funktionen, Daten und Anbindungen für
+                dich relevant sind.
+              </p>
+              <Link href="/einfuehrung" className="mk-link">
+                So läuft die Einführung ab <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <Implementation />
+          <div className="mk-actions">
+            <ConsultationLink />
+            <Link href="/pricing" className="mk-link">
+              Kosten und Leistungsumfang <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="mk-section mk-paper">
+        <div className="mk-wrap mk-faq-layout">
+          <div>
+            <p className="mk-kicker">Vor unserem Gespräch</p>
+            <h2>
+              Was du noch
+              <br />
+              wissen möchtest.
+            </h2>
+            <p className="mk-copy" style={{ marginTop: 22 }}>
+              Fragen zu deinem Betrieb klären wir persönlich. Diese Antworten helfen dir vorab bei
+              der Einordnung.
+            </p>
+          </div>
+          <FAQ />
+        </div>
+      </section>
+      <FinalCTA />
+    </div>
+  );
 }

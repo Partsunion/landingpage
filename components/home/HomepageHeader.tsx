@@ -2,224 +2,488 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import {
-    ArrowRight,
-    ArrowUpRight,
-    Bot,
-    Boxes,
-    ChevronDown,
-    Inbox,
-    Landmark,
-    Menu,
-    PackageSearch,
-    RotateCcw,
-    ScanLine,
-    ShoppingCart,
-    Smartphone,
-    X,
-    type LucideIcon,
+  ArrowRight,
+  BookOpen,
+  Boxes,
+  ChevronDown,
+  CircleHelp,
+  ClipboardList,
+  FileCheck2,
+  Landmark,
+  LayoutGrid,
+  Menu,
+  Monitor,
+  MessageCircle,
+  PackageCheck,
+  ScanLine,
+  ShoppingCart,
+  Sparkles,
+  Store,
+  Users,
+  X,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
 
-type ModuleLink = { label: string; text: string; href: string; icon: LucideIcon };
-
-const moduleGroups: Array<{ title: string; links: ModuleLink[] }> = [
-    {
-        title: 'Verkaufen',
+const navigation = [
+  {
+    id: 'plattform',
+    label: 'Plattform',
+    heading: 'Ein System. Dein ganzer Teilehandel.',
+    overview: { label: 'Plattform entdecken', href: '/plattform' },
+    columns: [
+      {
+        label: 'Automatisierung & Assistenz',
         links: [
-            { label: 'Anfrage', text: 'WhatsApp, Telefon und Theke', href: '/loesungen/anfragen-whatsapp', icon: Inbox },
-            { label: 'OE-Ermittlung', text: 'Fahrzeug und Teileprüfung', href: '/loesungen/oe-ermittlung', icon: ScanLine },
-            { label: 'Angebot & Auftrag', text: 'Vom Bedarf zum Beleg', href: '/loesungen/angebot-auftrag', icon: ShoppingCart },
+          {
+            title: 'Automatische OE-Ermittlung',
+            text: 'Fahrzeugschein auslesen. VIN decodieren.',
+            href: '/loesungen/oe-ermittlung',
+            icon: ScanLine,
+          },
+          {
+            title: 'WhatsApp-Bot',
+            text: 'Kundenanfragen strukturiert aufnehmen.',
+            href: '/whatsapp-bot',
+            icon: MessageCircle,
+          },
+          {
+            title: 'Betriebsassistent',
+            text: 'Fragen stellen. Vorgänge verstehen.',
+            href: '/betriebsassistent',
+            icon: Sparkles,
+          },
+          {
+            title: 'Partsunion Mobile App',
+            text: 'Dein System direkt an der Ware.',
+            href: '/loesungen/haendler-app',
+            icon: Monitor,
+          },
         ],
-    },
-    {
-        title: 'Ware bewegen',
+      },
+      {
+        label: 'Dein tägliches Geschäft',
         links: [
-            { label: 'Einkauf & Disposition', text: 'Fehlmengen kontrolliert decken', href: '/loesungen/einkauf-disposition', icon: PackageSearch },
-            { label: 'Bestand & Lager', text: 'Neuware und Einzelstücke', href: '/loesungen/bestand-lager', icon: Boxes },
-            { label: 'Retouren & Reklamationen', text: 'Rückgabe und Mangel sauber bearbeiten', href: '/loesungen/retouren', icon: RotateCcw },
+          {
+            title: 'Angebote & Aufträge',
+            text: 'Vom ersten Angebot bis zur Rechnung.',
+            href: '/loesungen/angebot-auftrag',
+            icon: ClipboardList,
+          },
+          {
+            title: 'Lager & Einkauf',
+            text: 'Bestände kennen. Bedarf decken.',
+            href: '/loesungen/bestand-lager',
+            icon: Boxes,
+          },
+          {
+            title: 'Kassensystem',
+            text: 'Thekenverkauf, Zahlung und Bestand.',
+            href: '/loesungen/finanzen-kasse',
+            icon: Store,
+          },
+          {
+            title: 'Retouren & Reklamationen',
+            text: 'Rückabwicklung im selben Vorgang.',
+            href: '/loesungen/retouren',
+            icon: PackageCheck,
+          },
+          {
+            title: 'Buchhaltung & Banking',
+            text: 'Belege, Buchungen und Zahlungen.',
+            href: '/buchhaltung-banking',
+            icon: Landmark,
+          },
         ],
+      },
+    ],
+    feature: {
+      eyebrow: 'Die All-in-One-Plattform für Teilehändler',
+      title: 'Ein System. Verbundene Arbeitsbereiche. Durchgängige Abläufe.',
+      text: 'Automatische OE-Ermittlung, ERP, WaWi und Kasse greifen ineinander.',
+      label: 'Die Plattform kennenlernen',
+      href: '/plattform',
+      icon: LayoutGrid,
     },
-    {
-        title: 'Betrieb führen',
+    bottom: [
+      { title: 'Alle Funktionen', href: '/features', icon: LayoutGrid },
+      { title: 'Alle Lösungen', href: '/loesungen', icon: PackageCheck },
+      { title: 'Produktansichten', href: '/live-demo', icon: Monitor },
+    ],
+  },
+  {
+    id: 'betriebe',
+    label: 'Für deinen Betrieb',
+    heading: 'Deine Ware. Deine Abläufe.',
+    overview: { label: 'Lösungen ansehen', href: '/loesungen' },
+    columns: [
+      {
+        label: 'Dein Geschäftsmodell',
         links: [
-            { label: 'Finanzen & Kasse', text: 'Rechnung, OP und Zahlung', href: '/loesungen/finanzen-kasse', icon: Landmark },
-            { label: 'Betriebsassistent', text: 'Fragen, beraten und bearbeiten', href: '/loesungen/betriebsassistent', icon: Bot },
-            { label: 'Händler-App', text: 'Codes, Fotos, Retoure und Reklamation', href: '/loesungen/haendler-app', icon: Smartphone },
+          {
+            title: 'Neuteilehandel',
+            text: 'Sortiment, Beschaffung und Verkauf verbinden.',
+            href: '/plattform/neuteile',
+            icon: ShoppingCart,
+          },
+          {
+            title: 'Gebrauchtteilehandel',
+            text: 'Gebrauchtteile, Zustände und Herkunft im Blick.',
+            href: '/plattform/gebrauchtteile',
+            icon: Store,
+          },
         ],
+      },
+      {
+        label: 'Dein Einstieg',
+        links: [
+          {
+            title: 'Einführung & Datenübernahme',
+            text: 'Den Wechsel gemeinsam vorbereiten.',
+            href: '/einfuehrung',
+            icon: PackageCheck,
+          },
+          {
+            title: 'Kosten & Umfang',
+            text: 'Was für deinen Betrieb sinnvoll ist.',
+            href: '/pricing',
+            icon: FileCheck2,
+          },
+        ],
+      },
+    ],
+    feature: {
+      eyebrow: 'Persönlich über deinen Betrieb sprechen',
+      title: 'Was soll bei dir im Alltag einfacher werden?',
+      text: 'Wir besprechen deine Abläufe und zeigen dir, wo Partsunion ansetzen kann.',
+      label: 'Beratung vereinbaren',
+      href: '/beratung',
+      icon: Users,
     },
-];
-
-const directLinks = [
-    { label: 'Praxisratgeber', href: '/blog' },
-    { label: 'Unternehmen', href: '/about' },
-];
-
-const platformLinks = [
-    { label: 'Neuteile-Plattform', text: 'Anfrage, OE, Einkauf, Lager und Finanzen', href: '/plattform/neuteile', icon: PackageSearch },
-    { label: 'Gebrauchtteile-Plattform', text: 'Einzelstücke, Preisermittlung, Inserate und eBay', href: '/plattform/gebrauchtteile', icon: Boxes },
+    bottom: [
+      { title: 'Partsunion kennenlernen', href: '/about', icon: Users },
+      { title: 'Direkter Kontakt', href: '/contact', icon: MessageCircle },
+    ],
+  },
+  {
+    id: 'wissen',
+    label: 'Wissen',
+    heading: 'Gute Entscheidungen beginnen mit Klarheit.',
+    overview: { label: 'Zum Ratgeber', href: '/blog' },
+    columns: [
+      {
+        label: 'Orientierung',
+        links: [
+          {
+            title: 'Praxisratgeber',
+            text: 'Wissen für den digitalen Teilehandel.',
+            href: '/blog',
+            icon: BookOpen,
+          },
+          {
+            title: 'Systeme vergleichen',
+            text: 'Die richtige Lösung für deinen Betrieb finden.',
+            href: '/vergleich',
+            icon: LayoutGrid,
+          },
+        ],
+      },
+      {
+        label: 'Partsunion kennenlernen',
+        links: [
+          { title: 'Über uns', text: 'Warum wir Partsunion bauen.', href: '/about', icon: Users },
+          {
+            title: 'Einführung & Zusammenarbeit',
+            text: 'Vom ersten Gespräch zum Arbeitsalltag.',
+            href: '/einfuehrung',
+            icon: CircleHelp,
+          },
+        ],
+      },
+    ],
+    feature: {
+      eyebrow: 'Vom Wissen in die Praxis',
+      title: 'Lass uns über deine nächsten Schritte sprechen.',
+      text: 'Mit deinen Fragen, deinen Abläufen und einem persönlichen Ansprechpartner.',
+      label: 'Beratung vereinbaren',
+      href: '/beratung',
+      icon: MessageCircle,
+    },
+    bottom: [
+      { title: 'Funktionen im Überblick', href: '/features', icon: LayoutGrid },
+      { title: 'Kontakt aufnehmen', href: '/contact', icon: MessageCircle },
+    ],
+  },
 ];
 
 export function HomepageHeader() {
-    const reducedMotion = useHydrationSafeReducedMotion();
-    const [productOpen, setProductOpen] = useState(false);
-    const [platformOpen, setPlatformOpen] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const pathname = usePathname();
+  const header = useRef<HTMLElement>(null);
+  const mobileTrigger = useRef<HTMLButtonElement>(null);
+  const groupTriggers = useRef<Record<string, HTMLButtonElement | null>>({});
 
-    const closeAll = () => {
-        setProductOpen(false);
-        setPlatformOpen(false);
+  const closeNavigation = () => {
+    setMobileOpen(false);
+    setActiveGroup(null);
+  };
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || (!mobileOpen && !activeGroup)) return;
+      event.preventDefault();
+      if (activeGroup) {
+        groupTriggers.current[activeGroup]?.focus();
+        setActiveGroup(null);
+      } else {
         setMobileOpen(false);
+        mobileTrigger.current?.focus();
+      }
     };
+    const onOutside = (event: PointerEvent) => {
+      if (header.current && !header.current.contains(event.target as Node)) closeNavigation();
+    };
+    const onHistory = () => closeNavigation();
+    const desktop = window.matchMedia('(min-width: 1100px)');
+    const onBreakpoint = () => closeNavigation();
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onOutside);
+    window.addEventListener('popstate', onHistory);
+    desktop.addEventListener('change', onBreakpoint);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onOutside);
+      window.removeEventListener('popstate', onHistory);
+      desktop.removeEventListener('change', onBreakpoint);
+    };
+  }, [mobileOpen, activeGroup]);
 
-    useEffect(() => {
-        const close = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') closeAll();
-        };
-        document.addEventListener('keydown', close);
-        return () => document.removeEventListener('keydown', close);
-    }, []);
-
-    useEffect(() => {
-        document.body.style.overflow = mobileOpen ? 'hidden' : '';
-        return () => { document.body.style.overflow = ''; };
-    }, [mobileOpen]);
-
-    return (
-        <header className="fixed inset-x-0 top-0 z-50 text-white">
-            <div className="border-b border-white/10 bg-[#0b1b31]/98 shadow-[0_8px_30px_rgba(4,12,25,.18)] backdrop-blur-xl">
-                <div className="mx-auto flex h-[72px] max-w-[1480px] items-center px-5 md:px-8 xl:px-10">
-                    <Link href="/" onClick={closeAll} aria-label="Partsunion Startseite" className="shrink-0">
-                        <Image src="/logo-wordmark.png" alt="Partsunion" width={426} height={126} priority className="h-7 w-auto brightness-0 invert" />
-                    </Link>
-
-                    <nav className="ml-14 hidden h-full items-center gap-1 xl:flex" aria-label="Hauptnavigation">
-                        <div
-                            className="flex h-full items-center"
-                            onBlur={(event) => {
-                                if (!event.currentTarget.contains(event.relatedTarget)) setProductOpen(false);
-                            }}
-                        >
-                            <button type="button" onClick={() => { setPlatformOpen(false); setProductOpen((open) => !open); }} className={`flex h-10 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition ${productOpen ? 'bg-white/10 text-white' : 'text-white/76 hover:bg-white/[.07] hover:text-white'}`} aria-haspopup="true" aria-expanded={productOpen}>
-                                Lösungen <ChevronDown className={`h-3.5 w-3.5 transition-transform ${productOpen ? 'rotate-180' : ''}`} />
-                            </button>
-
-                            <AnimatePresence>
-                                {productOpen && (
-                                    <motion.div
-                                        initial={reducedMotion ? false : { opacity: 0, y: -7 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={reducedMotion ? undefined : { opacity: 0, y: -5 }}
-                                        transition={{ duration: reducedMotion ? 0 : 0.18 }}
-                                        className="absolute left-1/2 top-[72px] w-[980px] max-w-[calc(100vw-64px)] -translate-x-1/2 border border-[#c9d3df] bg-white text-[#152033] shadow-[0_24px_60px_rgba(6,18,36,.22)]"
-                                    >
-                                        <div className="p-6">
-                                            <div className="mb-4 flex items-center justify-between border-b border-[#d7dee7] pb-4">
-                                                <span><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#2376e5]">Lösungen</span><strong className="ml-3 text-sm font-semibold">Für den kompletten Prozess</strong></span>
-                                                <Link href="/loesungen" onClick={closeAll} className="inline-flex items-center gap-2 text-xs font-semibold text-[#155fc8]">Alle Lösungen <ArrowRight className="h-3.5 w-3.5" /></Link>
-                                            </div>
-                                            <div className="grid grid-cols-3 gap-7">
-                                                {moduleGroups.map((group) => (
-                                                    <div key={group.title}>
-                                                        <div className="mb-1 border-b border-[#d7dee7] pb-2.5 text-[10px] font-bold uppercase tracking-[.14em] text-[#778191]">{group.title}</div>
-                                                        {group.links.map((item) => {
-                                                            const Icon = item.icon;
-                                                            return (
-                                                                <Link key={item.label} href={item.href} onClick={closeAll} className="group -mx-2 flex items-center gap-3 border-b border-[#edf0f4] px-2 py-3 transition last:border-b-0 hover:bg-[#f5f8fc]">
-                                                                    <span className="flex h-8 w-8 shrink-0 items-center justify-center border-l-2 border-[#78a9ea] text-[#1c6ed8] transition group-hover:border-[#1d6fe8] group-hover:bg-[#edf4fd]"><Icon className="h-4 w-4" /></span>
-                                                                    <span><strong className="block text-sm font-semibold">{item.label}</strong><span className="mt-0.5 block text-[11px] text-[#7a8492]">{item.text}</span></span>
-                                                                </Link>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-
-                        <div
-                            className="flex h-full items-center"
-                            onBlur={(event) => {
-                                if (!event.currentTarget.contains(event.relatedTarget)) setPlatformOpen(false);
-                            }}
-                        >
-                            <button type="button" onClick={() => { setProductOpen(false); setPlatformOpen((open) => !open); }} className={`flex h-10 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition ${platformOpen ? 'bg-white/10 text-white' : 'text-white/76 hover:bg-white/[.07] hover:text-white'}`} aria-haspopup="true" aria-expanded={platformOpen}>
-                                Plattformen <ChevronDown className={`h-3.5 w-3.5 transition-transform ${platformOpen ? 'rotate-180' : ''}`} />
-                            </button>
-                            <AnimatePresence>
-                                {platformOpen && (
-                                    <motion.div
-                                        initial={reducedMotion ? false : { opacity: 0, y: -7 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={reducedMotion ? undefined : { opacity: 0, y: -5 }}
-                                        transition={{ duration: reducedMotion ? 0 : 0.18 }}
-                                        className="absolute left-1/2 top-[72px] w-[760px] max-w-[calc(100vw-64px)] -translate-x-1/2 border border-[#c9d3df] bg-white p-6 text-[#152033] shadow-[0_24px_60px_rgba(6,18,36,.22)]"
-                                    >
-                                        <div className="mb-4 flex items-center justify-between border-b border-[#d7dee7] pb-4"><span><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#2376e5]">Plattformen</span><strong className="ml-3 text-sm font-semibold">Zwei Teilewelten. Ein Betrieb.</strong></span><Link href="/plattform" onClick={closeAll} className="inline-flex items-center gap-2 text-xs font-semibold text-[#155fc8]">Gesamtüberblick <ArrowRight className="h-3.5 w-3.5" /></Link></div>
-                                        <div className="grid grid-cols-2 gap-4">{platformLinks.map((item) => { const Icon = item.icon; return <Link key={item.href} href={item.href} onClick={closeAll} className="group border border-[#d6dee8] bg-[#f7f9fb] p-5 transition hover:border-[#8db4e6] hover:bg-[#eef5fd]"><span className="flex h-10 w-10 items-center justify-center border border-[#afc4dc] bg-white text-[#1d6fe8]"><Icon className="h-5 w-5" /></span><strong className="mt-5 block text-base">{item.label}</strong><span className="mt-2 block text-xs leading-5 text-[#6c7889]">{item.text}</span><span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#155fc8]">Plattform ansehen <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span></Link>; })}</div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-
-                        {directLinks.map((link) => <Link key={link.label} href={link.href} onClick={closeAll} className="rounded-md px-3.5 py-2.5 text-sm font-medium text-white/72 transition hover:bg-white/[.07] hover:text-white">{link.label}</Link>)}
-                    </nav>
-
-                    <div className="ml-auto hidden items-center gap-3 md:flex">
-                        <a href="https://app.partsunion.de/auth" className="px-3 py-2 text-sm font-semibold text-white/72 transition hover:text-white">Login</a>
-                        <Link href="/beratung" onClick={closeAll} className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#2f7df0] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(22,100,218,.32)] transition hover:bg-[#428cf8]">
-                            Beratung <ArrowUpRight className="h-4 w-4" />
-                        </Link>
-                    </div>
-
-                    <Link data-mobile-consultation href="/beratung" onClick={closeAll} className="ml-auto inline-flex h-9 items-center justify-center rounded-md bg-[#2f7df0] px-3.5 text-xs font-semibold text-white md:hidden">Beratung</Link>
-                    <button type="button" onClick={() => setMobileOpen((value) => !value)} className="ml-2 flex h-10 w-10 items-center justify-center rounded-md border border-white/18 bg-white/[.04] md:ml-4 xl:hidden" aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'} aria-expanded={mobileOpen}>
-                        {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-                    </button>
-                </div>
-            </div>
-
-            <AnimatePresence>
-                {mobileOpen && (
-                    <motion.div
-                        initial={reducedMotion ? false : { opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={reducedMotion ? undefined : { opacity: 0, y: -6 }}
-                        transition={{ duration: reducedMotion ? 0 : 0.2 }}
-                        className="max-h-[calc(100vh-72px)] overflow-y-auto border-b border-[#ccd6e3] bg-white text-[#162134] shadow-[0_24px_55px_rgba(4,15,31,.28)]"
-                    >
-                        <nav className="mx-auto max-w-[760px] px-5 py-5" aria-label="Mobile Navigation">
-                            <div className="mb-3 text-[10px] font-bold uppercase tracking-[.14em] text-[#6c7787]">Plattformen</div>
-                            <div className="grid gap-2 sm:grid-cols-2">{platformLinks.map((item) => { const Icon = item.icon; return <Link key={item.href} href={item.href} onClick={closeAll} className="flex items-center gap-3 border border-[#d8e0e9] bg-[#f7f9fb] p-3"><span className="flex h-8 w-8 items-center justify-center bg-white text-[#1d6fe8]"><Icon className="h-4 w-4" /></span><span><strong className="block text-sm">{item.label}</strong><span className="mt-0.5 block text-[10px] text-[#758294]">{item.text}</span></span></Link>; })}</div>
-                            <Link href="/plattform" onClick={closeAll} className="mt-2 flex items-center justify-between py-2 text-xs font-semibold text-[#155fc8]">Beide Plattformen im Überblick <ArrowRight className="h-3.5 w-3.5" /></Link>
-                            <div className="mb-3 mt-4 border-t border-[#e1e6ed] pt-4 text-[10px] font-bold uppercase tracking-[.14em] text-[#6c7787]">Lösungen</div>
-                            {moduleGroups.map((group) => (
-                                <div key={group.title} className="border-t border-[#e1e6ed] py-4 first:border-t-0">
-                                    <div className="mb-2 text-xs font-bold text-[#1c6ed8]">{group.title}</div>
-                                    <div className="grid sm:grid-cols-2">
-                                        {group.links.map((item) => {
-                                            const Icon = item.icon;
-                                            return <Link key={item.label} href={item.href} onClick={closeAll} className="flex items-center gap-3 py-2.5 text-sm font-semibold"><Icon className="h-4 w-4 text-[#2879e8]" />{item.label}<ArrowRight className="ml-auto h-3.5 w-3.5 text-[#8d96a3]" /></Link>;
-                                        })}
-                                    </div>
-                                </div>
-                            ))}
-                            <div className="grid grid-cols-2 gap-x-6 border-t border-[#e1e6ed] py-4">
-                                {directLinks.map((link) => <Link key={link.label} href={link.href} onClick={closeAll} className="flex items-center justify-between py-2.5 text-sm font-semibold">{link.label}<ChevronDown className="h-3.5 w-3.5 -rotate-90 text-[#8d96a3]" /></Link>)}
-                            </div>
-                            <div className="grid grid-cols-2 gap-2 border-t border-[#e1e6ed] pt-4">
-                                <a href="https://app.partsunion.de/auth" className="inline-flex h-11 items-center justify-center rounded-md border border-[#cdd5df] text-sm font-semibold">Login</a>
-                                <Link href="/beratung" onClick={closeAll} className="inline-flex h-11 items-center justify-center rounded-md bg-[#1d6fe8] px-3 text-sm font-semibold text-white">Beratung</Link>
-                            </div>
-                        </nav>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </header>
+  const isCurrent = (href: string) => pathname === href;
+  const isGroupCurrent = (group: (typeof navigation)[number]) => {
+    if (group.id === 'plattform') {
+      return (
+        [
+          '/plattform',
+          '/features',
+          '/loesungen',
+          '/whatsapp-bot',
+          '/betriebsassistent',
+          '/buchhaltung-banking',
+          '/live-demo',
+        ].includes(pathname) ||
+        pathname.startsWith('/features/') ||
+        pathname.startsWith('/loesungen/')
+      );
+    }
+    if (group.id === 'betriebe') {
+      return pathname.startsWith('/plattform/') || pathname === '/einfuehrung';
+    }
+    return ['/blog', '/vergleich', '/about'].some(
+      (href) => pathname === href || pathname.startsWith(`${href}/`),
     );
+  };
+
+  return (
+    <>
+      <a href="#main-content" className="mk-skip" onClick={closeNavigation}>
+        Zum Inhalt springen
+      </a>
+      <header
+        className="mk-head mm-header"
+        ref={header}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) closeNavigation();
+        }}
+      >
+        <div className="mk-wrap mm-header-inner">
+          <Link
+            href="/"
+            className="mk-brand mm-brand"
+            aria-label="Partsunion Startseite"
+            onClick={closeNavigation}
+          >
+            <Image src="/favicon.png" width={32} height={32} alt="" priority />
+            partsunion
+          </Link>
+
+          <nav
+            id="main-navigation"
+            className={`mm-nav ${mobileOpen ? 'mm-nav-open' : ''}`}
+            aria-label="Hauptnavigation"
+          >
+            {navigation.map((group) => {
+              const expanded = activeGroup === group.id;
+              const FeaturedIcon = group.feature.icon;
+              return (
+                <div key={group.id} className="mm-group">
+                  <button
+                    ref={(element) => {
+                      groupTriggers.current[group.id] = element;
+                    }}
+                    type="button"
+                    id={`mm-trigger-${group.id}`}
+                    className={`mm-trigger ${isGroupCurrent(group) ? 'mm-current' : ''}`}
+                    aria-expanded={expanded}
+                    aria-controls={`mm-panel-${group.id}`}
+                    onClick={() => setActiveGroup(expanded ? null : group.id)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        setActiveGroup(group.id);
+                        requestAnimationFrame(() =>
+                          document
+                            .querySelector<HTMLAnchorElement>(`#mm-panel-${group.id} a`)
+                            ?.focus(),
+                        );
+                      }
+                    }}
+                  >
+                    {group.label}
+                    <ChevronDown aria-hidden="true" />
+                  </button>
+                  <div
+                    id={`mm-panel-${group.id}`}
+                    className="mm-panel"
+                    hidden={!expanded}
+                    role="region"
+                    aria-labelledby={`mm-trigger-${group.id}`}
+                  >
+                    {expanded && (
+                      <>
+                        <div className="mm-panel-top">
+                          <p>{group.heading}</p>
+                          <Link href={group.overview.href} onClick={closeNavigation}>
+                            {group.overview.label}
+                            <ArrowRight aria-hidden="true" />
+                          </Link>
+                        </div>
+                        <div className="mm-panel-grid">
+                          {group.columns.map((column) => (
+                            <div className="mm-column" key={column.label}>
+                              <p className="mm-column-label">{column.label}</p>
+                              <ul>
+                                {column.links.map((link) => {
+                                  const Icon = link.icon;
+                                  return (
+                                    <li key={link.href}>
+                                      <Link
+                                        href={link.href}
+                                        className="mm-item"
+                                        aria-current={isCurrent(link.href) ? 'page' : undefined}
+                                        onClick={closeNavigation}
+                                      >
+                                        <span className="mm-item-icon">
+                                          <Icon aria-hidden="true" />
+                                        </span>
+                                        <span>
+                                          <strong>{link.title}</strong>
+                                          <span>{link.text}</span>
+                                        </span>
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </div>
+                          ))}
+                          <Link
+                            href={group.feature.href}
+                            className="mm-feature"
+                            onClick={closeNavigation}
+                            data-track={
+                              group.feature.href === '/beratung' ? 'Consultation CTA' : undefined
+                            }
+                          >
+                            <FeaturedIcon className="mm-feature-icon" aria-hidden="true" />
+                            <span className="mm-feature-eyebrow">{group.feature.eyebrow}</span>
+                            <strong>{group.feature.title}</strong>
+                            <span className="mm-feature-description">{group.feature.text}</span>
+                            <span className="mm-feature-link">
+                              {group.feature.label}
+                              <ArrowRight aria-hidden="true" />
+                            </span>
+                          </Link>
+                        </div>
+                        <div className="mm-panel-bottom">
+                          {group.bottom.map((link) => {
+                            const Icon = link.icon;
+                            return (
+                              <Link key={link.href} href={link.href} onClick={closeNavigation}>
+                                <Icon aria-hidden="true" />
+                                {link.title}
+                                <ArrowRight aria-hidden="true" />
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            <Link
+              href="/pricing"
+              className="mm-direct-link"
+              aria-current={isCurrent('/pricing') ? 'page' : undefined}
+              onClick={closeNavigation}
+            >
+              Kosten
+            </Link>
+            <div className="mm-mobile-bottom">
+              <Link
+                href="/beratung"
+                className="mk-button"
+                onClick={closeNavigation}
+                data-track="Consultation CTA"
+              >
+                Beratung vereinbaren
+                <ArrowRight aria-hidden="true" />
+              </Link>
+              <a href="https://app.partsunion.de">
+                Zum Kundenlogin
+                <ArrowRight aria-hidden="true" />
+              </a>
+            </div>
+          </nav>
+
+          <div className="mm-actions">
+            <a href="https://app.partsunion.de" className="mm-login">
+              Anmelden
+            </a>
+            <Link
+              href="/beratung"
+              className="mk-button mm-cta"
+              aria-label="Beratung vereinbaren"
+              data-track="Consultation CTA"
+              onClick={closeNavigation}
+            >
+              <span className="mm-cta-full">Beratung vereinbaren</span>
+              <span className="mm-cta-short" aria-hidden="true">
+                Beratung
+              </span>
+              <ArrowRight aria-hidden="true" />
+            </Link>
+            <button
+              ref={mobileTrigger}
+              className="mm-mobile-trigger"
+              type="button"
+              aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'}
+              aria-expanded={mobileOpen}
+              aria-controls="main-navigation"
+              onClick={() => {
+                setMobileOpen(!mobileOpen);
+                setActiveGroup(null);
+              }}
+            >
+              {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+      </header>
+      {(mobileOpen || activeGroup) && <div className="mm-backdrop" aria-hidden="true" />}
+    </>
+  );
 }

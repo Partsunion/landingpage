@@ -1,298 +1,311 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
-import { submitLead } from '@/lib/leads';
-import { track } from '@/components/layout/Analytics';
-import { CalendarPicker } from '@/components/landing/CalendarPicker';
-import { useHydrationSafeReducedMotion } from '@/components/motion/useHydrationSafeReducedMotion';
+import Link from 'next/link';
+import { useId, useRef, useState } from 'react';
+import { ArrowRight, CalendarDays, Check, CheckCircle2, Clock3, Mail } from 'lucide-react';
 import {
-    Send,
-    CheckCircle2,
-    ArrowRight,
-} from 'lucide-react';
+  bookConsultation,
+  BookingError,
+  type ConsultationResult,
+} from '@/lib/consultation-booking';
+import { validAppointment, appointmentLabel } from '@/lib/appointments';
+import { track } from '@/components/layout/Analytics';
+import { CalendarPicker } from './CalendarPicker';
 
-/**
- * FinalCTA — der Conversion-Abschluss der Seite: ein tiefblaues Panel
- * (einziger vollflächig blauer Block) mit Nutzenargumenten links und dem
- * Beratungsformular als weiße Karte rechts. Ersetzt die früheren Sektionen
- * ConsultationForm + CTA. Formular-Logik (submitLead, DSGVO-Consent,
- * CalendarPicker, Tracking) unverändert übernommen.
- */
+export function FinalCTA({
+  standalone = false,
+  source = 'beratung',
+}: {
+  standalone?: boolean;
+  source?: string;
+}) {
+  const id = useId();
+  const Heading = standalone ? 'h1' : 'h2';
+  const FormHeading = standalone ? 'h2' : 'h3';
+  const [slot, setSlot] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [bookingResult, setBookingResult] = useState<ConsultationResult | null>(null);
+  const [calendarRefresh, setCalendarRefresh] = useState(0);
+  const attempt = useRef({ id: '', fingerprint: '' });
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const started = useRef(false);
+  const sending = useRef(false);
+  const result = useRef<HTMLDivElement>(null);
+  const errorMessage = useRef<HTMLDivElement>(null);
 
-const benefits = [
-    '30 Minuten an deinem echten Arbeitsprozess',
-    'Anfrage, OE-Prüfung, Auftrag, Retoure und Reklamation durchgehen',
-    'Terminwunsch direkt im Formular auswählen',
-    'Konkrete nächste Schritte statt Standardpräsentation',
-];
+  function showError(message: string) {
+    setError(message);
+    requestAnimationFrame(() => errorMessage.current?.focus());
+  }
 
-export function FinalCTA() {
-    const reducedMotion = useHydrationSafeReducedMotion();
-    const [formState, setFormState] = useState({
-        firma: '',
-        ansprechpartner: '',
-        telefon: '',
-        email: '',
-        nachricht: '',
-        website: '',
-    });
-    const [appointmentSlot, setAppointmentSlot] = useState<string | null>(null);
-    const [consent, setConsent] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (sending.current) return;
+    const form = new FormData(event.currentTarget);
+    const get = (key: string) => String(form.get(key) || '').trim();
+    if (!slot || !validAppointment(slot)) {
+      showError('Bitte wähle einen freien Tag und eine Uhrzeit für unser Gespräch.');
+      return;
+    }
+    if (!get('consent')) {
+      showError('Bitte bestätige die Verwendung deiner Angaben für dieses Beratungsgespräch.');
+      return;
+    }
+    sending.current = true;
+    setBusy(true);
+    setError('');
+    try {
+      const details = {
+        company: get('firma'),
+        contactPerson: get('ansprechpartner'),
+        email: get('email'),
+        phone: get('telefon'),
+        notes: get('nachricht'),
+        website: get('website'),
+        consent: true,
+        slot: slot.slice(0, 16),
+      };
+      const fingerprint = JSON.stringify(details);
+      if (fingerprint !== attempt.current.fingerprint)
+        attempt.current = { id: crypto.randomUUID(), fingerprint };
+      const response = await bookConsultation({ ...details, requestId: attempt.current.id });
+      setBookingResult(response);
+      setSlot(response.appointment.start);
+      setSubmitted(true);
+      track('Lead Submitted', {
+        source,
+        page: window.location.pathname,
+        with_appointment: true,
+        intent: 'consultation',
+      });
+      requestAnimationFrame(() => result.current?.focus());
+    } catch (err) {
+      if (err instanceof BookingError && err.status === 409) {
+        setSlot(null);
+        setCalendarRefresh((n) => n + 1);
+      }
+      showError(
+        err instanceof Error
+          ? err.message
+          : 'Dein Termin konnte nicht gebucht werden. Bitte versuche es erneut.',
+      );
+      track('Lead Submit Failed', { source, page: window.location.pathname });
+    } finally {
+      sending.current = false;
+      setBusy(false);
+    }
+  }
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setError(null);
-
-        // DSGVO: explizite Einwilligung, bevor Daten das Formular verlassen.
-        if (!consent) {
-            setError('Bitte bestätige die Verarbeitung deiner Daten laut Datenschutzerklärung.');
-            setIsSubmitting(false);
-            return;
-        }
-
-        try {
-            await submitLead({
-                ...formState,
-                appointmentSlot,
-                source: 'beratung',
-                consent: true,
-            });
-            setIsSubmitted(true);
-            track('Lead Submitted', {
-                source: 'beratung',
-                with_appointment: appointmentSlot ? 'yes' : 'no',
-            });
-        } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut.';
-            setError(message);
-            track('Lead Submit Failed', { source: 'beratung' });
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-
-    const inputClass =
-        'flex h-10 w-full min-w-0 border border-[#cfd5dc] bg-white px-2.5 py-2 text-sm placeholder:text-[#8a929b] focus:outline-none focus:ring-2 focus:ring-[#1d6fe8] focus:border-transparent transition-all md:h-11 md:px-3.5';
-
-    return (
-        <section id="beratung" className="scroll-mt-36 bg-white py-12 md:py-16">
-            <div className="mx-auto max-w-[1450px] px-5 md:px-8 xl:px-10">
-                <motion.div
-                    initial={false}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: reducedMotion ? 0 : 0.6 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    className="relative overflow-hidden rounded-xl border border-[#155bc3] bg-[#1d6fe8] shadow-[0_22px_60px_rgba(29,111,232,.16)]"
-                >
-                    <div className="relative z-10 grid items-stretch lg:grid-cols-[.82fr_1.18fr]">
-                        {/* Links: Pitch */}
-                        <div className="p-6 text-white md:p-8 lg:p-9">
-                            <p className="mb-3 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-white/60 md:mb-5 md:text-[10px]">
-                                Unverbindliche Beratung
-                            </p>
-                            <h2
-                                className="mb-4 text-[32px] font-semibold leading-[1.04] tracking-[-0.045em] md:mb-6 md:text-4xl"
-                            >
-                                Zeig uns deinen echten Arbeitsprozess.
-                            </h2>
-                            <p className="mb-4 max-w-md text-sm leading-6 text-white/72 md:mb-6 md:text-lg md:leading-8">
-                                Wir schauen gemeinsam, wie Anfrage, Teileprüfung, Bestand, Beschaffung und Beleg heute in deinem Betrieb zusammenlaufen.
-                            </p>
-
-                            <ul className="mb-2 space-y-2.5 md:mb-7 md:space-y-3">
-                                {benefits.map((b, index) => (
-                                    <li key={b} className={`items-start gap-3 ${index > 1 ? 'hidden sm:flex' : 'flex'}`}>
-                                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white md:h-5 md:w-5" aria-hidden />
-                                        <span className="text-[13px] text-white/95 md:text-[15px]">{b}</span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {/* Ablauf */}
-                            <div className="hidden border-t border-white/15 pt-6 sm:block">
-                                <ol className="flex flex-col sm:flex-row gap-4 sm:gap-8">
-                                    {['Betrieb beschreiben', 'Terminwunsch wählen', 'Ablauf gemeinsam prüfen'].map((step, i) => (
-                                        <li key={step} className="flex items-center gap-2.5">
-                                            <span className="flex h-6 w-6 items-center justify-center border border-white/25 text-xs font-semibold text-white">
-                                                {i + 1}
-                                            </span>
-                                            <span className="text-sm text-white/68">{step}</span>
-                                        </li>
-                                    ))}
-                                </ol>
-                            </div>
-                        </div>
-
-                        {/* Rechts: Formular-Karte */}
-                        <div className="border-t border-white/20 bg-white p-4 md:p-7 lg:border-l lg:border-t-0 lg:p-8">
-                            {isSubmitted ? (
-                                <div className="text-center py-12">
-                                    <div className="h-14 w-14 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-5">
-                                        <CheckCircle2 className="h-7 w-7 text-success" />
-                                    </div>
-                                    <h3 className="text-xl font-semibold mb-2 text-foreground" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
-                                        Vielen Dank!
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground mb-6">
-                                            Wir haben deine Anfrage und den gewählten Terminwunsch erhalten und melden uns bei dir.
-                                    </p>
-                                    <Button
-                                        variant="outline"
-                                        onClick={() => {
-                                            setIsSubmitted(false);
-                                            setError(null);
-                                            setFormState({ firma: '', ansprechpartner: '', telefon: '', email: '', nachricht: '', website: '' });
-                                            setAppointmentSlot(null);
-                                            setConsent(false);
-                                        }}
-                                    >
-                                        Neue Anfrage
-                                    </Button>
-                                </div>
-                            ) : (
-                                <>
-                                    <h3 className="mb-4 text-lg font-semibold tracking-[-0.025em] text-[#101318] md:mb-5 md:text-xl">
-                                        Beratungstermin vereinbaren
-                                    </h3>
-                                    <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
-                                        <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-                                            <label htmlFor="cta-website">Website</label>
-                                            <input id="cta-website" type="text" name="website" value={formState.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
-                                        </div>
-                                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
-                                            <div className="space-y-1.5">
-                                                <label htmlFor="cta-firma" className="text-xs font-medium text-foreground md:text-sm">Firma *</label>
-                                                <input
-                                                    id="cta-firma"
-                                                    type="text"
-                                                    name="firma"
-                                                    value={formState.firma}
-                                                    onChange={handleChange}
-                                                    required
-                                                    placeholder="Autoteile Müller GmbH"
-                                                    className={inputClass}
-                                                />
-                                            </div>
-                                            <div className="space-y-1.5">
-                                                <label htmlFor="cta-ansprechpartner" className="text-xs font-medium text-foreground md:text-sm">Ansprechpartner *</label>
-                                                <input
-                                                    id="cta-ansprechpartner"
-                                                    type="text"
-                                                    name="ansprechpartner"
-                                                    value={formState.ansprechpartner}
-                                                    onChange={handleChange}
-                                                    required
-                                                    placeholder="Max Mustermann"
-                                                    className={inputClass}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
-                                            <div className="space-y-1.5">
-                                                <label htmlFor="cta-telefon" className="text-xs font-medium text-foreground md:text-sm">Telefon *</label>
-                                                <input
-                                                    id="cta-telefon"
-                                                    type="tel"
-                                                    name="telefon"
-                                                    value={formState.telefon}
-                                                    onChange={handleChange}
-                                                    required
-                                                    placeholder="+49 123 456789"
-                                                    className={inputClass}
-                                                />
-                                            </div>
-                                            <div className="space-y-1.5">
-                                                <label htmlFor="cta-email" className="text-xs font-medium text-foreground md:text-sm">E-Mail *</label>
-                                                <input
-                                                    id="cta-email"
-                                                    type="email"
-                                                    name="email"
-                                                    value={formState.email}
-                                                    onChange={handleChange}
-                                                    required
-                                                    placeholder="max@firma.de"
-                                                    className={inputClass}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="cta-nachricht" className="text-xs font-medium text-foreground md:text-sm">Nachricht (optional)</label>
-                                            <textarea
-                                                id="cta-nachricht"
-                                                name="nachricht"
-                                                value={formState.nachricht}
-                                                onChange={handleChange}
-                                                rows={2}
-                                                placeholder="Kurz zu deinem Betrieb und deinen Anforderungen…"
-                                                className="flex w-full resize-none border border-[#cfd5dc] bg-white px-2.5 py-2 text-sm placeholder:text-[#8a929b] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1d6fe8] transition-all md:px-3.5 md:py-2.5"
-                                            />
-                                        </div>
-
-                                        <CalendarPicker value={appointmentSlot} onChange={setAppointmentSlot} />
-
-                                        {/* DSGVO-Consent — explizites Opt-in (Art. 6 Abs. 1 lit. a) */}
-                                        <label className="flex cursor-pointer select-none items-start gap-2 text-[10px] leading-4 text-muted-foreground md:gap-2.5 md:text-xs md:leading-5">
-                                            <input
-                                                type="checkbox"
-                                                required
-                                                checked={consent}
-                                                onChange={(e) => setConsent(e.target.checked)}
-                                                className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-2 focus:ring-primary cursor-pointer"
-                                            />
-                                            <span>
-                                                Ich bin damit einverstanden, dass Partsunion meine Angaben zur Bearbeitung dieser Anfrage und für Rückfragen verwendet. Details findest du in der{' '}
-                                                <a href="/legal/datenschutz" className="text-primary hover:underline">
-                                                    Datenschutzerklärung
-                                                </a>
-                                                .
-                                            </span>
-                                        </label>
-
-                                        {error && (
-                                            <div className="border border-destructive/20 bg-destructive/10 p-3.5 text-sm text-destructive">
-                                                {error}
-                                            </div>
-                                        )}
-
-                                        <Button
-                                            type="submit"
-                                            size="lg"
-                                            className="group h-11 w-full rounded-none text-sm shadow-none disabled:cursor-not-allowed disabled:opacity-50 md:h-12 md:text-base"
-                                            disabled={isSubmitting || !consent}
-                                        >
-                                            {isSubmitting ? (
-                                                <>
-                                                    <div className="h-5 w-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-2" />
-                                                    Wird gesendet...
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <Send className="mr-2 h-4.5 w-4.5" />
-                                                    Beratung anfragen
-                                                    <ArrowRight className="ml-2 h-4.5 w-4.5 transition-transform group-hover:translate-x-1" />
-                                                </>
-                                            )}
-                                        </Button>
-                                        <p className="text-center text-[11px] text-muted-foreground">
-                                            Unverbindlich · Dein Terminwunsch wird mit der Anfrage an Partsunion übermittelt
-                                        </p>
-                                    </form>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </motion.div>
+  return (
+    <section id="beratung" className={`mk bk-section ${standalone ? 'bk-standalone' : ''}`}>
+      <div className="mk-wrap">
+        <div className="bk-shell">
+          <div className="bk-intro">
+            <p className="mk-kicker">Dein persönliches Beratungsgespräch</p>
+            <Heading>Lass uns über deinen Betrieb sprechen.</Heading>
+            <p className="bk-copy">
+              Wo verliert ihr heute Zeit? Gemeinsam schauen wir auf euren Alltag und klären, wie
+              automatische OE-Ermittlung, ERP, WhatsApp-Bot und die verbundenen Arbeitsbereiche euch
+              unterstützen können.
+            </p>
+            <div className="bk-meeting-meta">
+              <span>
+                <Clock3 aria-hidden="true" /> Ca. 30 Minuten
+              </span>
+              <span>
+                <Check aria-hidden="true" /> Unverbindlich
+              </span>
             </div>
-        </section>
-    );
+            <div className="bk-agenda">
+              <p className="bk-agenda-title">Darüber sprechen wir</p>
+              <ol>
+                <li>
+                  <span>01</span>
+                  <div>
+                    <strong>Dein Betrieb und eure Abläufe</strong>
+                    <p>
+                      Sortiment, Team, bisherige Programme und die Aufgaben, die euch aufhalten.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <span>02</span>
+                  <div>
+                    <strong>Die passenden Funktionen</strong>
+                    <p>
+                      Von Fahrzeugschein und OE-Ermittlung bis zu Kasse, Lager, Retouren und
+                      Banking.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <span>03</span>
+                  <div>
+                    <strong>Ein konkreter nächster Schritt</strong>
+                    <p>Einführung, Datenübernahme, Anbindungen und Kosten für deinen Bedarf.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+            <a className="bk-direct" href="mailto:info@partsunion.de" data-track="Contact Email">
+              <Mail aria-hidden="true" /> info@partsunion.de
+            </a>
+          </div>
+
+          <div className="mk-form bk-form">
+            {submitted ? (
+              <div ref={result} tabIndex={-1} className="mk-success bk-success" role="status">
+                <CheckCircle2 aria-hidden="true" />
+                <FormHeading>
+                  {bookingResult?.appointment.status === 'confirmed'
+                    ? 'Dein Beratungsgespräch ist gebucht.'
+                    : 'Deine Buchung wurde bereits bearbeitet.'}
+                </FormHeading>
+                <p className="bk-copy">Wir freuen uns darauf, deinen Betrieb kennenzulernen.</p>
+                {slot && (
+                  <div className="bk-confirmation">
+                    <CalendarDays aria-hidden="true" />
+                    <div>
+                      <span>Dein Gesprächstermin</span>
+                      <strong>{appointmentLabel(slot)} Uhr</strong>
+                      <span>Deutsche Ortszeit · Europe/Berlin</span>
+                    </div>
+                  </div>
+                )}
+                <p className="mk-small">
+                  {bookingResult?.confirmationEmail === 'sent'
+                    ? 'Die Bestätigung mit Datum, Uhrzeit und Kalendereintrag wurde per E-Mail versendet. Falls sie nicht ankommt, prüfe bitte auch deinen Spam-Ordner.'
+                    : 'Dein Termin ist im Kalender gespeichert. Die Bestätigungs-E-Mail konnte noch nicht sicher zugestellt werden. Bitte notiere dir den Termin; bei Fragen erreichst du uns unter info@partsunion.de.'}
+                </p>
+                <Link href="/plattform" className="mk-link">
+                  Inzwischen die Plattform ansehen <ArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            ) : (
+              <>
+                <FormHeading>Beratungsgespräch vereinbaren</FormHeading>
+                <p className="mk-small bk-form-intro">
+                  Wähle einen freien Termin. Du erhältst die Details direkt per E-Mail.
+                </p>
+                <form
+                  className="mk-form-fields bk-fields"
+                  onSubmit={handleSubmit}
+                  onFocusCapture={() => {
+                    if (!started.current) {
+                      started.current = true;
+                      track('Lead Form Started', { source, page: window.location.pathname });
+                    }
+                  }}
+                  aria-busy={busy}
+                >
+                  <div aria-hidden="true" className="bk-honeypot">
+                    <label htmlFor={`${id}-website`}>Website</label>
+                    <input id={`${id}-website`} name="website" tabIndex={-1} autoComplete="off" />
+                  </div>
+                  <fieldset className="bk-step" disabled={busy}>
+                    <legend>
+                      <span>01</span> Dein Gesprächstermin
+                    </legend>
+                    <CalendarPicker value={slot} onChange={setSlot} refresh={calendarRefresh} />
+                  </fieldset>
+                  <fieldset className="bk-step bk-details" disabled={busy}>
+                    <legend>
+                      <span>02</span> So erreichen wir dich
+                    </legend>
+                    <div className="mk-field">
+                      <label htmlFor={`${id}-firma`}>Firma *</label>
+                      <input
+                        id={`${id}-firma`}
+                        name="firma"
+                        autoComplete="organization"
+                        required
+                        maxLength={160}
+                        placeholder="Dein Unternehmen"
+                      />
+                    </div>
+                    <div className="mk-form-row">
+                      <div className="mk-field">
+                        <label htmlFor={`${id}-name`}>Dein Name *</label>
+                        <input
+                          id={`${id}-name`}
+                          name="ansprechpartner"
+                          autoComplete="name"
+                          required
+                          maxLength={120}
+                        />
+                      </div>
+                      <div className="mk-field">
+                        <label htmlFor={`${id}-email`}>E-Mail *</label>
+                        <input
+                          id={`${id}-email`}
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          required
+                          maxLength={254}
+                        />
+                      </div>
+                    </div>
+                    <details className="mk-optional">
+                      <summary>Telefon oder dein Anliegen ergänzen</summary>
+                      <div className="bk-optional-fields">
+                        <div className="mk-field">
+                          <label htmlFor={`${id}-phone`}>
+                            Telefon <span>(optional)</span>
+                          </label>
+                          <input
+                            id={`${id}-phone`}
+                            name="telefon"
+                            type="tel"
+                            autoComplete="tel"
+                            maxLength={30}
+                          />
+                        </div>
+                        <div className="mk-field">
+                          <label htmlFor={`${id}-message`}>
+                            Was möchtest du besprechen? <span>(optional)</span>
+                          </label>
+                          <textarea
+                            id={`${id}-message`}
+                            name="nachricht"
+                            maxLength={1200}
+                            rows={3}
+                            placeholder="Zum Beispiel: WhatsApp-Anfragen schneller bearbeiten oder Buchhaltung und Banking zusammenbringen …"
+                          />
+                        </div>
+                      </div>
+                    </details>
+                  </fieldset>
+                  <label className="mk-consent">
+                    <input type="checkbox" name="consent" required disabled={busy} />
+                    <span>
+                      Partsunion darf meine Angaben verwenden, um das Beratungsgespräch zu
+                      vereinbaren und Rückfragen zu klären. Weitere Informationen in der{' '}
+                      <Link href="/legal/datenschutz">Datenschutzerklärung</Link>.
+                    </span>
+                  </label>
+                  {error && (
+                    <div ref={errorMessage} tabIndex={-1} className="mk-error" role="alert">
+                      {error}{' '}
+                      <a href="mailto:info@partsunion.de" className="bk-error-link">
+                        Direkt per E-Mail schreiben
+                      </a>
+                    </div>
+                  )}
+                  <button type="submit" className="mk-button" disabled={busy}>
+                    {busy ? 'Termin wird gebucht …' : 'Beratungsgespräch buchen'}
+                    <ArrowRight aria-hidden="true" />
+                  </button>
+                  <p className="mk-small bk-submit-note">
+                    Persönliche Terminbestätigung per E-Mail.
+                  </p>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

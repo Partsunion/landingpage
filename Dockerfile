@@ -50,6 +50,7 @@ RUN rm -f ./out/_headers
 COPY --from=production-deps /app/node_modules ./node_modules
 COPY package.json ./
 COPY server.mjs ./
+COPY lib/static-segments.mjs lib/compressed-assets.mjs ./lib/
 
 EXPOSE 8080
 

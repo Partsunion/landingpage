@@ -309,7 +309,7 @@ export function OemSearchPublic() {
                                                     : result.grouping.matched === 'bundle'
                                                         ? 'Filterpaket'
                                                     : result.grouping.matched === 'single'
-                                                        ? 'Einzelteil'
+                                                        ? 'Teil'
                                                         : 'Teil'}
                                     </div>
                                 )}

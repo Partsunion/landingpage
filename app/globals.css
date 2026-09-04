@@ -94,6 +94,12 @@ html {
 
 /* Base styles */
 body {
+  /* next/font variables live on body. Keep these aliases in real CSS too:
+     Tailwind's inline theme does not emit them for plain CSS var() consumers. */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-geist-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --font-mono: var(--font-geist-mono);
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);

@@ -1,246 +1,151 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Clock, CalendarDays, Building2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { blogPosts, getPostBySlug } from '@/lib/blog-posts';
 import { getGeneratedArticle } from '@/lib/blog-articles-data';
+import { Breadcrumb, DemoLink } from '@/components/marketing/Shared';
 import { ArticleRetouren } from './articles/retouren';
 import { ArticleWhatsAppBot } from './articles/whatsapp-bot';
 import { ArticleOemErmittlung } from './articles/oem-ermittlung';
 import { ArticleRenderer } from './articles/Renderer';
-
 interface Props {
-    params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>;
 }
-
 const seoTitles: Record<string, string> = {
-    'retourenquote-autoteilhandel-senken': 'Retourenquote senken: 90-Tage-Plan für Teilehändler',
-    'whatsapp-bot-fuer-autoteilhaendler': 'WhatsApp-Bot für Autoteilehändler: Praxisleitfaden',
-    'oem-ermittlung-aus-vin-hsn-tsn': 'OE-Nummer aus VIN, HSN/TSN und Fahrzeugschein',
-    'warenwirtschaft-autoteilhandel-checkliste': 'Warenwirtschaft für Autoteilehändler: Checkliste',
-    'erp-vs-generisch-autoteilhandel': 'ERP für den Teilehandel: Branchenlösung im Vergleich',
-    'gobd-tse-kasse-autohandel': 'GoBD und TSE-Kasse im Autoteilehandel',
-    'foto-wareneingang-retoure-lager-ki': 'Foto-Wareneingang und Retouren im Autoteile-Lager',
-    'b2b-kundenportal-autoteilhandel-aufbauen': 'B2B-Kundenportal für Autoteilehändler aufbauen',
-    'e-rechnungspflicht-zugferd-xrechnung-handel': 'E-Rechnung mit ZUGFeRD und XRechnung im Handel',
-    'differenzbesteuerung-25a-gebrauchtteile': '§ 25a Differenzbesteuerung bei Gebrauchtteilen',
+  'retourenquote-autoteilhandel-senken': 'Retouren senken: 90-Tage-Plan für Teilehändler',
+  'whatsapp-bot-fuer-autoteilhaendler': 'WhatsApp-Bot im Teilehandel sinnvoll einführen',
+  'oem-ermittlung-aus-vin-hsn-tsn': 'OE-Nummer aus VIN, HSN/TSN und Fahrzeugschein',
+  'warenwirtschaft-autoteilhandel-checkliste': 'Warenwirtschaft für Autoteilehändler: Checkliste',
+  'erp-vs-generisch-autoteilhandel': 'ERP für den Teilehandel: Branchenlösung im Vergleich',
+  'gobd-tse-kasse-autohandel': 'GoBD und TSE-Kasse im Autoteilehandel',
+  'foto-wareneingang-retoure-lager-ki': 'Foto-Wareneingang und Retouren im Autoteile-Lager',
+  'b2b-kundenportal-autoteilhandel-aufbauen': 'B2B-Kundenportal für Autoteilehändler aufbauen',
+  'e-rechnungspflicht-zugferd-xrechnung-handel': 'E-Rechnung mit ZUGFeRD und XRechnung im Handel',
+  'differenzbesteuerung-25a-gebrauchtteile': '§ 25a Differenzbesteuerung bei Gebrauchtteilen',
 };
-
 export async function generateStaticParams() {
-    return blogPosts.map((p) => ({ slug: p.slug }));
+  return blogPosts.map((p) => ({ slug: p.slug }));
 }
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
-    const post = getPostBySlug(slug);
-    if (!post) return { title: 'Beitrag nicht gefunden' };
-
-    const url = `https://partsunion.de/blog/${post.slug}`;
-    const seoTitle = seoTitles[post.slug] ?? post.title;
-    return {
-        title: seoTitle,
-        description: post.description,
-        keywords: post.keywords,
-        alternates: { canonical: url },
-        openGraph: {
-            title: `${seoTitle} | Partsunion`,
-            description: post.description,
-            url,
-            type: 'article',
-            locale: 'de_DE',
-            siteName: 'Partsunion',
-            publishedTime: post.publishedAt,
-            modifiedTime: post.updatedAt,
-            authors: ['Partsunion'],
-            tags: post.keywords,
-            images: ['/opengraph-image'],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: `${seoTitle} | Partsunion`,
-            description: post.description,
-            images: ['/opengraph-image'],
-        },
-    };
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) return { title: 'Beitrag nicht gefunden' };
+  const title = seoTitles[slug] || post.title;
+  return {
+    title,
+    description: post.description,
+    alternates: { canonical: `https://partsunion.de/blog/${slug}` },
+    openGraph: {
+      title,
+      description: post.description,
+      url: `https://partsunion.de/blog/${slug}`,
+      type: 'article',
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      authors: ['Partsunion'],
+    },
+  };
 }
-
-const ARTICLES: Record<string, React.ReactNode> = {
-    'retourenquote-autoteilhandel-senken': <ArticleRetouren />,
-    'whatsapp-bot-fuer-autoteilhaendler': <ArticleWhatsAppBot />,
-    'oem-ermittlung-aus-vin-hsn-tsn': <ArticleOemErmittlung />,
+const articles: Record<string, React.ReactNode> = {
+  'retourenquote-autoteilhandel-senken': <ArticleRetouren />,
+  'whatsapp-bot-fuer-autoteilhaendler': <ArticleWhatsAppBot />,
+  'oem-ermittlung-aus-vin-hsn-tsn': <ArticleOemErmittlung />,
 };
-
 export default async function BlogPostPage({ params }: Props) {
-    const { slug } = await params;
-    const post = getPostBySlug(slug);
-    if (!post) notFound();
-
-    const generated = getGeneratedArticle(slug);
-    const body = ARTICLES[slug] ?? (generated ? <ArticleRenderer blocks={generated.blocks} faqs={generated.faqs} /> : null);
-    if (!body) notFound();
-
-    const breadcrumbLd = {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Start', item: 'https://partsunion.de/' },
-            { '@type': 'ListItem', position: 2, name: 'Praxisratgeber', item: 'https://partsunion.de/blog' },
-            { '@type': 'ListItem', position: 3, name: post.title, item: `https://partsunion.de/blog/${post.slug}` },
-        ],
-    };
-
-    const articleLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: post.title,
-        description: post.description,
-        url: `https://partsunion.de/blog/${post.slug}`,
-        datePublished: post.publishedAt,
-        dateModified: post.updatedAt,
-        wordCount: post.readingMinutes * 200,
-        timeRequired: `PT${post.readingMinutes}M`,
-        keywords: post.keywords.join(', '),
-        inLanguage: 'de-DE',
-        author: { '@id': 'https://partsunion.de/#organization' },
-        publisher: { '@id': 'https://partsunion.de/#organization' },
-        image: 'https://partsunion.de/opengraph-image',
-        articleSection: post.category,
-        isPartOf: { '@id': 'https://partsunion.de/#website' },
-        mainEntityOfPage: { '@type': 'WebPage', '@id': `https://partsunion.de/blog/${post.slug}` },
-    };
-
-    // Related posts — exclude current
-    const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
-
-    return (
-        <div className="pt-24 pb-20">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) notFound();
+  const generated = getGeneratedArticle(slug);
+  const body =
+    articles[slug] ||
+    (generated ? <ArticleRenderer blocks={generated.blocks} faqs={generated.faqs} /> : null);
+  if (!body) notFound();
+  const related = blogPosts
+    .filter((p) => p.slug !== slug)
+    .sort((a, b) => Number(b.category === post.category) - Number(a.category === post.category))
+    .slice(0, 3);
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    author: { '@id': 'https://partsunion.de/#organization' },
+    publisher: { '@id': 'https://partsunion.de/#organization' },
+    image: 'https://partsunion.de/opengraph-image',
+    inLanguage: 'de-DE',
+    mainEntityOfPage: `https://partsunion.de/blog/${slug}`,
+  };
+  return (
+    <div className="mk">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <article>
+        <header className="mk-page-hero">
+          <div className="mk-wrap">
+            <Breadcrumb
+              items={[{ label: 'Praxisratgeber', href: '/blog' }, { label: post.category }]}
             />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-            />
-
-            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center_top,rgba(29,111,232,0.08),transparent_55%)] -z-10" />
-            <div className="fixed inset-0 grid-pattern opacity-15 -z-10" />
-
-            <article className="container mx-auto px-4 md:px-6">
-                {/* Breadcrumb */}
-                <nav aria-label="Brotkrumen" className="mb-8 max-w-3xl mx-auto">
-                    <Link
-                        href="/blog"
-                        className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
-                    >
-                        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-                        Alle Ratgeber
-                    </Link>
-                </nav>
-
-                {/* Header */}
-                <header className="max-w-3xl mx-auto mb-12">
-                    <div className="flex items-center gap-3 mb-5 text-xs text-muted-foreground">
-                        <span className="font-medium uppercase tracking-[0.14em] text-primary/80">
-                            {post.category}
-                        </span>
-                        <span>·</span>
-                        <span className="inline-flex items-center gap-1">
-                            <CalendarDays className="h-3 w-3" />
-                            <time dateTime={post.publishedAt}>
-                                {new Date(post.publishedAt).toLocaleDateString('de-DE', {
-                                    day: 'numeric', month: 'long', year: 'numeric',
-                                })}
-                            </time>
-                        </span>
-                        <span>·</span>
-                        <span className="inline-flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            {post.readingMinutes} min
-                        </span>
-                    </div>
-                    <h1
-                        className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-5 text-foreground"
-                        style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', lineHeight: 1.1 }}
-                    >
-                        {post.title}
-                    </h1>
-                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                        {post.excerpt}
-                    </p>
-                    <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-4 text-xs text-muted-foreground">
-                        <Link href="/about" rel="author" className="inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary">
-                            <Building2 className="h-3.5 w-3.5" />
-                            Von Partsunion
-                        </Link>
-                        <span aria-hidden="true">·</span>
-                        <span>Praxisratgeber für den Autoteilehandel</span>
-                        {post.updatedAt !== post.publishedAt && (
-                            <>
-                                <span aria-hidden="true">·</span>
-                                <span>
-                                    Aktualisiert am{' '}
-                                    <time dateTime={post.updatedAt}>
-                                        {new Date(post.updatedAt).toLocaleDateString('de-DE', {
-                                            day: 'numeric', month: 'long', year: 'numeric',
-                                        })}
-                                    </time>
-                                </span>
-                            </>
-                        )}
-                    </div>
-                </header>
-
-                {/* Body */}
-                <div className="max-w-3xl mx-auto blog-content">
-                    {body}
-                </div>
-
-                {/* Closing CTA */}
-                <section className="max-w-3xl mx-auto mt-16 rounded-2xl border border-primary/30 bg-primary/[0.04] p-6 md:p-8 text-center">
-                    <h2
-                        className="text-xl md:text-2xl font-semibold mb-3"
-                        style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
-                    >
-                        Sehen Sie das live an Ihren Daten.
-                    </h2>
-                    <p className="text-sm md:text-base text-muted-foreground mb-5">
-                        30 Minuten Beratungstermin — wir rechnen Ihr Einsparpotenzial mit echten Zahlen durch.
-                    </p>
-                    <Link
-                        href="/#beratung"
-                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg gradient-primary text-primary-foreground text-sm font-medium shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:opacity-95 transition-opacity group"
-                    >
-                        Beratungstermin sichern
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
-                </section>
-
-                {/* Related */}
-                {related.length > 0 && (
-                    <section className="max-w-3xl mx-auto mt-16">
-                        <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground mb-5 text-center">
-                            Weiterlesen
-                        </h2>
-                        <div className="grid sm:grid-cols-2 gap-4">
-                            {related.map((r) => (
-                                <Link
-                                    key={r.slug}
-                                    href={`/blog/${r.slug}`}
-                                    className="group block rounded-xl border border-border bg-card shadow-[var(--shadow-card)] p-5 hover:border-border-hover transition-colors"
-                                >
-                                    <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-primary/80 mb-2 block">
-                                        {r.category}
-                                    </span>
-                                    <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
-                                        {r.title}
-                                    </h3>
-                                </Link>
-                            ))}
-                        </div>
-                    </section>
-                )}
-            </article>
+            <p className="mk-kicker">
+              {post.category} · {post.readingMinutes} Minuten Lesezeit
+            </p>
+            <h1>{post.title}</h1>
+            <p className="mk-copy">{post.excerpt}</p>
+            <div
+              className="mk-small"
+              style={{ marginTop: 26, display: 'flex', flexWrap: 'wrap', gap: 16 }}
+            >
+              <Link href="/about" rel="author" style={{ textDecoration: 'underline' }}>
+                Redaktion Partsunion
+              </Link>
+              <span>
+                Aktualisiert am{' '}
+                <time dateTime={post.updatedAt}>
+                  {new Intl.DateTimeFormat('de-DE', { dateStyle: 'long' }).format(
+                    new Date(post.updatedAt),
+                  )}
+                </time>
+              </span>
+            </div>
+          </div>
+        </header>
+        <div className="mk-section">
+          <div className="mk-wrap" style={{ maxWidth: 800 }}>
+            <div className="blog-content">{body}</div>
+            <div className="mk-callout" style={{ marginTop: 50 }}>
+              <h2 style={{ fontSize: 28 }}>Wie sieht das in deinem Betrieb aus?</h2>
+              <p>
+                Bring einen konkreten Fall ins Beratungsgespräch mit. Wir zeigen dir den passenden
+                Ablauf und klären die Voraussetzungen für die Einführung.
+              </p>
+              <div className="mk-actions">
+                <DemoLink />
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      </article>
+      <section className="mk-section mk-paper">
+        <div className="mk-wrap">
+          <p className="mk-kicker">Weitere Arbeitshilfen</p>
+          <h2 style={{ marginBottom: 32 }}>Das könnte dich auch interessieren.</h2>
+          <div className="mk-directory">
+            {related.map((item) => (
+              <Link key={item.slug} href={`/blog/${item.slug}`}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.excerpt}</p>
+                </div>
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

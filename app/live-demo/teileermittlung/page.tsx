@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function TeileermittlungDemoPage() {
     return (
-        <main className="relative min-h-screen pt-32 pb-20 px-4 overflow-hidden">
+        <div className="relative min-h-screen pt-32 pb-20 px-4 overflow-hidden">
             <div className="absolute inset-0 grid-pattern opacity-40" />
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] gradient-glow opacity-30 blur-3xl pointer-events-none" />
             <div className="relative z-10">
@@ -42,6 +42,6 @@ export default function TeileermittlungDemoPage() {
                 </div>
                 <OemSearchPublic />
             </div>
-        </main>
+        </div>
     );
 }

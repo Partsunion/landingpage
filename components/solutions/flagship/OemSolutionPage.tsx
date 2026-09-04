@@ -73,7 +73,7 @@ export function OemSolutionPage({ page }: { page: SolutionPageData }) {
                 primaryLabel="OE-Ermittlung live ansehen"
                 secondaryLabel="Prüfkette ansehen"
                 secondaryHref="#pruefkette"
-                proofItems={[{ title: '56 Marken', text: 'Fahrzeugdatenbank als Ausgangspunkt' }, { title: 'Automatische Prüfkette', text: 'von Fahrzeug bis Artikel' }, { title: 'Gezielte Rückfragen', text: 'nur bei fehlenden Angaben' }]}
+                proofItems={[{ title: '56 Marken', text: 'mit Nutzungsrechten für Fahrzeug- und Teileidentifikation' }, { title: '80 % der weltweiten VINs', text: 'decodierbar; OE-Zuordnung abhängig von Datenlage' }, { title: 'Gezielte Rückfragen', text: 'nur bei fehlenden Angaben' }]}
             >
                 <ResolverCanvas active={active} setActive={setActive} />
             </SolutionHero>

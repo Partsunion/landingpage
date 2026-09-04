@@ -635,20 +635,20 @@ export function LiveDemoChat() {
                             Demo abgeschlossen.
                         </h2>
                         <p className="text-muted-foreground text-sm mb-2 leading-relaxed">
-                            Sie haben gesehen, wie unsere KI in unter 8&nbsp;Sekunden das richtige Teil findet.
+                            Du hast die Teileermittlung an einem Beispiel kennengelernt.
                         </p>
                         <p className="text-foreground/90 text-sm mb-7 leading-relaxed font-medium">
-                            Lassen Sie uns 30&nbsp;Minuten darüber sprechen, wie das in Ihrem Betrieb läuft.
+                            Lass uns darüber sprechen, wie der passende Ablauf in deinem Betrieb aussieht.
                         </p>
                         <a
-                            href={`/#beratung?source=demo${partQuery ? `&part=${encodeURIComponent(partQuery)}` : ''}`}
+                            href="/beratung"
                             className="inline-flex items-center justify-center gap-2 w-full h-12 px-6 rounded-lg gradient-primary text-primary-foreground text-base font-medium shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:brightness-95 transition-all group"
                         >
-                            Beratungstermin sichern
+                            Beratungsgespräch vereinbaren
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                         </a>
                         <p className="mt-4 text-[11px] text-muted-foreground">
-                            Eine Demo-Anfrage pro Gerät · Unverbindlich
+                            Persönliches Gespräch · ca. 30 Minuten · unverbindlich
                         </p>
                     </div>
                 </div>
