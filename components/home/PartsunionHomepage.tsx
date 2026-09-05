@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Check,
   FileText,
-  Layers3,
   MessageCircle,
   PackageSearch,
   ShoppingCart,
@@ -88,8 +87,8 @@ const modules = [
   },
   {
     icon: Users,
-    title: 'Gemeinsam weiterarbeiten',
-    text: 'Kunden, Nachrichten, Aufgaben und Vorgänge zusammenführen. Damit die nächste Person mit dem vorhandenen Wissen übernimmt.',
+    title: 'Betriebsassistent & dynamische Maskenöffnung',
+    text: 'Der Assistent kennt die verbundenen Betriebsdaten, beantwortet Fragen und öffnet dynamisch die passende Maske für den nächsten Arbeitsschritt.',
     href: '/betriebsassistent',
     link: 'Den Betrieb im Blick behalten',
   },
@@ -258,6 +257,9 @@ export function PartsunionHomepage() {
             <Link href="/features" className="mk-link">
               Alle Funktionen im Detail <ArrowRight aria-hidden="true" />
             </Link>
+            <Link href="/automatisierung-autoteilehandel" className="mk-link">
+              Automatisierung im Autoteilehandel <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
@@ -276,8 +278,8 @@ export function PartsunionHomepage() {
               </h2>
               <p className="mk-copy">
                 Ein Foto vom Fahrzeugschein, eine Sprachnachricht, „habt ihr das Teil?“: So beginnt
-                euer Alltag. Der Partsunion-Bot hilft, daraus die Angaben zu machen, mit denen dein
-                Team tatsächlich arbeiten kann.
+                euer Alltag. Der Partsunion-Bot beantwortet Anfragen automatisch und macht daraus
+                einen vollständigen Vorgang, mit dem dein Team direkt weiterarbeiten kann.
               </p>
               <Link href="/whatsapp-bot" className="mk-link">
                 Den WhatsApp-Bot kennenlernen <ArrowRight aria-hidden="true" />
@@ -287,11 +289,11 @@ export function PartsunionHomepage() {
               <div>
                 <span>01</span>
                 <div>
-                  <h3>Bedarf aufnehmen und Angaben klären</h3>
+                  <h3>Anfragen automatisch beantworten</h3>
                   <p>
                     Der Kunde schreibt im vertrauten Chat. Fahrzeug, gesuchtes Teil und mitgesendete
-                    Medien werden in der Anfrage zusammengeführt. Fehlende Angaben werden
-                    nachgefragt.
+                    Medien werden in der Anfrage zusammengeführt. Der Bot klärt fehlende Angaben
+                    und antwortet automatisch.
                   </p>
                 </div>
               </div>
@@ -310,12 +312,11 @@ export function PartsunionHomepage() {
               <div>
                 <span>03</span>
                 <div>
-                  <h3>Übernehmen, ohne von vorn anzufangen</h3>
+                  <h3>Angebot senden und direkt bezahlen lassen</h3>
                   <p>
-                    Dein Team sieht Nachricht, Fahrzeugdaten und Bearbeitungsstand gemeinsam. Wenn
-                    fachliche Erfahrung gefragt ist, übernimmt ein Mensch mit dem vorhandenen
-                    Kontext. Mit eingerichteten Anbindungen kann die geprüfte Anfrage bis zur
-                    Angebotsauswahl im WhatsApp-Dialog weitergehen.
+                    Artikel, Preis, Verfügbarkeit und Liefertermin gehen automatisch zurück in den
+                    Chat. Partsunion erstellt das Angebot, der Kunde kann direkt bezahlen und
+                    bestellen. Danach laufen Auftrag und weitere Bearbeitung im System weiter.
                   </p>
                 </div>
               </div>
@@ -340,27 +341,28 @@ export function PartsunionHomepage() {
               Der Betriebsassistent findet den Zusammenhang.
             </h2>
             <p className="mk-copy">
-              Welche Aufträge hängen? Wo fehlt Ware? Was braucht als Nächstes Aufmerksamkeit? Stelle
-              deine Frage in normalen Worten und arbeite mit den passenden Vorgängen weiter.
+              Er kennt Artikel, Bestände, Kunden, Fahrzeuge, Aufträge, Einkauf, Retouren, Umsätze,
+              Forderungen und Aufgaben. Stelle deine Frage in normalen Worten und erhalte die
+              Antwort aus dem gesamten verbundenen Betriebswissen.
             </p>
             <div className="hu-list">
               <div>
                 <span>01</span>
                 <div>
-                  <h3>Überblick aus deinen Betriebsdaten</h3>
+                  <h3>Das gesamte Betriebswissen im Zusammenhang</h3>
                   <p>
-                    Aufträge, Kunden und Bestände im Zusammenhang finden. Mit Verweisen zu den
-                    zugrunde liegenden Vorgängen.
+                    Der Assistent findet Zusammenhänge über alle verbundenen Arbeitsbereiche und
+                    führt dich direkt zu den zugrunde liegenden Vorgängen.
                   </p>
                 </div>
               </div>
               <div>
                 <span>02</span>
                 <div>
-                  <h3>Vom Ergebnis zum nächsten Schritt</h3>
+                  <h3>Dynamisch zur richtigen Maske und Aktion</h3>
                   <p>
-                    Informationen nachschlagen und mögliche Aktionen vorbereiten. Dein Team prüft
-                    den Vorschlag und entscheidet über die Ausführung.
+                    Er öffnet passend zur Frage die benötigte Maske, priorisiert den nächsten
+                    Schritt und bereitet die Bearbeitung direkt im richtigen Vorgang vor.
                   </p>
                 </div>
               </div>
@@ -480,17 +482,6 @@ export function PartsunionHomepage() {
             </p>
           </div>
           <AudienceLinks />
-          <div className="hu-proofline">
-            <Layers3 aria-hidden="true" />
-            <p>
-              <strong>Aus dem Teilehandel entstanden.</strong> Mitgründer Elias führte selbst einen
-              Teilehandel. Aus den vielen getrennten Werkzeugen im Alltag wurde die Idee für
-              Partsunion.{' '}
-              <Link href="/about" className="mk-link">
-                Unsere Geschichte <ArrowRight aria-hidden="true" />
-              </Link>
-            </p>
-          </div>
         </div>
       </section>
 

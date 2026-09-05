@@ -53,7 +53,7 @@ export const topicPages: Record<TopicSlug, TopicPageData> = {
       },
       {
         title: 'Im Verkauf weiterarbeiten',
-        text: 'Die geprüfte Anfrage wird zur Grundlage für Angebot und Auftrag. Mit eingerichteten Anbindungen kann sie bis zur Angebotsauswahl im WhatsApp-Dialog weitergehen. Teileauswahl, Preis und Verfügbarkeit gehören zum selben Ablauf. Dein Team arbeitet mit dem Vorgang weiter, statt den Chat in ein zweites System abzutippen.',
+        text: 'Die geprüfte Anfrage wird zur Grundlage für Angebot und Auftrag. Artikel, Preis, Verfügbarkeit und Liefertermin werden automatisch beantwortet. Der Kunde erhält sein Angebot im WhatsApp-Dialog, kann direkt bezahlen und bestellen. Danach laufen Auftrag und weitere Bearbeitung ohne Neuerfassung im Partsunion-System weiter.',
       },
     ],
     featureTitle: 'Ein Bot, der deinen Teileablauf versteht.',
@@ -70,7 +70,7 @@ export const topicPages: Record<TopicSlug, TopicPageData> = {
       },
       {
         title: 'Anfrage und Warenwirtschaft verbunden',
-        text: 'Der Bot ist Teil des Partsunion-Ablaufs. Aus der aufgenommenen Anfrage führt der Weg zur OE-Ermittlung, zum Bestand und in den Verkauf. Die genaue Automatisierung richten wir passend zu deinem Sortiment und deinen Anbindungen ein. Bei fachlich offenen Fragen bleibt die Entscheidung bei deinem Team.',
+        text: 'Der Bot ist Teil des Partsunion-Ablaufs. Aus der aufgenommenen Anfrage führt der Weg zur OE-Ermittlung, zu Bestand und Liefertermin, zum Angebot, zur direkten Zahlung und in den Verkauf. Die genaue Automatisierung richten wir passend zu deinem Sortiment und deinen Anbindungen ein. Bei fachlich offenen Fragen übernimmt dein Team mit dem vollständigen Kontext.',
       },
     ],
     screenshot: 'whatsapp-dialog',
@@ -107,22 +107,22 @@ export const topicPages: Record<TopicSlug, TopicPageData> = {
       'Partsunion Betriebsassistent: Aufträge, Bestand, Angebote und offene Posten im Zusammenhang prüfen. Aktionen vorbereiten und kontrolliert freigeben.',
     eyebrow: 'Der Betriebsassistent in Partsunion',
     intro:
-      'Welche Aufträge können raus? Wo fehlt Ware? Welche Angebote sind offen? Der Betriebsassistent verbindet deine Frage mit den freigegebenen Betriebsdaten und bereitet den nächsten Arbeitsschritt vor.',
+      'Welche Aufträge können raus? Wo fehlt Ware? Welche Angebote sind offen? Der Betriebsassistent kennt alle in Partsunion verbundenen Betriebsdaten, beantwortet deine Frage im vollständigen Zusammenhang und bereitet den nächsten Arbeitsschritt vor.',
     workflowTitle: 'Von einer Frage zu einer Handlung.',
     workflowIntro:
       'Du musst zuerst wissen, was los ist. Danach braucht es den richtigen Vorgang und einen konkreten nächsten Schritt. Der Assistent verbindet diese Arbeit miteinander.',
     steps: [
       {
         title: 'Im Zusammenhang fragen',
-        text: 'Stelle eine Frage zu deinem Arbeitstag oder zum geöffneten Auftrag. Der Assistent berücksichtigt den unterstützten Seitenkontext. So kannst du direkt nach Status, Bestand oder nächsten Schritten fragen, während du den Vorgang bearbeitest.',
+        text: 'Stelle eine Frage zu deinem Arbeitstag oder zum geöffneten Auftrag. Der Assistent verbindet sie mit deinem Betriebs- und Vorgangskontext. So kannst du direkt nach Status, Bestand oder nächsten Schritten fragen, während du den Vorgang bearbeitest.',
       },
       {
         title: 'Freigegebene Daten prüfen',
         text: 'Der Assistent sucht in den Bereichen, auf die du zugreifen darfst. Angebote, Aufträge, Bestand oder offene Posten liefern den Zusammenhang. Die Antwort führt zu den betreffenden Vorgängen, damit du die Grundlage nachvollziehen kannst.',
       },
       {
-        title: 'Die Bearbeitung vorbereiten',
-        text: 'Aus dem Ergebnis kann ein konkreter Vorschlag entstehen: zum Beispiel ein Bestellentwurf für Rückstände, eine Pickliste oder eine Aufgabe. Du siehst, welchen Schritt der Assistent vorbereitet und welche Angaben dafür verwendet werden.',
+        title: 'Die richtige Maske dynamisch öffnen',
+        text: 'Aus dem Ergebnis entsteht ein konkreter nächster Schritt. Der Assistent öffnet dynamisch die passende Maske im richtigen Vorgang und kann dort zum Beispiel einen Bestellentwurf, eine Pickliste, ein Angebot oder eine Aufgabe vorbereiten.',
       },
       {
         title: 'Prüfen und freigeben',
@@ -250,29 +250,29 @@ export const topicPages: Record<TopicSlug, TopicPageData> = {
     label: 'Einführung & Datenübernahme',
     title: 'Ein klarer Weg vom bisherigen System zu Partsunion.',
     description:
-      'Partsunion einführen: Abläufe abstimmen, Datenübernahme prüfen, Team schulen und mit einem festgelegten Bereich starten. Beratungstermin vereinbaren.',
+      'Partsunion vollständig einführen: Prozessketten abstimmen, Daten und Anbindungen vorbereiten, Team schulen und den Betrieb koordiniert umstellen.',
     eyebrow: 'Einführung und Datenübernahme',
     intro:
-      'Dein Tagesgeschäft läuft weiter. Deshalb planen wir gemeinsam, mit welchen Abläufen du startest, welche Daten gebraucht werden und wie dein Team damit arbeiten wird.',
+      'Weil die Arbeitsbereiche in Partsunion ineinandergreifen, empfehlen wir die gemeinsame Umstellung der vollständigen Prozesskette. Dafür planen wir Daten, Anbindungen, Zuständigkeiten, Schulung und den Umstellungstermin zusammen mit deinem Team.',
     workflowTitle: 'Der Start bekommt einen konkreten Plan.',
     workflowIntro:
-      'Die richtige Reihenfolge hängt von deinem Betrieb ab. Ein überschaubarer erster Bereich macht Zuständigkeiten, Daten und offene Fragen greifbar.',
+      'Ein koordinierter Wechsel sorgt dafür, dass Anfrage, OE-Ermittlung, Verkauf, Einkauf, Lager, Kasse und Belege vom ersten Tag an mit denselben Daten arbeiten.',
     steps: [
       {
         title: 'Ablauf und Ziel festlegen',
-        text: 'Im Beratungsgespräch gehen wir einen typischen Vorgang durch: vom Eingang der Anfrage bis zum Verkauf oder Zahlungseingang. Wir klären, welche Bereiche zuerst gebraucht werden und woran du einen funktionierenden Start erkennst.',
+        text: 'Im Beratungsgespräch gehen wir deine vollständige Prozesskette durch: vom Eingang der Anfrage über Verkauf und Beschaffung bis zu Zahlung, Belegen und Rückabwicklung. Daraus entsteht der konkrete Einführungsumfang.',
       },
       {
         title: 'Daten und Anbindungen prüfen',
-        text: 'Ein Beispielexport zeigt, welche Kunden-, Artikel- und Bestandsdaten vorhanden sind. Gemeinsam prüfen wir Felder, Dubletten und Besonderheiten. Lieferanten, Kataloge, WhatsApp und Finanzanbindungen werden nach dem vereinbarten Umfang vorbereitet.',
+        text: 'Ein Beispielexport zeigt, welche Kunden-, Artikel- und Bestandsdaten vorhanden sind. Gemeinsam prüfen wir Felder, Dubletten und Besonderheiten. Lieferanten, Kataloge, WhatsApp und Finanzanbindungen werden für den gemeinsamen Start vorbereitet.',
       },
       {
         title: 'Mit dem Team durchspielen',
         text: 'Die Mitarbeiter üben die vorgesehenen Abläufe mit passenden Beispielen. Dazu gehören auch Rückfragen, Fehlmengen, Retouren und Zuständigkeitswechsel. Rollen und Freigaben werden so eingerichtet, dass jeder seine Arbeit ausführen kann.',
       },
       {
-        title: 'Starten und gezielt erweitern',
-        text: 'Vor dem Wechsel stimmen wir offene Punkte, Datenstand und Verantwortliche ab. Der vereinbarte Bereich geht zuerst in Nutzung. Weitere Funktionen folgen, sobald die Voraussetzungen geklärt und die nächsten Schritte gemeinsam festgelegt sind.',
+        title: 'Gemeinsam produktiv starten',
+        text: 'Vor dem Wechsel stimmen wir offene Punkte, Datenstand, Verantwortliche und den Umschaltzeitpunkt ab. Die verbundenen Arbeitsbereiche gehen gemeinsam in Nutzung, damit dein Team ohne doppelte Datenpflege im neuen System arbeitet.',
       },
     ],
     featureTitle: 'Die Einführung beginnt bei deinem Alltag.',
@@ -284,8 +284,8 @@ export const topicPages: Record<TopicSlug, TopicPageData> = {
         text: 'Ein bestehender Datenbestand ist selten schon perfekt sortiert. Artikelnummern, Kundenfelder, Lagerorte und Dubletten müssen zuerst verständlich sein. An einem Auszug prüfen wir, was direkt übernommen werden kann und welche Bereinigung sinnvoll ist. Auch der Umgang mit alten Belegen und offenen Vorgängen wird ausdrücklich abgestimmt.',
       },
       {
-        title: 'Ein sinnvoller erster Umfang',
-        text: 'Du musst nicht jeden Bereich gleichzeitig umstellen. Ein möglicher Einstieg ist die Verbindung aus Teileanfragen und Verkauf. Ein anderer Betrieb beginnt mit Bestand und Gebrauchtteilen. Entscheidend sind deine Engpässe und die Abhängigkeiten zwischen den Abläufen. Der vereinbarte Umfang bildet die Grundlage für Einrichtung, Schulung und Angebot.',
+        title: 'Ein vollständiger, abgestimmter Umstieg',
+        text: 'Wir empfehlen, die zusammenhängenden Arbeitsbereiche gemeinsam umzustellen. So entstehen keine neuen Inseln zwischen Anfrage, OE-Ermittlung, Verkauf, Einkauf, Lager, Kasse und Belegen. Der abgestimmte Gesamtumfang bildet die Grundlage für Einrichtung, Schulung und Angebot.',
       },
       {
         title: 'Das Team arbeitet den Ablauf durch',
@@ -303,7 +303,7 @@ export const topicPages: Record<TopicSlug, TopicPageData> = {
       {
         question: 'Wie lange dauert die Einführung?',
         answer:
-          'Das hängt vom vereinbarten Umfang, der Datenqualität und den benötigten Anbindungen ab. Nach der ersten Prüfung stimmen wir einen konkreten Plan ab. Einzelne Bereiche können sich leichter starten lassen als ein vollständiger Wechsel aller Abläufe.',
+          'Das hängt vom vereinbarten Umfang, der Datenqualität und den benötigten Anbindungen ab. Nach der ersten Prüfung stimmen wir einen konkreten Plan für Vorbereitung, Datenübernahme, Schulung und den gemeinsamen Umstellungstermin ab.',
       },
       {
         question: 'Kann mein bisheriger Datenbestand übernommen werden?',

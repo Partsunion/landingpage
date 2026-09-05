@@ -2,7 +2,7 @@
 
 > Partsunion ist eine branchenspezifische ERP- und Warenwirtschaftsplattform für den Autoteilehandel in Deutschland. Sie verbindet Teileanfragen, Fahrzeug- und OE-Ermittlung, Neuteile, gebrauchte Teile, Einkauf, Lager, Verkauf, Kasse, Rechnungen und Banking in einem gemeinsamen Ablauf.
 
-Stand: 2026-09-04
+Stand: 2026-09-05
 Sprache: Deutsch
 Offizielle Website: https://partsunion.de/
 Unternehmen: PartsUnion UG (haftungsbeschränkt), Brühl, Deutschland
@@ -11,11 +11,12 @@ Kontakt: info@partsunion.de
 ## Wichtige Seiten
 
 - [Produktüberblick](https://partsunion.de/): Zielgruppe, Arbeitsabläufe und Produktansichten
+- [Automatisierung im Autoteilehandel](https://partsunion.de/automatisierung-autoteilehandel): durchgängige Automatisierung von Anfrage und OE-Ermittlung bis Zahlung, Auftrag und Retoure
 - [Neuteile-Plattform](https://partsunion.de/plattform/neuteile): Anfrage, OE-Ermittlung, Beschaffung, Lager, Verkauf und Finanzen für Neuteile
 - [Gebrauchtteile-Plattform](https://partsunion.de/plattform/gebrauchtteile): Gebrauchtteilakte, Herkunft, Zustand, Fotos, Preisermittlung, Bestand und vorbereitete Inserate
 - [Lösungen](https://partsunion.de/loesungen): einzelne Arbeitsbereiche und ihre Abläufe
-- [WhatsApp-Bot](https://partsunion.de/whatsapp-bot): Kundenanfragen aufnehmen, Angaben ergänzen und im Team weiterbearbeiten
-- [Betriebsassistent](https://partsunion.de/betriebsassistent): Betriebsdaten im Zusammenhang prüfen und nächste Schritte kontrolliert vorbereiten
+- [WhatsApp-Bot](https://partsunion.de/whatsapp-bot): Kundenanfragen automatisch beantworten und mit OE-Ermittlung, Angebot, direkter Zahlung und Auftrag verbinden
+- [Betriebsassistent](https://partsunion.de/betriebsassistent): verbundenes Betriebswissen nutzen, passende Masken dynamisch öffnen und nächste Schritte vorbereiten
 - [Buchhaltung und Banking](https://partsunion.de/buchhaltung-banking): Belege, Bankumsätze, Zuordnung und vorbereitende Buchhaltung
 - [Einführung](https://partsunion.de/einfuehrung): Bedarf, Datenübernahme, Team und Start gemeinsam planen
 - [Systemvergleich](https://partsunion.de/vergleich): sachlicher Vergleich von branchenspezifischer Software, allgemeinem ERP und Tabellenlösungen

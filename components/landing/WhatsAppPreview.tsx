@@ -4,9 +4,8 @@
  * Jetzt: nutzt dieselbe `ChatPreview` wie die Feature-Pages → ein Design,
  * eine Nachrichten-Architektur.
  *
- * HONESTY: zeigt nur den LIVE-Pfad (Foto → Fahrzeug-/Teil-Erkennung →
- * 3 Angebote → Kunde wählt → Auftrag entsteht). Der Vorkasse-/Chat-Zahlungs-
- * Schritt (Klarna/PayPal/…) ist Roadmap und wird hier NICHT als live gezeigt.
+ * Zeigt den durchgängigen Pfad von der Anfrage über Fahrzeug- und
+ * Teileerkennung bis zu Angebot, direkter Zahlung und Auftrag.
  */
 
 import { ChatPreview, type ChatPreviewData } from './feature-previews/ChatPreview';
@@ -36,13 +35,20 @@ export const whatsappPreviewData: ChatPreviewData = {
             time: '14:33',
             tag: 'geprüft',
         },
-        // Live: aus der Auswahl entsteht ein Auftrag/Vorgang im Dashboard.
+        {
+            from: 'bot',
+            kind: 'payment',
+            amount: '76,20 €',
+            methods: ['PayPal', 'Karte', 'Klarna', 'SOFORT'],
+            time: '14:34',
+            tag: 'Zahlung',
+        },
         {
             from: 'bot',
             kind: 'confirm',
             orderId: '24871',
             eta: 'Mi 29.05. vor 12 Uhr',
-            time: '14:34',
+            time: '14:35',
         },
     ],
 };

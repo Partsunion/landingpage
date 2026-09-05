@@ -156,7 +156,7 @@ function BankingGraphic() {
 
 function RolloutGraphic() {
   const milestones = [
-    ['Ablauf', 'Was soll zuerst besser laufen?'],
+    ['Ablauf', 'Welche Prozesskette geht live?'],
     ['Daten', 'Was nehmen wir mit?'],
     ['Team', 'Wer arbeitet wie damit?'],
     ['Start', 'Was geht wann in Nutzung?'],
@@ -180,7 +180,7 @@ function RolloutGraphic() {
         ))}
       </ol>
       <div className="tp-graphic-foot">
-        <Users aria-hidden="true" /> Gemeinsam festgelegt. Schritt für Schritt.
+        <Users aria-hidden="true" /> Gemeinsam vorbereitet. Koordiniert umgestellt.
       </div>
     </div>
   );

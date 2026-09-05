@@ -10,8 +10,6 @@ import {
   ScanLine,
   ShoppingCart,
   WalletCards,
-  RotateCcw,
-  Smartphone,
 } from 'lucide-react';
 
 /** A readable process illustration, not a fabricated application screenshot. */
@@ -19,7 +17,7 @@ export function SystemWorkflow() {
   return (
     <figure
       className="sw-system"
-      aria-label="Ablaufbeispiel: Fahrzeugschein auslesen, VIN decodieren, OE-Nummer automatisch ermitteln und den Vorgang in den verbundenen Arbeitsbereichen weiterführen."
+      aria-label="Ablaufbeispiel: Fahrzeugschein auslesen, VIN decodieren, OE-Nummer automatisch ermitteln, Angebot erstellen, Liefertermin senden und den Kunden direkt bezahlen lassen."
     >
       <div className="sw-top">
         <span>
@@ -90,24 +88,25 @@ export function SystemWorkflow() {
       <div className="sw-platform">
         <div>
           <Layers3 aria-hidden="true" />
-          <strong>Ein Vorgang. Alle Arbeitsbereiche.</strong>
+          <strong>Im System geht der Vorgang automatisch weiter.</strong>
         </div>
         <div className="sw-areas">
           <span>
-            <ShoppingCart aria-hidden="true" /> Angebot & Auftrag
+            <ShoppingCart aria-hidden="true" /> Angebot automatisch erstellt
           </span>
           <span>
-            <PackageSearch aria-hidden="true" /> Einkauf & Lager
+            <MessageCircle aria-hidden="true" /> Preis & Liefertermin gesendet
           </span>
           <span>
-            <WalletCards aria-hidden="true" /> Kasse & Finanzen
+            <WalletCards aria-hidden="true" /> Direkt bezahlen & bestellen
           </span>
           <span>
-            <RotateCcw aria-hidden="true" /> Retouren
+            <PackageSearch aria-hidden="true" /> Auftrag & Beschaffung weiter
           </span>
         </div>
         <p>
-          <Smartphone aria-hidden="true" /> Auch unterwegs mit der Partsunion App
+          <Layers3 aria-hidden="true" /> ERP, Warenwirtschaft, Kasse, Belege und Retouren bleiben
+          verbunden
         </p>
       </div>
       <figcaption>

@@ -246,6 +246,7 @@ export default function RootLayout({
                     'B2B-Kundenportal mit kundenspezifischen Preisen nach Freischaltung',
                     'Mandantenbezogene Rollen, 2FA, Audit-Log sowie DSGVO-Auskunft und -Löschung',
                     'WhatsApp-Bot mit Fahrzeugschein-Auswertung und Anbindung an die automatische OE-Ermittlung',
+                    'Angebot und direkte Zahlung im verbundenen WhatsApp-Verkaufsablauf',
                     'Automatische OE-Ermittlung mit Nutzungsrechten für 56 Marken und 80 Prozent weltweiter VIN-Decodierungsabdeckung',
                     'Betriebsassistent für Fragen und freigegebene Aktionen über Arbeitsbereiche hinweg',
                     'Partsunion Mobile App für die mobile Arbeit am Vorgang',

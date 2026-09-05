@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import { Check, X } from 'lucide-react';
 import { Breadcrumb, DemoLink, FAQ } from '@/components/marketing/Shared';
 export const metadata: Metadata = {
   title: 'ERP für Autoteilehändler im Vergleich',
   description:
-    'Vergleiche Branchen-ERP, allgemeine Warenwirtschaft und Tabellen anhand deiner Teilevorgänge. Eine konkrete Prüfliste für Funktionen, Daten und Einführung.',
+    'Vergleiche Partsunion, allgemeine ERP-Warenwirtschaft und Tabellen für den Autoteilehandel anhand klarer Haken und Kreuze bei wichtigen Funktionen.',
   alternates: { canonical: 'https://partsunion.de/vergleich' },
   openGraph: {
     title: 'Welches System passt zu deinem Teilehandel?',
@@ -11,62 +12,83 @@ export const metadata: Metadata = {
     url: 'https://partsunion.de/vergleich',
   },
 };
-const rows = [
-  [
-    'Fahrzeug- und OE-Bezug',
-    'Im Teilemodell vorgesehen',
-    'Branchenmodul oder Anpassung prüfen',
-    'Manuell verknüpfte Angaben',
-  ],
-  [
-    'Verkauf, Einkauf und Lager',
-    'Gemeinsame Datenbasis',
-    'Umfang der gewählten Module prüfen',
-    'Getrennte Listen verbinden',
-  ],
-  [
-    'Angebot bis Rechnung',
-    'Referenzierte Belegkette',
-    'Typische ERP-Funktion; Ablauf prüfen',
-    'Bezüge selbst pflegen',
-  ],
-  [
-    'Verfügbar und reserviert',
-    'Getrennte Bestandszustände',
-    'Lager- und Reservierungslogik prüfen',
-    'Eigene Regeln erforderlich',
-  ],
-  [
-    'Gebrauchte Teile',
-    'Herkunft, Zustand und Fotos am Exemplar',
-    'Seriennummern- oder Bestandsmodell für Gebrauchtteile prüfen',
-    'Einzelne Datensätze selbst organisieren',
-  ],
-  [
-    'Digitale Anfragekanäle',
-    'Optional im Verkaufsprozess',
-    'Schnittstellen und Übergabe prüfen',
-    'Separate Kommunikation',
-  ],
-  [
-    'Kassenanbindung und Exporte',
-    'Vorbereitete Pfade; Einrichtung und Prüfung nötig',
-    'Verfügbarkeit je Anbieter und Edition prüfen',
-    'Zusätzliche Fachsoftware nötig',
-  ],
-  [
-    'B2B-Kundenportal',
-    'Nach Freischaltung und Einrichtung',
-    'Portalumfang und Anbindung prüfen',
-    'Zusätzliches System nötig',
-  ],
-  [
-    'Einführung und Migration',
-    'Nach Prozess- und Datenprüfung',
-    'Projektumfang individuell klären',
-    'Datenregeln selbst festlegen',
-  ],
+type ComparisonCell = { available: boolean; label: string };
+
+const yes = (label: string): ComparisonCell => ({ available: true, label });
+const no = (label: string): ComparisonCell => ({ available: false, label });
+
+const rows: Array<{
+  criterion: string;
+  partsunion: ComparisonCell;
+  genericErp: ComparisonCell;
+  spreadsheets: ComparisonCell;
+}> = [
+  {
+    criterion: 'Automatische OE-Ermittlung',
+    partsunion: yes('Direkt integriert'),
+    genericErp: no('Branchenlösung nötig'),
+    spreadsheets: no('Nur manuell'),
+  },
+  {
+    criterion: 'WhatsApp bis Angebot und Zahlung',
+    partsunion: yes('Durchgängiger Ablauf'),
+    genericErp: no('Zusatzlösungen nötig'),
+    spreadsheets: no('Nicht automatisiert'),
+  },
+  {
+    criterion: 'Verkauf, Einkauf und Lager verbunden',
+    partsunion: yes('Gemeinsame Datenbasis'),
+    genericErp: yes('Je nach Modulumfang'),
+    spreadsheets: no('Listen bleiben getrennt'),
+  },
+  {
+    criterion: 'Angebot bis Rechnung',
+    partsunion: yes('Verbundene Belegkette'),
+    genericErp: yes('Typische ERP-Funktion'),
+    spreadsheets: no('Bezüge manuell pflegen'),
+  },
+  {
+    criterion: 'Bestand, Reservierung und Beschaffung',
+    partsunion: yes('Automatisch verbunden'),
+    genericErp: yes('Je nach Lagerlogik'),
+    spreadsheets: no('Eigene Regeln nötig'),
+  },
+  {
+    criterion: 'Gebrauchtteile mit Herkunft und Zustand',
+    partsunion: yes('Am konkreten Gebrauchtteil'),
+    genericErp: no('Sondermodell nötig'),
+    spreadsheets: no('Manuell organisiert'),
+  },
+  {
+    criterion: 'Dynamische Maskenöffnung und Betriebsassistent',
+    partsunion: yes('Im Arbeitsablauf integriert'),
+    genericErp: no('Nicht branchenspezifisch'),
+    spreadsheets: no('Nicht verfügbar'),
+  },
+  {
+    criterion: 'Retouren und Reklamationen',
+    partsunion: yes('Mit Ursprungsbeleg verbunden'),
+    genericErp: yes('Je nach Modulumfang'),
+    spreadsheets: no('Manuelle Nachverfolgung'),
+  },
+  {
+    criterion: 'Kasse, Banking und Buchhaltung',
+    partsunion: yes('Im Geschäftsvorgang verbunden'),
+    genericErp: yes('Je nach Edition und Anbindung'),
+    spreadsheets: no('Weitere Systeme nötig'),
+  },
 ];
+
+function StatusCell({ cell }: { cell: ComparisonCell }) {
+  const Icon = cell.available ? Check : X;
+  return (
+    <span className={`mk-status ${cell.available ? 'mk-status-yes' : 'mk-status-no'}`}>
+      <Icon aria-hidden="true" />
+      <span className="sr-only">{cell.available ? 'Ja: ' : 'Nein: '}</span>
+      <span>{cell.label}</span>
+    </span>
+  );
+}
 export default function VergleichPage() {
   return (
     <div className="mk">
@@ -89,7 +111,7 @@ export default function VergleichPage() {
       <section className="mk-section">
         <div className="mk-wrap">
           <p className="mk-kicker">Drei Ansätze im Überblick</p>
-          <h2 style={{ marginBottom: 30 }}>Diese Punkte solltest du prüfen.</h2>
+          <h2 style={{ marginBottom: 30 }}>Was ist direkt im System verbunden?</h2>
           <div
             className="mk-table"
             role="region"
@@ -98,7 +120,8 @@ export default function VergleichPage() {
           >
             <table>
               <caption className="sr-only">
-                Orientierung zum Funktions- und Einführungsumfang; kein Test einzelner Anbieter.
+                Vergleich direkt verbundener Funktionen in Partsunion, allgemeinem ERP und
+                Tabellen.
               </caption>
               <thead>
                 <tr>
@@ -113,49 +136,22 @@ export default function VergleichPage() {
               </thead>
               <tbody>
                 {rows.map((row) => (
-                  <tr key={row[0]}>
-                    <th scope="row">{row[0]}</th>
-                    {row.slice(1).map((cell, index) => (
-                      <td key={index}>{cell}</td>
-                    ))}
+                  <tr key={row.criterion}>
+                    <th scope="row">{row.criterion}</th>
+                    <td><StatusCell cell={row.partsunion} /></td>
+                    <td><StatusCell cell={row.genericErp} /></td>
+                    <td><StatusCell cell={row.spreadsheets} /></td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           <p className="mk-small" style={{ marginTop: 20 }}>
-            Die Tabelle dient als Prüfliste, nicht als Bewertung einzelner Anbieter. Der
-            tatsächliche Umfang hängt von Edition, Anbindungen und Einrichtung ab. Auf kleinen
-            Bildschirmen kannst du die Tabelle seitlich verschieben.
+            Ein Haken zeigt eine direkt verfügbare oder typische Systemfunktion. Ein Kreuz zeigt,
+            dass dafür üblicherweise eine zusätzliche Branchenlösung oder manuelle Arbeit nötig
+            ist. Der konkrete Umfang eines allgemeinen ERP hängt von Edition und Einrichtung ab.
+            Auf kleinen Bildschirmen kannst du die Tabelle seitlich verschieben.
           </p>
-        </div>
-      </section>
-      <section className="mk-section mk-paper">
-        <div className="mk-wrap">
-          <p className="mk-kicker">Für ein aussagekräftiges Beratungsgespräch</p>
-          <h2>Bring diese drei Fälle mit.</h2>
-          <div className="mk-implementation">
-            {[
-              [
-                'Eine schwierige Teileanfrage',
-                'Ein Fahrzeug mit mehreren möglichen Ausführungen. Prüfe, ob fehlende Angaben und die fachliche Entscheidung nachvollziehbar bleiben.',
-              ],
-              [
-                'Einen Auftrag mit Fehlmenge',
-                'Ein Teil liegt im Lager, ein anderes muss beschafft werden. Verfolge Bestand, Reservierung und Bestellung bis zum Beleg.',
-              ],
-              [
-                'Eine Rückgabe oder Reklamation',
-                'Prüfe, ob Ursprungsbeleg, Zustand, Entscheidung und Bestandswirkung miteinander verbunden sind.',
-              ],
-            ].map(([title, text], index) => (
-              <article key={title}>
-                <span className="mk-number">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
       <section className="mk-section">

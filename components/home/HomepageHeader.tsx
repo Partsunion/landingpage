@@ -23,6 +23,7 @@ import {
   Sparkles,
   Store,
   Users,
+  Workflow,
   X,
 } from 'lucide-react';
 
@@ -107,6 +108,7 @@ const navigation = [
       icon: LayoutGrid,
     },
     bottom: [
+      { title: 'Automatisierung im Teilehandel', href: '/automatisierung-autoteilehandel', icon: Workflow },
       { title: 'Alle Funktionen', href: '/features', icon: LayoutGrid },
       { title: 'Alle Lösungen', href: '/loesungen', icon: PackageCheck },
       { title: 'Produktansichten', href: '/live-demo', icon: Monitor },
@@ -272,6 +274,7 @@ export function HomepageHeader() {
           '/betriebsassistent',
           '/buchhaltung-banking',
           '/live-demo',
+          '/automatisierung-autoteilehandel',
         ].includes(pathname) ||
         pathname.startsWith('/features/') ||
         pathname.startsWith('/loesungen/')

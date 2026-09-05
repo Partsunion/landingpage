@@ -6,6 +6,7 @@ const groups = [
     title: 'Die Plattform',
     links: [
       ['Plattform im Überblick', '/plattform'],
+      ['Automatisierung im Autoteilehandel', '/automatisierung-autoteilehandel'],
       ['Automatische OE-Ermittlung', '/loesungen/oe-ermittlung'],
       ['Kassensystem', '/loesungen/finanzen-kasse'],
       ['Retouren & Reklamationen', '/loesungen/retouren'],

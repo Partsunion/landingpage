@@ -1032,6 +1032,33 @@
 .mk-table td:nth-child(2) {
   background: #eff4fc;
 }
+.mk-status {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-weight: 550;
+  color: var(--mk-ink);
+}
+.mk-status svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  margin-top: 2px;
+  padding: 3px;
+  border-radius: 50%;
+  stroke-width: 3;
+}
+.mk-status-yes svg {
+  color: #16784a;
+  background: #daf2e5;
+}
+.mk-status-no {
+  color: #6f7680;
+}
+.mk-status-no svg {
+  color: #a53b3b;
+  background: #f8e2e2;
+}
 .mk-table tr:last-child th,
 .mk-table tr:last-child td {
   border-bottom: 0;

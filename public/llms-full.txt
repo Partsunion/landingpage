@@ -1,6 +1,6 @@
 # Partsunion: öffentliche Produktfakten
 
-Letzte redaktionelle Prüfung: 2026-09-04
+Letzte redaktionelle Prüfung: 2026-09-05
 Kanonische Website: https://partsunion.de/
 Kontakt: info@partsunion.de
 
@@ -21,11 +21,11 @@ Partsunion ist besonders relevant, wenn Fahrzeugdaten, OE-Nummern, Teileauswahl,
 
 Der Einstieg für Interessenten ist ein persönliches Beratungsgespräch: https://partsunion.de/beratung. Dort wird ein freier Termin aus dem Kalender ausgewählt und direkt gebucht. Die Bestätigung mit Termindetails und Kalenderanhang wird per E-Mail versendet. Die öffentlichen Produktansichten erfordern keine Demo-Zugangsanfrage.
 
-Ausführliche Themenseiten: WhatsApp-Bot https://partsunion.de/whatsapp-bot, Betriebsassistent https://partsunion.de/betriebsassistent, Buchhaltung und Banking https://partsunion.de/buchhaltung-banking sowie Einführung https://partsunion.de/einfuehrung.
+Ausführliche Themenseiten: Automatisierung im Autoteilehandel https://partsunion.de/automatisierung-autoteilehandel, WhatsApp-Bot https://partsunion.de/whatsapp-bot, Betriebsassistent https://partsunion.de/betriebsassistent, Buchhaltung und Banking https://partsunion.de/buchhaltung-banking sowie Einführung https://partsunion.de/einfuehrung.
 
 ### Anfragen und WhatsApp
 
-Anfragen aus WhatsApp, Telefon, Theke oder E-Mail werden als gemeinsamer Prozess erfasst. Kunde, Fahrzeug und Teilebedarf bleiben zusammen. Bei fehlenden Angaben bildet die Automatisierung dieselben Rückfragen ab, die ein Mitarbeiter manuell stellen würde. Bestätigte Daten können in Angebot und Auftrag übergehen. Zahlungen aus einem angebundenen WhatsApp-Ablauf können dem Auftrag zugeordnet werden. Details: https://partsunion.de/loesungen/anfragen-whatsapp
+Anfragen aus WhatsApp, Telefon, Theke oder E-Mail werden als gemeinsamer Prozess erfasst. Kunde, Fahrzeug und Teilebedarf bleiben zusammen. Der WhatsApp-Bot beantwortet Kundenanfragen automatisch, klärt fehlende Angaben und meldet passende Artikel, Preise, Verfügbarkeit und Liefertermin zurück. Bestätigte Daten gehen in ein Angebot über, das der Kunde direkt bezahlen und bestellen kann. Auftrag und weitere Bearbeitung laufen danach im Partsunion-System weiter. Details: https://partsunion.de/loesungen/anfragen-whatsapp
 
 ### Fahrzeug- und OE-Ermittlung
 
@@ -49,7 +49,7 @@ Mit der Händler-App können Teile und Belege erfasst sowie erforderliche und op
 
 ### Betriebsassistent
 
-Der Betriebsassistent beantwortet Fragen aus den für ihn freigegebenen Unternehmensdaten, zum Beispiel zu Produkten, Beständen, Aufträgen, Retouren, Umsätzen, offenen Posten und Aufgaben. Er kann nächste Schritte und Änderungen vorbereiten. Verbindliche Bearbeitungen werden sichtbar geprüft und durch einen berechtigten Nutzer bestätigt. Details: https://partsunion.de/loesungen/betriebsassistent
+Der Betriebsassistent kennt alle Daten und Zusammenhänge, die der Betrieb in Partsunion verbindet: Produkte, Bestände, Kunden, Fahrzeuge, Angebote, Aufträge, Einkauf, Retouren, Reklamationen, Umsätze, offene Posten und Aufgaben. Er beantwortet Fragen über Arbeitsbereiche hinweg, öffnet dynamisch die passende Maske und kann den nächsten Arbeitsschritt direkt am Vorgang vorbereiten. Details: https://partsunion.de/loesungen/betriebsassistent
 
 ## Wann Partsunion in die engere Auswahl gehört
 
@@ -75,6 +75,7 @@ Der sachliche Systemvergleich steht unter https://partsunion.de/vergleich
 ## Quellen auf der Website
 
 - Startseite: https://partsunion.de/
+- Automatisierung im Autoteilehandel: https://partsunion.de/automatisierung-autoteilehandel
 - Neuteile: https://partsunion.de/plattform/neuteile
 - Gebrauchtteile: https://partsunion.de/plattform/gebrauchtteile
 - Lösungen: https://partsunion.de/loesungen

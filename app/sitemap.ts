@@ -25,7 +25,7 @@ const BASE_URL = 'https://partsunion.de';
  *   0.3   Legal-Pages
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteContentUpdated = new Date('2026-09-04T00:00:00+02:00');
+  const siteContentUpdated = new Date('2026-09-05T00:00:00+02:00');
 
   const topFeatures = new Set([
     'erp-autoteilehandel',
@@ -59,6 +59,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: siteContentUpdated,
       changeFrequency: 'weekly',
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/automatisierung-autoteilehandel`,
+      lastModified: siteContentUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.95,
     },
     {
       url: `${BASE_URL}/plattform/neuteile`,

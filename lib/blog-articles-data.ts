@@ -173,7 +173,7 @@ export const generatedArticles: GeneratedArticle[] = [
       },
       {
         type: 'p',
-        text: 'Einige zukunftsweisende Bausteine wie Marktplatz- und Shop-Sync, Großhändler-Direktbestellung, Chat-Vorkasse oder Versand-Tracking befinden sich bei Partsunion in Entwicklung. Bewerten Sie bei jedem Anbieter klar, was heute live ist und was Roadmap – und treffen Sie Ihre Auswahl auf Basis der Funktionen, die Sie ab Tag eins brauchen. Wer den Aufwand gegen den Nutzen rechnen will, kann das im ROI-Rechner durchspielen oder die offenen Punkte direkt in einer Beratung klären.',
+        text: 'Einige zukunftsweisende Bausteine wie Marktplatz- und Shop-Sync, Großhändler-Direktbestellung oder Versand-Tracking befinden sich bei Partsunion in Entwicklung. Bewerten Sie bei jedem Anbieter klar, was heute live ist und was Roadmap – und treffen Sie Ihre Auswahl auf Basis der Funktionen, die Sie ab Tag eins brauchen. Wer den Aufwand gegen den Nutzen rechnen will, kann das im ROI-Rechner durchspielen oder die offenen Punkte direkt in einer Beratung klären.',
       },
       {
         type: 'linklist',
@@ -916,7 +916,7 @@ export const generatedArticles: GeneratedArticle[] = [
       },
       {
         type: 'p',
-        text: 'Kommunizieren Sie das offen gegenüber Ihren Kunden. Eine Portal-Anfrage landet bei Ihnen, Ihr Team prüft Verfügbarkeit und Preis und bestätigt verbindlich. Das verhindert Überverkäufe und enttäuschte Werkstätten. Funktionen wie Versand-Tracking, Großhändler-Direktbestellung, Marktplatz-Sync oder Vorkasse-Zahlung per Stripe oder PayPal sind in Entwicklung und sollten heute nicht als verfügbar versprochen werden.',
+        text: 'Kommunizieren Sie das offen gegenüber Ihren Kunden. Eine Portal-Anfrage landet bei Ihnen, Ihr Team prüft Verfügbarkeit und Preis und bestätigt verbindlich. Das verhindert Überverkäufe und enttäuschte Werkstätten. Funktionen wie Versand-Tracking, Großhändler-Direktbestellung oder Marktplatz-Sync sind in Entwicklung und sollten heute nicht als verfügbar versprochen werden.',
       },
       {
         type: 'ul',

@@ -15,17 +15,17 @@ export const homeFaqs = [
   {
     question: 'Passt Partsunion zu meinem Betrieb?',
     answer:
-      'Partsunion richtet sich an Autoteilehändler und Autoverwerter mit Neu-, Gebraucht- oder Mischsortiment. Besonders sinnvoll ist es, wenn WhatsApp-Anfragen, Fahrzeugdaten, Bestand und Belege heute in unterschiedlichen Programmen liegen. Im Beratungsgespräch prüfen wir gemeinsam, welche Abläufe und Funktionen zu deinem Betrieb passen.',
+      'Partsunion richtet sich an Autoteilehändler und Autoverwerter mit Neu-, Gebraucht- oder Mischsortiment. Im Beratungsgespräch prüfen wir gemeinsam, welche Abläufe und Funktionen zu deinem Betrieb passen.',
   },
   {
     question: 'Was übernimmt der WhatsApp-Bot?',
     answer:
-      'Der Bot nimmt Teileanfragen auf, führt Kunden-, Fahrzeug- und Teileinformationen zusammen und bereitet die weitere Bearbeitung vor. Dein Team arbeitet mit dem Vorgang im gemeinsamen System weiter. Welche Antworten, Rückfragen und Übergaben für deinen Betrieb sinnvoll sind, stimmen wir mit dir ab.',
+      'Der WhatsApp-Bot beantwortet Kundenanfragen automatisch, nimmt Texte, Sprachnachrichten und Fahrzeugscheine auf und führt Kunden-, Fahrzeug- und Teileinformationen zusammen. Er klärt fehlende Angaben, stößt die OE-Ermittlung an und antwortet mit passenden Artikeln, Preisen, Verfügbarkeit und Liefertermin. Aus der Auswahl entsteht im System ein Angebot, das der Kunde direkt bezahlen und bestellen kann. Auftrag und weitere Bearbeitung laufen ohne Neuerfassung in Partsunion weiter.',
   },
   {
     question: 'Was macht der Betriebsassistent?',
     answer:
-      'Der Betriebsassistent hilft deinem Team bei Fragen zu Bestand, Aufträgen, Retouren, offenen Forderungen und Aufgaben. Er verbindet freigegebene Betriebsdaten mit dem jeweiligen Vorgang und kann nächste Arbeitsschritte vorbereiten. Verbindliche Bestellungen und finanzwirksame Schritte bleiben an Rechte und Bestätigungen gebunden.',
+      'Der Betriebsassistent kennt alle Daten und Zusammenhänge, die dein Betrieb in Partsunion verbindet: Artikel, Bestände, Kunden, Fahrzeuge, Angebote, Aufträge, Einkauf, Retouren, Reklamationen, Umsätze, offene Forderungen und Aufgaben. Er beantwortet Fragen zum gesamten Betrieb, priorisiert Handlungsbedarf, öffnet dynamisch die passende Maske und kann den nächsten Arbeitsschritt direkt vorbereiten. So wird er zum zentralen Wissens- und Arbeitsassistenten für deinen Teilehandel.',
   },
   {
     question: 'Was kostet Partsunion?',
@@ -40,12 +40,12 @@ export const homeFaqs = [
   {
     question: 'Müssen wir den ganzen Betrieb auf einmal umstellen?',
     answer:
-      'Nein. Gemeinsam legen wir einen überschaubaren Einstieg fest, zum Beispiel Teileanfragen und Verkauf. Daten, Zuständigkeiten und Schulung werden dafür vorbereitet. Weitere Bereiche folgen nach dem vereinbarten Einführungsplan.',
+      'Ja, wir empfehlen die gemeinsame Umstellung der zusammenhängenden Arbeitsbereiche. Partsunion entfaltet seinen größten Nutzen, wenn Anfrage, OE-Ermittlung, Verkauf, Einkauf, Lager, Kasse und Belege vom Start an als durchgängige Prozesskette arbeiten. Dafür bereiten wir Daten, Anbindungen, Zuständigkeiten und Schulung gemeinsam vor und planen einen klaren Umstellungstermin für dein Team.',
   },
   {
     question: 'Welche Anbindungen sind für uns verfügbar?',
     answer:
-      'Das prüfen wir mit deinen konkreten Lieferanten, Katalogen und Verkaufskanälen. Manche Funktionen benötigen einen eigenen Vertrag, eine technische Einrichtung oder eine Freischaltung. Zahlungsanbieter, Kassenanbindung und B2B-Portal werden deshalb vor dem Start ausdrücklich abgestimmt.',
+      'Das prüfen wir mit deinen konkreten Lieferanten, Katalogen und Verkaufskanälen. Manche Funktionen benötigen eine technische Einrichtung oder eine Freischaltung. Zahlungsanbieter, Kassenanbindung und B2B-Portal werden deshalb vor dem Start ausdrücklich abgestimmt.',
   },
   {
     question: 'Wie vereinbare ich ein Beratungsgespräch?',
@@ -108,16 +108,16 @@ export function Implementation() {
     <div className="mk-implementation">
       {[
         [
-          'Bedarf gemeinsam klären',
-          'Im Beratungsgespräch sehen wir uns deinen Betrieb, deine Programme und einen typischen Teilevorgang an. Daraus entstehen ein passender Funktionsumfang und ein konkretes Angebot.',
+          'Die gesamte Prozesskette klären',
+          'Im Beratungsgespräch sehen wir uns deinen Betrieb, deine Programme und den Ablauf von der Anfrage bis zu Belegen, Zahlung und Rückabwicklung an.',
         ],
         [
-          'Daten und Team vorbereiten',
-          'Wir prüfen die Datenübernahme, richten die vereinbarten Bereiche ein und gehen die Abläufe mit deinem Team durch.',
+          'Daten, Anbindungen und Team vorbereiten',
+          'Wir übernehmen die benötigten Daten, richten die verbundenen Arbeitsbereiche ein und trainieren dein Team am vollständigen Ablauf.',
         ],
         [
-          'Mit einem klaren Ablauf starten',
-          'Wir stimmen den Start ab, klären offene Punkte und erweitern die Nutzung in den vereinbarten Schritten.',
+          'Den Betrieb gemeinsam umstellen',
+          'Wir empfehlen einen koordinierten Umstellungstermin, damit Anfrage, OE-Ermittlung, Verkauf, Einkauf, Lager, Kasse und Belege vom Start an ineinandergreifen.',
         ],
       ].map(([title, text], index) => (
         <article key={title}>

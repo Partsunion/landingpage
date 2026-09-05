@@ -21,7 +21,7 @@ export function ImplementationPath() {
                 <div className="grid gap-5 lg:grid-cols-[.72fr_1.28fr] lg:items-end lg:gap-14">
                     <div>
                         <div className="text-[9px] font-bold uppercase tracking-[.16em] text-[#1c6dd8]">Einführung im Betrieb</div>
-                        <h2 className="mt-3 text-[clamp(2rem,3vw,2.85rem)] font-semibold leading-[1.08] tracking-[-.043em] text-[#132036]">Gemeinsam einführen. Schritt für Schritt.</h2>
+                        <h2 className="mt-3 text-[clamp(2rem,3vw,2.85rem)] font-semibold leading-[1.08] tracking-[-.043em] text-[#132036]">Gemeinsam vorbereiten. Koordiniert umstellen.</h2>
                     </div>
                     <p className="max-w-2xl text-[15px] leading-7 text-[#627084] lg:justify-self-end">Partsunion muss zu deinem Betrieb passen. Deshalb beginnt die Einführung nicht mit einer allgemeinen Präsentation, sondern mit den tatsächlichen Abläufen an Theke, Lager und im Büro.</p>
                 </div>
@@ -54,7 +54,7 @@ export function ImplementationPath() {
                 </ol>
 
                 <div className="mt-6 flex flex-col gap-3 border-t border-[#ced8e3] pt-5 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-[12px] leading-5 text-[#667487]">Du musst nicht alle Arbeitsbereiche auf einmal einführen.</p>
+                    <p className="text-[12px] leading-5 text-[#667487]">Die verbundenen Arbeitsbereiche gehen gemeinsam in Nutzung.</p>
                     <Link href="/beratung" className="inline-flex items-center gap-2 text-sm font-semibold text-[#155fc8]">Eigenen Start gemeinsam planen <ArrowRight className="h-4 w-4" /></Link>
                 </div>
             </div>

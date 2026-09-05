@@ -15,6 +15,7 @@ import {
     ScanLine,
     ShoppingCart,
     Store,
+    CreditCard,
     WalletCards,
     Warehouse,
     type LucideIcon,
@@ -88,6 +89,16 @@ const scenes: FlowScene[] = [
         cropClass: 'scale-[1.12] origin-[58%_15%]',
     },
     {
+        label: 'Kunde bezahlt direkt',
+        shortLabel: 'Zahlung',
+        image: '/product/verkaufsauftrag.png',
+        alt: 'Originale Partsunion Ansicht eines Angebots mit verbundenem Verkaufsauftrag',
+        title: 'Der Kunde kann das Angebot direkt bezahlen',
+        detail: 'Zahlung, Bestellung und Vorgang laufen automatisch im System weiter.',
+        icon: CreditCard,
+        cropClass: 'scale-[1.12] origin-[58%_15%]',
+    },
+    {
         label: 'Auftrag ist angelegt',
         shortLabel: 'Auftrag',
         image: '/product/verkaufsauftrag.png',
@@ -127,6 +138,20 @@ function ChatBubble({ message }: { message: ChatMessage }) {
         );
     }
 
+    if (message.kind === 'payment') {
+        return (
+            <div className="ml-auto max-w-[94%] rounded-md rounded-tr-none border border-[#1d6fe8]/30 bg-white px-2 py-1.5 shadow-sm">
+                <div className="flex items-center justify-between gap-2">
+                    <span className="font-semibold">Sicher bezahlen</span>
+                    <strong>{message.amount}</strong>
+                </div>
+                <div className="mt-1 text-[5px] text-[#68747e]">{(message.methods ?? []).join(' · ')}</div>
+                <div className="mt-1.5 rounded bg-[#1d6fe8] py-1 text-center text-[6px] font-bold text-white">JETZT BEZAHLEN</div>
+                <span className="mt-1 block text-right text-[5px] text-[#68747e]">{message.time} ✓✓</span>
+            </div>
+        );
+    }
+
     if (message.kind === 'confirm') {
         return (
             <div className="ml-auto max-w-[94%] rounded-md rounded-tr-none bg-[#d9fdd3] px-2 py-1.5 shadow-sm">
@@ -148,7 +173,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
 
 function PhoneConversation({ active, reducedMotion }: { active: number; reducedMotion: boolean }) {
     const visibleMessages = whatsappPreviewData.messages.filter((_, index) => index <= active);
-    const translateY = [0, 0, -36, -72, -158, -214][active] ?? 0;
+    const translateY = [0, 0, -36, -72, -158, -235, -300][active] ?? 0;
 
     return (
         <PhoneFrame className="z-20 w-full" screenClassName="bg-[#e9eee9]" >
@@ -229,7 +254,7 @@ export function HeroFlow() {
                             <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-[#a9bfd9] bg-white text-[#1d6fe8]"><Activity className="h-3.5 w-3.5" /></span>
                             <span><strong className="block text-[9px] font-semibold sm:text-[10px]">Kundenfall KF-2026-0871</strong><span className="hidden text-[7px] text-[#7b8795] sm:block">Eingang · Fahrzeug · Teilebedarf · Verkauf</span></span>
                             <AnimatePresence mode="wait"><motion.span key={scene.label} initial={reducedMotion ? false : { opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={reducedMotion ? undefined : { opacity: 0, y: -3 }} transition={{ duration: reducedMotion ? 0 : 0.25 }} className="ml-auto max-w-[48%] truncate border-l border-[#d5dde7] pl-3 text-[7px] font-semibold text-[#245faa] sm:text-[8px]">{scene.label}</motion.span></AnimatePresence>
-                            <span className="font-mono text-[7px] font-bold text-[#8793a2]">0{active + 1}/06</span>
+                            <span className="font-mono text-[7px] font-bold text-[#8793a2]">0{active + 1}/0{scenes.length}</span>
                         </div>
 
                         <div className="bg-[#e9eef4] p-2 sm:p-3">
@@ -258,7 +283,7 @@ export function HeroFlow() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-6 border-t border-[#cbd5e1] bg-white">
+                        <div className="grid grid-cols-7 border-t border-[#cbd5e1] bg-white">
                             {scenes.map((item, index) => <button key={item.shortLabel} type="button" data-hero-scene={index} onClick={() => setActive(index)} className={`relative min-w-0 overflow-hidden border-r border-[#d7dee7] px-0.5 py-2.5 text-[5.5px] font-bold uppercase tracking-[-.01em] transition last:border-r-0 sm:px-1 sm:py-3 sm:text-[7px] sm:tracking-[.04em] ${active === index ? 'bg-[#edf4ff] text-[#155fc8]' : 'bg-white text-[#8290a2] hover:bg-[#f7f9fc] hover:text-[#405169]'}`} aria-label={`Schritt ${index + 1}: ${item.label}`} aria-pressed={active === index} aria-current={active === index ? 'step' : undefined}>{item.shortLabel}{active === index && <motion.span key={`progress-${active}`} initial={reducedMotion ? false : { scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: reducedMotion ? 0 : 4.2, ease: 'linear' }} className="absolute inset-x-0 top-0 h-0.5 origin-left bg-[#1d6fe8]" />}</button>)}
                         </div>
                         <div className="flex items-center justify-between border-t border-[#d7dee7] bg-[#f8fafc] px-3 py-2 text-[6px] text-[#8793a2] sm:text-[7px]"><span>Originale Partsunion-Ansichten</span><span className="font-bold">DEMO-DATEN</span></div>
