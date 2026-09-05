@@ -27,6 +27,14 @@ FROM node:22.23.2-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e
 
 WORKDIR /app
 
+# The runtime never invokes npm or Corepack. Remove their bundled package trees
+# so build tooling (including tar/pacote/sigstore) is not shipped to production,
+# and install the current Alpine OpenSSL security fixes over the pinned base.
+RUN apk upgrade --no-cache libcrypto3 libssl3 \
+    && rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack \
+    && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack \
+       /usr/local/bin/pnpm /usr/local/bin/pnpx /usr/local/bin/yarn /usr/local/bin/yarnpkg
+
 ARG VCS_REF=unknown
 ARG BUILD_DATE=unknown
 ARG APP_RELEASE=landingpage@unversioned
