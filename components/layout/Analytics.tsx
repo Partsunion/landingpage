@@ -14,6 +14,7 @@
 import Script from 'next/script';
 import { useEffect, useSyncExternalStore } from 'react';
 import { captureLandingContext } from '@/lib/attribution';
+import { analyticsClick } from '@/lib/analytics-click';
 
 /** Tausche das gegen deinen Plausible-Domain-Slug, sobald du den Account hast. */
 const PLAUSIBLE_DOMAIN = 'partsunion.de';
@@ -36,11 +37,34 @@ export function Analytics() {
     captureLandingContext();
     const click = (event: MouseEvent) => {
       const target =
-        event.target instanceof Element ? event.target.closest<HTMLElement>('[data-track]') : null;
-      if (target?.dataset.track)
+        event.target instanceof Element
+          ? event.target.closest<HTMLElement>('[data-track], a[href], button, input[type="submit"]')
+          : null;
+      if (!target) return;
+      const anchor = target instanceof HTMLAnchorElement ? target : target.closest<HTMLAnchorElement>('a[href]');
+      const placementNode = target.closest<HTMLElement>('[data-track-section], section[id], header, footer, nav, main');
+      const placement = placementNode?.dataset.trackSection
+        || placementNode?.id
+        || placementNode?.tagName.toLocaleLowerCase('de-DE')
+        || 'content';
+      const generic = analyticsClick({
+        explicitTarget: target.dataset.track,
+        href: anchor?.getAttribute('href') || undefined,
+        ariaLabel: target.getAttribute('aria-label') || undefined,
+        isSubmit: target instanceof HTMLInputElement
+          ? target.type === 'submit'
+          : target instanceof HTMLButtonElement && target.type === 'submit',
+        page: window.location.pathname,
+        placement,
+        origin: window.location.origin,
+      });
+      track('UI Click', { ...generic });
+      // Bestehende Conversion-Namen bleiben parallel erhalten. So brechen
+      // bereits eingerichtete Ziele und Kampagnenberichte nicht.
+      if (target.dataset.track && target.dataset.track !== 'UI Click')
         track(target.dataset.track, {
           page: window.location.pathname,
-          placement: target.closest('header') ? 'header' : 'content',
+          placement: generic.placement,
         });
     };
     document.addEventListener('click', click);
@@ -60,7 +84,7 @@ export function Analytics() {
 }
 
 /**
- * Type-safe Helper für Custom-Events.
+ * Type-safe Helper für aggregierte Custom-Events.
  * Wird nur ausgeführt wenn `window.plausible` existiert (Script geladen).
  */
 type PlausibleProps = Record<string, string | number | boolean>;

@@ -7,6 +7,7 @@ import {
   appointmentLabel,
 } from '../lib/appointments.ts';
 import { campaignContext } from '../lib/attribution.ts';
+import { analyticsClick } from '../lib/analytics-click.ts';
 
 test('Termine wechseln den UTC-Offset mit der deutschen Sommerzeit', () => {
   assert.equal(berlinAppointment('2026-03-27', '09:00'), '2026-03-27T09:00:00+01:00');
@@ -52,4 +53,32 @@ test('Kampagnenkontext übernimmt nur begrenzte Parameter und die Referrer-Domai
     campaignContext('https://partsunion.de/beratung', 'https://partsunion.de/?email=private'),
     { landingPath: '/beratung' },
   );
+});
+
+test('Klickanalyse speichert nur sichere Ziele statt URL-Parameter oder Kontaktdaten', () => {
+  assert.deepEqual(analyticsClick({
+    href: '/beratung?email=person@example.com#termin',
+    page: '/plattform/neuteile?gclid=private',
+    placement: 'Hero',
+    origin: 'https://partsunion.de',
+  }), {
+    page: '/plattform/neuteile',
+    target: 'Link /beratung',
+    placement: 'hero',
+    destination: '/beratung',
+    kind: 'internal',
+  });
+  assert.deepEqual(analyticsClick({
+    href: 'https://wa.me/49123456789?text=private',
+    explicitTarget: 'Vertrieb +49 123 456789',
+    page: '/',
+    placement: 'footer',
+    origin: 'https://partsunion.de',
+  }), {
+    page: '/',
+    target: 'Outbound wa.me',
+    placement: 'footer',
+    destination: 'wa.me',
+    kind: 'outbound',
+  });
 });
