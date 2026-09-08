@@ -285,7 +285,25 @@ export default function DatenschutzPage() {
           insbesondere werden auch keine IP-Adressen an Google übermittelt.
         </p>
 
-        <h3>Plausible Analytics (cookielose Reichweitenmessung)</h3>
+        <h3>Eigene cookielose Reichweitenmessung</h3>
+        <p>
+          Wir erfassen auf unserer eigenen technischen Infrastruktur Seitenaufrufe, Einstiegsseite,
+          Referrer-Domain, freiwillig übermittelte Kampagnenparameter und Klicks auf Bedienelemente.
+          Dabei werden keine Kontaktangaben und keine URL-Abfrageparameter außerhalb der ausdrücklich
+          vorgesehenen Kampagnenfelder gespeichert. Eine zufällige Sitzungskennung liegt nur für die
+          Dauer des geöffneten Seitenbesuchs im Arbeitsspeicher des Browsers und wird weder als Cookie
+          noch im lokalen Browserspeicher abgelegt.
+        </p>
+        <p>
+          Die beim Aufruf technisch anfallende IP-Adresse wird vor dem Speichern auf einen groben
+          Netzbereich gekürzt. Zusätzlich wird daraus zusammen mit technischen Browsermerkmalen eine
+          täglich wechselnde, nicht rückrechenbare Prüfsumme gebildet. Die vollständige IP-Adresse wird
+          nicht in der Analysedatenbank gespeichert. Rohereignisse werden spätestens nach 400 Tagen
+          gelöscht. Rechtsgrundlage ist unser berechtigtes Interesse an Reichweitenmessung,
+          Herkunftsauswertung und der Verbesserung unseres Angebots (Art. 6 Abs. 1 lit. f DSGVO).
+        </p>
+
+        <h3>Plausible Analytics (optionale cookielose Zweitauswertung)</h3>
         <p>
           Zur statistischen Auswertung der Besucherzugriffe nutzen wir Plausible Analytics, einen
           Webanalysedienst mit Hosting in der Europäischen Union. Plausible setzt

@@ -8,8 +8,8 @@ import { ShieldCheck } from "lucide-react";
  * Transparenter Datenschutzhinweis für die cookielose Reichweitenmessung.
  *
  * Die Seite verwendet nur den lokalen Merker zum Ausblenden dieses Hinweises
- * und eine cookielose Reichweitenmessung über Plausible. Da die Messung keine
- * Cookies setzt und nicht auf den Gerätespeicher zugreift, wird hier keine
+ * und eine cookielose, eigene Reichweitenmessung. Da die Messung keine Cookies
+ * setzt und nicht auf den Gerätespeicher zugreift, wird hier keine
  * Einwilligungsentscheidung simuliert. Der Hinweis verlinkt transparent auf
  * die Datenschutzerklärung. Keine Tracking-Pixel, keine Remarketing-Tags und
  * kein Google Analytics.
@@ -93,7 +93,7 @@ export function CookieBanner() {
                 </span>
                 <p className="min-w-0 flex-1 text-[11px] leading-4 text-[#657184] sm:text-xs sm:leading-5">
                     <strong className="font-semibold text-[#1a2638]">Keine Tracking-Cookies.</strong>{" "}
-                    <span className="hidden sm:inline">Plausible misst die Reichweite anonym und EU-gehostet. </span>
+                    <span className="hidden sm:inline">Wir messen Reichweite cookielos; IP-Adressen werden vor dem Speichern gekürzt und gehasht. </span>
                     <Link href="/legal/datenschutz" className="font-medium text-[#155fc8] underline underline-offset-2 hover:text-[#0e4fae]">
                         Datenschutz
                     </Link>

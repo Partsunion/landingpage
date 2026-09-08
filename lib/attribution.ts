@@ -27,3 +27,9 @@ export function leadContext(): Record<string, string> {
   captureLandingContext();
   return { ...landingContext, submissionPath: window.location.pathname };
 }
+
+export function analyticsContext(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  captureLandingContext();
+  return { ...landingContext };
+}

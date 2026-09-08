@@ -1,9 +1,9 @@
 /**
- * Plausible Analytics — DSGVO-konform, cookielos, ~1.4 KB Script.
+ * Cookielose Website-Analyse über die eigene API plus optionales Plausible.
  *
- * Statt Google Analytics 4 (kompliziert, Cookie-Consent erforderlich, oft DSGVO-Bedenken
- * wegen US-Datenübermittlung) nutzen wir Plausible: EU-Hosting, keine Cookies,
- * keine IP-Speicherung, keine personenbezogenen Daten — kein Consent-Banner nötig.
+ * Die eigene Erfassung speichert keine vollständigen IP-Adressen und legt keine
+ * Besucherkennung im Browser ab. Plausible bleibt als optionale, aggregierte
+ * Zweitauswertung eingebunden.
  *
  * Conversion-Events werden via `window.plausible('event-name', { props })` getriggert.
  * Helper-Funktion `track()` ist nachfolgend exportiert — verwendet im ConsultationForm,
@@ -13,7 +13,8 @@
 'use client';
 import Script from 'next/script';
 import { useEffect, useSyncExternalStore } from 'react';
-import { captureLandingContext } from '@/lib/attribution';
+import { usePathname } from 'next/navigation';
+import { analyticsContext, captureLandingContext } from '@/lib/attribution';
 import { analyticsClick } from '@/lib/analytics-click';
 
 /** Tausche das gegen deinen Plausible-Domain-Slug, sobald du den Account hast. */
@@ -27,7 +28,38 @@ const PLAUSIBLE_SCRIPT = 'https://plausible.io/js/script.tagged-events.outbound-
 const PLAUSIBLE_INTEGRITY =
   'sha384-cNy8VYncrUFmX/OhlSwl5GX0i+gb9VwyOZlUuhIU4gjR6jhozJYi9Mifv7A2ZX7q';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://api.partsunion.de';
+let analyticsSessionId: string | undefined;
+
+function browserUuid(): string {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = [...bytes].map((value) => value.toString(16).padStart(2, '0')).join('');
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
+function firstPartyTrack(type: 'pageview' | 'click', detail: Record<string, string>): void {
+  if (typeof window === 'undefined' || !['partsunion.de', 'www.partsunion.de'].includes(window.location.hostname)) return;
+  if (navigator.doNotTrack === '1') return;
+  analyticsSessionId ||= browserUuid();
+  const context = analyticsContext();
+  const payload = {
+    eventId: browserUuid(), sessionId: analyticsSessionId, type,
+    path: window.location.pathname,
+    ...(context.referrerHost ? { referrerHost: context.referrerHost } : {}),
+    ...Object.fromEntries(Object.entries(context).filter(([key]) => key.startsWith('utm_'))),
+    ...detail,
+  };
+  void fetch(`${API_BASE}/api/website-analytics/events`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload), keepalive: true, credentials: 'omit',
+  }).catch(() => { /* analytics must never interrupt the website */ });
+}
+
 export function Analytics() {
+  const pathname = usePathname();
   const productionHost = useSyncExternalStore(
     () => () => {},
     () => ['partsunion.de', 'www.partsunion.de'].includes(window.location.hostname),
@@ -59,6 +91,10 @@ export function Analytics() {
         origin: window.location.origin,
       });
       track('UI Click', { ...generic });
+      firstPartyTrack('click', {
+        target: generic.target, placement: generic.placement,
+        destination: generic.destination, kind: generic.kind,
+      });
       // Bestehende Conversion-Namen bleiben parallel erhalten. So brechen
       // bereits eingerichtete Ziele und Kampagnenberichte nicht.
       if (target.dataset.track && target.dataset.track !== 'UI Click')
@@ -70,6 +106,9 @@ export function Analytics() {
     document.addEventListener('click', click);
     return () => document.removeEventListener('click', click);
   }, []);
+  useEffect(() => {
+    firstPartyTrack('pageview', { path: pathname });
+  }, [pathname]);
   if (!productionHost) return null;
   return (
     <Script
