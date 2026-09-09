@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DESKTOP_CATALOG_URL, desktopPlatforms, parseDesktopCatalog, loadDesktopCatalog } from '../lib/desktop-downloads.ts';
+import { DESKTOP_CATALOG_URL, desktopPlatforms, desktopPreviewCatalog, parseDesktopCatalog, loadDesktopCatalog } from '../lib/desktop-downloads.ts';
 
 const fixture = () => ({
   releaseAvailable: true, serviceConfigured: true, version: 'desktop-v1.0.44', releaseDate: '2026-09-07T10:00:00.000Z',
@@ -19,6 +19,19 @@ test('veröffentlichte Windows- und Mac-Versionen führen ausschließlich zum Do
 test('reine Mac-Veröffentlichung aktiviert keinen Windows-Download', () => {
   const data = fixture(); data.platforms.shift();
   assert.deepEqual(parseDesktopCatalog(data).downloads.map((p) => p.id), ['macos-arm64', 'macos-x64']);
+});
+test('öffentliche Prüfversion ist vollständig, unveränderlich und transparent gekennzeichnet', () => {
+  assert.equal(desktopPreviewCatalog.version, '1.0.44');
+  assert.deepEqual(desktopPreviewCatalog.downloads.map(({ id }) => id), desktopPlatforms.map(({ id }) => id));
+  for (const download of desktopPreviewCatalog.downloads) {
+    assert.match(download.url, /^https:\/\/github\.com\/Partsunion\/landingpage\/releases\/download\/desktop-preview-v1\.0\.44-c5774bc7\/Partsunion-(?:windows-x64\.msi|macos-(?:arm64|x64)\.dmg)$/);
+    assert.match(download.sha256, /^[0-9a-f]{64}$/);
+    assert.ok(Number.isSafeInteger(download.sizeBytes) && download.sizeBytes > 0);
+  }
+  const windows = desktopPreviewCatalog.downloads.find(({ id }) => id === 'windows-x64');
+  assert.equal(windows?.verification, 'unsigned-review');
+  assert.match(windows?.warning ?? '', /Unbekannter Herausgeber/);
+  assert.ok(desktopPreviewCatalog.downloads.filter(({ verification }) => verification === 'apple-signed-notarized').length === 2);
 });
 test('nicht veröffentlichte Releases bekommen keinen erfundenen Download', () => {
   assert.deepEqual(parseDesktopCatalog({ releaseAvailable: false, version: null, releaseDate: null, platforms: [], serviceConfigured: false }), { available: false });

@@ -20,24 +20,28 @@
 .dl-section-heading .mk-kicker { margin-bottom:14px; }
 .dl-release { color:var(--mk-muted); font-size:14px; max-width:320px; line-height:1.6; }
 .dl-release span { display:block; font-size:12px; margin-top:4px; }
+.dl-preview-notice { display:flex; gap:12px; align-items:flex-start; margin-bottom:24px; padding:16px 18px; border:1px solid #efd399; border-radius:8px; background:#fff9ec; color:#614715; font-size:13px; line-height:1.65; }
+.dl-preview-notice svg { width:19px; height:19px; flex-shrink:0; margin-top:1px; }
 .dl-platforms { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
 .dl-platform { padding:30px 24px 22px; border:1px solid var(--mk-line); border-radius:10px; background:#fff; min-width:0; display:flex; flex-direction:column; }
 .dl-platform-icon { width:46px; height:46px; display:grid; place-items:center; color:var(--mk-blue); background:#edf3fc; border-radius:10px; margin-bottom:24px; }
 .dl-platform-icon svg { width:24px; height:24px; }
 .dl-platform h3 { font-size:22px; }
 .dl-platform-subtitle { color:var(--mk-muted); font-size:13px; line-height:1.6; margin-top:8px; min-height:42px; }
-.dl-requirement { font-size:12px; padding:18px 0 26px; color:#3b5667; }
+.dl-verification { display:flex; align-items:center; gap:7px; width:max-content; max-width:100%; margin-top:15px; padding:5px 8px; border-radius:999px; font-size:11px; font-weight:650; line-height:1.35; }
+.dl-verification svg { width:14px; height:14px; flex-shrink:0; }
+.dl-verification--apple-signed-notarized { background:#eaf7ef; color:#23623d; }
+.dl-verification--unsigned-review { background:#fff2d8; color:#74500a; }
+.dl-requirement { font-size:12px; padding:16px 0 24px; color:#3b5667; }
 .dl-download-button { display:flex; justify-content:center; align-items:center; gap:9px; min-height:48px; padding:12px; border:1px solid var(--mk-blue); border-radius:6px; background:var(--mk-blue); color:#fff; font-size:13px; font-weight:600; text-align:center; line-height:1.5; margin-top:auto; }
 .dl-download-button svg { width:17px; height:17px; flex-shrink:0; }
 a.dl-download-button:hover { background:#114fbf; }
 .dl-download-button:disabled { border-color:#dbe2e8; background:#edf1f4; color:#536778; cursor:not-allowed; }
 .dl-file-meta { color:var(--mk-muted); font-size:12px; text-align:center; margin-top:13px; }
+.dl-platform-warning { margin-top:10px; color:#74500a; font-size:11px; line-height:1.5; text-align:center; }
 .dl-checksum { margin-top:16px; border-top:1px solid var(--mk-line); padding-top:12px; font-size:12px; }
 .dl-checksum summary { cursor:pointer; }
 .dl-checksum code { display:block; overflow-wrap:anywhere; margin-top:12px; font-size:11px; }
-.dl-refresh { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-top:20px; color:var(--mk-muted); font-size:13px; line-height:1.6; }
-.dl-refresh button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:8px 12px; color:var(--mk-blue); font-weight:600; white-space:nowrap; cursor:pointer; }
-.dl-refresh svg { width:15px; height:15px; }
 .dl-setup { margin-top:88px; padding-top:58px; border-top:1px solid var(--mk-line); }
 .dl-steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; list-style:none; padding:0; margin:34px 0 0; }
 .dl-step-number { display:block; color:var(--mk-blue); font-size:13px; font-weight:650; margin-bottom:20px; }
@@ -76,6 +80,6 @@ a.dl-download-button:hover { background:#114fbf; }
   .dl-setup { margin-top:55px; padding-top:40px; }.dl-steps { gap:30px; }.dl-step-number { margin-bottom:12px; }
   .dl-demo { margin:55px 0; padding:26px; align-items:flex-start; gap:18px; }.dl-demo-icon { width:42px; height:42px; }
   .dl-demo > div:nth-child(2) { flex-basis:calc(100% - 60px); }.dl-demo > a { margin-left:0; }.dl-demo h2 { font-size:26px; }
-  .dl-faq { grid-template-columns:1fr; gap:25px; }.dl-refresh { align-items:flex-start; flex-direction:column; gap:6px; }
+  .dl-faq { grid-template-columns:1fr; gap:25px; }
 }
 @media(max-width:420px) { .dl-hero h1 { font-size:43px; }.dl-hero-copy { font-size:16px; }.dl-workspaces { gap:16px; }.dl-demo-icon { display:none; } }
