@@ -13,6 +13,53 @@ export type DesktopCatalog =
   | { available: false }
   | { available: true; version: string; releasedAt: string; downloads: DesktopDownload[] };
 
+export type DesktopPreviewDownload = DesktopDownload & {
+  verification: 'apple-signed-notarized' | 'unsigned-review';
+  statusLabel: string;
+  warning: string | null;
+};
+
+const DESKTOP_PREVIEW_RELEASE_URL = 'https://github.com/Partsunion/landingpage/releases/download/desktop-preview-v1.0.44-c5774bc7';
+
+/**
+ * Immutable, reviewed download set for direct customer evaluation. Keeping the
+ * full URLs and digests in source means an API response cannot redirect a
+ * visitor to another host or silently exchange an installer.
+ */
+export const desktopPreviewCatalog = {
+  version: '1.0.44',
+  releasedAt: '2026-09-09T13:37:26.000Z',
+  downloads: [
+    {
+      id: 'windows-x64',
+      url: `${DESKTOP_PREVIEW_RELEASE_URL}/Partsunion-windows-x64.msi`,
+      sizeBytes: 9_179_136,
+      sha256: 'abad66e2ebc01d0ecf5d4ace373fd85c5672709d7931bb0cacc442e8da9a9160',
+      verification: 'unsigned-review',
+      statusLabel: 'Prüfversion · nicht signiert',
+      warning: 'Windows kann „Unbekannter Herausgeber“ anzeigen.',
+    },
+    {
+      id: 'macos-arm64',
+      url: `${DESKTOP_PREVIEW_RELEASE_URL}/Partsunion-macos-arm64.dmg`,
+      sizeBytes: 6_946_970,
+      sha256: '341d2f9d69e43035e27c3d47a7b463ba58cc53de6e24ee13f8f29728cc5b15d6',
+      verification: 'apple-signed-notarized',
+      statusLabel: 'Von Apple notarisiert',
+      warning: null,
+    },
+    {
+      id: 'macos-x64',
+      url: `${DESKTOP_PREVIEW_RELEASE_URL}/Partsunion-macos-x64.dmg`,
+      sizeBytes: 7_318_873,
+      sha256: '5e521795a7809b96bb3c5e3593c792278289b83ad535f69e686bc93f1aa344de',
+      verification: 'apple-signed-notarized',
+      statusLabel: 'Von Apple notarisiert',
+      warning: null,
+    },
+  ] satisfies DesktopPreviewDownload[],
+} as const;
+
 const stableVersion = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/;
 const maximumCatalogBytes = 32 * 1024;
 const maximumInstallerBytes = 2 * 1024 * 1024 * 1024;
