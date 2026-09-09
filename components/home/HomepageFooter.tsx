@@ -27,7 +27,7 @@ const groups = [
       ['Einführung & Datenübernahme', '/einfuehrung'],
       ['Kosten & Umfang', '/pricing'],
       ['Beratung vereinbaren', '/beratung'],
-      ['Zum Kundenlogin', 'https://app.partsunion.de'],
+      ['Desktop-App herunterladen', '/download'],
     ],
   },
   {

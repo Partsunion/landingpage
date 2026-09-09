@@ -16,9 +16,13 @@ import { CalendarPicker } from './CalendarPicker';
 export function FinalCTA({
   standalone = false,
   source = 'beratung',
+  introTitle = 'Lass uns über deinen Betrieb sprechen.',
+  introCopy = 'Wo verliert ihr heute Zeit? Gemeinsam schauen wir auf euren Alltag und klären, wie automatische OE-Ermittlung, ERP, WhatsApp-Bot und die verbundenen Arbeitsbereiche euch unterstützen können.',
 }: {
   standalone?: boolean;
   source?: string;
+  introTitle?: string;
+  introCopy?: string;
 }) {
   const id = useId();
   const Heading = standalone ? 'h1' : 'h2';
@@ -104,12 +108,8 @@ export function FinalCTA({
         <div className="bk-shell">
           <div className="bk-intro">
             <p className="mk-kicker">Dein persönliches Beratungsgespräch</p>
-            <Heading>Lass uns über deinen Betrieb sprechen.</Heading>
-            <p className="bk-copy">
-              Wo verliert ihr heute Zeit? Gemeinsam schauen wir auf euren Alltag und klären, wie
-              automatische OE-Ermittlung, ERP, WhatsApp-Bot und die verbundenen Arbeitsbereiche euch
-              unterstützen können.
-            </p>
+            <Heading>{introTitle}</Heading>
+            <p className="bk-copy">{introCopy}</p>
             <div className="bk-meeting-meta">
               <span>
                 <Clock3 aria-hidden="true" /> Ca. 30 Minuten

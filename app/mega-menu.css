@@ -56,12 +56,13 @@
   gap: 20px;
   flex-shrink: 0;
 }
-.mm-login {
+.mm-download {
   font-size: 14px;
   color: #394f5d;
   padding-block: 12px;
 }
-.mm-login:hover {
+.mm-download:hover,
+.mm-download[aria-current='page'] {
   color: #175cda;
 }
 .mm-cta.mk-button {
@@ -344,9 +345,6 @@
   .mm-actions {
     gap: 14px;
   }
-  .mm-login {
-    display: none;
-  }
   .mm-panel-grid {
     gap: 16px;
     padding: 25px;
@@ -356,6 +354,9 @@
   }
 }
 @media (max-width: 1099px) {
+  .mm-download {
+    display: none;
+  }
   .mm-header.mk-head {
     height: 70px;
   }

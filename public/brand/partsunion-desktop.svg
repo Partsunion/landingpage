@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Partsunion App Icon</title>
+  <desc id="desc">The blue Partsunion union mark on a classic white application tile.</desc>
+
+  <defs>
+    <linearGradient id="brand-blue" x1="350" y1="318" x2="674" y2="706" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3478F6"/>
+      <stop offset="1" stop-color="#1F5ED6"/>
+    </linearGradient>
+    <linearGradient id="tile-surface" x1="512" y1="102" x2="512" y2="922" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <filter id="tile-shadow" x="54" y="54" width="916" height="944" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#0F2B5C" flood-opacity="0.20"/>
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0F2B5C" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <!--
+    The tile occupies 80% of the 1024 px canvas. This matches the visual
+    footprint of conventional macOS app icons and prevents an oversized Dock
+    appearance while preserving a clean silhouette on Windows and iOS.
+  -->
+  <g filter="url(#tile-shadow)">
+    <rect x="102" y="102" width="820" height="820" rx="184" fill="url(#tile-surface)"/>
+    <rect x="103.5" y="103.5" width="817" height="817" rx="182.5" fill="none" stroke="#DCE4F0" stroke-width="3"/>
+  </g>
+
+  <!-- The original Partsunion four-link mark, enlarged for clear small-size rendering. -->
+  <g transform="translate(512 512) scale(1.1) translate(-512 -512)" fill="none" stroke="url(#brand-blue)" stroke-width="82" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M431 560V404C431 345 469 310 526 310H553C616 310 654 349 654 411"/>
+    <path d="M464 432H620C679 432 714 470 714 527V554C714 617 675 655 613 655"/>
+    <path d="M593 464V620C593 679 555 714 498 714H471C408 714 370 675 370 613"/>
+    <path d="M560 592H404C345 592 310 554 310 497V470C310 407 349 369 411 369"/>
+  </g>
+</svg>

@@ -445,17 +445,17 @@ export function HomepageHeader() {
                 Beratung vereinbaren
                 <ArrowRight aria-hidden="true" />
               </Link>
-              <a href="https://app.partsunion.de">
-                Zum Kundenlogin
+              <Link href="/download" aria-current={isCurrent('/download') ? 'page' : undefined} onClick={closeNavigation}>
+                Download
                 <ArrowRight aria-hidden="true" />
-              </a>
+              </Link>
             </div>
           </nav>
 
           <div className="mm-actions">
-            <a href="https://app.partsunion.de" className="mm-login">
-              Anmelden
-            </a>
+            <Link href="/download" className="mm-download" aria-current={isCurrent('/download') ? 'page' : undefined} onClick={closeNavigation}>
+              Download
+            </Link>
             <Link
               href="/beratung"
               className="mk-button mm-cta"

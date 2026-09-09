@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { Menu, X, ChevronDown, LogIn } from 'lucide-react';
+import { Menu, X, ChevronDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getValuePropositions, getCoreFeatures } from '@/lib/feature-data';
 
@@ -163,20 +163,16 @@ export function Navbar() {
                         <Link href="/plattform" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                             Plattform
                         </Link>
-                        <Link href="/download" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-                            Download
-                        </Link>
                         <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                             Über uns
                         </Link>
                         <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                             Kontakt
                         </Link>
-                        {/* Login Button */}
-                        <a href="https://app.partsunion.de/auth" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
-                            <LogIn className="h-4 w-4" />
-                            Login
-                        </a>
+                        <Link href="/download" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                            <Download className="h-4 w-4" aria-hidden="true" />
+                            Download
+                        </Link>
 
                         <Link href="/#beratung">
                             <Button variant="primary" size="sm">
@@ -239,27 +235,20 @@ export function Navbar() {
                             Über uns
                         </Link>
                         <Link
-                            href="/download"
-                            className="text-sm font-medium text-foreground hover:text-primary"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Download
-                        </Link>
-                        <Link
                             href="/contact"
                             className="text-sm font-medium text-foreground hover:text-primary"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Kontakt
                         </Link>
-                        <a
-                            href="https://app.partsunion.de/auth"
+                        <Link
+                            href="/download"
                             className="text-sm font-medium text-foreground hover:text-primary flex items-center gap-2"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
-                            <LogIn className="h-4 w-4" />
-                            Login
-                        </a>
+                            <Download className="h-4 w-4" aria-hidden="true" />
+                            Download
+                        </Link>
                         <Link href="/#beratung" onClick={() => setIsMobileMenuOpen(false)}>
                             <Button className="w-full mt-4">Beratung vereinbaren</Button>
                         </Link>

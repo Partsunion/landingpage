@@ -181,7 +181,11 @@ for (const canonical of indexableCanonicals) {
 }
 assert(!sitemap.includes('<loc>https://partsunion.de/termin</loc>'), 'sitemap.xml: noindex-Seite /termin darf nicht enthalten sein.');
 assert(!sitemap.includes('<loc>https://bot.partsunion.de</loc>'), 'sitemap.xml: noindex-Demo darf nicht enthalten sein.');
-assert(!sitemap.includes('<loc>https://partsunion.de/download</loc>'), 'sitemap.xml: noindex-Downloadseite darf nicht enthalten sein.');
+assert(sitemap.includes('<loc>https://partsunion.de/download</loc>'), 'sitemap.xml: öffentliche Desktop-Downloadseite fehlt.');
+const downloadPage = await readFile(join(output, 'download.html'), 'utf8');
+assert(!/<meta name="robots" content="[^"]*noindex/i.test(downloadPage), 'download: öffentliche Kundenseite darf nicht noindex sein.');
+assert(downloadPage.includes('Windows') && downloadPage.includes('macOS'), 'download: Windows- oder Mac-Information fehlt.');
+assert(!downloadPage.includes('Partsunion-Preview-1.0.38'), 'download: veraltete Preview darf nicht als Kundendownload verlinkt werden.');
 assert(!sitemap.includes('<loc>https://partsunion.de/live-demo/teileermittlung</loc>'), 'sitemap.xml: noindex-Werkzeugseite darf nicht enthalten sein.');
 assert(!sitemap.includes(new Date().toISOString()), 'sitemap.xml: lastModified darf nicht bei jedem Build auf die aktuelle Uhrzeit springen.');
 

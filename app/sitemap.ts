@@ -41,6 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]);
 
   return [
+    {
+      url: `${BASE_URL}/download`,
+      lastModified: new Date('2026-09-07T00:00:00+02:00'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     // ─── Konversions-kritisch ─────────────────────────────────────
     {
       url: `${BASE_URL}/`,
