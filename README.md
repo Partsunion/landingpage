@@ -5,7 +5,7 @@
 Die Website wird mit Next.js statisch exportiert. Lokal starten:
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -22,11 +22,21 @@ npm run seo:check
 `seo:check` prüft nach dem Build alle indexierbaren HTML-Seiten auf Title,
 Description, selbstreferenzierendes Canonical, genau eine H1, Open-Graph-Daten,
 gültiges JSON-LD und Aufnahme in die Sitemap. Zusätzlich werden `robots.txt`,
-`llms.txt` und `llms-full.txt` kontrolliert.
+`llms.txt`, `llms-full.txt`, die internen Links sowie die kontrollierten
+Legacy-URLs (`/termin`, `/bot`) geprüft.
 
 Such- und Antwortbots wie OAI-SearchBot, PerplexityBot und Claude-SearchBot sind
-in `public/robots.txt` erlaubt. Reine Trainingscrawler werden separat behandelt.
+in der generierten `robots.txt` erlaubt. Reine Trainingscrawler werden separat behandelt.
 Die Trennung darf nicht versehentlich wieder zusammengeführt werden.
+
+## CRM und Terminbuchung
+
+Das Kontaktformular sendet Leads an `https://api.partsunion.de/api/crm/leads`.
+Die Beratung lädt freie Zeiten über `https://api.partsunion.de/api/book/availability`
+und bucht über `/api/book/consultations`. Für Staging können die Basis-URLs mit
+`NEXT_PUBLIC_CRM_LEADS_URL` und `NEXT_PUBLIC_BOOKING_API_URL` überschrieben werden.
+Beide Formulare enthalten Einwilligung, Honeypot, Attribution, Timeouts und
+verständliche Fehlerzustände.
 
 Verifizierungscodes werden beim Build über diese Variablen gesetzt:
 

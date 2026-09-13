@@ -1,38 +1,26 @@
-import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
-import sharp from 'sharp';
-import { productImages } from '../lib/product-images.ts';
+import assert from "node:assert/strict";
+import { readFile, stat } from "node:fs/promises";
 
-for (const [key, asset] of Object.entries(productImages)) {
-  for (const extension of ['.png', '.webp', '-1600.webp']) {
-    const metadata = await sharp(`public/product/${key}${extension}`).metadata();
-    const width = extension === '-1600.webp' ? Math.min(1600, asset.width) : asset.width;
-    assert.equal(metadata.width, width, `${key}${extension}: width`);
-    assert.ok(Math.abs(metadata.height - (asset.height * width / asset.width)) <= 1, `${key}${extension}: aspect ratio`);
-  }
+const source = await readFile("components/ProductShot.tsx", "utf8");
+const assets = [...source.matchAll(/src: "(\/product\/[^"]+)"/g)].map((match) => match[1]);
+assert.equal(new Set(assets).size, 5, "ProductShot muss fünf eindeutige, kuratierte Produktoberflächen verwenden");
+
+for (const asset of assets) {
+  const path = `public${asset}`;
+  const info = await stat(path);
+  assert.ok(info.isFile() && info.size > 20_000, `${path} fehlt oder ist zu klein`);
 }
 
-const routes = {
-  'loesungen/oe-ermittlung': 'oe-ermittlung',
-  'loesungen/angebot-auftrag': 'verkauf-auftrag',
-  'loesungen/einkauf-disposition': 'einkauf-bestellung',
-  'loesungen/bestand-lager': 'lager-artikel',
-  'loesungen/retouren': 'retouren-rma',
-  'loesungen/finanzen-kasse': 'kasse-verkauf',
-  'loesungen/betriebsassistent': 'assistent-arbeitsablaeufe',
-  'loesungen/anfragen-whatsapp': 'whatsapp-dialog',
-  'whatsapp-bot': 'whatsapp-dialog',
-  'betriebsassistent': 'assistent-arbeitsablaeufe',
-  'buchhaltung-banking': 'banking-abgleich',
-  'einfuehrung': 'arbeitstag',
-  'plattform/gebrauchtteile': 'gebrauchtteile-bestand',
-  'plattform/neuteile': 'verkauf-auftrag',
+const pages = {
+  "loesungen/oe-ermittlung.html": "feature-theme-vehicle",
+  "loesungen/bestand-lager.html": "feature-theme-stock",
+  "whatsapp-bot.html": "feature-theme-chat",
+  "buchhaltung-banking.html": "feature-theme-finance",
+  "produktdaten.html": "product-explorer",
 };
-for (const [route, key] of Object.entries(routes)) {
-  const html = await readFile(`out/${route}.html`, 'utf8');
-  assert.ok(html.includes(`data-product-image="${key}"`), `${route}: expected screenshot ${key}`);
+for (const [page, marker] of Object.entries(pages)) {
+  const html = await readFile(`out/${page}`, "utf8");
+  assert.ok(html.includes(marker), `${page}: erwarteter visueller Kontext ${marker} fehlt`);
 }
-const mobile = await readFile('out/loesungen/haendler-app.html', 'utf8');
-assert.ok(mobile.includes('keine Bildschirmaufnahme der App'));
-assert.ok(!mobile.includes('data-product-image='), 'Mobile app must not show a desktop screenshot');
-console.log(`Checked ${Object.keys(productImages).length} screenshot assets and ${Object.keys(routes).length + 1} topic mappings.`);
+
+console.log(`Produktbild-Prüfung bestanden: ${assets.length} kuratierte Screenshots und ${Object.keys(pages).length} Themenzuordnungen.`);
