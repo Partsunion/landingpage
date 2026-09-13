@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Partsunion" }],
   creator: "Partsunion",
   publisher: "Partsunion",
-  icons: { icon: "https://partsunion.de/favicon.png", shortcut: "https://partsunion.de/favicon.png" },
+  icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
   formatDetection: { email: false, address: false, telephone: false },
   alternates: { canonical: "/" },
   openGraph: {
