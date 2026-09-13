@@ -14,7 +14,16 @@ function firstPartyTrack(type: "pageview" | "click", detail: Record<string, stri
   if (typeof window === "undefined" || !["partsunion.de", "www.partsunion.de"].includes(window.location.hostname) || navigator.doNotTrack === "1") return;
   analyticsSessionId ||= uuid();
   const context = analyticsContext();
-  void fetch(`${API_BASE}/api/website-analytics/events`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ eventId: uuid(), sessionId: analyticsSessionId, type, path: window.location.pathname, ...context, ...detail }), keepalive: true, credentials: "omit" }).catch(() => undefined);
+  const payload = {
+    eventId: uuid(),
+    sessionId: analyticsSessionId,
+    type,
+    path: window.location.pathname,
+    ...(context.referrerHost ? { referrerHost: context.referrerHost } : {}),
+    ...Object.fromEntries(Object.entries(context).filter(([key]) => key.startsWith("utm_"))),
+    ...detail,
+  };
+  void fetch(`${API_BASE}/api/website-analytics/events`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, credentials: "omit" }).catch(() => undefined);
 }
 
 export function Analytics() {
