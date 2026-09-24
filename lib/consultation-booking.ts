@@ -13,6 +13,20 @@ export interface ConsultationResult {
   confirmationEmail: "pending" | "sending" | "sent" | "failed" | "uncertain";
 }
 
+export interface AppointmentResponseView {
+  typeLabel: string;
+  title: string;
+  start: string;
+  end: string;
+  startLabel: string;
+  durationMinutes: number;
+  assigneeName: string | null;
+  location: string | null;
+  customerName: string | null;
+  status: string;
+  attendanceStatus?: "pending" | "confirmed" | "declined" | null;
+}
+
 export class BookingError extends Error {
   constructor(message: string, public readonly status: number) {
     super(message);
@@ -48,4 +62,24 @@ export async function bookConsultation(input: { requestId: string; company: stri
   const result = await response.json();
   if (!result.appointment?.id || !result.appointment?.start) throw new BookingError("Die Buchungsantwort konnte nicht gelesen werden. Bitte versuche es mit denselben Angaben erneut.", 0);
   return result;
+}
+
+async function appointmentCapabilityRequest(path: "resolve" | "respond", token: string, action?: "accept" | "decline"): Promise<AppointmentResponseView> {
+  const response = await fetch(`${BOOKING_API}/${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    cache: "no-store",
+    body: JSON.stringify({ token, ...(action ? { action } : {}) }),
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result.appointment) throw new BookingError(result.error || "Der Termin-Link ist ungültig oder nicht mehr aktiv.", response.status);
+  return result.appointment as AppointmentResponseView;
+}
+
+export function resolveAppointmentResponse(token: string): Promise<AppointmentResponseView> {
+  return appointmentCapabilityRequest("resolve", token);
+}
+
+export function respondToAppointment(token: string, action: "accept" | "decline"): Promise<AppointmentResponseView> {
+  return appointmentCapabilityRequest("respond", token, action);
 }

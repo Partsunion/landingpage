@@ -7,12 +7,13 @@ import { ContentHubPage } from "@/components/ContentHubPage";
 import { DownloadPage, ImplementationPage, ProductViewsPage } from "@/components/DedicatedPages";
 import { FeaturePage } from "@/components/FeaturePage";
 import { AboutPage, ArticlePage, ComparisonPage, ContactPage, LegalPage, PricingPage } from "@/components/SpecialPages";
+import { AppointmentResponse } from "@/components/AppointmentResponse";
 import { allRoutes, groupByPath, navGroups, routeByPath } from "@/lib/site-data";
 
 function humanize(value: string) { return value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ") }
 
 export function InnerPage({ path }: { path: string }) {
-  if (path === "/termin") return <ContactPage consultation />;
+  if (path === "/termin") return <AppointmentResponse />;
   if (path === "/bot") return <FeaturePage path="/whatsapp-bot" />;
   if (path === "/blog/retourenquote-autoteilehandel-senken") return <ArticlePage path="/blog/retourenquote-autoteilhandel-senken" />;
   if (path === "/blog") return <ContentHubPage type="blog" />;
