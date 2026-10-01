@@ -149,7 +149,7 @@ export function ConsultationBooking({ compact = false }: { compact?: boolean }) 
         <div className="field"><label htmlFor={`${id}-phone`}>Telefon (optional)</label><input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" maxLength={30} placeholder="+49 123 456789" disabled={busy} /></div>
         <div className="field field-wide"><label htmlFor={`${id}-topic`}>Was möchtest du besprechen? (optional)</label><textarea id={`${id}-topic`} name="topic" maxLength={1200} rows={compact ? 2 : 3} placeholder="Aktuelle Software, Abläufe oder Funktionen, die dich interessieren." disabled={busy} /></div>
       </div>
-      <label className="booking-consent"><input type="checkbox" name="consent" required disabled={busy} /><span>Partsunion darf meine Angaben verwenden, um das Beratungsgespräch zu vereinbaren und Rückfragen zu klären. Weitere Informationen in der <Link href="/legal/datenschutz">Datenschutzerklärung</Link>.</span></label>
+      <label className="booking-consent"><input type="checkbox" name="consent" required disabled={busy} /><span>Ich habe die Informationen zur Verarbeitung meiner Angaben in der <Link href="/legal/datenschutz">Datenschutzerklärung</Link> zur Kenntnis genommen.</span></label>
       {error && <p className="form-error" role="alert">{error} <a href="mailto:info@partsunion.de">Per E-Mail schreiben</a></p>}
       <button className="button button-primary booking-submit" type="submit" disabled={busy}>{busy ? "Termin wird gebucht …" : "Beratungsgespräch buchen"} <ArrowRight /></button>
     </div>}

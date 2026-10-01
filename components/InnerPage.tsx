@@ -6,7 +6,8 @@ import { glyphForPath, ProcessGlyph } from "@/components/ProcessGlyph";
 import { ContentHubPage } from "@/components/ContentHubPage";
 import { DownloadPage, ImplementationPage, ProductViewsPage } from "@/components/DedicatedPages";
 import { FeaturePage } from "@/components/FeaturePage";
-import { AboutPage, ArticlePage, ComparisonPage, ContactPage, LegalPage, PricingPage } from "@/components/SpecialPages";
+import { AboutPage, ArticlePage, ComparisonPage, ContactPage, PricingPage } from "@/components/SpecialPages";
+import { LegalPage } from "@/components/LegalPage";
 import { AppointmentResponse } from "@/components/AppointmentResponse";
 import { allRoutes, groupByPath, navGroups, routeByPath } from "@/lib/site-data";
 

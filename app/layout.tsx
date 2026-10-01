@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Partsunion" }],
   creator: "Partsunion",
   publisher: "Partsunion",
-  icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
   formatDetection: { email: false, address: false, telephone: false },
   alternates: { canonical: "/" },
   openGraph: {
@@ -44,7 +43,8 @@ const siteSchema = {
       url: base,
       logo: { "@type": "ImageObject", url: `${base}/brand/partsunion-logo.png` },
       email: "info@partsunion.de",
-      address: { "@type": "PostalAddress", addressLocality: "Brühl", addressCountry: "DE" },
+      vatID: "DE464848197",
+      address: { "@type": "PostalAddress", streetAddress: "Zum Sommersberg 27", postalCode: "50321", addressLocality: "Brühl", addressCountry: "DE" },
       contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "info@partsunion.de", availableLanguage: ["de"] },
       description: "Anbieter einer verbundenen ERP-, Warenwirtschafts- und Automatisierungsplattform für den Autoteilehandel.",
       knowsAbout: ["Autoteilehandel", "OE-Ermittlung", "Fahrzeugidentifikation", "Warenwirtschaft", "Lagerverwaltung", "Kasse", "Buchhaltung", "Retourenmanagement"],

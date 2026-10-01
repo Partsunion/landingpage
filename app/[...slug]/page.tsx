@@ -26,7 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = canonicalPathFor(path);
   const featurePage = canonical.startsWith("/features/") || canonical.startsWith("/loesungen/") || ["/whatsapp-bot", "/betriebsassistent", "/buchhaltung-banking", "/automatisierung-autoteilehandel", "/plattform/neuteile", "/plattform/gebrauchtteile", "/live-demo/teileermittlung"].includes(canonical);
   const profile = featurePage ? featureProfile(canonical, route.label, route.description) : null;
-  const description = metadataDescription(route.description, profile?.result ?? "Erfahre, wie Partsunion deinen Autoteilehandel im Alltag unterstützt.");
+  const legalDescriptions: Record<string, string> = {
+    "/legal/impressum": "Impressum der PartsUnion UG (haftungsbeschränkt) mit Anschrift, Geschäftsführung, Registergericht, Registernummer und Kontaktangaben.",
+    "/legal/agb": "B2B-AGB von Partsunion für SaaS, Einrichtung, Support, Integrationen, Abrechnung, Laufzeit und Nutzung der Plattform im Autoteilehandel.",
+    "/legal/datenschutz": "Datenschutzerklärung von Partsunion zu Websitebetrieb, Reichweitenmessung, Kontaktformular, Terminbuchung, Empfängern und Betroffenenrechten.",
+    "/legal/widerruf": "Hinweise zum Widerrufsrecht bei Partsunion: B2B-Angebot für Unternehmer, unverbindliche Beratungstermine und vertragliche Sonderregelungen.",
+  };
+  const description = legalDescriptions[path] ?? metadataDescription(route.description, profile?.result ?? "Erfahre, wie Partsunion deinen Autoteilehandel im Alltag unterstützt.");
   return {
     title: featurePage ? seoTitleFor(canonical, route.label) : route.label,
     description,

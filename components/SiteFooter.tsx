@@ -29,7 +29,7 @@ export function SiteFooter() {
         <a href="#top" className="back-top" aria-label="Nach oben"><ArrowUp size={18} /></a>
         <div className="footer-legal">
           <span>© 2026 PartsUnion UG (haftungsbeschränkt) · Brühl</span>
-          <div><Link href="/legal/datenschutz">Datenschutz</Link><Link href="/legal/impressum">Impressum</Link><Link href="/legal/agb">AGB</Link><Link href="/legal/widerruf">Widerruf</Link><a href="mailto:info@partsunion.de">info@partsunion.de</a></div>
+          <div><Link href="/legal/impressum">Impressum</Link><Link href="/legal/agb">AGB</Link><Link href="/legal/datenschutz">Datenschutz</Link><Link href="/legal/widerruf">Widerruf</Link><a href="mailto:info@partsunion.de">info@partsunion.de</a></div>
         </div>
       </div>
     </footer>

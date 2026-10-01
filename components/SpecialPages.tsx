@@ -65,11 +65,6 @@ export function AboutPage() {
   </>;
 }
 
-export function LegalPage({ path }: { path: string }) {
-  const route = routeByPath(path)!;
-  return <><section className="special-heading legal-heading"><Crumbs title={route.label} /><div className="container special-heading-copy"><p className="eyebrow">RECHTLICHES</p><h1>{route.label}</h1><p>{route.description}</p></div></section><section className="section container legal-copy"><aside><strong>PartsUnion UG (haftungsbeschränkt)</strong><span>Brühl, Deutschland</span><a href="mailto:info@partsunion.de">info@partsunion.de</a></aside><article><h2>{route.label}</h2><p>Hier findest du die rechtlichen Informationen rund um die Nutzung der Partsunion Website und Plattform.</p><h3>Geltungsbereich und Anbieter</h3><p>Die Angaben beziehen sich auf das Angebot der PartsUnion UG (haftungsbeschränkt). Für rechtsverbindliche Anfragen erreichst du uns unter info@partsunion.de.</p><h3>Aktualität der Informationen</h3><p>Rechtliche Inhalte werden bei Bedarf aktualisiert. Maßgeblich ist die jeweils veröffentlichte Fassung.</p></article></section></>;
-}
-
 export function ArticlePage({ path }: { path: string }) {
   const route = routeByPath(path)!;
   const shot: ProductShotVariant = /whatsapp|anfragen/.test(path) ? "whatsapp" : /oe|fahrzeug|vin/.test(path) ? "oe" : /lager|bestand/.test(path) ? "inventory" : "order";
