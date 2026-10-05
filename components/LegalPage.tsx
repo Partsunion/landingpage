@@ -227,8 +227,33 @@ function Datenschutz() {
     <h3>14. Keine automatisierte Einzelfallentscheidung</h3>
     <p>Bei Websitebesuch, Kontaktanfrage und Terminbuchung findet keine ausschließlich automatisierte Entscheidung einschließlich Profiling statt, die dir gegenüber rechtliche Wirkung entfaltet oder dich ähnlich erheblich beeinträchtigt.</p>
 
-    <h3>15. Aktualisierung dieser Erklärung</h3>
+    <h3>15. WhatsApp-Anbindung und Händlerkommunikation</h3>
+    <p>Wenn ein Händler WhatsApp mit Partsunion verbindet, autorisiert er die App „PartsUnion Commerce“ für sein eigenes WhatsApp-Unternehmenskonto. Die Anbindung erfolgt über die WhatsApp Business Platform von Meta. Für die Zuordnung der Verbindung werden Unternehmens- und WhatsApp-Konto-IDs, Telefonnummer-IDs, die sichtbare Geschäftsnummer und die erteilten Berechtigungen verarbeitet. Zugangsdaten für die Schnittstelle werden serverseitig verarbeitet und nicht anderen Händlern bereitgestellt.</p>
+    <p>Bei einer verbundenen Geschäftsnummer können Telefonnummer und Profilname des Absenders, Nachrichteninhalte, übermittelte Bilder, Dokumente oder Sprachnachrichten sowie Zeitpunkte, Nachrichten-IDs und Zustellstatus verarbeitet werden. Diese Daten dienen der Bearbeitung von Kundenanfragen, Angeboten, Bestellungen, Rückfragen und Retouren im Auftrag des jeweiligen Händlers. Nachrichten werden dem zugehörigen Händler zugeordnet. Soweit die Verarbeitung für den Händler erfolgt, gelten seine Datenschutzinformationen und die mit ihm vereinbarten Bedingungen zur Auftragsverarbeitung.</p>
+    <p>Automatisierte Assistenzfunktionen können Inhalte zur Erkennung und Bearbeitung einer Anfrage auswerten. Welche Funktionen und technischen Dienstleister für einen Händler verwendet werden, richtet sich nach seiner konkreten Einrichtung und den ergänzenden Datenschutzinformationen. Teile keine für deine Anfrage unnötigen personenbezogenen Daten oder besonders sensiblen Informationen über WhatsApp.</p>
+    <p>WhatsApp und Meta verarbeiten Daten auch nach ihren eigenen Datenschutzinformationen. Weitere Informationen findest du in der <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener noreferrer">WhatsApp-Datenschutzrichtlinie für den Europäischen Raum</a>. Das Trennen der Verbindung beendet die Anbindung; bereits gespeicherte Geschäftsvorgänge werden dadurch nicht automatisch gelöscht. Für eine Löschanfrage folge der <Link href="/legal/datenloeschung">Anleitung zur Datenlöschung</Link>.</p>
+
+    <h3>16. Aktualisierung dieser Erklärung</h3>
     <p>Wir passen diese Datenschutzerklärung an, wenn sich Datenverarbeitungen, eingesetzte Dienstleister oder rechtliche Anforderungen ändern. Es gilt die auf dieser Website veröffentlichte Fassung.</p>
+    <p className="legal-note">Stand: Oktober 2026</p>
+  </>;
+}
+
+function Datenloeschung() {
+  return <>
+    <h2>Datenlöschung bei Partsunion und WhatsApp</h2>
+    <p className="legal-lead">Hier erfährst du, wie du die Löschung von Daten anfragen kannst, die Partsunion über die Plattform oder die Meta-App „PartsUnion Commerce“ verarbeitet.</p>
+    <h3>1. Anfrage senden</h3>
+    <p>Schreibe an <a href="mailto:info@partsunion.de?subject=Datenl%C3%B6schung%20Partsunion%20WhatsApp">info@partsunion.de</a> mit dem Betreff „Datenlöschung Partsunion WhatsApp“. Nenne die E-Mail-Adresse oder WhatsApp-Nummer, unter der du Partsunion verwendet hast, und den betroffenen Händler beziehungsweise dein Unternehmen. Beschreibe, welche Daten oder welche Verbindung deine Anfrage betrifft. Sende zunächst keine Ausweiskopie, Passwörter, Zugangstokens oder Bestätigungscodes.</p>
+    <h3>2. Nachrichten an einen Händler</h3>
+    <p>Wenn du über WhatsApp mit einem Händler kommuniziert hast, wende dich auch an diesen Händler. Er entscheidet über die Verarbeitung seiner Kunden- und Geschäftsdaten. Wir ordnen deine Anfrage dem betroffenen Händler zu und unterstützen die Bearbeitung, soweit Partsunion die Daten in dessen Auftrag verarbeitet.</p>
+    <h3>3. WhatsApp-Verbindung eines Händlers trennen</h3>
+    <p>Als berechtigter Händleradministrator kannst du Partsunion auffordern, die WhatsApp-Verbindung deines Unternehmens zu trennen. Du kannst außerdem die erteilte Berechtigung in den Meta-Einstellungen deiner Business-Integrationen überprüfen und entfernen. Das Entfernen einer Berechtigung löscht bereits gespeicherte Daten nicht automatisch; sende dafür zusätzlich eine Löschanfrage.</p>
+    <h3>4. Bearbeitung und Rückmeldung</h3>
+    <p>Zur Bearbeitung prüfen wir, ob die Anfrage von einer berechtigten Person stammt und welche Daten betroffen sind. Falls weitere Angaben erforderlich sind, melden wir uns über deinen angegebenen Kontaktweg. Wir teilen dir mit, wie deine Anfrage bearbeitet wurde und welche Daten gegebenenfalls wegen gesetzlicher Aufbewahrungspflichten oder zur Bearbeitung bestehender Ansprüche noch gespeichert werden müssen. Daten in Sicherungskopien unterliegen den jeweiligen Backup-Zyklen.</p>
+    <h3>5. Daten bei WhatsApp und Meta</h3>
+    <p>Eine Anfrage an Partsunion betrifft die von Partsunion verarbeiteten Daten. Daten in deinem eigenen WhatsApp-Konto, auf deinem Gerät oder bei Meta kannst du über die dort vorgesehenen Einstellungen und Kontaktwege verwalten. Weitere Informationen stehen in der <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener noreferrer">WhatsApp-Datenschutzrichtlinie</a>.</p>
+    <p>Weitere Informationen zu Partsunion findest du in unserer <Link href="/legal/datenschutz">Datenschutzerklärung</Link> und im <Link href="/legal/impressum">Impressum</Link>.</p>
     <p className="legal-note">Stand: Oktober 2026</p>
   </>;
 }
@@ -260,6 +285,7 @@ export function LegalPage({ path }: { path: string }) {
     "/legal/impressum": <Impressum />,
     "/legal/agb": <Agb />,
     "/legal/datenschutz": <Datenschutz />,
+    "/legal/datenloeschung": <Datenloeschung />,
     "/legal/widerruf": <Widerruf />,
   };
   return <>
