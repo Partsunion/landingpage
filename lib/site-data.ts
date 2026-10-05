@@ -116,6 +116,7 @@ export const extraRoutes: NavItem[] = [
   ["Impressum", "/legal/impressum", "Anbieterkennzeichnung und Kontaktinformationen."],
   ["AGB", "/legal/agb", "Allgemeine Geschäftsbedingungen für die Partsunion B2B-Software und zugehörige Leistungen."],
   ["Datenschutz", "/legal/datenschutz", "Informationen zur Verarbeitung personenbezogener Daten."],
+  ["Datenlöschung", "/legal/datenloeschung", "So kannst du die Löschung deiner Partsunion- und WhatsApp-Daten anfragen."],
   ["Widerruf", "/legal/widerruf", "Informationen zum Widerrufsrecht."],
   ["Beratung", "/termin", "Vereinbare ein persönliches Beratungsgespräch mit dem Partsunion Team."],
   ["WhatsApp-Bot", "/bot", "Verwandle Teileanfragen aus WhatsApp in strukturierte Vorgänge."],
