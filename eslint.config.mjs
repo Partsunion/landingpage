@@ -5,6 +5,24 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  {
+    // Keep project imports unchanged; this versioned upstream fork is CommonJS and needs only these imports.
+    files: ["vendor/partsunion-braces/**/*.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": [
+        "error",
+        {
+          allow: [
+            "^\\./(?:lib/)?(?:stringify|compile|expand|parse|constants|utils)$",
+            "^fill-range$",
+          ],
+        },
+      ],
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
