@@ -20,7 +20,7 @@ function firstPartyTrack(type: "pageview" | "click", detail: Record<string, stri
     type,
     path: window.location.pathname,
     ...(context.referrerHost ? { referrerHost: context.referrerHost } : {}),
-    ...Object.fromEntries(Object.entries(context).filter(([key]) => key.startsWith("utm_"))),
+    ...Object.fromEntries(Object.entries(context).filter(([key]) => key.startsWith("utm_") && key !== 'utm_id')),
     ...detail,
   };
   void fetch(`${API_BASE}/api/website-analytics/events`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, credentials: "omit" }).catch(() => undefined);

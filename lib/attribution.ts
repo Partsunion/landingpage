@@ -1,9 +1,10 @@
 let landingContext: Record<string, string> | undefined;
+const ATTRIBUTION_KEY = 'partsunion.lead-attribution.v1';
 
 export function campaignContext(url: string, referrer = ""): Record<string, string> {
   const current = new URL(url);
   const context: Record<string, string> = { landingPath: current.pathname };
-  for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]) {
+  for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id"]) {
     const value = current.searchParams.get(key);
     if (value && value.length <= 100 && /^[\p{L}\p{N} _./-]+$/u.test(value)) context[key] = value;
   }
@@ -27,6 +28,13 @@ export function leadContext(): Record<string, string> {
 export function captureLandingContext(): void {
   if (typeof window === "undefined" || landingContext) return;
   landingContext = campaignContext(window.location.href, document.referrer);
+  try {
+    const stored = JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || 'null');
+    if(stored && typeof stored.landingPath === 'string') {
+      const allowed = ['landingPath','referrerHost','utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id'];
+      landingContext = Object.fromEntries(Object.entries(stored).filter(([key,value]) => allowed.includes(key) && typeof value === 'string' && value.length <= 300)) as Record<string,string>;
+    } else sessionStorage.setItem(ATTRIBUTION_KEY,JSON.stringify(landingContext));
+  } catch { /* Attribution remains available for this document if storage is unavailable. */ }
 }
 
 export function analyticsContext(): Record<string, string> {

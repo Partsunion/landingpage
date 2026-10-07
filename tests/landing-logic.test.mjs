@@ -77,3 +77,15 @@ test('Klickanalyse übernimmt keine E-Mail-Adressen oder URL-Parameter', () => {
     page: '/', target: 'E-Mail Kontakt', placement: 'footer', destination: 'mailto', kind: 'contact',
   });
 });
+
+test('Website-Anfragen behalten die erste Kampagne über einen Seitenwechsel hinweg',async()=>{
+ const oldWindow=globalThis.window,oldDocument=globalThis.document,oldStorage=globalThis.sessionStorage,store=new Map();
+ try{
+  globalThis.sessionStorage={getItem:key=>store.get(key)||null,setItem:(key,value)=>store.set(key,value)};
+  globalThis.document={referrer:'https://google.de/search?q=private'};
+  globalThis.window={location:{href:'https://partsunion.de/fuer-haendler?utm_source=google&utm_medium=cpc&utm_campaign=herbst&utm_id=42',pathname:'/fuer-haendler'}};
+  const first=await import('../lib/attribution.ts?first-touch-test');first.captureLandingContext();
+  globalThis.window={location:{href:'https://partsunion.de/kontakt',pathname:'/kontakt'}};globalThis.document={referrer:'https://partsunion.de/fuer-haendler'};
+  const next=await import('../lib/attribution.ts?next-document-test');assert.deepEqual(next.leadContext(),{landingPath:'/fuer-haendler',utm_source:'google',utm_medium:'cpc',utm_campaign:'herbst',utm_id:'42',referrerHost:'google.de',submissionPath:'/kontakt'});
+ }finally{globalThis.window=oldWindow;globalThis.document=oldDocument;globalThis.sessionStorage=oldStorage;}
+});
