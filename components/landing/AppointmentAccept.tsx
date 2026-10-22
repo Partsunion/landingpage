@@ -39,13 +39,16 @@ interface PublicAppt {
   status: string;
 }
 
-type Phase = 'loading' | 'notfound' | 'ready' | 'submitting' | 'done-accepted' | 'done-declined';
+type Phase = 'loading' | 'notfound' | 'ready' | 'submitting' | 'done-accepted' | 'done-declined' | 'done-cancelled';
 
 export function AppointmentAccept() {
   const [appt, setAppt] = useState<PublicAppt | null>(null);
   const [phase, setPhase] = useState<Phase>('loading');
   const [token, setToken] = useState<string>('');
   const [calendar, setCalendar] = useState<string>('');
+  const [manageMode, setManageMode] = useState<'reschedule' | 'cancel' | null>(null);
+  const [newStart, setNewStart] = useState('');
+  const [manageError, setManageError] = useState('');
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -78,7 +81,7 @@ export function AppointmentAccept() {
         setCalendar(typeof d.calendar === 'string' ? d.calendar : '');
         if (a.status === 'confirmed') setPhase('done-accepted');
         else if (a.status === 'declined') setPhase('done-declined');
-        else if (a.status === 'cancelled') setPhase('done-declined');
+        else if (a.status === 'cancelled') setPhase('done-cancelled');
         else setPhase('ready');
       })
       .catch((error: unknown) => {
@@ -105,6 +108,32 @@ export function AppointmentAccept() {
       setPhase(action === 'accept' ? 'done-accepted' : 'done-declined');
     } catch {
       setPhase('ready');
+    }
+  };
+
+  const manage = async (action: 'cancel' | 'reschedule') => {
+    if (!token) return;
+    setManageError('');
+    if (action === 'cancel' && !window.confirm('Möchten Sie diesen Termin wirklich absagen?')) return;
+    if (action === 'reschedule' && !newStart) { setManageError('Bitte wählen Sie einen neuen Zeitpunkt.'); return; }
+    setPhase('submitting');
+    try {
+      const r = await fetch(`${API_BASE}/api/book/manage`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, action, ...(action === 'reschedule' ? { start: newStart } : {}) }),
+        cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer',
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(typeof data.error === 'string' ? data.error : 'Termin konnte nicht geändert werden.');
+      setAppt(data.appointment);
+      if (typeof data.calendar === 'string') setCalendar(data.calendar);
+      setManageMode(null);
+      // A new time is a fresh proposal and needs the customer's confirmation;
+      // cancellation is terminal.
+      setPhase(action === 'cancel' ? 'done-cancelled' : 'ready');
+    } catch (error) {
+      setManageError(error instanceof Error ? error.message : 'Termin konnte nicht geändert werden.');
+      setPhase(appt?.status === 'confirmed' ? 'done-accepted' : 'ready');
     }
   };
 
@@ -164,12 +193,12 @@ export function AppointmentAccept() {
                   Kalender übernehmen.
                 </p>
               </div>
-            ) : phase === 'done-declined' ? (
+            ) : phase === 'done-declined' || phase === 'done-cancelled' ? (
               <div className="mb-5">
                 <div className="flex items-center gap-2 text-[var(--muted-foreground)] mb-2">
                   <XCircle className="h-6 w-6" />
                   <span className="text-lg font-display font-semibold text-[var(--foreground)]">
-                    {appt.status === 'cancelled' ? 'Termin abgesagt' : 'Termin abgelehnt'}
+                    {phase === 'done-cancelled' || appt.status === 'cancelled' ? 'Termin abgesagt' : 'Termin abgelehnt'}
                   </span>
                 </div>
                 <p className="text-sm text-[var(--muted-foreground)]">
@@ -208,6 +237,7 @@ export function AppointmentAccept() {
               )}
             </div>
 
+            {manageError && <p role="alert" className="mb-3 rounded-lg bg-warning/10 px-3 py-2 text-sm text-warning">{manageError}</p>}
             {phase === 'ready' && (
               <div className="flex flex-col gap-2">
                 <button
@@ -222,21 +252,36 @@ export function AppointmentAccept() {
                 >
                   Leider absagen
                 </button>
+                <button type="button" onClick={() => { setNewStart(appt.start.slice(0, 16)); setManageMode('reschedule'); }} className="w-full rounded-xl border border-border px-5 py-2.5 text-sm text-[var(--muted-foreground)] hover:bg-muted">Anderen Zeitpunkt wählen</button>
+                <button type="button" onClick={() => setManageMode('cancel')} className="w-full rounded-xl border border-border px-5 py-2.5 text-sm text-[var(--muted-foreground)] hover:bg-muted">Termin endgültig absagen</button>
               </div>
             )}
+            {phase === 'done-accepted' && !manageMode && (
+              <div className="mt-3 flex flex-col gap-2">
+                <button type="button" onClick={() => { setNewStart(appt.start.slice(0, 16)); setManageMode('reschedule'); }} className="w-full rounded-xl border border-border px-5 py-2.5 text-sm text-[var(--muted-foreground)] hover:bg-muted">Termin verschieben</button>
+                <button type="button" onClick={() => setManageMode('cancel')} className="w-full rounded-xl border border-border px-5 py-2.5 text-sm text-[var(--muted-foreground)] hover:bg-muted">Termin absagen</button>
+              </div>
+            )}
+            {manageMode === 'reschedule' && (
+              <div className="mt-3 space-y-2 rounded-xl border border-border bg-muted p-3">
+                <label className="block text-sm font-medium">Neuer Zeitpunkt<input type="datetime-local" value={newStart} min={new Date().toISOString().slice(0, 16)} onChange={(e) => setNewStart(e.target.value)} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm" /></label>
+                <div className="flex gap-2"><button type="button" onClick={() => void manage('reschedule')} className="flex-1 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground">Verschiebung anfragen</button><button type="button" onClick={() => setManageMode(null)} className="rounded-lg border border-border px-3 py-2 text-sm">Abbrechen</button></div>
+              </div>
+            )}
+            {manageMode === 'cancel' && <div className="mt-3 rounded-xl border border-border bg-muted p-3"><p className="mb-2 text-sm text-[var(--muted-foreground)]">Der Termin wird storniert und der Teams-Kalendereintrag entfernt.</p><div className="flex gap-2"><button type="button" onClick={() => void manage('cancel')} className="flex-1 rounded-lg bg-destructive px-3 py-2 text-sm font-medium text-white">Endgültig absagen</button><button type="button" onClick={() => setManageMode(null)} className="rounded-lg border border-border px-3 py-2 text-sm">Abbrechen</button></div></div>}
             {phase === 'submitting' && (
               <div className="py-3 text-center text-[var(--muted-foreground)]">
                 <Loader2 className="h-5 w-5 animate-spin mx-auto" />
               </div>
             )}
-            {phase === 'done-accepted' && (
+            {(phase === 'done-accepted' || (phase === 'done-cancelled' && calendar)) && (
               <button
                 type="button"
                 onClick={downloadCalendar}
                 disabled={!calendar}
                 className="w-full inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl gradient-primary text-primary-foreground text-sm font-medium shadow-[0_8px_20px_-6px_rgba(29,111,232,0.45)] hover:brightness-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <CalendarPlus className="h-4 w-4" /> Zum Kalender hinzufügen
+                <CalendarPlus className="h-4 w-4" /> {phase === 'done-cancelled' ? 'Kalendereintrag aktualisieren' : 'Zum Kalender hinzufügen'}
               </button>
             )}
           </>
