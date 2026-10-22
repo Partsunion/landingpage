@@ -43,6 +43,7 @@ interface CustomerDraft {
 }
 
 interface DemoOffer {
+    id: string;
     orderId: string;
     productName: string;
     brand: string;
@@ -54,6 +55,8 @@ interface DemoOffer {
     vatRate: number;
     currency: string;
     leadTime: string;
+    availability?: string;
+    tier?: 'budget' | 'medium' | 'premium';
     demoPaymentEnabled: boolean;
     oemVerification: 'exact' | 'demo_reference';
 }
@@ -64,6 +67,8 @@ interface Message {
     text: string;
     imageUrl?: string;
     offer?: DemoOffer;
+    offers?: DemoOffer[];
+    diagram?: DemoDiagram;
 }
 
 interface PendingImage {
@@ -76,10 +81,23 @@ interface ReplyButton {
     title: string;
 }
 
+interface DemoDiagram {
+    id: string;
+    title: string;
+    disclaimer: string;
+    positions: Array<{
+        number: number;
+        label: string;
+        choiceId: string;
+    }>;
+}
+
 interface ChatResponse {
     reply?: string;
     buttons?: ReplyButton[];
     demoOffer?: DemoOffer;
+    demoOffers?: DemoOffer[];
+    demoDiagram?: DemoDiagram | null;
     completed?: boolean;
     error?: string;
 }
@@ -113,9 +131,9 @@ const TYPES: Array<{
 ];
 
 const SUGGESTIONS = [
-    'Bremsscheibe vorne für WVWZZZAUZJP051563',
-    'Bremsbeläge vorne für WAUHMAF40JA073675',
-    'Bremsscheibe hinten für WVWZZZAUZJP051563',
+    'Wasserpumpe für WVWZZZAUZHW000001',
+    'Querlenker für WVWZZZAUZHW000001',
+    'Ölfilter für WVWZZZAUZHW000001',
 ];
 
 const initialCustomer: CustomerDraft = {
@@ -129,6 +147,64 @@ const initialCustomer: CustomerDraft = {
 
 const MAX_SOURCE_IMAGE_BYTES = 12 * 1024 * 1024;
 const MAX_DEMO_DATA_URL_LENGTH = 4_000_000;
+
+const DIAGRAM_SLOTS = [
+    { x: 38, y: 35 },
+    { x: 282, y: 35 },
+    { x: 38, y: 103 },
+    { x: 282, y: 103 },
+    { x: 82, y: 164 },
+    { x: 238, y: 164 },
+    { x: 160, y: 22 },
+    { x: 160, y: 178 },
+];
+
+function DemoDiagramCard({ diagram }: { diagram: DemoDiagram }) {
+    return (
+        <div className="mt-2 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-200 bg-slate-50 px-3 py-2">
+                <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-700">{diagram.title}</div>
+                <div className="mt-0.5 text-[10px] text-slate-500">{diagram.disclaimer}</div>
+            </div>
+            <div className="bg-gradient-to-b from-slate-50 to-white p-3">
+                <svg
+                    viewBox="0 0 320 200"
+                    role="img"
+                    aria-label="Schematische Explosionsansicht mit nummerierten Teilepositionen"
+                    className="h-auto w-full"
+                >
+                    <rect x="103" y="55" width="114" height="92" rx="18" fill="#E2E8F0" stroke="#64748B" strokeWidth="2" />
+                    <path d="M120 76h80M120 126h80M132 55v92M188 55v92" stroke="#94A3B8" strokeWidth="2" strokeDasharray="5 4" />
+                    <circle cx="124" cy="101" r="13" fill="#CBD5E1" stroke="#64748B" strokeWidth="2" />
+                    <circle cx="196" cy="101" r="13" fill="#CBD5E1" stroke="#64748B" strokeWidth="2" />
+                    {diagram.positions.slice(0, DIAGRAM_SLOTS.length).map((position, index) => {
+                        const slot = DIAGRAM_SLOTS[index];
+                        return (
+                            <g key={position.choiceId}>
+                                <line x1="160" y1="101" x2={slot.x} y2={slot.y} stroke="#94A3B8" strokeWidth="1.5" />
+                                <circle cx={slot.x} cy={slot.y} r="15" fill="#1D6FE8" stroke="#FFFFFF" strokeWidth="3" />
+                                <text x={slot.x} y={slot.y + 4} textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="700">
+                                    {position.number}
+                                </text>
+                            </g>
+                        );
+                    })}
+                    <text x="160" y="105" textAnchor="middle" fill="#334155" fontSize="10" fontWeight="700">BAUGRUPPE</text>
+                </svg>
+                <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+                    {diagram.positions.map((position) => (
+                        <div key={position.choiceId} className="flex items-start gap-2 rounded-lg bg-slate-50 px-2.5 py-2 text-[10px] leading-snug text-slate-600">
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+                                {position.number}
+                            </span>
+                            <span>{position.label}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}
 
 function readFileAsDataUrl(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -217,6 +293,11 @@ function OfferCard({
     paid: boolean;
     onPay: () => void;
 }) {
+    const tierLabel = offer.tier === 'budget'
+        ? 'Günstig'
+        : offer.tier === 'premium'
+            ? 'Premium'
+            : 'Empfohlen';
     const price = Number(offer.priceGross || 0).toLocaleString('de-DE', {
         style: 'currency',
         currency: offer.currency || 'EUR',
@@ -229,7 +310,7 @@ function OfferCard({
         <div className="mt-3 overflow-hidden rounded-xl border border-amber-300/70 bg-white shadow-[0_8px_25px_rgba(15,23,42,.08)]">
             <div className="flex items-center justify-between gap-3 border-b border-amber-200 bg-amber-50 px-4 py-2.5">
                 <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-800">
-                    <PackageCheck className="h-4 w-4" /> Demo-Angebot
+                    <PackageCheck className="h-4 w-4" /> {tierLabel}
                 </div>
                 <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
                     paid
@@ -243,20 +324,10 @@ function OfferCard({
                 <div>
                     <div className="text-sm font-bold">{offer.productName}</div>
                     <div className="mt-0.5 text-xs text-slate-500">
-                        {offer.brand} · {offer.supplierName || 'Demo-Großhändler'}
+                        {offer.brand}
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3 rounded-lg bg-slate-50 p-3 text-xs">
-                    <div>
-                        <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
-                            {offer.oemVerification === 'exact' ? 'OE-Nummer' : 'OE-Referenz (Demo)'}
-                        </div>
-                        <div className="mt-1 font-mono font-semibold">{offer.oemNumber}</div>
-                    </div>
-                    <div>
-                        <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Demo-Artikel</div>
-                        <div className="mt-1 truncate font-mono font-semibold">{offer.supplierPartNumber}</div>
-                    </div>
                     <div>
                         <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Lieferzeit</div>
                         <div className="mt-1 font-medium">{offer.leadTime}</div>
@@ -265,6 +336,10 @@ function OfferCard({
                         <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Preis</div>
                         <div className="mt-1 font-mono text-base font-bold text-primary">{price}</div>
                         <div className="text-[10px] text-slate-400">{net} netto · {offer.vatRate || 19} % MwSt.</div>
+                    </div>
+                    <div className="col-span-2">
+                        <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Verfügbarkeit</div>
+                        <div className="mt-1 font-medium text-emerald-700">Verfügbar · für die Demo geprüft</div>
                     </div>
                 </div>
                 {paid ? (
@@ -317,7 +392,7 @@ function DemoCheckout({
                 <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
                     <div>
                         <div className="text-xs font-bold uppercase tracking-[0.12em] text-[#635BFF]">Sicherer Checkout</div>
-                        <div className="mt-0.5 text-lg font-bold text-slate-900">Partsunion Demo-Zahlung</div>
+                        <div className="mt-0.5 text-lg font-bold text-slate-900">Händler-Demo-Zahlung</div>
                     </div>
                     <button
                         type="button"
@@ -362,7 +437,7 @@ function DemoCheckout({
                             <div className="flex items-start justify-between gap-4">
                                 <div>
                                     <div className="text-sm font-semibold text-slate-900">{offer.productName}</div>
-                                    <div className="mt-1 font-mono text-xs text-slate-500">OE {offer.oemNumber}</div>
+                                    <div className="mt-1 text-xs text-slate-500">{offer.brand}</div>
                                 </div>
                                 <div className="font-mono text-base font-bold text-slate-900">{price}</div>
                             </div>
@@ -493,8 +568,13 @@ export function BotDemo() {
                 role: 'bot',
                 text: data.reply || 'Bitte versuchen Sie es erneut.',
                 offer: data.demoOffer,
+                offers: Array.isArray(data.demoOffers) ? data.demoOffers : undefined,
+                diagram: data.demoDiagram || undefined,
             }]);
-            setButtons(Array.isArray(data.buttons) ? data.buttons.slice(0, 3) : []);
+            // WhatsApp reply buttons are limited to three, while an
+            // interactive list supports up to ten rows. Position questions
+            // use the list representation in this visual demo.
+            setButtons(Array.isArray(data.buttons) ? data.buttons.slice(0, 10) : []);
             if (data.completed) setStage('complete');
         } catch (requestError) {
             setMessages((current) => [...current, {
@@ -534,6 +614,7 @@ export function BotDemo() {
                 body: JSON.stringify({
                     sessionId,
                     orderId: checkoutOffer.orderId,
+                    offerId: checkoutOffer.id,
                 }),
             });
             const data = await response.json().catch(() => ({})) as DemoPaymentResponse;
@@ -754,10 +835,10 @@ export function BotDemo() {
                                         <Bot className="h-5 w-5" />
                                     </div>
                                     <div className="min-w-0 flex-1">
-                                        <div className="truncate text-sm font-semibold text-white">Partsunion Kundenservice</div>
+                                        <div className="truncate text-sm font-semibold text-white">Musterteile GmbH</div>
                                         <div className="mt-0.5 flex items-center gap-1.5 text-[10px] text-white/70">
                                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                                            {stage === 'complete' ? 'Demo-Angebot erstellt' : 'online · OE-Service aktiv'}
+                                            {stage === 'complete' ? 'Demo-Angebot erstellt' : 'online · Demo-Katalog aktiv'}
                                         </div>
                                     </div>
                                     <span className="hidden rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white sm:block">
@@ -794,7 +875,22 @@ export function BotDemo() {
                                                     )}
                                                     <SafeMarkdown text={message.text} />
                                                 </div>
-                                                {message.offer && (
+                                                {message.diagram ? <DemoDiagramCard diagram={message.diagram} /> : null}
+                                                {message.offers?.length ? (
+                                                    <div className="space-y-3">
+                                                        {message.offers.map((offer) => (
+                                                            <OfferCard
+                                                                key={offer.id}
+                                                                offer={offer}
+                                                                paid={Boolean(demoPayments[offer.orderId])}
+                                                                onPay={() => {
+                                                                    setPaymentError('');
+                                                                    setCheckoutOffer(offer);
+                                                                }}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                ) : message.offer ? (
                                                     <OfferCard
                                                         offer={message.offer}
                                                         paid={Boolean(demoPayments[message.offer.orderId])}
@@ -803,7 +899,7 @@ export function BotDemo() {
                                                             setCheckoutOffer(message.offer!);
                                                         }}
                                                     />
-                                                )}
+                                                ) : null}
                                             </div>
                                         </div>
                                     ))}
